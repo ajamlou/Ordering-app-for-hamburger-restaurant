@@ -1,5 +1,6 @@
 <template>
   <div id="ordering">
+    <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
@@ -90,8 +91,16 @@ export default {
   width: 40em;
 }
 
+.example-panel {
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: -2;
+}
 .ingredient {
   border: 1px solid #ccd;
   padding: 1em;
+  background-image: url('~@/assets/exampleImage.jpg');
+  color: white;
 }
 </style>
