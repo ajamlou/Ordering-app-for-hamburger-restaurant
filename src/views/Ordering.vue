@@ -34,13 +34,17 @@
 </template>
 <script>
 
-//import the components that are used in the template
+//import the components that are used in the template, the name that you
+//use for importing will be used in the template above and also below in
+//components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
+/* instead of defining a Vue instance, export default allows the only 
+necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
   components: {
@@ -49,7 +53,7 @@ export default {
   },
   mixins: [sharedVueStuff], // include stuff that is used in both 
                             // the ordering system and the kitchen
-  data: function(){
+  data: function() { //Not that data is a function!
     return {
       chosenIngredients: [],
       price: 0,
@@ -86,6 +90,7 @@ export default {
 }
 </script>
 <style scoped>
+/* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
 #ordering {
   margin:auto;
   width: 40em;
