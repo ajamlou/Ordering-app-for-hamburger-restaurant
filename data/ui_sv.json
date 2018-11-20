@@ -1,0 +1,20 @@
+{
+  "cancelOrder" : "Avbryt köp",
+  "next" : "Nästa",
+  "changeIng" : "Byt ut ingrediens",
+  "content": "Innehåll",
+  "thankOrder" : "Tack för din beställning!",
+  "yourOrder" : "Din beställning",
+  "newOrder" : "Ny beställning",
+  "pay" : "Betala",
+  "sum" :"Summa",
+  "ordersFinished" : "Färdiga beställningar",
+  "ordersInQueue" : "Beställningar att förbereda",
+  "ordersTrending" : "Populära beställningar",
+  "placeOrder" : "Beställ",
+  "sideorders" : "Tillbehör",
+  "ingredients" : "Ingredienser",
+  "ready" : "Klart",
+  "order" : "Min burgare",
+  "language" : "English"
+}

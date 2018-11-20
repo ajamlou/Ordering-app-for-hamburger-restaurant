@@ -1,0 +1,20 @@
+{
+  "cancelOrder" : "Cancel order",
+  "next" : "Next",
+  "changeIng" : "Change ingredient",
+  "content" : "Content",
+  "thankOrder" : "Thank you for your order!",
+  "yourOrder" : "Your Order",
+  "newOrder" : "New Order",
+  "pay" : "Pay",
+  "sum": "Sum",
+  "ordersFinished" : "Finished orders",
+  "ordersInQueue" : "Order queue",
+  "ordersTrending" : "Trending orders",
+  "placeOrder" : "Place order",
+  "sideorders" : "Side orders",
+  "ingredients" : "Ingredients",
+  "ready" : "Done",
+  "order" : "My burger",
+  "language" : "Svenska"
+}
