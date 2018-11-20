@@ -1,4 +1,4 @@
-# burger-skeleton
+# Max-Hamburgare
 
 This skeleton code contains a back-end for your burger ordering system as well as stubs for building views and maintaining a clean folder structure. Take some time to get acquainted with the different files and how they are connected.
 
