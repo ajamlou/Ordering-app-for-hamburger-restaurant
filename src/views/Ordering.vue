@@ -4,15 +4,57 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
-
+    <div id="bread">
+      <h2>{{ uiLabels.bread }}: </h2>
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
-      v-on:increment="addToOrder(item)"  
-      :item="item" 
+      v-on:increment="addToOrder(item)"
+      v-if="item.category == 4"
+      :item="item"
       :lang="lang"
       :key="item.ingredient_id">
     </Ingredient>
+  </div>
+
+  <div id="patty">
+    <h2>{{ uiLabels.patty }}: </h2>
+  <Ingredient
+    ref="ingredient"
+    v-for="item in ingredients"
+    v-on:increment="addToOrder(item)"
+    v-if="item.category == 1"
+    :item="item"
+    :lang="lang"
+    :key="item.ingredient_id">
+  </Ingredient>
+</div>
+
+<div id="garnish">
+  <h2>{{ uiLabels.garnish }}: </h2>
+<Ingredient
+  ref="ingredient"
+  v-for="item in ingredients"
+  v-on:increment="addToOrder(item)"
+  v-if="item.category == 2"
+  :item="item"
+  :lang="lang"
+  :key="item.ingredient_id">
+</Ingredient>
+</div>
+
+<div id="sauce">
+  <h2>{{ uiLabels.sauce }}: </h2>
+<Ingredient
+  ref="ingredient"
+  v-for="item in ingredients"
+  v-on:increment="addToOrder(item)"
+  v-if="item.category == 3"
+  :item="item"
+  :lang="lang"
+  :key="item.ingredient_id">
+</Ingredient>
+</div>
 
     <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
@@ -20,11 +62,11 @@
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
-      <OrderItem 
+      <OrderItem
         v-for="(order, key) in orders"
         v-if="order.status !== 'done'"
         :order-id="key"
-        :order="order" 
+        :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
@@ -43,7 +85,7 @@ import OrderItem from '@/components/OrderItem.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
-/* instead of defining a Vue instance, export default allows the only 
+/* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
@@ -51,7 +93,7 @@ export default {
     Ingredient,
     OrderItem
   },
-  mixins: [sharedVueStuff], // include stuff that is used in both 
+  mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
