@@ -4,8 +4,12 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
-    <div id="bread">
-      <h2>{{ uiLabels.bread }}: </h2>
+
+    <div id="categories-wrapper">
+
+<div class="category">
+    <h2>{{ uiLabels.bread }}: </h2>
+    <div id="bread" class="ingredient-wrapper">
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
@@ -16,9 +20,11 @@
       :key="item.ingredient_id">
     </Ingredient>
   </div>
+</div>
 
-  <div id="patty">
-    <h2>{{ uiLabels.patty }}: </h2>
+<div class="category">
+<h2>{{ uiLabels.patty }}: </h2>
+  <div id="patty" class="ingredient-wrapper">
   <Ingredient
     ref="ingredient"
     v-for="item in ingredients"
@@ -29,9 +35,11 @@
     :key="item.ingredient_id">
   </Ingredient>
 </div>
+</div>
 
-<div id="garnish">
-  <h2>{{ uiLabels.garnish }}: </h2>
+<div class="category">
+<h2>{{ uiLabels.garnish }}: </h2>
+<div id="garnish" class="ingredient-wrapper">
 <Ingredient
   ref="ingredient"
   v-for="item in ingredients"
@@ -42,9 +50,11 @@
   :key="item.ingredient_id">
 </Ingredient>
 </div>
+</div>
 
-<div id="sauce">
-  <h2>{{ uiLabels.sauce }}: </h2>
+<div class="category">
+<h2>{{ uiLabels.sauce }}: </h2>
+<div id="sauce" class="ingredient-wrapper">
 <Ingredient
   ref="ingredient"
   v-for="item in ingredients"
@@ -54,6 +64,9 @@
   :lang="lang"
   :key="item.ingredient_id">
 </Ingredient>
+</div>
+</div>
+
 </div>
 
     <h1>{{ uiLabels.order }}</h1>
@@ -135,7 +148,7 @@ export default {
 /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
 #ordering {
   margin:auto;
-  width: 40em;
+  width: 90%;
 }
 
 .example-panel {
@@ -144,10 +157,60 @@ export default {
   top:0;
   z-index: -2;
 }
+
+
 .ingredient {
   border: 1px solid #ccd;
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
+  color: white;
+  border-radius: 15px;
+  flex: 0 0 auto;
+  width:10em;
+  height:3em;
+}
+
+.ingredient-wrapper{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  border-radius: 15px;
+  /*display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(10,10%);
+  grid-template-areas: "title";
+  text-align: center;*/
+}
+
+.category{
+  display:grid;
+  text-align: center;
+  grid-template-columns: 10% 90%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  margin: 0 0.5em 1em;
+}
+
+
+#categories-wrapper{
+
+}
+
+button{
+  float:right;
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+button:hover{
+  background-color: #000;
   color: white;
 }
 </style>

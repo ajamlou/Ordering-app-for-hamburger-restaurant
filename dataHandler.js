@@ -4,7 +4,7 @@ let csv = require("csvtojson");
 
 let ingredientsDataName = "ingredients";
 let transactionsDataName = "transactions";
-let defaultLanguage = "en";
+let defaultLanguage = "sv";
 let fs = require('fs');
 
 fs.watch("./data/", (event_type, file_name) => {

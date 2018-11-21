@@ -7,7 +7,7 @@ var sharedVueStuff = {
       orders: {},
       uiLabels: {},
       ingredients: {},
-      lang: "en"
+      lang: "sv"
     }
   },
   created: function () {
