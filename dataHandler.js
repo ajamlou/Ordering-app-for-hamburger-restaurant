@@ -5,6 +5,12 @@ let csv = require("csvtojson");
 let ingredientsDataName = "ingredients";
 let transactionsDataName = "transactions";
 let defaultLanguage = "en";
+let fs = require('fs');
+
+fs.watch("./data/", (event_type, file_name) => {
+    console.log("Deleting Require cache for " + file_name);
+    delete require.cache[ require.resolve("./data/" + file_name)];
+});
 
 // Store data in an object to keep the global namespace clean
 function Data() {
@@ -81,7 +87,7 @@ Data.prototype.addOrder = function (order) {
     transId += 1;
     transactions.push({transaction_id: transId,
                        ingredient_id: i[k].ingredient_id,
-                       change: - 2});
+                       change: - 1});
   }
     return orderId;
 };
@@ -111,6 +117,3 @@ Data.prototype.markOrderNotStarted = function (orderId) {
 };
 
 module.exports = Data;
-
-
-
