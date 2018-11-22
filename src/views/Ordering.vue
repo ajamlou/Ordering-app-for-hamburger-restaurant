@@ -7,14 +7,49 @@
 
     <div id="categories-wrapper">
 
-<div class="category">
-    <h2>{{ uiLabels.bread }}: </h2>
-    <div id="bread" class="ingredient-wrapper">
-    <Ingredient
+      <div class="category">
+        <h2>{{ uiLabels.bread }}: </h2>
+        <div id="bread" class="ingredient-wrapper">
+          <PlusButton
+          ref="PlusButton"
+          :item="ingredients"
+          :category=4>
+        </PlusButton>
+          <!--<Ingredient
+          ref="ingredient"
+          v-for="item in ingredients"
+          v-on:increment="addToOrder(item)"
+          v-if="item.category == 4"
+          :item="item"
+          :lang="lang"
+          :key="item.ingredient_id">
+        </Ingredient> !-->
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>{{ uiLabels.patty }}: </h2>
+      <div id="patty" class="ingredient-wrapper">
+        <Ingredient
+        ref="ingredient"
+        v-for="item in ingredients"
+        v-on:increment="addToOrder(item)"
+        v-if="item.category == 1"
+        :item="item"
+        :lang="lang"
+        :key="item.ingredient_id">
+      </Ingredient>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2>{{ uiLabels.garnish }}: </h2>
+    <div id="garnish" class="ingredient-wrapper">
+      <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
       v-on:increment="addToOrder(item)"
-      v-if="item.category == 4"
+      v-if="item.category == 2"
       :item="item"
       :lang="lang"
       :key="item.ingredient_id">
@@ -23,13 +58,13 @@
 </div>
 
 <div class="category">
-<h2>{{ uiLabels.patty }}: </h2>
-  <div id="patty" class="ingredient-wrapper">
-  <Ingredient
+  <h2>{{ uiLabels.sauce }}: </h2>
+  <div id="sauce" class="ingredient-wrapper">
+    <Ingredient
     ref="ingredient"
     v-for="item in ingredients"
     v-on:increment="addToOrder(item)"
-    v-if="item.category == 1"
+    v-if="item.category == 3"
     :item="item"
     :lang="lang"
     :key="item.ingredient_id">
@@ -37,55 +72,25 @@
 </div>
 </div>
 
-<div class="category">
-<h2>{{ uiLabels.garnish }}: </h2>
-<div id="garnish" class="ingredient-wrapper">
-<Ingredient
-  ref="ingredient"
-  v-for="item in ingredients"
-  v-on:increment="addToOrder(item)"
-  v-if="item.category == 2"
-  :item="item"
+</div>
+
+<h1>{{ uiLabels.order }}</h1>
+{{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+
+<h1>{{ uiLabels.ordersInQueue }}</h1>
+<div>
+  <OrderItem
+  v-for="(order, key) in orders"
+  v-if="order.status !== 'done'"
+  :order-id="key"
+  :order="order"
+  :ui-labels="uiLabels"
   :lang="lang"
-  :key="item.ingredient_id">
-</Ingredient>
+  :key="key">
+</OrderItem>
 </div>
 </div>
-
-<div class="category">
-<h2>{{ uiLabels.sauce }}: </h2>
-<div id="sauce" class="ingredient-wrapper">
-<Ingredient
-  ref="ingredient"
-  v-for="item in ingredients"
-  v-on:increment="addToOrder(item)"
-  v-if="item.category == 3"
-  :item="item"
-  :lang="lang"
-  :key="item.ingredient_id">
-</Ingredient>
-</div>
-</div>
-
-</div>
-
-    <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
-    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-
-    <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-        v-for="(order, key) in orders"
-        v-if="order.status !== 'done'"
-        :order-id="key"
-        :order="order"
-        :ui-labels="uiLabels"
-        :lang="lang"
-        :key="key">
-      </OrderItem>
-    </div>
-  </div>
 </template>
 <script>
 
@@ -94,6 +99,7 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
+import PlusButton from '@/components/PlusButton.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -104,10 +110,11 @@ export default {
   name: 'Ordering',
   components: {
     Ingredient,
-    OrderItem
+    OrderItem,
+    PlusButton
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
-                            // the ordering system and the kitchen
+  // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
       chosenIngredients: [],
@@ -128,10 +135,10 @@ export default {
     placeOrder: function () {
       var i,
       //Wrap the order in an object
-        order = {
-          ingredients: this.chosenIngredients,
-          price: this.price
-        };
+      order = {
+        ingredients: this.chosenIngredients,
+        price: this.price
+      };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit('order', {order: order});
       //set all counters to 0. Notice the use of $refs
@@ -167,7 +174,7 @@ export default {
   border-radius: 15px;
   flex: 0 0 auto;
   width:10em;
-  height:3em;
+  height:inherit;
 }
 
 .ingredient-wrapper{
@@ -186,6 +193,7 @@ export default {
   display:grid;
   text-align: center;
   grid-template-columns: 10% 90%;
+  grid-template-rows: 17vh;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
