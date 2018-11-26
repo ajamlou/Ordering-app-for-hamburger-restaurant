@@ -54,11 +54,8 @@
     </OrderItem>
   </div>
 </div>
-<<<<<<< HEAD
-=======
 
 </div>
->>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
@@ -74,11 +71,7 @@ export default {
     OrderItemToPrepare
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
-<<<<<<< HEAD
-                            //the ordering system and the kitchen
-=======
   //the ordering system and the kitchen
->>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
   data: function(){
     return {
       chosenIngredients: [],
@@ -94,12 +87,6 @@ export default {
 </script>
 <style scoped>
 
-<<<<<<< HEAD
-  h1 {
-    text-transform: uppercase;
-    font-size: 1.4em;
-  }
-=======
 #kitchen-grid {
   display: grid;
   grid-template-columns: 25% 50% 25%;
@@ -172,5 +159,4 @@ h1 {
   font-size: 1.4em;
   text-color: white;
 }
->>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
 </style>
