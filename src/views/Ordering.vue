@@ -8,24 +8,14 @@
     <div id="categories-wrapper">
 
       <div class="category">
-        <h2>{{ uiLabels.bread }}: </h2>
+
+      <h2>{{ uiLabels.bread }}: </h2>
         <div id="bread" class="ingredient-wrapper">
-          <PlusButton
+        <PlusButton
           ref="PlusButton"
           :v-bind:items="ingredients"
           :category=4>
         </PlusButton>
-
-      <!---  <Ingredient
-        ref="ingredient"
-        v-for="item in ingredients"
-        v-on:increment="addToOrder(item)"
-        v-if="item.category == 4"
-        :item="item"
-        :lang="lang"
-        :key="item.ingredient_id">
-      </Ingredient> !-->
-
     </div>
   </div>
 
@@ -132,7 +122,6 @@
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
-import Modal from '@/components/Modal.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -144,8 +133,7 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton,
-    Modal
+    PlusButton
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -208,7 +196,7 @@ export default {
   border-radius: 15px;
   flex: 0 0 auto;
   width:7em;
-  height:inherit;
+  height:3em;
 }
 
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
@@ -216,6 +204,7 @@ export default {
   flex-wrap: nowrap;
   overflow-x: auto;
   border-radius: 15px;
+  height:3em;
   /*display: grid;
   grid-gap: 0px;
   grid-template-columns: repeat(10,10%);
@@ -231,6 +220,8 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
+  height:3em;
+
 }
 
 
