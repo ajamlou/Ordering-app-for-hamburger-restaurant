@@ -20,5 +20,7 @@
   "bread" : "Bröd",
   "patty" : "Protein",
   "garnish" : "Pålägg",
-  "sauce" : "Sås"
+  "sauce" : "Sås",
+  "sides" : "Tillbehör",
+  "drinks" : "Dryck"
 }

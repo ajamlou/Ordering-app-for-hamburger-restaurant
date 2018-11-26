@@ -12,49 +12,51 @@
         <div id="bread" class="ingredient-wrapper">
           <PlusButton
           ref="PlusButton"
-          :item="ingredients"
+          :v-bind:items="ingredients"
           :category=4>
         </PlusButton>
-          <!--<Ingredient
-          ref="ingredient"
-          v-for="item in ingredients"
-          v-on:increment="addToOrder(item)"
-          v-if="item.category == 4"
-          :item="item"
-          :lang="lang"
-          :key="item.ingredient_id">
-        </Ingredient> !-->
-      </div>
-    </div>
 
-    <div class="category">
-      <h2>{{ uiLabels.patty }}: </h2>
-      <div id="patty" class="ingredient-wrapper">
-        <Ingredient
+      <!---  <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
-        v-if="item.category == 1"
+        v-if="item.category == 4"
         :item="item"
         :lang="lang"
         :key="item.ingredient_id">
-      </Ingredient>
+      </Ingredient> !-->
+
     </div>
   </div>
 
   <div class="category">
-    <h2>{{ uiLabels.garnish }}: </h2>
-    <div id="garnish" class="ingredient-wrapper">
+    <h2>{{ uiLabels.patty }}: </h2>
+    <div id="patty" class="ingredient-wrapper">
       <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
       v-on:increment="addToOrder(item)"
-      v-if="item.category == 2"
+      v-if="item.category == 1"
       :item="item"
       :lang="lang"
       :key="item.ingredient_id">
     </Ingredient>
   </div>
+</div>
+
+<div class="category">
+  <h2>{{ uiLabels.garnish }}: </h2>
+  <div id="garnish" class="ingredient-wrapper">
+    <Ingredient
+    ref="ingredient"
+    v-for="item in ingredients"
+    v-on:increment="addToOrder(item)"
+    v-if="item.category == 2"
+    :item="item"
+    :lang="lang"
+    :key="item.ingredient_id">
+  </Ingredient>
+</div>
 </div>
 
 <div class="category">
@@ -65,6 +67,36 @@
     v-for="item in ingredients"
     v-on:increment="addToOrder(item)"
     v-if="item.category == 3"
+    :item="item"
+    :lang="lang"
+    :key="item.ingredient_id">
+  </Ingredient>
+</div>
+</div>
+
+<div class="category">
+  <h2>{{ uiLabels.sides }}: </h2>
+  <div id="sides" class="ingredient-wrapper">
+    <Ingredient
+    ref="ingredient"
+    v-for="item in ingredients"
+    v-on:increment="addToOrder(item)"
+    v-if="item.category == 5"
+    :item="item"
+    :lang="lang"
+    :key="item.ingredient_id">
+  </Ingredient>
+</div>
+</div>
+
+<div class="category">
+  <h2>{{ uiLabels.drinks }}: </h2>
+  <div id="drinks" class="ingredient-wrapper">
+    <Ingredient
+    ref="ingredient"
+    v-for="item in ingredients"
+    v-on:increment="addToOrder(item)"
+    v-if="item.category == 6"
     :item="item"
     :lang="lang"
     :key="item.ingredient_id">
@@ -100,6 +132,7 @@
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
+import Modal from '@/components/Modal.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -111,7 +144,8 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton
+    PlusButton,
+    Modal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -166,18 +200,18 @@ export default {
 }
 
 
-.ingredient {
+.ingredient { /*Styr 1 enskild ingrediens-ruta*/
   border: 1px solid #ccd;
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
   color: white;
   border-radius: 15px;
   flex: 0 0 auto;
-  width:10em;
+  width:7em;
   height:inherit;
 }
 
-.ingredient-wrapper{
+.ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -189,11 +223,11 @@ export default {
   text-align: center;*/
 }
 
-.category{
+.category{ /*Denna styr en kategori-rad*/
   display:grid;
   text-align: center;
   grid-template-columns: 10% 90%;
-  grid-template-rows: 17vh;
+  grid-template-rows: 12vh;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;

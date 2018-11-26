@@ -20,5 +20,7 @@
   "bread" : "Bread",
   "patty" : "Protein",
   "garnish" : "Garnish",
-  "sauce" : "Sauce"
+  "sauce" : "Sauce",
+  "sides" : "Sides",
+  "drinks" : "Drinks"
 }
