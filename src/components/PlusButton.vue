@@ -1,5 +1,5 @@
 <template>
-  <button @click="openModal" class="PlusButton">
+  <button class="PlusButton">
     <slot>+</slot>
   </button>
 </template>
@@ -9,8 +9,8 @@
 export default {
   name: 'PlusButton',
   props: {
-    items: [],
-    category: 0
+    ingredients: Array,
+    category: Number
   },
   data: function () {
     return {
@@ -18,12 +18,9 @@ export default {
     };
   },
   methods: {
-    openModal: function(){
-
     }
 
   }
-}
 </script>
 <style scoped>
 .PlusButton{
@@ -34,10 +31,10 @@ export default {
   border-radius: 15px;
   flex: 0 0 auto;
   width:7em;
-  height:inherit;
+  height:2em;
 }
 .PlusButton:hover{
-  background-color: rgba(200, 200, 200, 0.5);
-  color: rgb(100,100,100);
+  background-color: rgba(100, 100, 100, 0.5);
+  color: rgb(80,80,80);
 }
 </style>

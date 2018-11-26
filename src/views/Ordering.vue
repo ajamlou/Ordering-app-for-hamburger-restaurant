@@ -6,17 +6,22 @@
     <h1>{{ uiLabels.ingredients }}</h1>
 
     <div id="categories-wrapper">
+      <CategoryRow
+      :ingredients="ingredients"
+      :category="4"
+      :categoryName="uiLabels.bread">
+    </CategoryRow>
 
-      <div class="category">
+      <!--<div class="category">
         <h2>{{ uiLabels.bread }}: </h2>
         <div id="bread" class="ingredient-wrapper">
           <PlusButton
           ref="PlusButton"
-          :v-bind:items="ingredients"
+          v-bind:items="ingredients"
           :category=4>
         </PlusButton>
 
-      <!---  <Ingredient
+       <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
@@ -24,10 +29,10 @@
         :item="item"
         :lang="lang"
         :key="item.ingredient_id">
-      </Ingredient> !-->
+      </Ingredient>
 
     </div>
-  </div>
+  </div> !-->
 
   <div class="category">
     <h2>{{ uiLabels.patty }}: </h2>
@@ -125,13 +130,13 @@
 </div>
 </template>
 <script>
-
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
+import CategoryRow from '@/components/CategoryRow.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -143,7 +148,8 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton
+    PlusButton,
+    CategoryRow
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
