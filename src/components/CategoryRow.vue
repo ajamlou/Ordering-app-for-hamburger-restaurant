@@ -8,7 +8,6 @@
 
       <PlusButton
       ref="PlusButton"
-      :ingredients="ingredients"
       :category="category">
     </PlusButton>
 
@@ -23,7 +22,6 @@
   export default {
     name: 'CategoryRow',
     props: {
-      ingredients: Array,
       category: Number,
       categoryName: String
     },

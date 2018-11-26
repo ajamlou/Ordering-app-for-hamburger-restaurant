@@ -4,6 +4,9 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
+    <!--<div v-for="item in ingredients">
+      {{item}}
+    </div> !-->
 
     <div id="categories-wrapper">
       <CategoryRow
@@ -212,13 +215,14 @@ export default {
   border-radius: 15px;
   flex: 0 0 auto;
   width:7em;
-  height:inherit;
+  display:table-cell;
 }
 
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y:hidden;
   border-radius: 15px;
   /*display: grid;
   grid-gap: 0px;
@@ -228,6 +232,7 @@ export default {
 }
 
 .category{ /*Denna styr en kategori-rad*/
+  position:relative;
   display:grid;
   text-align: center;
   grid-template-columns: 10% 90%;
