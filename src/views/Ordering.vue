@@ -132,7 +132,6 @@
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
-import Modal from '@/components/Modal.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -144,8 +143,7 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton,
-    Modal
+    PlusButton
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
