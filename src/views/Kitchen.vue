@@ -92,10 +92,11 @@ export default {
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #header1 {
-  background: #F08080;
+  background: #DC143C;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -104,7 +105,7 @@ export default {
 }
 
 #header2 {
-  background: #4169E1;
+  background: #00BFFF;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -113,7 +114,7 @@ export default {
 }
 
 #header3 {
-  background: #90EE90;
+  background: #00FF7F;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -127,18 +128,32 @@ export default {
   border-radius: 4px;
 }
 
-.toPrepare {
+.toPrepare, .orderFinished {
+  position: relative;
+  width: 45%;
+  height: 100px;
+  padding: 5px;
+  justify-content: center;
+}
+
+.isPreparing {
+  width: 30%;
+  height: 100px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
+  float: left;
+  margin: 7px 7px 7px 7px;
+  box-sizing: border-box;
 }
 
 #preparing {
   font-size:15pt;
   border: 1px solid white;
   border-radius: 4px;
-}
-
-.isPreparing {
-  border: 2px solid white;
 }
 
 #finished {
@@ -151,7 +166,7 @@ export default {
   border: 2px solid white;
 }
 
-#orders, #header1, #preparing, #header2, #finished, #header3 { overflow: auto }
+.isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 { overflow: auto }
 
 
 h1 {
