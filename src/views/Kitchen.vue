@@ -1,6 +1,15 @@
 
 <template>
-  <div id="kitchen-grid">
+<div>
+  <div class = "buttonWindow">
+    <button @click = 'openKitchen' class = "button">
+      <slot>+</slot>
+    </button>
+
+  </div>
+
+
+  <div id="kitchen-grid" v-show = "kitchenControl">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="orders">
       <div id="header1">
@@ -56,6 +65,8 @@
 </div>
 
 </div>
+
+</div>
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
@@ -75,12 +86,16 @@ export default {
   data: function(){
     return {
       chosenIngredients: [],
-      price: 0
+      price: 0,
+      kitchenControl: false
     }
   },
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
+    },
+    openKitchen: function(){
+      this.kitchenControl = true;
     }
   }
 }
