@@ -1,14 +1,5 @@
 
 <template>
-<div>
-  <div class = "buttonWindow">
-    <button @click = 'openKitchen' class = "button">
-      <slot>+</slot>
-    </button>
-
-  </div>
-
-
   <div id="kitchen-grid" v-show = "kitchenControl">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="orders">
@@ -63,9 +54,6 @@
     </OrderItem>
   </div>
 </div>
-
-</div>
-
 </div>
 </template>
 <script>
@@ -107,67 +95,74 @@ export default {
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+<<<<<<< HEAD
+#header1 {
+  background: #DC143C;
+=======
+#header1, #header2, #header3 {
+>>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
+  height: 60px;
+  line-height: 20px;
+  font-size:16pt;
+  border-radius: 4px;
+  border: 0.5px solid white;
 }
 
 #header1 {
   background: #DC143C;
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
 }
-
 #header2 {
   background: #00BFFF;
+<<<<<<< HEAD
   height: 60px;
   line-height: 20px;
   font-size:16pt;
   border-radius: 4px;
   border: 0.5px solid white;
+=======
+>>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
 }
-
 #header3 {
   background: #00FF7F;
+<<<<<<< HEAD
   height: 60px;
   line-height: 20px;
   font-size:16pt;
   border-radius: 4px;
   border: 0.5px solid white;
+=======
+>>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
 }
 
-#orders {
-  font-size:15pt;
+#orders, #finished, #preparing {
+  font-size: 1em;
   border: 1px solid white;
   border-radius: 4px;
 }
 
-.toPrepare {
-  border: 2px solid white;
-}
-
-#preparing {
-  font-size:15pt;
-  border: 1px solid white;
-  border-radius: 4px;
+.toPrepare, .orderFinished {
+  width: 45%;
 }
 
 .isPreparing {
+  width: 30%;
+}
+
+.toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
+  float: left;
+  height: 100px;
+  margin: 7px;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
-#finished {
-  font-size:15pt;
-  border: 1px solid white;
-  border-radius: 4px;
+.isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
+  overflow: auto
 }
-
-.orderFinished {
-  border: 2px solid white;
-}
-
-#orders, #header1, #preparing, #header2, #finished, #header3 { overflow: auto }
-
 
 h1 {
   text-transform: uppercase;

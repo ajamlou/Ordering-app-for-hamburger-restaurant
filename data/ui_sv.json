@@ -14,14 +14,17 @@
   "ordersTrending" : "Populära beställningar",
   "placeOrder" : "Beställ",
   "sideorders" : "Tillbehör",
+  "myOrder" : "Din beställning",
   "ingredients" : "Ingredienser",
   "ready" : "Klart",
   "order" : "Min burgare",
   "language" : "English",
   "bread" : "Bröd",
-  "patty" : "Protein",
+  "patty" : "Patty",
   "garnish" : "Pålägg",
   "sauce" : "Sås",
   "sides" : "Tillbehör",
-  "drinks" : "Dryck"
+  "drinks" : "Dryck",
+  "myBurger" : "Designa din hamburgare",
+  "sidesAndDrinks" : "Tillbehör & dryck"
 }

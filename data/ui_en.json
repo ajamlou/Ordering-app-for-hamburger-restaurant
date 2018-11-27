@@ -14,6 +14,7 @@
   "ordersTrending" : "Trending orders",
   "placeOrder" : "Place order",
   "sideorders" : "Side orders",
+  "myOrder" : "Your order",
   "ingredients" : "Ingredients",
   "ready" : "Done",
   "order" : "My burger",
@@ -23,5 +24,7 @@
   "garnish" : "Garnish",
   "sauce" : "Sauce",
   "sides" : "Sides",
-  "drinks" : "Drinks"
+  "drinks" : "Drinks",
+  "myBurger" : "Design your burger",
+  "sidesAndDrinks" : "Sides & drinks"
 }
