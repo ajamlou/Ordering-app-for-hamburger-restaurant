@@ -100,7 +100,7 @@ export default {
   line-height: 20px;
   font-size:16pt;
   border-radius: 4px;
-  border: 0.5px solid white;
+  border: 1px solid white;
   text-shadow: 2px 2px #696969;
 }
 
@@ -116,8 +116,8 @@ export default {
 
 #orders, #finished, #preparing {
   font-size: 1em;
-  border: 1px solid white;
-  border-radius: 4px;
+  border: 2px solid white;
+  border-radius: 6px;
 }
 
 .toPrepare, .orderFinished {
