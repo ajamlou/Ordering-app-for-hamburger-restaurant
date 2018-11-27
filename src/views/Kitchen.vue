@@ -1,6 +1,6 @@
 
 <template>
-  <div id="kitchen-grid" v-show = "kitchenControl">
+  <div id="kitchen-grid">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="orders">
       <div id="header1">
@@ -54,6 +54,7 @@
     </OrderItem>
   </div>
 </div>
+
 </div>
 </template>
 <script>
@@ -74,16 +75,12 @@ export default {
   data: function(){
     return {
       chosenIngredients: [],
-      price: 0,
-      kitchenControl: false
+      price: 0
     }
   },
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
-    },
-    openKitchen: function(){
-      this.kitchenControl = true;
     }
   }
 }
@@ -98,12 +95,7 @@ export default {
   font-family: 'Montserrat', sans-serif;
 }
 
-<<<<<<< HEAD
-#header1 {
-  background: #DC143C;
-=======
 #header1, #header2, #header3 {
->>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -116,25 +108,9 @@ export default {
 }
 #header2 {
   background: #00BFFF;
-<<<<<<< HEAD
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
-=======
->>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
 }
 #header3 {
   background: #00FF7F;
-<<<<<<< HEAD
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
-=======
->>>>>>> 1d20a9b801e94285105c0c66bc211b6ff2828daf
 }
 
 #orders, #finished, #preparing {
