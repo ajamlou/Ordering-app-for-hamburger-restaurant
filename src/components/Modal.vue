@@ -6,7 +6,7 @@
         <button
               type="button"
               class="btn-close"
-              @click="close"
+              @click="close()"
               aria-label="Close modal">
               x
             </button>
@@ -46,7 +46,7 @@ export default {
     mixins: [sharedVueStuff],
   methods: {
         close() {
-          this.$emit('close');
+          this.$emit('closeModal');
         },
       },
     };
@@ -73,7 +73,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index:9999;
+    z-index: 9999;
   }
 
   .modal {

@@ -9,10 +9,10 @@
     </div> !-->
 
     <div id="categories-wrapper">
-      <CategoryRow
-      :ingredients="ingredients"
-      :category="4"
-      :categoryName="uiLabels.bread">
+      <CategoryRow v-for="category in burgerCategories"
+      :key="category.categoryNr"
+      :category="category.categoryNr"
+      :categoryName="category.label">
     </CategoryRow>
 
       <!--<div class="category">
@@ -161,6 +161,16 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      burgerCategories:[
+        {categoryNr: 4,
+        label:uiLabels.bread},
+        {categoryNr: 1,
+        label:uiLabels.patty},
+        {categoryNr: 2,
+        label:uiLabels.garnish},
+        {categoryNr: 3,
+        label:uiLabels.sauce}
+      ]
     }
   },
   created: function () {
