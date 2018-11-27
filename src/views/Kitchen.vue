@@ -125,14 +125,14 @@ export default {
 }
 
 .isPreparing {
-  width: 30%;
+  width: 31%;
 }
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
   float: left;
   height: 100px;
-  margin: 7px;
+  margin: 8px;
   padding: 5px;
   box-sizing: border-box;
   border-radius: 20px;
