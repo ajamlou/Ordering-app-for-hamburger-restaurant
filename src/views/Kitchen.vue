@@ -95,7 +95,7 @@ export default {
 }
 
 #header1 {
-  background: #F08080;
+  background: #DC143C;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -104,7 +104,7 @@ export default {
 }
 
 #header2 {
-  background: #4169E1;
+  background: #00BFFF;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
@@ -113,7 +113,7 @@ export default {
 }
 
 #header3 {
-  background: #90EE90;
+  background: #00FF7F;
   height: 60px;
   line-height: 20px;
   font-size:16pt;
