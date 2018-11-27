@@ -202,7 +202,7 @@ export default {
   border: 1px solid #ccd;
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
-  color: white;
+  color: black;
   border-radius: 15px;
   flex: 0 0 auto;
   width:7em;
