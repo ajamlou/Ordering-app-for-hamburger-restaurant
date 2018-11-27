@@ -101,6 +101,7 @@ export default {
   font-size:16pt;
   border-radius: 4px;
   border: 0.5px solid white;
+  text-shadow: 2px 2px #696969;
 }
 
 #header1 {
@@ -134,6 +135,9 @@ export default {
   margin: 7px;
   padding: 5px;
   box-sizing: border-box;
+  border-radius: 20px;
+  border: 3px solid white;
+  background-color: black;
 }
 
 .isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
