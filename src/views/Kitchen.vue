@@ -95,79 +95,50 @@ export default {
   font-family: 'Montserrat', sans-serif;
 }
 
+#header1, #header2, #header3 {
+  height: 60px;
+  line-height: 20px;
+  font-size:16pt;
+  border-radius: 4px;
+  border: 0.5px solid white;
+}
+
 #header1 {
   background: #DC143C;
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
 }
-
 #header2 {
   background: #00BFFF;
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
 }
-
 #header3 {
   background: #00FF7F;
-  height: 60px;
-  line-height: 20px;
-  font-size:16pt;
-  border-radius: 4px;
-  border: 0.5px solid white;
 }
 
-#orders {
-  font-size:15pt;
+#orders, #finished, #preparing {
+  font-size: 1em;
   border: 1px solid white;
   border-radius: 4px;
 }
 
 .toPrepare, .orderFinished {
-  position: relative;
   width: 45%;
-  height: 100px;
-  padding: 5px;
-  justify-content: center;
 }
 
 .isPreparing {
   width: 30%;
-  height: 100px;
-  padding: 5px;
-  box-sizing: border-box;
 }
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
   float: left;
-  margin: 7px 7px 7px 7px;
+  height: 100px;
+  margin: 7px;
+  padding: 5px;
   box-sizing: border-box;
 }
 
-#preparing {
-  font-size:15pt;
-  border: 1px solid white;
-  border-radius: 4px;
+.isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
+  overflow: auto
 }
-
-#finished {
-  font-size:15pt;
-  border: 1px solid white;
-  border-radius: 4px;
-}
-
-.orderFinished {
-  border: 2px solid white;
-}
-
-.isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 { overflow: auto }
-
 
 h1 {
   text-transform: uppercase;
