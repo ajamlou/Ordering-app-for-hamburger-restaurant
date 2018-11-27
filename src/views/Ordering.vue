@@ -4,7 +4,7 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <h1>{{ uiLabels.ingredients }}</h1>
     <div id="categories-wrapper">
-        
+
         <div class="category">
             <h2>{{ uiLabels.bread }}: </h2>
             <div id="bread" class="ingredient-wrapper">
@@ -32,16 +32,7 @@ v-if="item.category == 4"
                             ref="PlusButton"
                             :v-bind:items="ingredients"
                             :category=1>
-    </PlusButton>
-                <!--      <Ingredient
-ref="ingredient"
-v-for="item in ingredients"
-v-on:increment="addToOrder(item)"
-v-if="item.category == 1"
-:item="item"
-:lang="lang"
-:key="item.ingredient_id">
-    </Ingredient>-->     
+    </PlusButton>    
     </div>
     </div>
 
@@ -53,60 +44,39 @@ v-if="item.category == 1"
                             :v-bind:items="ingredients"
                             :category=2>
     </PlusButton>
-                <!--                <Ingredient
-ref="ingredient"
-v-for="item in ingredients"
-v-on:increment="addToOrder(item)"
-v-if="item.category == 2"
-:item="item"
-:lang="lang"
-:key="item.ingredient_id">
-    </Ingredient>-->
     </div>
     </div>
 
         <div class="category">
             <h2>{{ uiLabels.sauce }}: </h2>
             <div id="sauce" class="ingredient-wrapper">
-                <Ingredient
-                            ref="ingredient"
-                            v-for="item in ingredients"
-                            v-on:increment="addToOrder(item)"
-                            v-if="item.category == 3"
-                            :item="item"
-                            :lang="lang"
-                            :key="item.ingredient_id">
-    </Ingredient>
+                <PlusButton
+                            ref="PlusButton"
+                            :v-bind:items="ingredients"
+                            :category=3>
+    </PlusButton>
     </div>
     </div>
 
         <div class="category">
             <h2>{{ uiLabels.sides }}: </h2>
             <div id="sides" class="ingredient-wrapper">
-                <Ingredient
-                            ref="ingredient"
-                            v-for="item in ingredients"
-                            v-on:increment="addToOrder(item)"
-                            v-if="item.category == 5"
-                            :item="item"
-                            :lang="lang"
-                            :key="item.ingredient_id">
-    </Ingredient>
+                <PlusButton
+                            ref="PlusButton"
+                            :v-bind:items="ingredients"
+                            :category=5>
+    </PlusButton>
     </div>
     </div>
 
         <div class="category">
             <h2>{{ uiLabels.drinks }}: </h2>
             <div id="drinks" class="ingredient-wrapper">
-                <Ingredient
-                            ref="ingredient"
-                            v-for="item in ingredients"
-                            v-on:increment="addToOrder(item)"
-                            v-if="item.category == 6"
-                            :item="item"
-                            :lang="lang"
-                            :key="item.ingredient_id">
-    </Ingredient>
+                <PlusButton
+                            ref="PlusButton"
+                            :v-bind:items="ingredients"
+                            :category=6>
+    </PlusButton>
     </div>
     </div>
 
