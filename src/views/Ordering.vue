@@ -3,7 +3,8 @@
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
-    <h1>{{ uiLabels.ingredients }}</h1>
+    <h1>{{ uiLabels.myOrder }}</h1>
+    <h2>{{ uiLabels.myBurger }} </h2>
 
     <div id="categories-wrapper">
 
@@ -73,6 +74,8 @@
   </Ingredient>
 </div>
 </div>
+
+<h2>{{ uiLabels.sidesAndDrinks }} </h2>
 
 <div class="category">
   <h2>{{ uiLabels.sides }}: </h2>
