@@ -33,7 +33,7 @@ export default {
   color: rgb(100,100,100);
   border-radius: 15px;
   flex: 0 0 auto;
-  width:7em;
+  width:5em;
   height:inherit;
 }
 .PlusButton:hover{
