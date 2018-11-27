@@ -6,6 +6,7 @@
     <h1>{{ uiLabels.myOrder }}</h1>
     <h2>{{ uiLabels.myBurger }} </h2>
 
+
     <div id="categories-wrapper">
 
         <div class="category">
@@ -34,7 +35,7 @@ v-if="item.category == 4"
                 <PlusButton
                             ref="PlusButton"
                             :v-bind:items="ingredients"
-                            :category=1>
+                            category="1">
     </PlusButton>
     </div>
     </div>
@@ -45,40 +46,25 @@ v-if="item.category == 4"
                 <PlusButton
                             ref="PlusButton"
                             :v-bind:items="ingredients"
-                            :category=2>
+                            category="2">
     </PlusButton>
     </div>
     </div>
 
-<<<<<<< HEAD
+
+            <div class="category">
+                <h2>{{ uiLabels.sauce }}: </h2>
+                <div id="sauce" class="ingredient-wrapper">
+                    <PlusButton
+                                ref="PlusButton"
+                                :v-bind:items="ingredients"
+                                category="3">
+        </PlusButton>
+        </div>
+        </div>
+
 <h2>{{ uiLabels.sidesAndDrinks }} </h2>
 
-<div class="category">
-  <h2>{{ uiLabels.sides }}: </h2>
-  <div id="sides" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 5"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-=======
-        <div class="category">
-            <h2>{{ uiLabels.sauce }}: </h2>
-            <div id="sauce" class="ingredient-wrapper">
-                <PlusButton
-                            ref="PlusButton"
-                            :v-bind:items="ingredients"
-                            :category=3>
-    </PlusButton>
-    </div>
-    </div>
->>>>>>> f81b0ac2f9f5f38ca7ab7f84356252331d3edede
 
         <div class="category">
             <h2>{{ uiLabels.sides }}: </h2>
@@ -86,7 +72,7 @@ v-if="item.category == 4"
                 <PlusButton
                             ref="PlusButton"
                             :v-bind:items="ingredients"
-                            :category=5>
+                            category="5">
     </PlusButton>
     </div>
     </div>
@@ -97,7 +83,7 @@ v-if="item.category == 4"
                 <PlusButton
                             ref="PlusButton"
                             :v-bind:items="ingredients"
-                            :category=6>
+                            category="6">
     </PlusButton>
     </div>
     </div>
