@@ -1,7 +1,7 @@
 
 <template>
   <div id="kitchen-grid">
-<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="orders">
       <div id="header1">
         <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -36,26 +36,32 @@
       :key="key">
     </OrderItemToPrepare>
   </div>
-  </div>
-
-  <div id="finished">
-    <div id="header3">
-      <h1>{{ uiLabels.ordersFinished }}</h1>
-    </div>
-    <div>
-      <OrderItem class="orderFinished"
-      v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      :order-id="key"
-      :order="order"
-      :lang="lang"
-      :ui-labels="uiLabels"
-      :key="key">
-    </OrderItem>
-  </div>
 </div>
 
+<div id="finished">
+  <div id="header3">
+    <h1>{{ uiLabels.ordersFinished }}</h1>
+  </div>
+  <div>
+    <OrderItem class="orderFinished"
+    v-for="(order, key) in orders"
+    v-if="order.status === 'done'"
+    :order-id="key"
+    :order="order"
+    :lang="lang"
+    :ui-labels="uiLabels"
+    :key="key">
+  </OrderItem>
 </div>
+</div>
+<div class="backButton">
+    Här tänkte jag att vi kan ha en bakåt-knapp till vänster.
+</div>
+<div class="backButton">
+    Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
+</div>
+</div>
+
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
@@ -142,6 +148,18 @@ export default {
 
 .isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
   overflow: auto
+}
+
+.backButton {
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
+}
+
+.selectButton {
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
 }
 
 h1 {
