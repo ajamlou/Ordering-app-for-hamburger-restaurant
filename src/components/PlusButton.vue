@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <button @click="onClick" class="PlusButton">
-=======
   <button @click="showModal" class="PlusButton">
->>>>>>> origin/maxsbranch
     <slot>+</slot>
     <modal
     :category="category"
