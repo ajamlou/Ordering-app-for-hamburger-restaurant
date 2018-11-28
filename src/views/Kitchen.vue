@@ -1,6 +1,7 @@
 
 <template>
-  <div id = "kitchenId">
+  <div>
+
     <div id = "buttonMesh">
       <div id = "statisticsId" class = statisticsButtonClass v-if = "kitchenButtonData === 'no show'">
         <button id = "statisticsButton">STATISTIK</button>
@@ -9,6 +10,7 @@
         <button  id = "kitchenButton" @click = "kitchenButton">ORDERBESTÄLLNINGAR</button>
       </div>
     </div>
+
     <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div id="orders">
@@ -108,6 +110,7 @@ export default {
 }
 </script>
 <style scoped>
+
 #kitchen-grid {
   display: grid;
   position: fixed;
@@ -115,7 +118,7 @@ export default {
   color: white;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  height: 90vh;
+  height: 99vh;
 }
 
 #header1, #header2, #header3 {
@@ -155,45 +158,12 @@ export default {
 #orders, #finished {
   width: 25vw;
 }
-#buttonMesh{
-  display: grid;
-}
-
-.kitchenButtonClass, .backButtonClass, .statisticsButtonClass{
-  margin: auto;
-}
-
-#kitchenButton, #backButton, #statisticsButton{
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 2.5vh;
-  border-radius: 4px;
-}
-#statisticsButton{
-background-color: magenta;
-}
-#backButton {
-  background-color: #FFA500;
-}
-
-#kitchenButton {
-  background-color: #4CAF50;
-}
-
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
-}
 
 .toPrepare, .orderFinished {
-  width: 45%;
+  width: 42%;
 }
 .isPreparing {
-  width: 31%;
+  width: 30%;
 }
 
 .toPrepare, .isPreparing, .orderFinished {
@@ -218,4 +188,39 @@ h1 {
   font-size: 1.4em;
   text-color: white;
 }
+
+/* ccskod för knappar under denna kommentar */
+#buttonMesh{
+  display: grid;
+}
+
+.kitchenButtonClass, .backButtonClass, .statisticsButtonClass{
+  margin: auto;
+}
+
+#kitchenButton, #backButton, #statisticsButton{
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2.5vh;
+  border-radius: 4px;
+}
+#statisticsButton{
+  background-color: magenta;
+}
+#backButton {
+  background-color: #FFA500;
+}
+#kitchenButton {
+  background-color: #4CAF50;
+}
+
+.selectButton {
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
+}
+
 </style>
