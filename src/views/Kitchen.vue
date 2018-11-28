@@ -2,7 +2,7 @@
 <template>
   <div id = "kitchen">
     <div id = "buttonMesh">
-      <div v-if = "kitchenButtonData === 'no show'">
+      <div class = "kitchenButton" v-if = "kitchenButtonData === 'no show'">
         <button  id = "kitchenButton" @click = "kitchenButton">Orderbeställningar</button>
       </div>
     </div>
@@ -61,7 +61,7 @@
   </div>
 </div>
 <div class="backButton">
-<button @click = "backButton"> Tillbaka </button>
+  <button @click = "backButton"> Tillbaka </button>
 </div>
 <div class="backButton">
   Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
@@ -152,18 +152,24 @@ export default {
 #orders, #finished {
   width: 25vw;
 }
-#kitchenButton{
-  background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 4px;
+#buttonMesh{
+  display: grid;
+}
+.kitchenButton{
+  margin: auto;
 }
 
+#kitchenButton{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
 .toPrepare, .orderFinished {
   width: 45%;
 }
