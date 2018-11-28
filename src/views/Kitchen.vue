@@ -92,14 +92,17 @@ export default {
 <style scoped>
 #kitchen-grid {
   display: grid;
+  position: fixed;
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  height: 700px;
 }
 
 #header1, #header2, #header3 {
   height: 60px;
+  position: fixed;
   line-height: 20px;
   font-size:16pt;
   border-radius: 4px;
@@ -109,12 +112,15 @@ export default {
 
 #header1 {
   background: #DC143C;
+  width: 352px;
 }
 #header2 {
   background: #00BFFF;
+  width: 710px;
 }
 #header3 {
   background: #00FF7F;
+  width: 352px;
 }
 
 #orders, #finished, #preparing {
