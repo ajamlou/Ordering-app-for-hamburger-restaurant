@@ -5,7 +5,7 @@
 
     <h1>{{ uiLabels.myOrder }}</h1>
     <h2>{{ uiLabels.myBurger }} </h2>
-    <modal
+    <modal ref="modal"
     :category="this.modalCategory"
     v-show="this.isModalVisible === true"
     @addOrder="addToOrder"
@@ -27,7 +27,7 @@
 @ModalInfo="switchVisibility"
 :categoryName="uiLabels[category.label]">
 </CategoryRow>
-
+<!--
 <div class="category">
   <h2>{{ uiLabels.patty }}: </h2>
   <div id="patty" class="ingredient-wrapper">
@@ -41,7 +41,7 @@
     :key="item.ingredient_id">
   </Ingredient>
 </div>
-</div>
+</div> !-->
 
     </div>
 
@@ -143,8 +143,8 @@ export default {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit('order', {order: order});
       //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-        this.$refs.ingredient[i].resetCounter();
+      for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i += 1) {
+        this.$refs.modal.$refs.ingredient[i].resetCounter();
       }
       this.price = 0;
       this.chosenIngredients = [];
