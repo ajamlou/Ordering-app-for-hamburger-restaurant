@@ -97,38 +97,46 @@ export default {
   color: white;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  height: 700px;
+  height: 90vh;
 }
 
 #header1, #header2, #header3 {
-  height: 60px;
+  height: 10vh;
   position: fixed;
-  line-height: 20px;
+  line-height: 4vh;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
   text-shadow: 2px 2px #696969;
+  margin: auto;
+  font-size: 3vh;
 }
 
 #header1 {
   background: #DC143C;
-  width: 352px;
+  width: 25vw;
 }
 #header2 {
   background: #00BFFF;
-  width: 710px;
+  width: 50vw;
 }
 #header3 {
   background: #00FF7F;
-  width: 352px;
+  width: 25vw;
 }
 
-#orders, #finished, #preparing {
+#orders, #preparing, #finished {
   font-size: 1em;
   border: 2px solid white;
   border-radius: 6px;
 }
 
+#preparing {
+  width: 50vw;
+}
+#orders, #finished {
+  width: 25vw;
+}
 .toPrepare, .orderFinished {
   width: 45%;
 }
@@ -138,6 +146,7 @@ export default {
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
+  font-size: 2.5vh;
   float: left;
   height: 100px;
   margin: 8px;
