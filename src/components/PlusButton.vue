@@ -1,10 +1,11 @@
 <template>
-  <button @click="showModal" class="PlusButton">
+  <button @click="emitModalInfo" class="PlusButton">
     <slot>+</slot>
-    <modal
+  <!--  <modal
     :category="category"
     v-show="isModalVisible"
-    @close="closeModal"/>
+    v-on:closeModal="switchVisibility"
+    @close="switchVisibility"/>!-->
   </button>
 </template>
 <script>
@@ -19,17 +20,21 @@ export default {
     category: Number
   },
   data () {
-      return {
+    /*  return {
         isModalVisible: false,
-      };
+      }; */
     },
     methods: {
-      showModal() {
-        this.isModalVisible = true;
+      emitModalInfo:function(){
+        this.$emit('ModalInfo', category)
       },
-      closeModal() {
-        this.isModalVisible = false;
-      }
+    /*  switchVisibility() {
+        if(this.isModalVisible){
+          this.isModalVisible = false
+        }
+        else{
+        this.isModalVisible = true}
+      }, */
     },
   };
 </script>

@@ -1,13 +1,37 @@
 
 <template>
-  <div id="kitchen-grid">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <div id = "kitchen">
+    <div id = "buttonMesh">
+      <div class = "kitchenButtonClass" v-if = "kitchenButtonData === 'no show'">
+        <button  id = "kitchenButton" @click = "kitchenButton">ORDERBESTÄLLNINGAR</button>
+      </div>
+    </div>
+    <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+      <div id="orders">
+        <div id="header1">
+          <h1>{{ uiLabels.ordersInQueue }}</h1>
+        </div>
+        <div>
+          <OrderItemToPrepare class="toPrepare"
+          v-for="(order, key) in orders"
+          v-if="order.status !== 'done'"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemToPrepare>
+      </div>
+    </div>
+
+    <div id="preparing">
+      <div id="header2">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div>
-        <OrderItemToPrepare class="toPrepare"
+        <OrderItemToPrepare class="isPreparing"
         v-for="(order, key) in orders"
         v-if="order.status !== 'done'"
         v-on:done="markDone(key)"
@@ -20,46 +44,30 @@
     </div>
   </div>
 
-  <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
+  <div id="finished">
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
     </div>
     <div>
-      <OrderItemToPrepare class="isPreparing"
+      <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      v-on:done="markDone(key)"
+      v-if="order.status === 'done'"
       :order-id="key"
       :order="order"
-      :ui-labels="uiLabels"
       :lang="lang"
+      :ui-labels="uiLabels"
       :key="key">
-    </OrderItemToPrepare>
+    </OrderItem>
   </div>
+</div>
+<div class="backButtonClass">
+  <button id = "backButton" @click = "backButton"> TILLBAKA </button>
+</div>
+<div class="selectButton">
+  Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
+</div>
 </div>
 
-<div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
-  <div>
-    <OrderItem class="orderFinished"
-    v-for="(order, key) in orders"
-    v-if="order.status === 'done'"
-    :order-id="key"
-    :order="order"
-    :lang="lang"
-    :ui-labels="uiLabels"
-    :key="key">
-  </OrderItem>
-</div>
-</div>
-<div class="backButton">
-    Här tänkte jag att vi kan ha en bakåt-knapp till vänster.
-</div>
-<div class="backButton">
-    Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
-</div>
 </div>
 
 </template>
@@ -79,12 +87,19 @@ export default {
   data: function(){
     return {
       chosenIngredients: [],
-      price: 0
+      price: 0,
+      kitchenButtonData: "no show"
     }
   },
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
+    },
+    kitchenButton: function(){
+      this.kitchenButtonData = "show";
+    },
+    backButton: function(){
+      this.kitchenButtonData = "no show";
     }
   }
 }
@@ -92,35 +107,86 @@ export default {
 <style scoped>
 #kitchen-grid {
   display: grid;
+  position: fixed;
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  height: 90vh;
 }
 
 #header1, #header2, #header3 {
-  height: 60px;
-  line-height: 20px;
+  height: 10vh;
+  position: fixed;
+  line-height: 4vh;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
   text-shadow: 2px 2px #696969;
+  margin: auto;
+  font-size: 3vh;
 }
 
 #header1 {
   background: #DC143C;
+  width: 25vw;
 }
 #header2 {
   background: #00BFFF;
+  width: 50vw;
 }
 #header3 {
   background: #00FF7F;
+  width: 25vw;
 }
 
-#orders, #finished, #preparing {
+#orders, #preparing, #finished {
   font-size: 1em;
   border: 2px solid white;
   border-radius: 6px;
+}
+
+#preparing {
+  width: 50vw;
+}
+#orders, #finished {
+  width: 25vw;
+}
+#buttonMesh{
+  display: grid;
+}
+
+.kitchenButtonClass{
+  margin: auto;
+}
+
+#kitchenButton, #backButton{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2.5vh;
+  border-radius: 4px;
+}
+
+#backButton {
+    background-color: #FFA500;
+}
+
+#kitchenButton {
+    background-color: #4CAF50;
+}
+
+.backButtonClass {
+  margin: auto;
+}
+
+.selectButton {
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
 }
 
 .toPrepare, .orderFinished {
@@ -132,6 +198,7 @@ export default {
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
+  font-size: 2.5vh;
   float: left;
   height: 100px;
   margin: 8px;
@@ -144,18 +211,6 @@ export default {
 
 .isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
   overflow: auto
-}
-
-.backButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
-}
-
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
 }
 
 h1 {

@@ -6,8 +6,7 @@
         <button
               type="button"
               class="btn-close"
-              @click="close()"
-              aria-label="Close modal">
+              @click="$emit('closeModal')">
               x
             </button>
       </slot>
@@ -44,12 +43,7 @@ export default {
     category: Number
   },
     mixins: [sharedVueStuff],
-  methods: {
-        close() {
-          this.$emit('closeModal');
-        },
-      },
-    };
+      }
 
 </script>
 
