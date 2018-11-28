@@ -1,7 +1,10 @@
 
 <template>
-  <div id = "kitchen">
+  <div id = "kitchenId">
     <div id = "buttonMesh">
+      <div id = "statisticsId" class = statisticsButtonClass v-if = "kitchenButtonData === 'no show'">
+        <button id = "statisticsButton">STATISTIK</button>
+      </div>
       <div class = "kitchenButtonClass" v-if = "kitchenButtonData === 'no show'">
         <button  id = "kitchenButton" @click = "kitchenButton">ORDERBESTÄLLNINGAR</button>
       </div>
@@ -156,31 +159,28 @@ export default {
   display: grid;
 }
 
-.kitchenButtonClass{
+.kitchenButtonClass, .backButtonClass, .statisticsButtonClass{
   margin: auto;
 }
 
-#kitchenButton, #backButton{
-  background-color: #4CAF50;
+#kitchenButton, #backButton, #statisticsButton{
   border: none;
-  color: white;
+  color: black;
   padding: 15px 32px;
   text-decoration: none;
   display: inline-block;
   font-size: 2.5vh;
   border-radius: 4px;
 }
-
+#statisticsButton{
+background-color: magenta;
+}
 #backButton {
-    background-color: #FFA500;
+  background-color: #FFA500;
 }
 
 #kitchenButton {
-    background-color: #4CAF50;
-}
-
-.backButtonClass {
-  margin: auto;
+  background-color: #4CAF50;
 }
 
 .selectButton {
