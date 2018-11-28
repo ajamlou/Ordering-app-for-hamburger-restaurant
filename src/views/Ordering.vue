@@ -81,7 +81,6 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    //PlusButton,
     CategoryRow,
     Modal
   },
@@ -119,12 +118,11 @@ export default {
   },
   methods: {
     switchVisibility: function(category) {
-      this.modalCategory=category;
-
       if (this.isModalVisible === true){
         this.isModalVisible = false;
       }
       else {
+      this.modalCategory=category;
       this.isModalVisible = true;
     }
 
