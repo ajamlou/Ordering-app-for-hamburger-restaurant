@@ -167,12 +167,12 @@ export default {
   padding: 15px 32px;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 2.5vh;
   border-radius: 4px;
 }
 
 #backButton {
-    background-color: #8B0000;
+    background-color: #FFA500;
 }
 
 #kitchenButton {
