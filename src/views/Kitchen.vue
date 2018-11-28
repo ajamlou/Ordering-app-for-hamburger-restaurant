@@ -2,7 +2,7 @@
 <template>
   <div id = "kitchen">
     <div id = "buttonMesh">
-      <div class = "kitchenButton" v-if = "kitchenButtonData === 'no show'">
+      <div class = "kitchenButtonClass" v-if = "kitchenButtonData === 'no show'">
         <button  id = "kitchenButton" @click = "kitchenButton">Orderbeställningar</button>
       </div>
     </div>
@@ -60,10 +60,10 @@
     </OrderItem>
   </div>
 </div>
-<div class="backButton">
-  <button @click = "backButton"> Tillbaka </button>
+<div class="backButtonClass">
+  <button id = "backButton" @click = "backButton"> Tillbaka </button>
 </div>
-<div class="backButton">
+<div class="selectButton">
   Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
 </div>
 </div>
@@ -155,21 +155,40 @@ export default {
 #buttonMesh{
   display: grid;
 }
-.kitchenButton{
+
+.kitchenButtonClass{
   margin: auto;
 }
 
-#kitchenButton{
-  background-color: #4CAF50; /* Green */
+#kitchenButton, #backButton{
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 15px 32px;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   border-radius: 4px;
 }
+
+#backButton {
+    background-color: #8B0000;
+}
+
+#kitchenButton {
+    background-color: #4CAF50;
+}
+
+.backButtonClass {
+  margin: auto;
+}
+
+.selectButton {
+  width: 100%;
+  margin: 10px;
+  margin-left: 5px;
+}
+
 .toPrepare, .orderFinished {
   width: 45%;
 }
@@ -192,18 +211,6 @@ export default {
 
 .isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
   overflow: auto
-}
-
-.backButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
-}
-
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
 }
 
 h1 {
