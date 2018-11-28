@@ -2,17 +2,13 @@
   <transition name="modal-fade">
   <div class="modal-backdrop">
     <div class="modal">
-
-      <slot name="header">
         <button
               type="button"
               class="btn-close"
               @click="$emit('ModalInfo')">
               x
             </button>
-      </slot>
       <div class="mod-bod">
-      <slot name="body">
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
@@ -22,11 +18,7 @@
         :lang="lang"
         :key="item.ingredient_id">
       </Ingredient>
-      </slot>
     </div>
-
-      <slot name="footer">
-      </slot>
     </div>
   </div>
 </transition>
@@ -65,7 +57,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,6 +79,7 @@ export default {
     grid-template-columns: 33% 33% 33%;
   }
 
+/*
   .modal-header,
   .modal-footer {
     padding: 15px;
@@ -107,7 +100,7 @@ export default {
   .modal-body {
     position: relative;
     padding: 20px 10px;
-  }
+  } */
 
   .ingredient{
 
