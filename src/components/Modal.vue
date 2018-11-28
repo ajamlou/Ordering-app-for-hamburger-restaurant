@@ -109,11 +109,4 @@ export default {
     color: #4AAE9B;
     background: transparent;
   }
-
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
-  }
 </style>
