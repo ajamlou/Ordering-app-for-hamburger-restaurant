@@ -3,7 +3,7 @@
   <div id = "kitchen">
     <div id = "buttonMesh">
       <div class = "kitchenButtonClass" v-if = "kitchenButtonData === 'no show'">
-        <button  id = "kitchenButton" @click = "kitchenButton">Orderbeställningar</button>
+        <button  id = "kitchenButton" @click = "kitchenButton">ORDERBESTÄLLNINGAR</button>
       </div>
     </div>
     <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
@@ -61,7 +61,7 @@
   </div>
 </div>
 <div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> Tillbaka </button>
+  <button id = "backButton" @click = "backButton"> TILLBAKA </button>
 </div>
 <div class="selectButton">
   Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
