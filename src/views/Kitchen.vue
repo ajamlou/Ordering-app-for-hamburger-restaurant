@@ -1,65 +1,79 @@
 
 <template>
-  <div id="kitchen-grid">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <div id = "kitchen">
+
+    <div id = "buttonMesh">
+
+      <div id = "kitchenButton">
+
+        <button @click = "kitchenButton" v-if = "kitchenButtonData === 'no show'">+</button>
+
+        </div>
+
+      </div>
+
+      <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <div id="orders">
+          <div id="header1">
+            <h1>{{ uiLabels.ordersInQueue }}</h1>
+          </div>
+          <div>
+            <OrderItemToPrepare class="toPrepare"
+            v-for="(order, key) in orders"
+            v-if="order.status !== 'done'"
+            v-on:done="markDone(key)"
+            :order-id="key"
+            :order="order"
+            :ui-labels="uiLabels"
+            :lang="lang"
+            :key="key">
+          </OrderItemToPrepare>
+        </div>
+      </div>
+
+      <div id="preparing">
+        <div id="header2">
+          <h1>{{ uiLabels.ordersPreparing }}</h1>
+        </div>
+        <div>
+          <OrderItemToPrepare class="isPreparing"
+          v-for="(order, key) in orders"
+          v-if="order.status !== 'done'"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemToPrepare>
+      </div>
+    </div>
+
+    <div id="finished">
+      <div id="header3">
+        <h1>{{ uiLabels.ordersFinished }}</h1>
       </div>
       <div>
-        <OrderItemToPrepare class="toPrepare"
+        <OrderItem class="orderFinished"
         v-for="(order, key) in orders"
-        v-if="order.status !== 'done'"
-        v-on:done="markDone(key)"
+        v-if="order.status === 'done'"
         :order-id="key"
         :order="order"
-        :ui-labels="uiLabels"
         :lang="lang"
+        :ui-labels="uiLabels"
         :key="key">
-      </OrderItemToPrepare>
+      </OrderItem>
     </div>
   </div>
-
-  <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
-    </div>
-    <div>
-      <OrderItemToPrepare class="isPreparing"
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      v-on:done="markDone(key)"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItemToPrepare>
-  </div>
-</div>
-
-<div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
-  <div>
-    <OrderItem class="orderFinished"
-    v-for="(order, key) in orders"
-    v-if="order.status === 'done'"
-    :order-id="key"
-    :order="order"
-    :lang="lang"
-    :ui-labels="uiLabels"
-    :key="key">
-  </OrderItem>
-</div>
-</div>
-<div class="backButton">
+  <div class="backButton">
     Här tänkte jag att vi kan ha en bakåt-knapp till vänster.
-</div>
-<div class="backButton">
+  </div>
+  <div class="backButton">
     Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
+  </div>
 </div>
+
 </div>
 
 </template>
@@ -79,12 +93,16 @@ export default {
   data: function(){
     return {
       chosenIngredients: [],
-      price: 0
+      price: 0,
+      kitchenButtonData: "no show"
     }
   },
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
+    },
+    kitchenButton: function(){
+      this.kitchenButtonData = "show";
     }
   }
 }
