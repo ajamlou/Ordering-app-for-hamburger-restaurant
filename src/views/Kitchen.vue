@@ -2,8 +2,8 @@
 <template>
   <div id = "kitchen">
     <div id = "buttonMesh">
-      <div id = "kitchenButton">
-        <button @click = "kitchenButton" v-if = "kitchenButtonData === 'no show'">+</button>
+      <div v-if = "kitchenButtonData === 'no show'">
+        <button  id = "kitchenButton" @click = "kitchenButton">Orderbeställningar</button>
       </div>
     </div>
     <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
@@ -152,6 +152,17 @@ export default {
 #orders, #finished {
   width: 25vw;
 }
+#kitchenButton{
+  background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 .toPrepare, .orderFinished {
   width: 45%;
 }
