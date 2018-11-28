@@ -1,12 +1,11 @@
 <template>
-  <div id="ordering">
+<div id="ordering">
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
-    <h1>{{ uiLabels.ingredients }}</h1>
-    <!--<div v-for="item in ingredients">
-      {{item}}
-    </div> !-->
+    <h1>{{ uiLabels.myOrder }}</h1>
+    <h2>{{ uiLabels.myBurger }} </h2>
+
 
     <div id="categories-wrapper">
       <CategoryRow v-for="category in burgerCategories"
@@ -15,7 +14,7 @@
       :categoryName="uiLabels[category.label]">
     </CategoryRow>
 
-<h1>Extras</h1>
+<h1>{{uiLabels.sidesAndDrinks}}</h1>
 
 <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
@@ -23,25 +22,36 @@
 :categoryName="uiLabels[category.label]">
 </CategoryRow>
 
-</div>
+        <div class="category">
+            <h2>{{ uiLabels.drinks }}: </h2>
+            <div id="drinks" class="ingredient-wrapper">
+                <PlusButton
+                            ref="PlusButton"
+                            :v-bind:items="ingredients"
+                            category="6">
+    </PlusButton>
+    </div>
+    </div>
 
-<h1>{{ uiLabels.order }}</h1>
-{{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
-<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+    </div>
 
-<h1>{{ uiLabels.ordersInQueue }}</h1>
-<div>
-  <OrderItem
-  v-for="(order, key) in orders"
-  v-if="order.status !== 'done'"
-  :order-id="key"
-  :order="order"
-  :ui-labels="uiLabels"
-  :lang="lang"
-  :key="key">
-</OrderItem>
-</div>
-</div>
+    <h1>{{ uiLabels.order }}</h1>
+    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+
+    <h1>{{ uiLabels.ordersInQueue }}</h1>
+    <div>
+        <OrderItem
+                   v-for="(order, key) in orders"
+                   v-if="order.status !== 'done'"
+                   :order-id="key"
+                   :order="order"
+                   :ui-labels="uiLabels"
+                   :lang="lang"
+                   :key="key">
+    </OrderItem>
+    </div>
+    </div>
 </template>
 <script>
 //import the components that are used in the template, the name that you
@@ -52,10 +62,10 @@ import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 
-//import methods and data that are shared between ordering and kitchen views
-import sharedVueStuff from '@/components/sharedVueStuff.js'
+    //import methods and data that are shared between ordering and kitchen views
+    import sharedVueStuff from '@/components/sharedVueStuff.js'
 
-/* instead of defining a Vue instance, export default allows the only
+    /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
@@ -89,49 +99,22 @@ export default {
         label:"drinks"},
       ]
     }
-  },
-  created: function () {
-    this.$store.state.socket.on('orderNumber', function (data) {
-      this.orderNumber = data;
-    }.bind(this));
-  },
-  methods: {
-    addToOrder: function (item) {
-      this.chosenIngredients.push(item);
-      this.price += +item.selling_price;
-    },
-    placeOrder: function () {
-      var i,
-      //Wrap the order in an object
-      order = {
-        ingredients: this.chosenIngredients,
-        price: this.price
-      };
-      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      this.$store.state.socket.emit('order', {order: order});
-      //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-        this.$refs.ingredient[i].resetCounter();
-      }
-      this.price = 0;
-      this.chosenIngredients = [];
-    }
   }
 }
 </script>
 <style scoped>
-/* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
-#ordering {
-  margin:auto;
-  width: 90%;
-}
+    /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
+    #ordering {
+        margin:auto;
+        width: 90%;
+    }
 
-.example-panel {
-  position: fixed;
-  left:0;
-  top:0;
-  z-index: -2;
-}
+    .example-panel {
+        position: fixed;
+        left:0;
+        top:0;
+        z-index: -2;
+    }
 
 
 .ingredient { /*Styr 1 enskild ingrediens-ruta*/
@@ -170,25 +153,25 @@ export default {
 }
 
 
-#categories-wrapper{
+    #categories-wrapper{
 
-}
+    }
 
-button{
-  float:right;
-  background-color: #ddd;
-  border: none;
-  color: black;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 16px;
-}
-button:hover{
-  background-color: #000;
-  color: white;
-}
+    button{
+        float:right;
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+    button:hover{
+        background-color: #000;
+        color: white;
+    }
 </style>
