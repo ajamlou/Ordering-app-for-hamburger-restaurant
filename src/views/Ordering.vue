@@ -5,12 +5,16 @@
 
     <h1>{{ uiLabels.myOrder }}</h1>
     <h2>{{ uiLabels.myBurger }} </h2>
-
+    <modal
+    :category="this.modalCategory"
+    v-show="this.isModalVisible === true"
+    @ModalInfo="switchVisibility"/>
 
     <div id="categories-wrapper">
       <CategoryRow v-for="category in burgerCategories"
       :key="category.categoryNr"
       :category="category.categoryNr"
+      @ModalInfo="switchVisibility"
       :categoryName="uiLabels[category.label]">
     </CategoryRow>
 
@@ -63,8 +67,9 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
-import PlusButton from '@/components/PlusButton.vue'
+//import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
+import Modal from '@/components/Modal.vue'
 
     //import methods and data that are shared between ordering and kitchen views
     import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -76,8 +81,9 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton,
-    CategoryRow
+    //PlusButton,
+    CategoryRow,
+    Modal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -86,6 +92,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      modalCategory:0,
+      isModalVisible: false,
       burgerCategories:[
         {categoryNr: 4,
         label:"bread"},
@@ -110,6 +118,17 @@ export default {
     }.bind(this));
   },
   methods: {
+    switchVisibility: function(category) {
+      this.modalCategory=category;
+
+      if (this.isModalVisible === true){
+        this.isModalVisible = false;
+      }
+      else {
+      this.isModalVisible = true;
+    }
+
+    },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
