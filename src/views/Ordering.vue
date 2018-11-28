@@ -132,6 +132,7 @@ export default {
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      this.isModalVisible = false;
     },
     placeOrder: function () {
       var i,
