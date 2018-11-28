@@ -5,9 +5,9 @@ let csv = require("csvtojson");
 let ingredientsDataName = "ingredients";
 let transactionsDataName = "transactions";
 let defaultLanguage = "sv";
-let fs = require('fs');
+let fs1 = require('fs');
 
-fs.watch("./data/", (event_type, file_name) => {
+fs1.watch("./data/", (event_type, file_name) => {
     console.log("Deleting Require cache for " + file_name);
     delete require.cache[ require.resolve("./data/" + file_name)];
 });

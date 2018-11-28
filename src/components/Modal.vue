@@ -15,7 +15,7 @@
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
-        v-on:increment="addToOrder(item)"
+        v-on:increment="$emit('addOrder',item)"
         v-if="item.category == category"
         :item="item"
         :lang="lang"
@@ -67,7 +67,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 9998;
   }
 
   .modal {

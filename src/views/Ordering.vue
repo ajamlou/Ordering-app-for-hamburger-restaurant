@@ -8,6 +8,7 @@
     <modal
     :category="this.modalCategory"
     v-show="this.isModalVisible === true"
+    @addOrder="addToOrder"
     @ModalInfo="switchVisibility"/>
 
     <div id="categories-wrapper">
@@ -23,6 +24,7 @@
 <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
+@ModalInfo="switchVisibility"
 :categoryName="uiLabels[category.label]">
 </CategoryRow>
 
