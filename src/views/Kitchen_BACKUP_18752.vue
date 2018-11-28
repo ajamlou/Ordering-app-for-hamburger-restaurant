@@ -54,14 +54,19 @@
     </OrderItem>
   </div>
 </div>
+<<<<<<< HEAD
+=======
 
 </div>
+>>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
+
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
+
 export default {
   name: 'Ordering',
   components: {
@@ -69,7 +74,11 @@ export default {
     OrderItemToPrepare
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
+<<<<<<< HEAD
+                            //the ordering system and the kitchen
+=======
   //the ordering system and the kitchen
+>>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
   data: function(){
     return {
       chosenIngredients: [],
@@ -84,12 +93,20 @@ export default {
 }
 </script>
 <style scoped>
+
+<<<<<<< HEAD
+  h1 {
+    text-transform: uppercase;
+    font-size: 1.4em;
+  }
+=======
 #kitchen-grid {
   display: grid;
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
 }
+
 #header1 {
   background: #F08080;
   height: 60px;
@@ -98,6 +115,7 @@ export default {
   border-radius: 4px;
   border: 0.5px solid white;
 }
+
 #header2 {
   background: #4169E1;
   height: 60px;
@@ -106,6 +124,7 @@ export default {
   border-radius: 4px;
   border: 0.5px solid white;
 }
+
 #header3 {
   background: #90EE90;
   height: 60px;
@@ -114,34 +133,44 @@ export default {
   border-radius: 4px;
   border: 0.5px solid white;
 }
+
 #orders {
   font-size:15pt;
   border: 1px solid white;
   border-radius: 4px;
 }
+
 .toPrepare {
   border: 2px solid white;
 }
+
 #preparing {
   font-size:15pt;
   border: 1px solid white;
   border-radius: 4px;
 }
+
 .isPreparing {
   border: 2px solid white;
 }
+
 #finished {
   font-size:15pt;
   border: 1px solid white;
   border-radius: 4px;
 }
+
 .orderFinished {
   border: 2px solid white;
 }
+
 #orders, #header1, #preparing, #header2, #finished, #header3 { overflow: auto }
+
+
 h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   text-color: white;
 }
+>>>>>>> 520a2a737ee2ad198080f1ec45d93747678f1961
 </style>

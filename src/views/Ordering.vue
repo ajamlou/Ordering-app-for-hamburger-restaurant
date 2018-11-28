@@ -4,95 +4,24 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
+    <!--<div v-for="item in ingredients">
+      {{item}}
+    </div> !-->
 
     <div id="categories-wrapper">
+      <CategoryRow v-for="category in burgerCategories"
+      :key="category.categoryNr"
+      :category="category.categoryNr"
+      :categoryName="uiLabels[category.label]">
+    </CategoryRow>
 
-      <div class="category">
+<h1>Extras</h1>
 
-      <h2>{{ uiLabels.bread }}: </h2>
-        <div id="bread" class="ingredient-wrapper">
-        <PlusButton
-          ref="PlusButton"
-          :v-bind:items="ingredients"
-          :category=4>
-        </PlusButton>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2>{{ uiLabels.patty }}: </h2>
-    <div id="patty" class="ingredient-wrapper">
-      <Ingredient
-      ref="ingredient"
-      v-for="item in ingredients"
-      v-on:increment="addToOrder(item)"
-      v-if="item.category == 1"
-      :item="item"
-      :lang="lang"
-      :key="item.ingredient_id">
-    </Ingredient>
-  </div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.garnish }}: </h2>
-  <div id="garnish" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 2"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.sauce }}: </h2>
-  <div id="sauce" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 3"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.sides }}: </h2>
-  <div id="sides" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 5"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.drinks }}: </h2>
-  <div id="drinks" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 6"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
+<CategoryRow v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:categoryName="uiLabels[category.label]">
+</CategoryRow>
 
 </div>
 
@@ -115,13 +44,13 @@
 </div>
 </template>
 <script>
-
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import PlusButton from '@/components/PlusButton.vue'
+import CategoryRow from '@/components/CategoryRow.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -133,7 +62,8 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    PlusButton
+    PlusButton,
+    CategoryRow
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -142,6 +72,22 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      burgerCategories:[
+        {categoryNr: 4,
+        label:"bread"},
+        {categoryNr: 1,
+        label:"patty"},
+        {categoryNr: 2,
+        label: "garnish"},
+        {categoryNr: 3,
+        label:"sauce"}
+      ],
+      extrasCategories:[
+        {categoryNr: 5,
+        label:"sides"},
+        {categoryNr: 6,
+        label:"drinks"},
+      ]
     }
   },
   created: function () {
@@ -196,15 +142,15 @@ export default {
   border-radius: 15px;
   flex: 0 0 auto;
   width:7em;
-  height:3em;
+  display:table-cell;
 }
 
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y:hidden;
   border-radius: 15px;
-  height:3em;
   /*display: grid;
   grid-gap: 0px;
   grid-template-columns: repeat(10,10%);
@@ -213,6 +159,7 @@ export default {
 }
 
 .category{ /*Denna styr en kategori-rad*/
+  position:relative;
   display:grid;
   text-align: center;
   grid-template-columns: 10% 90%;
@@ -220,8 +167,6 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
-  height:3em;
-
 }
 
 

@@ -1,16 +1,18 @@
 <template>
-  <button @click="openModal" class="PlusButton">
+  <button @click="onClick" class="PlusButton">
     <slot>+</slot>
   </button>
 </template>
-
-
 <script>
 export default {
   name: 'PlusButton',
   props: {
-    items: [],
-    category: 0
+    item: [],
+    category: 0,
+    onClick: {
+      type: Function,
+      required: true
+    }
   },
   data: function () {
     return {
@@ -18,10 +20,6 @@ export default {
     };
   },
   methods: {
-    openModal: function(){
-
-    }
-
   }
 }
 </script>
@@ -33,7 +31,7 @@ export default {
   color: rgb(100,100,100);
   border-radius: 15px;
   flex: 0 0 auto;
-  width:7em;
+  width:10em;
   height:inherit;
 }
 .PlusButton:hover{
