@@ -2,6 +2,7 @@
   <transition name="modal-fade">
   <div class="modal-backdrop">
     <div class="modal">
+
       <slot name="header">
         <button
               type="button"
@@ -10,7 +11,7 @@
               x
             </button>
       </slot>
-
+      <div class="mod-bod">
       <slot name="body">
         <Ingredient
         ref="ingredient"
@@ -22,6 +23,7 @@
         :key="item.ingredient_id">
       </Ingredient>
       </slot>
+    </div>
 
       <slot name="footer">
       </slot>
@@ -76,6 +78,13 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+    width:60%;
+    border-radius: 15px;
+  }
+
+  .mod-bod{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
   }
 
   .modal-header,
@@ -98,6 +107,10 @@ export default {
   .modal-body {
     position: relative;
     padding: 20px 10px;
+  }
+
+  .ingredient{
+
   }
 
   .btn-close {
