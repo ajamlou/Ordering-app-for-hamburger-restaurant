@@ -12,105 +12,16 @@
       <CategoryRow v-for="category in burgerCategories"
       :key="category.categoryNr"
       :category="category.categoryNr"
-      :categoryName="category.label">
+      :categoryName="uiLabels[category.label]">
     </CategoryRow>
 
-      <!--<div class="category">
-        <h2>{{ uiLabels.bread }}: </h2>
-        <div id="bread" class="ingredient-wrapper">
-          <PlusButton
-          ref="PlusButton"
-          v-bind:items="ingredients"
-          :category=4>
-        </PlusButton>
+<h1>Extras</h1>
 
-       <Ingredient
-        ref="ingredient"
-        v-for="item in ingredients"
-        v-on:increment="addToOrder(item)"
-        v-if="item.category == 4"
-        :item="item"
-        :lang="lang"
-        :key="item.ingredient_id">
-      </Ingredient>
-
-    </div>
-  </div> !-->
-
-  <div class="category">
-    <h2>{{ uiLabels.patty }}: </h2>
-    <div id="patty" class="ingredient-wrapper">
-      <Ingredient
-      ref="ingredient"
-      v-for="item in ingredients"
-      v-on:increment="addToOrder(item)"
-      v-if="item.category == 1"
-      :item="item"
-      :lang="lang"
-      :key="item.ingredient_id">
-    </Ingredient>
-  </div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.garnish }}: </h2>
-  <div id="garnish" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 2"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.sauce }}: </h2>
-  <div id="sauce" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 3"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.sides }}: </h2>
-  <div id="sides" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 5"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
-
-<div class="category">
-  <h2>{{ uiLabels.drinks }}: </h2>
-  <div id="drinks" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 6"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
-</div>
-</div>
+<CategoryRow v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:categoryName="uiLabels[category.label]">
+</CategoryRow>
 
 </div>
 
@@ -163,13 +74,19 @@ export default {
       orderNumber: "",
       burgerCategories:[
         {categoryNr: 4,
-        label:uiLabels.bread},
+        label:"bread"},
         {categoryNr: 1,
-        label:uiLabels.patty},
+        label:"patty"},
         {categoryNr: 2,
-        label:uiLabels.garnish},
+        label: "garnish"},
         {categoryNr: 3,
-        label:uiLabels.sauce}
+        label:"sauce"}
+      ],
+      extrasCategories:[
+        {categoryNr: 5,
+        label:"sides"},
+        {categoryNr: 6,
+        label:"drinks"},
       ]
     }
   },
