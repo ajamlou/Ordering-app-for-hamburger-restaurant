@@ -1,5 +1,5 @@
 <template>
-<div id="ordering">
+  <div id="ordering">
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
@@ -24,7 +24,7 @@
       :lang="lang">
     </CategoryRow>
 
-<h1>{{uiLabels.sidesAndDrinks}}</h1>
+    <h1>{{uiLabels.sidesAndDrinks}}</h1>
 
  <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
@@ -33,20 +33,20 @@
 @ModalInfo="switchVisibility"
 :categoryName="uiLabels[category.label]"
 :lang="lang">
-</CategoryRow> 
+</CategoryRow>
 <!--
 <div class="category">
   <h2>{{ uiLabels.patty }}: </h2>
   <div id="patty" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 1"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
+  <Ingredient
+  ref="ingredient"
+  v-for="item in ingredients"
+  v-on:increment="addToOrder(item)"
+  v-if="item.category == 1"
+  :item="item"
+  :lang="lang"
+  :key="item.ingredient_id">
+</Ingredient>
 </div>
 </div> !-->
 
@@ -80,10 +80,10 @@ import OrderItem from '@/components/OrderItem.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 
-    //import methods and data that are shared between ordering and kitchen views
-    import sharedVueStuff from '@/components/sharedVueStuff.js'
+//import methods and data that are shared between ordering and kitchen views
+import sharedVueStuff from '@/components/sharedVueStuff.js'
 
-    /* instead of defining a Vue instance, export default allows the only
+/* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',

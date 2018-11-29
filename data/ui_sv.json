@@ -26,5 +26,6 @@
   "sides" : "Tillbehör",
   "drinks" : "Dryck",
   "myBurger" : "Designa din hamburgare",
-  "sidesAndDrinks" : "Tillbehör & dryck"
+  "sidesAndDrinks" : "Tillbehör & dryck",
+  "cancel" : "Avbryt Order"
 }

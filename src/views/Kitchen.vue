@@ -2,78 +2,87 @@
 <template>
   <div>
 
-<StaffViewFrontPage
-  @Visibility="kitchenButton"
-  v-if = "kitchenButtonData === 'no show'">
-</StaffViewFrontPage>
 
-    <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-      <div id="orders">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersInQueue }}</h1>
-        </div>
-        <div>
-          <OrderItemToPrepare class="toPrepare"
-          v-for="(order, key) in orders"
-          v-if="order.status == 'not-started'"
-          v-on:done="markDone(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemToPrepare>
-      </div>
-    </div>
+  <div id="kitchen-grid">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <div id="preparing">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
+    <div id="orders">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersInQueue }}</h1>
       </div>
       <div>
-        <OrderItemToCook class="isPreparing"
+        <OrderItemToPrepare class="toPrepare"
         v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
+        v-if="order.status == 'not-started'"
+        v-on:done="markDone(key)"
+        v-on:cancel = "markCanceled(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToCook>
+      </OrderItemToPrepare>
     </div>
   </div>
 
-  <div id="finished">
-    <div id="header3">
-      <h1>{{ uiLabels.ordersFinished }}</h1>
+  <div id="preparing">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
     </div>
     <div>
-      <OrderItem class="orderFinished"
+      <OrderItemToCook class="isPreparing"
       v-for="(order, key) in orders"
-      v-if="order.status === 'started'"
+      v-if="order.status === 'done'"
+      v-on:cooked="markCooked(key)"
       :order-id="key"
       :order="order"
-      :lang="lang"
       :ui-labels="uiLabels"
+      :lang="lang"
       :key="key">
-    </OrderItem>
+    </OrderItemToCook>
   </div>
 </div>
-<div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> TILLBAKA </button>
+
+<div id="finished">
+  <div id="header3">
+    <h1>{{ uiLabels.ordersFinished }}</h1>
+  </div>
+  <div>
+    <OrderItem class="orderFinished"
+    v-for="(order, key) in orders"
+    v-if="order.status === 'started'"
+    :order-id="key"
+    :order="order"
+    :lang="lang"
+    :ui-labels="uiLabels"
+    :key="key">
+  </OrderItem>
 </div>
-<div class="selectButton">
-  Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
 </div>
+<div class = "statisticsButtonClass">
+  <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
+</div>
+<div class = "storageButtonClass">
+  <button  id = "storageButton" @click="toggleModal()">LAGER</button>
+</div>
+<div class = "selectButtonClass">
+  <button  id = "selectButton" >MARKERA</button>
+</div>
+
+<StaffViewModals
+  @switchVisibility="toggleModal"
+  v-show= "modalVisibility === true">
+</StaffViewModals>
+<!-- <div class="backButtonClass">
+  <button id = "backButton" @click = "backButton"> STATISTIK </button>
+</div> -->
 </div>
 
 </div>
 
 </template>
 <script>
-import StaffViewFrontPage from '@/components/StaffViewFrontPage.vue'
+import StaffViewModals from '@/components/StaffViewModals.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -85,7 +94,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewFrontPage
+    StaffViewModals
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -93,7 +102,7 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      kitchenButtonData: "no show"
+      modalVisibility: false
     }
   },
   methods: {
@@ -103,12 +112,20 @@ export default {
     markCooked: function (orderid) {
       this.$store.state.socket.emit("orderStarted", orderid);
     },
-    kitchenButton: function(){
-      this.kitchenButtonData = "show";
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("markOrderCanceled", orderid);
     },
-    backButton: function(){
-      this.kitchenButtonData = "no show";
-    }
+    toggleModal: function(){
+      if (this.modalVisibility === true){
+        this.modalVisibility = false;
+      }
+      else {
+        this.modalVisibility = true;
+      }
+    },
+    // backButton: function(){
+    //   this.kitchenButtonData = "no show";
+    // }
   }
 }
 </script>
@@ -171,9 +188,9 @@ export default {
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
-  font-size: 2.5vh;
+  font-size: 1.8vh;
   float: left;
-  height: 100px;
+  height: 15vh;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;
@@ -193,32 +210,40 @@ h1 {
 }
 
 /* ccskod för knappar under denna kommentar */
-#buttonMesh{
-  display: grid;
+
+#selectButton, #statisticsButton, #storageButton{
+border: none;
+color: white;
+text-shadow: 2px 2px #696969;
+cursor: pointer;
+padding: 15px;
+text-decoration: none;
+display: inline-block;
+font-size: 4vh;
+border-radius: 18px;
+width: 12vw;
+height: 10vh;
+margin: 5vh;
 }
 
-.backButtonClass{
-  margin: auto;
+#statisticsButton:hover {background-color: #8a0f5d}
+#storageButton:hover {background-color: #b37400}
+#selectButton:hover {background-color: #008060}
+
+#statisticsButton{
+  background-color: #C71585;
 }
 
-#backButton{
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 2.5vh;
-  border-radius: 4px;
-}
-
-#backButton {
+#storageButton {
   background-color: #FFA500;
 }
 
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
+#selectButton {
+  background-color: #00b386;
+}
+
+.selectButtonClass, .statisticsButtonClass, .storageButtonClass{
+  margin: auto;
 }
 
 </style>
