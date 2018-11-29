@@ -26,7 +26,6 @@
 
 <script>
 import Ingredient from '@/components/Ingredient.vue'
-import sharedVueStuff from '@/components/sharedVueStuff.js'
 
 export default {
   name: 'Modal',
@@ -34,9 +33,10 @@ export default {
     Ingredient
   },
   props: {
-    category: Number
+    category: Number,
+    ingredients: Array,
+    lang: String
   },
-    mixins: [sharedVueStuff],
       }
 
 </script>
@@ -49,7 +49,7 @@ export default {
 
   .modal-fade-enter-active,
   .modal-fade-leave-active {
-    transition: opacity .5s ease
+    transition: opacity .5s ease;
   }
   .modal-backdrop {
     position: fixed;
@@ -82,36 +82,13 @@ export default {
 
   .mod-bod{
     margin:auto;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     width:100%;
-    grid-template-columns: 33% 33% 33%;
     overflow-y: auto;
     overflow-x: hidden;
 
   }
-
-/*
-  .modal-header,
-  .modal-footer {
-    padding: 15px;
-    display: flex;
-  }
-
-  .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
-  }
-
-  .modal-footer {
-    border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    padding: 20px 10px;
-  } */
 
   .ingredient{
     border: 1px solid #ccd;
@@ -119,7 +96,7 @@ export default {
     font-size: 2em;
     color: rgb(100,100,100);
     border-radius: 15px;
-    width:7em;
+    width:33%;
     height:3em;
     text-align: center;
     margin:auto auto 7px auto;
@@ -128,7 +105,7 @@ export default {
   .btn-close {
     /*border: none;*/
     position:element(#ing-mod);
-    transform: translate(29em,-40%);
+    transform: translate(1000%,-40%);
     font-size: 23px;
     padding: 20px;
     height:3em;

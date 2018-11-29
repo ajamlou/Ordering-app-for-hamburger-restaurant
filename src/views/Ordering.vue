@@ -1,4 +1,5 @@
 <template>
+
 <div id="welcome">
 <OrderingViewFrontPage
   @Visibility="createBurgerButton"
@@ -14,45 +15,52 @@
     <modal ref="modal"
     :category="this.modalCategory"
     v-show="this.isModalVisible === true"
+    :ingredients="ingredients"
+    :lang="lang"
     @addOrder="addToOrder"
-    @ModalInfo="switchVisibility"/>
+    @ModalInfo="switchVisibility">
+  </modal>
 
     <div id="categories-wrapper">
       <CategoryRow v-for="category in burgerCategories"
       :key="category.categoryNr"
       :category="category.categoryNr"
+      :addedItems="displayedIngredients"
       @ModalInfo="switchVisibility"
-      :categoryName="uiLabels[category.label]">
+      :categoryName="uiLabels[category.label]"
+      :lang="lang">
     </CategoryRow>
 
-<h1>{{uiLabels.sidesAndDrinks}}</h1>
+    <h1>{{uiLabels.sidesAndDrinks}}</h1>
 
-<CategoryRow v-for="category in extrasCategories"
+ <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
+:addedItems="displayedIngredients"
 @ModalInfo="switchVisibility"
-:categoryName="uiLabels[category.label]">
+:categoryName="uiLabels[category.label]"
+:lang="lang">
 </CategoryRow>
 <!--
 <div class="category">
   <h2>{{ uiLabels.patty }}: </h2>
   <div id="patty" class="ingredient-wrapper">
-    <Ingredient
-    ref="ingredient"
-    v-for="item in ingredients"
-    v-on:increment="addToOrder(item)"
-    v-if="item.category == 1"
-    :item="item"
-    :lang="lang"
-    :key="item.ingredient_id">
-  </Ingredient>
+  <Ingredient
+  ref="ingredient"
+  v-for="item in ingredients"
+  v-on:increment="addToOrder(item)"
+  v-if="item.category == 1"
+  :item="item"
+  :lang="lang"
+  :key="item.ingredient_id">
+</Ingredient>
 </div>
 </div> !-->
 
     </div>
 
     <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+    {{ displayedIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -81,10 +89,10 @@ import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 
-    //import methods and data that are shared between ordering and kitchen views
-    import sharedVueStuff from '@/components/sharedVueStuff.js'
+//import methods and data that are shared between ordering and kitchen views
+import sharedVueStuff from '@/components/sharedVueStuff.js'
 
-    /* instead of defining a Vue instance, export default allows the only
+/* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
@@ -100,6 +108,7 @@ export default {
   data: function() { //Not that data is a function!
     return {
       chosenIngredients: [],
+      displayedIngredients: [],
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -143,7 +152,10 @@ export default {
       this.createBurgerButtonData = "show";
     },
     addToOrder: function (item) {
+      this.displayedIngredients.push(item);
+      if(item.category !== 5 && item.category !== 6){
       this.chosenIngredients.push(item);
+    }
       this.price += +item.selling_price;
       this.isModalVisible = false;
     },
@@ -162,6 +174,7 @@ export default {
       }
       this.price = 0;
       this.chosenIngredients = [];
+      this.displayedIngredients = [];
     }
   }
 }

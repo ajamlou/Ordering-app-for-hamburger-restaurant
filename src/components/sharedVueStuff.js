@@ -6,7 +6,7 @@ var sharedVueStuff = {
     return {
       orders: {},
       uiLabels: {},
-      ingredients: {},
+      ingredients: [],
       lang: "sv"
     }
   },

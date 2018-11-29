@@ -112,8 +112,14 @@ Data.prototype.markOrderStarted = function (orderId) {
   this.orders[orderId].status = "started";
 };
 
+Data.prototype.markOrderCanceled = function (orderId) {
+  this.orders[orderId].status = "cancel";
+};
+
 Data.prototype.markOrderNotStarted = function (orderId) {
   this.orders[orderId].status = "not-started";
 };
+
+
 
 module.exports = Data;
