@@ -59,7 +59,6 @@
   </OrderItem>
 </div>
 </div>
-
 <div class = "statisticsButtonClass">
   <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
 </div>
@@ -211,9 +210,6 @@ h1 {
 }
 
 /* ccskod för knappar under denna kommentar */
-#buttonMesh{
-  display: grid;
-}
 
 #selectButton, #statisticsButton, #storageButton{
 border: none;
@@ -227,6 +223,7 @@ font-size: 4vh;
 border-radius: 18px;
 width: 12vw;
 height: 10vh;
+margin: 5vh;
 }
 
 #statisticsButton:hover {background-color: #8a0f5d}
