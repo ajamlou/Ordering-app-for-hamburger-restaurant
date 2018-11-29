@@ -3,61 +3,61 @@
   <div>
 
 
-  <div id="kitchen-grid">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div id="kitchen-grid">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
+      <div id="orders">
+        <div id="header1">
+          <h1>{{ uiLabels.ordersInQueue }}</h1>
+        </div>
+        <div>
+          <OrderItemToPrepare class="toPrepare"
+          v-for="(order, key) in orders"
+          v-if="order.status === 'not-started'"
+          v-on:cancel = "markCanceled(key)"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemToPrepare>
+      </div>
+    </div>
+
+    <div id="preparing">
+      <div id="header2">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div>
-        <OrderItemToPrepare class="toPrepare"
+        <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
-        v-if="order.status == 'not-started'"
-        v-on:done="markDone(key)"
-        v-on:cancel = "markCanceled(key)"
+        v-if="order.status === 'done'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToPrepare>
+      </OrderItemToCook>
     </div>
   </div>
 
-  <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
+  <div id="finished">
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
     </div>
     <div>
-      <OrderItemToCook class="isPreparing"
+      <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      v-on:cooked="markCooked(key)"
+      v-if="order.status === 'started'"
       :order-id="key"
       :order="order"
-      :ui-labels="uiLabels"
       :lang="lang"
+      :ui-labels="uiLabels"
       :key="key">
-    </OrderItemToCook>
+    </OrderItem>
   </div>
-</div>
-
-<div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
-  <div>
-    <OrderItem class="orderFinished"
-    v-for="(order, key) in orders"
-    v-if="order.status === 'started'"
-    :order-id="key"
-    :order="order"
-    :lang="lang"
-    :ui-labels="uiLabels"
-    :key="key">
-  </OrderItem>
-</div>
 </div>
 <div class = "statisticsButtonClass">
   <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
@@ -70,11 +70,11 @@
 </div>
 
 <StaffViewModals
-  @switchVisibility="toggleModal"
-  v-show= "modalVisibility === true">
+@switchVisibility="toggleModal"
+v-show= "modalVisibility === true">
 </StaffViewModals>
 <!-- <div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> STATISTIK </button>
+<button id = "backButton" @click = "backButton"> STATISTIK </button>
 </div> -->
 </div>
 
@@ -113,7 +113,7 @@ export default {
       this.$store.state.socket.emit("orderStarted", orderid);
     },
     markCanceled: function (orderid) {
-      this.$store.state.socket.emit("markOrderCanceled", orderid);
+      this.$store.state.socket.emit("orderCanceled", orderid);
     },
     toggleModal: function(){
       if (this.modalVisibility === true){
@@ -212,18 +212,18 @@ h1 {
 /* ccskod för knappar under denna kommentar */
 
 #selectButton, #statisticsButton, #storageButton{
-border: 2px solid white;
-color: white;
-text-shadow: 2px 2px #696969;
-cursor: pointer;
-padding: 15px;
-text-decoration: none;
-display: inline-block;
-font-size: 4vh;
-border-radius: 18px;
-width: 12vw;
-height: 10vh;
-margin: 5vh;
+  border: 2px solid white;
+  color: white;
+  text-shadow: 2px 2px #696969;
+  cursor: pointer;
+  padding: 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 4vh;
+  border-radius: 18px;
+  width: 12vw;
+  height: 10vh;
+  margin: 5vh;
 }
 
 #statisticsButton:hover {background-color: #008060}
