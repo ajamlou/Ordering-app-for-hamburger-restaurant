@@ -11,10 +11,10 @@
           X
         </button>
 
-        <StaffViewStorage>
+        <StaffViewStorage v-show = "decideContent === 'storage'">
         </StaffViewStorage>
 
-        <StaffViewStatistics>
+        <StaffViewStatistics v-show = "decideContent === 'statistics'">
         </StaffViewStatistics>
 
 
@@ -30,6 +30,10 @@ import StaffViewStatistics from '@/components/StaffViewStatistics.vue'
 export default {
   name: 'KitchenModal',
 
+  props: {
+    decideContent:String
+
+  },
   components:{
     StaffViewStorage,
     StaffViewStatistics

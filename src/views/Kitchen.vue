@@ -60,10 +60,10 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleVisibility()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleVisibility()">LAGER</button>
+  <button  id = "storageButton" @click="toggleVisibility(), decideContent()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
@@ -72,6 +72,7 @@
 
 <KitchenModal
 @switchVisibility = "toggleVisibility"
+:decideContent="decidedContent"
 v-show = "ModalVisibility === true">
 </KitchenModal>
 
@@ -107,7 +108,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      ModalVisibility: false
+      ModalVisibility: false,
+      decidedContent: "statistics"
     }
   },
   methods: {
@@ -126,6 +128,15 @@ export default {
       }
       else {
         this.ModalVisibility = true;
+      }
+    },
+    decideContent: function(){
+      if (this.decidedContent === "statistics"){
+        this.decidedContent = "storage";
+        console.log(this.decidedContent);
+      }
+      else {
+        this.decidedContent = "statistics";
       }
     },
     // backButton: function(){

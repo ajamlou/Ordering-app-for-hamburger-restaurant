@@ -3,7 +3,7 @@
   <div>
   <div class="modal-header">
     <slot name="header">
-      Statistics
+      Storage
     </slot>
   </div>
 
