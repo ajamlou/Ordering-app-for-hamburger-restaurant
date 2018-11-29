@@ -17,9 +17,14 @@ export default {
 
 <style>
 body {
-  height:100vh;
+  height:100%;
   background: rgb(200,200,200);
   background-size: 200% 200%;
+  width:100%;
+  margin-top:0px;
+  padding-top:0px;
+  padding-left: 0px;
+  margin-left: 0px;
   /* animation: Gradient 20s linear infinite; */
 }
 /*
