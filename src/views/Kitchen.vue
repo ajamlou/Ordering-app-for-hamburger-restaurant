@@ -2,63 +2,64 @@
 <template>
   <div>
 
+    <div id="kitchen-grid">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-  <div id="kitchen-grid">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-    <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
+      <div id="orders">
+        <div id="header1">
+          <h1>{{ uiLabels.ordersInQueue }}</h1>
+        </div>
+        <div class="allOrders">
+          <OrderItemToPrepare class="toPrepare"
+          v-for="(order, key) in orders"
+          v-if="order.status === 'not-started'"
+          v-on:cancel = "markCanceled(key)"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemToPrepare>
       </div>
-      <div>
-        <OrderItemToPrepare class="toPrepare"
+    </div>
+
+    <div id="preparing">
+      <div id="header2">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
+      </div>
+
+      <div class="allOrders">
+        <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
-        v-if="order.status == 'not-started'"
-        v-on:done="markDone(key)"
-        v-on:cancel = "markCanceled(key)"
+        v-if="order.status === 'done'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToPrepare>
+      </OrderItemToCook>
     </div>
   </div>
 
-  <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
+  <div id="finished">
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
     </div>
-    <div>
-      <OrderItemToCook class="isPreparing"
+    <div class="allOrders">
+      <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      v-on:cooked="markCooked(key)"
+      v-if="order.status === 'started'"
       :order-id="key"
       :order="order"
-      :ui-labels="uiLabels"
       :lang="lang"
+      :ui-labels="uiLabels"
       :key="key">
-    </OrderItemToCook>
+    </OrderItem>
   </div>
 </div>
 
-<div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
-  <div>
-    <OrderItem class="orderFinished"
-    v-for="(order, key) in orders"
-    v-if="order.status === 'started'"
-    :order-id="key"
-    :order="order"
-    :lang="lang"
-    :ui-labels="uiLabels"
-    :key="key">
-  </OrderItem>
-</div>
-</div>
 <div class = "statisticsButtonClass">
   <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
 </div>
@@ -70,11 +71,11 @@
 </div>
 
 <StaffViewModals
-  @switchVisibility="toggleModal"
-  v-show= "modalVisibility === true">
+@switchVisibility="toggleModal"
+v-show= "modalVisibility === true">
 </StaffViewModals>
 <!-- <div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> STATISTIK </button>
+<button id = "backButton" @click = "backButton"> STATISTIK </button>
 </div> -->
 </div>
 
@@ -113,7 +114,7 @@ export default {
       this.$store.state.socket.emit("orderStarted", orderid);
     },
     markCanceled: function (orderid) {
-      this.$store.state.socket.emit("markOrderCanceled", orderid);
+      this.$store.state.socket.emit("orderCanceled", orderid);
     },
     toggleModal: function(){
       if (this.modalVisibility === true){
@@ -141,10 +142,14 @@ export default {
   height: 99vh;
 }
 
+.allOrders {
+  margin-top: 10vh;
+}
+
 #header1, #header2, #header3 {
   height: 10vh;
   line-height: 4vh;
-  position: relative;
+  position: fixed;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
@@ -225,6 +230,7 @@ width: 12vw;
 height: 10vh;
 margin: 5vh;
 background-color: #00b386;
+
 }
 
 #statisticsButton:hover {background-color: #008060}

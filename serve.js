@@ -64,8 +64,8 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', {orders: data.getAllOrders() });
   });
 
-  socket.on('orderNotStarted', function (orderId) {
-    data.markOrderNotStarted(orderId);
+  socket.on('orderCanceled', function (orderId) {
+    data.markOrderCanceled(orderId);
     io.emit('currentQueue', {orders: data.getAllOrders() });
   });
 
