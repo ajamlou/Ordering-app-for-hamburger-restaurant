@@ -28,9 +28,11 @@
     :key="category.categoryNr"
     :category="category.categoryNr"
     :addedItems="displayedIngredients"
-    @ModalInfo="switchVisibility"
     :categoryName="uiLabels[category.label]"
-    :lang="lang">
+    :lang="lang"
+    :threshold="category.threshold"
+    :itemCount="categoryItemCounter[category.categoryNr]"
+    @ModalInfo="switchVisibility">
   </CategoryRow>
 
   <h1>{{uiLabels.sidesAndDrinks}}</h1>
@@ -39,9 +41,11 @@
   :key="category.categoryNr"
   :category="category.categoryNr"
   :addedItems="displayedIngredients"
-  @ModalInfo="switchVisibility"
   :categoryName="uiLabels[category.label]"
-  :lang="lang">
+  :lang="lang"
+  :threshold="category.threshold"
+  :itemCount="categoryItemCounter[category.categoryNr]"
+  @ModalInfo="switchVisibility">
 </CategoryRow>
 <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
@@ -79,6 +83,7 @@ export default {
     return {
       chosenIngredients: [],
       displayedIngredients: [],
+      categoryItemCounter: [0,0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -86,19 +91,25 @@ export default {
       isModalVisible: false,
       burgerCategories:[
         {categoryNr: 4,
-          label:"bread"},
+          label:"bread",
+        threshold:1},
           {categoryNr: 1,
-            label:"patty"},
+            label:"patty",
+          threshold:5},
             {categoryNr: 2,
-              label: "garnish"},
+              label: "garnish",
+            threshold: 5},
               {categoryNr: 3,
-                label:"sauce"}
+                label:"sauce",
+              threshold:5}
               ],
               extrasCategories:[
                 {categoryNr: 5,
-                  label:"sides"},
+                  label:"sides",
+                threshold:5},
                   {categoryNr: 6,
-                    label:"drinks"},
+                    label:"drinks",
+                  threshold:5},
                   ]
                 }
               },
@@ -122,6 +133,7 @@ export default {
                   this.createBurgerButtonData = "show";
                 },
                 addToOrder: function (item) {
+                  this.categoryItemCounter[item.category]+=1;
                   this.displayedIngredients.push(item);
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
