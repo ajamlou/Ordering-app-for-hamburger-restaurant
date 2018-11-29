@@ -9,7 +9,7 @@
         <div id="header1">
           <h1>{{ uiLabels.ordersInQueue }}</h1>
         </div>
-        <div>
+        <div class="allOrders">
           <OrderItemToPrepare class="toPrepare"
           v-for="(order, key) in orders"
           v-if="order.status === 'not-started'"
@@ -29,7 +29,7 @@
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
 
-      <div>
+      <div class="allOrders">
         <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
         v-if="order.status === 'done'"
@@ -47,7 +47,7 @@
     <div id="header3">
       <h1>{{ uiLabels.ordersFinished }}</h1>
     </div>
-    <div>
+    <div class="allOrders">
       <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
       v-if="order.status === 'started'"
@@ -142,20 +142,14 @@ export default {
   height: 99vh;
 }
 
-.header-grid {
-  position: fixed;
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
-  color: white;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  height: 99vh;
+.allOrders {
+  margin-top: 10vh;
 }
 
 #header1, #header2, #header3 {
   height: 10vh;
   line-height: 4vh;
-  position: relative;
+  position: fixed;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
