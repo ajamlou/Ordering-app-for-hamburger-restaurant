@@ -7,10 +7,11 @@
 </OrderingViewFrontPage>
 
 <div id="ordering" v-if = "createBurgerButtonData === 'show'">
+    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
-    <h1>{{ uiLabels.myOrder }}</h1>
+    <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
     <h2>{{ uiLabels.myBurger }} </h2>
     <modal ref="modal"
     :category="this.modalCategory"
@@ -217,7 +218,12 @@ export default {
   grid-template-areas: "title";
   text-align: center;*/
 }
-
+    #bestallning{
+        text-align: center;
+    }
+    #avbryt{
+        align-items: flex-start;
+    }
 .category{ /*Denna styr en kategori-rad*/
   position:relative;
   display:grid;
