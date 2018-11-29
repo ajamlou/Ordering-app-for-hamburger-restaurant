@@ -64,7 +64,7 @@
   <button  id = "statisticsButton" @click="statisticsButton()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" >LAGER</button>
+  <button  id = "storageButton" @click="storageButton()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton" >MARKERA</button>
@@ -217,14 +217,7 @@ h1 {
 }
 
 #selectButton, #statisticsButton, #storageButton{
-padding: 15px 25px;
-font-size: 24px;
-text-align: center;
-cursor: pointer;
-outline: none;
 border: none;
-border-radius: 10px;
-/* border: none;
 color: black;
 padding: 15px;
 text-decoration: none;
@@ -232,20 +225,23 @@ display: inline-block;
 font-size: 4vh;
 border-radius: 7px;
 width: 12vw;
-height: 10vh; */
+height: 10vh;
 }
 
+#statisticsButton:hover {background-color: #8a0f5d}
+#storageButton:hover {background-color: #b37400}
+#selectButton:hover {background-color: #66cc00}
 
 #statisticsButton{
-  background-color: magenta;
-}
-
-#selectButton {
-  background-color: #4CAF50;
+  background-color: #C71585;
 }
 
 #storageButton {
-  background-color: #40E0D0;
+  background-color: #FFA500;
+}
+
+#selectButton {
+  background-color: #8cff1a;
 }
 
 .selectButtonClass, .statisticsButtonClass, .storageButtonClass{

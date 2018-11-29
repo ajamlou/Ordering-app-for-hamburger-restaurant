@@ -27,20 +27,20 @@
         </div>
       </div>
     </div>
-</transition>
+  </transition>
 
 </template>
 
 <script>
-  export default {
-    name: 'StaffViewModals',
+export default {
+  name: 'StaffViewModals',
 
-    methods: {
-      emitSwitchVisibility: function() {
-        this.$emit('Visibility')
-      }
+  methods: {
+    emitSwitchVisibility: function() {
+      this.$emit('Visibility')
     }
   }
+}
 </script>
 
 <style scoped>
@@ -83,16 +83,19 @@
 
 .modal-default-button {
   float: right;
+  margin: auto;
+  color: white;
+  height: 3vh;
+  background-color: #800000;
+  font-size: 2vh;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 5px;
 }
 
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
+.modal-default-button:hover {background-color: #4d0000}
 
 .modal-enter {
   opacity: 0;
