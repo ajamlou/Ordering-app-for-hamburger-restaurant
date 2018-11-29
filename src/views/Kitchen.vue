@@ -28,7 +28,6 @@
       <div id="header2">
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
-
       <div class="allOrders">
         <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
@@ -70,11 +69,15 @@
   <button  id = "selectButton">MARKERA</button>
 </div>
 
-<StaffViewModals
+<StaffViewStorage
 @switchVisibility="toggleModal"
 v-show= "modalVisibility === true">
-</StaffViewModals>
+</StaffViewStorage>
 
+<StaffViewStatistics
+@switchVisibility = "toggleModal"
+v-show= "modalVisibility === true">
+</StaffViewStatistics>
 
 
 </div>
@@ -83,7 +86,7 @@ v-show= "modalVisibility === true">
 
 </template>
 <script>
-import StaffViewModals from '@/components/StaffViewModals.vue'
+import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -95,7 +98,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewModals
+    StaffViewStorage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
