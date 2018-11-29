@@ -28,7 +28,6 @@
       <div id="header2">
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
-
       <div class="allOrders">
         <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
@@ -61,20 +60,24 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleStatistics()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleModal()">LAGER</button>
+  <button  id = "storageButton" @click="toggleStorage()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
 </div>
 
-<StaffViewModals
-@switchVisibility="toggleModal"
-v-show= "modalVisibility === true">
-</StaffViewModals>
+<StaffViewStorage
+@switchVisibility="toggleStorage"
+v-show= "StorageVisibility === true">
+</StaffViewStorage>
 
+<StaffViewStatistics
+@switchVisibility = "toggleStatistics"
+v-show = "StatisticsVisibility === true">
+</StaffViewStatistics>
 
 
 </div>
@@ -83,7 +86,8 @@ v-show= "modalVisibility === true">
 
 </template>
 <script>
-import StaffViewModals from '@/components/StaffViewModals.vue'
+import StaffViewStorage from '@/components/StaffViewStorage.vue'
+import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -95,7 +99,8 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewModals
+    StaffViewStorage,
+    StaffViewStatistics
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -103,7 +108,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      modalVisibility: false
+      StatisticsVisibility: false,
+      StorageVisibility: false
     }
   },
   methods: {
@@ -116,12 +122,20 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleModal: function(){
-      if (this.modalVisibility === true){
-        this.modalVisibility = false;
+    toggleStorage: function(){
+      if (this.StorageVisibility === true){
+        this.StorageVisibility = false;
       }
       else {
-        this.modalVisibility = true;
+        this.StorageVisibility = true;
+      }
+    },
+    toggleStatistics: function(){
+      if (this.StatisticsVisibility === true){
+        this.StatisticsVisibility = false;
+      }
+      else {
+        this.StatisticsVisibility = true;
       }
     },
     // backButton: function(){
@@ -152,7 +166,7 @@ export default {
   position: fixed;
   font-size:16pt;
   border-radius: 4px;
-  border: 1px solid white;
+  border-bottom: 3px solid white;
   text-shadow: 2px 2px #696969;
   margin: auto;
   font-size: 3vh;
@@ -173,7 +187,7 @@ export default {
 
 #orders, #preparing, #finished {
   font-size: 1em;
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 6px;
 }
 
