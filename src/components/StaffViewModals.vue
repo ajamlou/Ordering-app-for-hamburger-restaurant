@@ -1,4 +1,5 @@
 <template>
+  <transition>
   <div id = "buttonMesh">
     <div class = "statisticsButtonClass">
       <button id = "statisticsButton" @click = "emitSwitchVisibility">STATISTIK</button>
@@ -10,6 +11,7 @@
       <button  id = "selectButton" >MARKERA</button>
     </div>
   </div>
+</transition>
 </template>
 
 <script>

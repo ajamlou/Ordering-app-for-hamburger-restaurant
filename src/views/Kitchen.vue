@@ -3,7 +3,7 @@
   <div>
 
 
-  <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
+  <div id="kitchen-grid">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <div id="orders">
@@ -58,13 +58,6 @@
     :key="key">
   </OrderItem>
 </div>
-</div>
-
-<div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> TILLBAKA </button>
-</div>
-<div class="selectButton">
-  Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
 </div>
 
 <StaffViewModals
