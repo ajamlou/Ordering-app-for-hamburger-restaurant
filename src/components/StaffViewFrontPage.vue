@@ -1,10 +1,10 @@
 <template>
   <div id = "buttonMesh">
-    <div id = "statisticsId" class = "statisticsButtonClass">
-      <button id = "statisticsButton">STATISTIK</button>
-    </div>
     <div class = "kitchenButtonClass">
       <button  id = "kitchenButton" @click = "emitSwitchVisibility">ORDERBESTÄLLNINGAR</button>
+    </div>
+    <div class = "statisticsButtonClass">
+      <button id = "statisticsButton">STATISTIK</button>
     </div>
     <div class = "storageButtonClass">
       <button  id = "storageButton" >LAGERHÅLLNING</button>
@@ -25,7 +25,12 @@
 </script>
 
 <style scoped>
-#kitchenButton, #statisticsButton{
+
+#buttonMesh {
+
+}
+
+#kitchenButton, #statisticsButton, #storageButton{
 border: none;
 color: black;
 padding: 15px;
@@ -43,7 +48,14 @@ border-radius: 4px;
   background-color: #4CAF50;
 }
 
-.kitchenButtonClass, .statisticsButtonClass{
+#kitchenButton {
+  background-color: #4CAF50;
+}
+#storageButton {
+  background-color: #40E0D0;
+}
+
+.kitchenButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;
 }
 
