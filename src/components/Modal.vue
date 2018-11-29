@@ -1,17 +1,14 @@
 <template>
   <transition name="modal-fade">
   <div class="modal-backdrop">
-    <div class="modal">
-      <slot name="header">
+    <div class="modal" id="ing-mod">
         <button
               type="button"
               class="btn-close"
               @click="$emit('ModalInfo')">
               x
             </button>
-      </slot>
-
-      <slot name="body">
+      <div class="mod-bod">
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
@@ -21,10 +18,7 @@
         :lang="lang"
         :key="item.ingredient_id">
       </Ingredient>
-      </slot>
-
-      <slot name="footer">
-      </slot>
+    </div>
     </div>
   </div>
 </transition>
@@ -63,21 +57,40 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 9998;
   }
 
   .modal {
+    text-align:center;
+    display: flex; /*added*/
+    flex-direction: column; /*added*/
+    margin-top:20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
+    overflow: visible;
+    border-radius: 15px;
+    width:45em;
+    max-width:100%;
+    max-height:60%;
   }
 
+  .mod-bod{
+    margin:auto;
+    display: grid;
+    width:100%;
+    grid-template-columns: 33% 33% 33%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+  }
+
+/*
   .modal-header,
   .modal-footer {
     padding: 15px;
@@ -98,15 +111,32 @@ export default {
   .modal-body {
     position: relative;
     padding: 20px 10px;
+  } */
+
+  .ingredient{
+    border: 1px solid #ccd;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 2em;
+    color: rgb(100,100,100);
+    border-radius: 15px;
+    width:7em;
+    height:3em;
+    text-align: center;
+    margin:auto auto 7px auto;
   }
 
   .btn-close {
     /*border: none;*/
-    font-size: 20px;
+    position:element(#ing-mod);
+    transform: translate(29em,-40%);
+    font-size: 23px;
     padding: 20px;
+    height:3em;
+    width:3em;
+    border-radius:3em;
     cursor: pointer;
     font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
+    color: white;
+    background: red;
   }
 </style>
