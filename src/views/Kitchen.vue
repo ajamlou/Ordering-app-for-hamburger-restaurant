@@ -2,14 +2,22 @@
 <template>
   <div>
 
-
+<div class="header-grid">
+    <div id="header1">
+      <h1>{{ uiLabels.ordersInQueue }}</h1>
+    </div>
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
+    </div>
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+    </div>
+  </div>
   <div id="kitchen-grid">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
-      </div>
+
       <div>
         <OrderItemToPrepare class="toPrepare"
         v-for="(order, key) in orders"
@@ -26,9 +34,7 @@
   </div>
 
   <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
-    </div>
+
     <div>
       <OrderItemToCook class="isPreparing"
       v-for="(order, key) in orders"
@@ -44,9 +50,7 @@
 </div>
 
 <div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
+
   <div>
     <OrderItem class="orderFinished"
     v-for="(order, key) in orders"
@@ -134,6 +138,16 @@ export default {
 #kitchen-grid {
   display: grid;
   position: fixed;
+  grid-template-columns: 25% 50% 25%;
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  height: 99vh;
+}
+
+.header-grid {
+  position: fixed;
+  display: grid;
   grid-template-columns: 25% 50% 25%;
   color: white;
   text-align: center;
