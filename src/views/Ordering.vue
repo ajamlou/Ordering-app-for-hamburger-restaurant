@@ -51,7 +51,7 @@
 </div> !-->
 
     </div>
-
+<!--
     <h1>{{ uiLabels.order }}</h1>
     {{ displayedIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
@@ -67,7 +67,7 @@
                    :lang="lang"
                    :key="key">
     </OrderItem>
-    </div>
+  </div> -->
     </div>
 </template>
 <script>
