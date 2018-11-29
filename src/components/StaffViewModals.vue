@@ -5,33 +5,33 @@
       <div class="modal-wrapper">
         <div class="modal-container" id="ing-mod">
           <button
-            type="button"
-            class="close-button"
-            @click="$emit('switchVisibility')">
-            X
-          </button>
+          type="button"
+          class="close-button"
+          @click="$emit('switchVisibility')">
+          X
+        </button>
 
-          <div class="modal-header">
-            <slot name="header">
-              Header
-            </slot>
-          </div>
+        <div class="modal-header">
+          <slot name="header">
+            Header
+          </slot>
+        </div>
 
-          <div class="modal-body">
-            <slot name="body">
-              Body
-            </slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              Footer
+        <div class="modal-body">
+          <slot name="body">
+            Body
+          </slot>
+        </div>
+        <div class="modal-footer">
+          <slot name="footer">
+            Footer
 
-            </slot>
-          </div>
+          </slot>
         </div>
       </div>
     </div>
-  </transition>
+  </div>
+</transition>
 
 </template>
 
@@ -108,7 +108,7 @@ export default {
   font-weight: bold;
   color: white;
   background: #ff3333;
-    margin: auto;
+  margin: auto;
 }
 
 .close-button:hover {background-color: #660000}

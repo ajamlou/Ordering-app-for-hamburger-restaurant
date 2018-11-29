@@ -67,16 +67,16 @@
   <button  id = "storageButton" @click="toggleModal()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
-  <button  id = "selectButton" >MARKERA</button>
+  <button  id = "selectButton">MARKERA</button>
 </div>
 
 <StaffViewModals
 @switchVisibility="toggleModal"
 v-show= "modalVisibility === true">
 </StaffViewModals>
-<!-- <div class="backButtonClass">
-<button id = "backButton" @click = "backButton"> STATISTIK </button>
-</div> -->
+
+
+
 </div>
 
 </div>
