@@ -1,5 +1,11 @@
 <template>
-<div id="ordering">
+<div id="welcome">
+<OrderingViewFrontPage
+  @Visibility="createBurgerButton"
+  v-if = "createBurgerButtonData === 'no show'">
+</OrderingViewFrontPage>
+
+<div id="ordering" v-if = "createBurgerButtonData === 'show'">
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
@@ -62,6 +68,7 @@
     </OrderItem>
     </div>
     </div>
+    </div>
 </template>
 <script>
 //import the components that are used in the template, the name that you
@@ -72,6 +79,7 @@ import OrderItem from '@/components/OrderItem.vue'
 //import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
+import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 
     //import methods and data that are shared between ordering and kitchen views
     import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -84,7 +92,8 @@ export default {
     Ingredient,
     OrderItem,
     CategoryRow,
-    Modal
+    Modal,
+    OrderingViewFrontPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -92,6 +101,7 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
+      createBurgerButtonData: "no show",
       orderNumber: "",
       modalCategory:0,
       isModalVisible: false,
@@ -128,6 +138,9 @@ export default {
       this.isModalVisible = true;
     }
 
+    },
+      createBurgerButton: function(){
+      this.createBurgerButtonData = "show";
     },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
@@ -203,10 +216,6 @@ export default {
   margin: 0 0.5em 1em;
 }
 
-
-    #categories-wrapper{
-
-    }
 
     button{
         float:right;
