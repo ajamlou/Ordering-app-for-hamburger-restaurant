@@ -113,7 +113,8 @@ Data.prototype.markOrderStarted = function (orderId) {
 };
 
 Data.prototype.markOrderCanceled = function (orderId) {
-  this.orders[orderId].status = "cancel";
+  this.orders[orderId].status = 'cancel';
+  this.currentOrderNumber -= 1;
 };
 
 Data.prototype.markOrderNotStarted = function (orderId) {
