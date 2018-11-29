@@ -2,14 +2,10 @@
 <template>
   <div>
 
-    <div id = "buttonMesh">
-      <div id = "statisticsId" class = statisticsButtonClass v-if = "kitchenButtonData === 'no show'">
-        <button id = "statisticsButton">STATISTIK</button>
-      </div>
-      <div class = "kitchenButtonClass" v-if = "kitchenButtonData === 'no show'">
-        <button  id = "kitchenButton" @click = "kitchenButton">ORDERBESTÄLLNINGAR</button>
-      </div>
-    </div>
+<StaffViewFrontPage
+  @Visibility="kitchenButton"
+  v-if = "kitchenButtonData === 'no show'">
+</StaffViewFrontPage>
 
     <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -57,6 +53,7 @@
       <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
       v-if="order.status === 'done'"
+      v-on:done="markDone(key)"
       :order-id="key"
       :order="order"
       :lang="lang"
@@ -77,6 +74,7 @@
 
 </template>
 <script>
+import StaffViewFrontPage from '@/components/StaffViewFrontPage.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 //import methods and data that are shared between ordering and kitchen views
@@ -85,7 +83,8 @@ export default {
   name: 'Ordering',
   components: {
     OrderItem,
-    OrderItemToPrepare
+    OrderItemToPrepare,
+    StaffViewFrontPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -194,11 +193,11 @@ h1 {
   display: grid;
 }
 
-.kitchenButtonClass, .backButtonClass, .statisticsButtonClass{
+.backButtonClass{
   margin: auto;
 }
 
-#kitchenButton, #backButton, #statisticsButton{
+#backButton{
   border: none;
   color: black;
   padding: 15px 32px;
@@ -207,14 +206,9 @@ h1 {
   font-size: 2.5vh;
   border-radius: 4px;
 }
-#statisticsButton{
-  background-color: magenta;
-}
+
 #backButton {
   background-color: #FFA500;
-}
-#kitchenButton {
-  background-color: #4CAF50;
 }
 
 .selectButton {
