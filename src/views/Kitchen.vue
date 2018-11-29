@@ -1,6 +1,9 @@
 
 <template>
   <div>
+    <StaffViewModals>
+    </StaffViewModals>
+    
     <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div id="orders">

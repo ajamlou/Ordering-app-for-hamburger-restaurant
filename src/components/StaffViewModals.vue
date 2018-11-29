@@ -1,10 +1,7 @@
 <template>
   <div id = "buttonMesh">
-    <div class = "kitchenButtonClass">
-      <button  id = "kitchenButton" @click = "emitSwitchVisibility">ORDERBESTÄLLNINGAR</button>
-    </div>
     <div class = "statisticsButtonClass">
-      <button id = "statisticsButton">STATISTIK</button>
+      <button id = "statisticsButton" @click = "emitSwitchVisibility">STATISTIK</button>
     </div>
     <div class = "storageButtonClass">
       <button  id = "storageButton" >LAGER</button>
@@ -17,7 +14,7 @@
 
 <script>
   export default {
-    name: 'StaffViewFrontPage',
+    name: 'StaffViewModals',
 
     methods: {
       emitSwitchVisibility: function() {
