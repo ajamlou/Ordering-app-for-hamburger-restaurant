@@ -4,7 +4,7 @@
 
     <h2>{{ categoryName }}: </h2>
 
-    <div class="plusbutton-wrapper">
+    <div class="box-wrapper">
 
       <Ingredient v-for="item in addedItems"
       v-if="item.category == category"
@@ -49,10 +49,13 @@ import Ingredient from '@/components/Ingredient.vue'
   </script>
 
   <style scoped>
-  .plusbutton-wrapper{
+  .box-wrapper{
     text-align: left;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
-  .PlusButton{
+  .PlusButton, .ingredient{
     border: 1px solid #ccd;
     background-color: rgba(255, 255, 255, 0.5);
     font-size: 2em;
@@ -63,6 +66,11 @@ import Ingredient from '@/components/Ingredient.vue'
     display:table-cell;
     height:100%
   }
+
+.ingredient:hover{
+  background-color:rgba(255, 255, 255, 0.5);
+  color: rgb(100,100,100);
+}
   .PlusButton:hover{
     background-color: rgba(100, 100, 100, 0.5);
     color: rgb(80,80,80);
