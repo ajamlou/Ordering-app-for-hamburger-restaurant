@@ -60,9 +60,20 @@
 </div>
 </div>
 
+<div class = "statisticsButtonClass">
+  <button  id = "statisticsButton" @click="statisticsButton()">STATISTIK</button>
+</div>
+<div class = "storageButtonClass">
+  <button  id = "storageButton" >LAGER</button>
+</div>
+<div class = "selectButtonClass">
+  <button  id = "selectButton" >MARKERA</button>
+</div>
+
 <StaffViewModals
   @Visibility="statisticsButton"
-  v-if = "kitchenButtonData === 'no show'">
+  @Close="statisticsButton"
+  v-show= "statisticsButtonData === true">
 </StaffViewModals>
 <!-- <div class="backButtonClass">
   <button id = "backButton" @click = "backButton"> STATISTIK </button>
@@ -93,7 +104,7 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      kitchenButtonData: "no show"
+      statisticsButtonData: false
     }
   },
   methods: {
@@ -107,7 +118,12 @@ export default {
       this.$store.state.socket.emit("markOrderCanceled", orderid);
     },
     statisticsButton: function(){
-      this.kitchenButtonData = "show";
+      if (this.statisticsButtonData === true){
+        this.statisticsButtonData = false;
+      }
+      else {
+        this.statisticsButtonData = true;
+      }
     },
     // backButton: function(){
     //   this.kitchenButtonData = "no show";
@@ -200,22 +216,40 @@ h1 {
   display: grid;
 }
 
-.backButtonClass{
+#selectButton, #statisticsButton, #storageButton{
+padding: 15px 25px;
+font-size: 24px;
+text-align: center;
+cursor: pointer;
+outline: none;
+border: none;
+border-radius: 10px;
+/* border: none;
+color: black;
+padding: 15px;
+text-decoration: none;
+display: inline-block;
+font-size: 4vh;
+border-radius: 7px;
+width: 12vw;
+height: 10vh; */
+}
+
+
+#statisticsButton{
+  background-color: magenta;
+}
+
+#selectButton {
+  background-color: #4CAF50;
+}
+
+#storageButton {
+  background-color: #40E0D0;
+}
+
+.selectButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;
-}
-
-#backButton{
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 2.5vh;
-  border-radius: 4px;
-}
-
-#backButton {
-  background-color: #FFA500;
 }
 
 </style>
