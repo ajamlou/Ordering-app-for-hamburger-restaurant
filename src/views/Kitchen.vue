@@ -2,10 +2,6 @@
 <template>
   <div>
 
-    <StaffViewFrontPage
-    @Visibility="kitchenButton"
-    v-if = "kitchenButtonData === 'no show'">
-  </StaffViewFrontPage>
 
   <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -70,13 +66,21 @@
 <div class="selectButton">
   Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
 </div>
+
+<StaffViewModals
+  @Visibility="statisticsButton"
+  v-if = "kitchenButtonData === 'no show'">
+</StaffViewModals>
+<!-- <div class="backButtonClass">
+  <button id = "backButton" @click = "backButton"> STATISTIK </button>
+</div> -->
 </div>
 
 </div>
 
 </template>
 <script>
-import StaffViewFrontPage from '@/components/StaffViewFrontPage.vue'
+import StaffViewModals from '@/components/StaffViewModals.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -88,7 +92,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewFrontPage
+    StaffViewModals
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -109,12 +113,12 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("markOrderCanceled", orderid);
     },
-    kitchenButton: function(){
+    statisticsButton: function(){
       this.kitchenButtonData = "show";
     },
-    backButton: function(){
-      this.kitchenButtonData = "no show";
-    }
+    // backButton: function(){
+    //   this.kitchenButtonData = "no show";
+    // }
   }
 }
 </script>
@@ -219,12 +223,6 @@ h1 {
 
 #backButton {
   background-color: #FFA500;
-}
-
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
 }
 
 </style>
