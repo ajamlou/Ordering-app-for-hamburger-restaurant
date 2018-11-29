@@ -18,11 +18,11 @@ export default {
 <style>
 body {
   height:100vh;
-  background: #696969;
+  background: rgb(200,200,200);
   background-size: 200% 200%;
   /* animation: Gradient 20s linear infinite; */
 }
-
+/*
 @keyframes Gradient {
   0% {
     background-position: 10% 10%
@@ -42,5 +42,5 @@ body {
   100% {
     background-position: 10% 10%
   }
-}
+}*/
 </style>
