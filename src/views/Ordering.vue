@@ -43,7 +43,7 @@
   :categoryName="uiLabels[category.label]"
   :lang="lang">
 </CategoryRow>
-
+<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -153,7 +153,9 @@ export default {
             /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
             .masterDiv{
               font-family: 'Montserrat', sans-serif;
-              background-color: #ffffcc;
+              height:100%;
+              margin-top:0px !important;
+              padding-top:0px !important;
             }
             #ordering {
               margin:auto;

@@ -21,8 +21,8 @@ body {
   background: rgb(200,200,200);
   background-size: 200% 200%;
   width:100%;
-  margin-top:0px;
-  padding-top:0px;
+  margin-top:0px !important;
+  padding-top:0px !important;
   padding-left: 0px;
   margin-left: 0px;
   /* animation: Gradient 20s linear infinite; */
