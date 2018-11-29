@@ -7,7 +7,10 @@
       <button id = "statisticsButton">STATISTIK</button>
     </div>
     <div class = "storageButtonClass">
-      <button  id = "storageButton" >LAGERHÅLLNING</button>
+      <button  id = "storageButton" >LAGER</button>
+    </div>
+    <div class = "selectButtonClass">
+      <button  id = "selectButton" >MARKERA</button>
     </div>
   </div>
 </template>
@@ -30,7 +33,7 @@
 
 }
 
-#kitchenButton, #statisticsButton, #storageButton{
+#selectButton, #statisticsButton, #storageButton{
 border: none;
 color: black;
 padding: 15px;
@@ -38,24 +41,22 @@ text-decoration: none;
 display: inline-block;
 font-size: 2.5vh;
 border-radius: 4px;
+width: 9vw;
 }
 
 #statisticsButton{
   background-color: magenta;
 }
 
-#kitchenButton {
+#selectButton {
   background-color: #4CAF50;
 }
 
-#kitchenButton {
-  background-color: #4CAF50;
-}
 #storageButton {
   background-color: #40E0D0;
 }
 
-.kitchenButtonClass, .statisticsButtonClass, .storageButtonClass{
+.selectButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;
 }
 

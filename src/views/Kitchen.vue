@@ -1,13 +1,7 @@
 
 <template>
   <div>
-
-<StaffViewFrontPage
-  @Visibility="kitchenButton"
-  v-if = "kitchenButtonData === 'no show'">
-</StaffViewFrontPage>
-
-    <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
+    <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div id="orders">
         <div id="header1">
@@ -61,12 +55,13 @@
     </OrderItem>
   </div>
 </div>
-<div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> TILLBAKA </button>
-</div>
-<div class="selectButton">
-  Här tänkte jag att vi kan ha en markera-knapp längst åt höger.
-</div>
+<StaffViewFrontPage
+  @Visibility="kitchenButton"
+  v-if = "kitchenButtonData === 'no show'">
+</StaffViewFrontPage>
+<!-- <div class="backButtonClass">
+  <button id = "backButton" @click = "backButton"> STATISTIK </button>
+</div> -->
 </div>
 
 </div>
@@ -106,9 +101,9 @@ export default {
     kitchenButton: function(){
       this.kitchenButtonData = "show";
     },
-    backButton: function(){
-      this.kitchenButtonData = "no show";
-    }
+    // backButton: function(){
+    //   this.kitchenButtonData = "no show";
+    // }
   }
 }
 </script>
@@ -213,12 +208,6 @@ h1 {
 
 #backButton {
   background-color: #FFA500;
-}
-
-.selectButton {
-  width: 100%;
-  margin: 10px;
-  margin-left: 5px;
 }
 
 </style>
