@@ -2,65 +2,68 @@
 <template>
   <div>
 
-<StaffViewFrontPage
-  @Visibility="kitchenButton"
-  v-if = "kitchenButtonData === 'no show'">
-</StaffViewFrontPage>
+    <StaffViewFrontPage
+    @Visibility="kitchenButton"
+    v-if = "kitchenButtonData === 'no show'">
+  </StaffViewFrontPage>
 
-    <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-      <div id="orders">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersInQueue }}</h1>
-        </div>
-        <div>
-          <OrderItemToPrepare class="toPrepare"
-          v-for="(order, key) in orders"
-          v-if="order.status == 'not-started'"
-          v-on:done="markDone(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemToPrepare>
-      </div>
-    </div>
+  <div id="kitchen-grid" v-if = "kitchenButtonData === 'show'">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <div id="preparing">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
+    <div id="orders">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersInQueue }}</h1>
       </div>
       <div>
-        <OrderItemToCook class="isPreparing"
+        <OrderItemToPrepare class="toPrepare"
         v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
+        v-if="order.status == 'not-started'"
+        v-on:done="markDone(key)"
+        v-on:cancel = "markCanceled(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToCook>
+      </OrderItemToPrepare>
     </div>
   </div>
 
-  <div id="finished">
-    <div id="header3">
-      <h1>{{ uiLabels.ordersFinished }}</h1>
+  <div id="preparing">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
     </div>
     <div>
-      <OrderItem class="orderFinished"
+      <OrderItemToCook class="isPreparing"
       v-for="(order, key) in orders"
-      v-if="order.status === 'started'"
+      v-if="order.status === 'done'"
+      v-on:cooked="markCooked(key)"
       :order-id="key"
       :order="order"
-      :lang="lang"
       :ui-labels="uiLabels"
+      :lang="lang"
       :key="key">
-    </OrderItem>
+    </OrderItemToCook>
   </div>
 </div>
+
+<div id="finished">
+  <div id="header3">
+    <h1>{{ uiLabels.ordersFinished }}</h1>
+  </div>
+  <div>
+    <OrderItem class="orderFinished"
+    v-for="(order, key) in orders"
+    v-if="order.status === 'started'"
+    :order-id="key"
+    :order="order"
+    :lang="lang"
+    :ui-labels="uiLabels"
+    :key="key">
+  </OrderItem>
+</div>
+</div>
+
 <div class="backButtonClass">
   <button id = "backButton" @click = "backButton"> TILLBAKA </button>
 </div>
@@ -102,6 +105,9 @@ export default {
     },
     markCooked: function (orderid) {
       this.$store.state.socket.emit("orderStarted", orderid);
+    },
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("markOrderCanceled", orderid);
     },
     kitchenButton: function(){
       this.kitchenButtonData = "show";
@@ -171,9 +177,9 @@ export default {
 
 .toPrepare, .isPreparing, .orderFinished {
   border: 2px solid white;
-  font-size: 2.5vh;
+  font-size: 1.8vh;
   float: left;
-  height: 100px;
+  height: 15vh;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;

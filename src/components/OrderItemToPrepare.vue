@@ -10,6 +10,9 @@
   <button v-on:click="orderDone">
     {{uiLabels.ready}}
   </button>
+  <button v-on:click="cancelOrder">
+    {{uiLabels.cancel}}
+  </button>
 </div>
 </template>
 <script>
@@ -31,11 +34,11 @@ export default {
       this.$emit('done');
     },
     cancelOrder: function () {
-      // not implemented
+      this.$emit('cancel');
     }
   }
 }
 </script>
 <style scoped>
-	
+
 </style>
