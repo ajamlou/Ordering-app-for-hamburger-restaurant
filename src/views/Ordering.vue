@@ -8,25 +8,32 @@
     <modal ref="modal"
     :category="this.modalCategory"
     v-show="this.isModalVisible === true"
+    :ingredients="ingredients"
+    :lang="lang"
     @addOrder="addToOrder"
-    @ModalInfo="switchVisibility"/>
+    @ModalInfo="switchVisibility">
+  </modal>
 
     <div id="categories-wrapper">
       <CategoryRow v-for="category in burgerCategories"
       :key="category.categoryNr"
       :category="category.categoryNr"
+      :addedItems="displayedIngredients"
       @ModalInfo="switchVisibility"
-      :categoryName="uiLabels[category.label]">
+      :categoryName="uiLabels[category.label]"
+      :lang="lang">
     </CategoryRow>
 
 <h1>{{uiLabels.sidesAndDrinks}}</h1>
 
-<CategoryRow v-for="category in extrasCategories"
+ <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
+:addedItems="displayedIngredients"
 @ModalInfo="switchVisibility"
-:categoryName="uiLabels[category.label]">
-</CategoryRow>
+:categoryName="uiLabels[category.label]"
+:lang="lang">
+</CategoryRow> 
 <!--
 <div class="category">
   <h2>{{ uiLabels.patty }}: </h2>
@@ -46,7 +53,7 @@
     </div>
 
     <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+    {{ displayedIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -91,6 +98,7 @@ export default {
   data: function() { //Not that data is a function!
     return {
       chosenIngredients: [],
+      displayedIngredients: [],
       price: 0,
       orderNumber: "",
       modalCategory:0,
@@ -130,7 +138,10 @@ export default {
 
     },
     addToOrder: function (item) {
+      this.displayedIngredients.push(item);
+      if(item.category !== 5 && item.category !== 6){
       this.chosenIngredients.push(item);
+    }
       this.price += +item.selling_price;
       this.isModalVisible = false;
     },
@@ -149,6 +160,7 @@ export default {
       }
       this.price = 0;
       this.chosenIngredients = [];
+      this.displayedIngredients = [];
     }
   }
 }

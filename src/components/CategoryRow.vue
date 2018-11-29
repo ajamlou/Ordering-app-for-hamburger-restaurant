@@ -6,6 +6,13 @@
 
     <div class="plusbutton-wrapper">
 
+      <Ingredient v-for="item in addedItems"
+      v-if="item.category == category"
+      :item="item"
+      :lang="lang"
+      :key="item.ingredient_id">
+    </Ingredient>
+
       <button @click="emitModalInfo" class="PlusButton">
         <slot>+</slot>
       </button>
@@ -17,29 +24,27 @@
 </template>
 
 <script>
+import Ingredient from '@/components/Ingredient.vue'
 
   export default {
-    name: 'CategoryRow',
     props: {
       category: Number,
-      categoryName: String
+      categoryName: String,
+      addedItems: Array,
+      lang: String,
+    },
+    components:{
+      Ingredient
+    },
+    data:function(){
+      return {}
     },
     methods: {
       emitModalInfo:function(){
         this.$emit('ModalInfo', this.category)
       },
-    /*components:{
-      PlusButton
-    },*/
-    data:function(){
-      return{
-
-      }
-    }
   }
 }
-
-    //import PlusButton from '@/components/PlusButton.vue'
 
   </script>
 
