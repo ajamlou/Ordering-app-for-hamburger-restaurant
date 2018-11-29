@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'StaffViewStatistics',
+  name: 'StaffViewStorage',
   methods: {
   }
 }

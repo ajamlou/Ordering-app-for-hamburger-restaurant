@@ -60,24 +60,20 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleStatistics()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleVisibility()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleStorage()">LAGER</button>
+  <button  id = "storageButton" @click="toggleVisibility()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
 </div>
 
-<StaffViewStorage
-@switchVisibility="toggleStorage"
-v-show= "StorageVisibility === true">
-</StaffViewStorage>
 
-<StaffViewStatistics
-@switchVisibility = "toggleStatistics"
-v-show = "StatisticsVisibility === true">
-</StaffViewStatistics>
+<KitchenModal
+@switchVisibility = "toggleVisibility"
+v-show = "ModalVisibility === true">
+</KitchenModal>
 
 
 </div>
@@ -86,13 +82,15 @@ v-show = "StatisticsVisibility === true">
 
 </template>
 <script>
+//import methods and data that are shared between the component and kitchen views
+import KitchenModal from '@/components/KitchenModal.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
-//import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
+
 export default {
   name: 'Ordering',
   components: {
@@ -100,7 +98,8 @@ export default {
     OrderItemToPrepare,
     OrderItemToCook,
     StaffViewStorage,
-    StaffViewStatistics
+    StaffViewStatistics,
+    KitchenModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -108,8 +107,7 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      StatisticsVisibility: false,
-      StorageVisibility: false
+      ModalVisibility: false
     }
   },
   methods: {
@@ -122,20 +120,12 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleStorage: function(){
-      if (this.StorageVisibility === true){
-        this.StorageVisibility = false;
+    toggleVisibility: function(){
+      if (this.ModalVisibility === true){
+        this.ModalVisibility = false;
       }
       else {
-        this.StorageVisibility = true;
-      }
-    },
-    toggleStatistics: function(){
-      if (this.StatisticsVisibility === true){
-        this.StatisticsVisibility = false;
-      }
-      else {
-        this.StatisticsVisibility = true;
+        this.ModalVisibility = true;
       }
     },
     // backButton: function(){
