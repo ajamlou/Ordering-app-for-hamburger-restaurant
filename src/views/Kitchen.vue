@@ -61,19 +61,18 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="statisticsButton()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="storageButton()">LAGER</button>
+  <button  id = "storageButton" @click="toggleModal()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton" >MARKERA</button>
 </div>
 
 <StaffViewModals
-  @Visibility="statisticsButton"
-  @Close="statisticsButton"
-  v-show= "statisticsButtonData === true">
+  @switchVisibility="toggleModal"
+  v-show= "modalVisibility === true">
 </StaffViewModals>
 <!-- <div class="backButtonClass">
   <button id = "backButton" @click = "backButton"> STATISTIK </button>
@@ -104,7 +103,7 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      statisticsButtonData: false
+      modalVisibility: false
     }
   },
   methods: {
@@ -117,12 +116,12 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("markOrderCanceled", orderid);
     },
-    statisticsButton: function(){
-      if (this.statisticsButtonData === true){
-        this.statisticsButtonData = false;
+    toggleModal: function(){
+      if (this.modalVisibility === true){
+        this.modalVisibility = false;
       }
       else {
-        this.statisticsButtonData = true;
+        this.modalVisibility = true;
       }
     },
     // backButton: function(){
@@ -218,19 +217,22 @@ h1 {
 
 #selectButton, #statisticsButton, #storageButton{
 border: none;
-color: black;
+color: white;
+  text-shadow: 2px 2px #696969;
+/* -webkit-text-stroke-width: 0.8px;
+-webkit-text-stroke-color: #333333; */
 padding: 15px;
 text-decoration: none;
 display: inline-block;
 font-size: 4vh;
-border-radius: 7px;
+border-radius: 18px;
 width: 12vw;
 height: 10vh;
 }
 
 #statisticsButton:hover {background-color: #8a0f5d}
 #storageButton:hover {background-color: #b37400}
-#selectButton:hover {background-color: #66cc00}
+#selectButton:hover {background-color: #008060}
 
 #statisticsButton{
   background-color: #C71585;
@@ -241,7 +243,7 @@ height: 10vh;
 }
 
 #selectButton {
-  background-color: #8cff1a;
+  background-color: #00b386;
 }
 
 .selectButtonClass, .statisticsButtonClass, .storageButtonClass{

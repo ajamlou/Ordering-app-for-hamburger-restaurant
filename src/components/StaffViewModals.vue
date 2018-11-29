@@ -1,6 +1,7 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div class="modal-wrapper">
         <div class="modal-container">
 
@@ -19,7 +20,7 @@
           <div class="modal-footer">
             <slot name="footer">
               default footer
-              <button class="modal-default-button" @click="$emit('Close')">
+              <button class="modal-default-button" @click="$emit('switchVisibility')">
                 STÄNG
               </button>
             </slot>
@@ -36,9 +37,6 @@ export default {
   name: 'StaffViewModals',
 
   methods: {
-    emitSwitchVisibility: function() {
-      this.$emit('Visibility')
-    }
   }
 }
 </script>
@@ -93,6 +91,7 @@ export default {
   outline: none;
   border: none;
   border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modal-default-button:hover {background-color: #4d0000}
