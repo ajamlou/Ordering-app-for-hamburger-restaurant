@@ -143,8 +143,8 @@ export default {
 
 #header1, #header2, #header3 {
   height: 10vh;
-  position: fixed;
   line-height: 4vh;
+  position: relative;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
@@ -158,7 +158,7 @@ export default {
   width: 25vw;
 }
 #header2 {
-  background: #00BFFF;
+  background: #FFA500;
   width: 50vw;
 }
 #header3 {
@@ -212,7 +212,7 @@ h1 {
 /* ccskod för knappar under denna kommentar */
 
 #selectButton, #statisticsButton, #storageButton{
-border: none;
+border: 2px solid white;
 color: white;
 text-shadow: 2px 2px #696969;
 cursor: pointer;
@@ -226,19 +226,11 @@ height: 10vh;
 margin: 5vh;
 }
 
-#statisticsButton:hover {background-color: #8a0f5d}
-#storageButton:hover {background-color: #b37400}
+#statisticsButton:hover {background-color: #008060}
+#storageButton:hover {background-color: #008060}
 #selectButton:hover {background-color: #008060}
 
-#statisticsButton{
-  background-color: #C71585;
-}
-
-#storageButton {
-  background-color: #FFA500;
-}
-
-#selectButton {
+#statisticsButton,#storageButton,#selectButton {
   background-color: #00b386;
 }
 
