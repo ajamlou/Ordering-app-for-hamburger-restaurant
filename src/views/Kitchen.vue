@@ -2,7 +2,6 @@
 <template>
   <div>
 
-
     <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -29,6 +28,7 @@
       <div id="header2">
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
+
       <div>
         <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
@@ -59,6 +59,7 @@
     </OrderItem>
   </div>
 </div>
+
 <div class = "statisticsButtonClass">
   <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
 </div>
@@ -141,6 +142,16 @@ export default {
   height: 99vh;
 }
 
+.header-grid {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  height: 99vh;
+}
+
 #header1, #header2, #header3 {
   height: 10vh;
   line-height: 4vh;
@@ -212,27 +223,25 @@ h1 {
 /* ccskod för knappar under denna kommentar */
 
 #selectButton, #statisticsButton, #storageButton{
-  border: 2px solid white;
-  color: white;
-  text-shadow: 2px 2px #696969;
-  cursor: pointer;
-  padding: 15px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 4vh;
-  border-radius: 18px;
-  width: 12vw;
-  height: 10vh;
-  margin: 5vh;
+border: 2px solid white;
+color: white;
+text-shadow: 2px 2px #696969;
+cursor: pointer;
+padding: 15px;
+text-decoration: none;
+display: inline-block;
+font-size: 4vh;
+border-radius: 18px;
+width: 12vw;
+height: 10vh;
+margin: 5vh;
+background-color: #00b386;
+
 }
 
 #statisticsButton:hover {background-color: #008060}
 #storageButton:hover {background-color: #008060}
 #selectButton:hover {background-color: #008060}
-
-#statisticsButton,#storageButton,#selectButton {
-  background-color: #00b386;
-}
 
 .selectButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;

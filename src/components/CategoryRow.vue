@@ -13,9 +13,9 @@
       :key="item.ingredient_id">
     </Ingredient>
 
-      <button @click="emitModalInfo" class="PlusButton">
-        <slot>+</slot>
-      </button>
+    <button @click="emitModalInfo" class="PlusButton">
+      <slot>+</slot>
+    </button>
 
 
   </div>
@@ -26,53 +26,63 @@
 <script>
 import Ingredient from '@/components/Ingredient.vue'
 
-  export default {
-    props: {
-      category: Number,
-      categoryName: String,
-      addedItems: Array,
-      lang: String,
+export default {
+  props: {
+    category: Number,
+    categoryName: String,
+    addedItems: Array,
+    lang: String,
+  },
+  components:{
+    Ingredient
+  },
+  data:function(){
+    return {}
+  },
+  methods: {
+    emitModalInfo:function(){
+      this.$emit('ModalInfo', this.category)
     },
-    components:{
-      Ingredient
-    },
-    data:function(){
-      return {}
-    },
-    methods: {
-      emitModalInfo:function(){
-        this.$emit('ModalInfo', this.category)
-      },
   }
 }
 
-  </script>
+</script>
 
-  <style scoped>
-  .box-wrapper{
-    text-align: left;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-  }
-  .PlusButton, .ingredient{
-    border: 1px solid #ccd;
-    background-color: rgba(255, 255, 255, 0.5);
-    font-size: 2em;
-    color: rgb(100,100,100);
-    border-radius: 15px;
-    flex: 0 0 auto;
-    width:7em;
-    display:table-cell;
-    height:100%
-  }
+<style scoped>
+.box-wrapper{
+  text-align: left;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.category{ /*Denna styr en kategori-rad*/
+  position:relative;
+  display:grid;
+  text-align: center;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 12vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  margin: 0 0.5em 1em;
+}
+.PlusButton, .ingredient{
+  border: 1px solid #ccd;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 2em;
+  color: rgb(100,100,100);
+  border-radius: 15px;
+  flex: 0 0 auto;
+  width:7em;
+  display:table-cell;
+  height:100%
+}
 
 .ingredient:hover{
   background-color:rgba(255, 255, 255, 0.5);
   color: rgb(100,100,100);
 }
-  .PlusButton:hover{
-    background-color: rgba(100, 100, 100, 0.5);
-    color: rgb(80,80,80);
-  }
-  </style>
+.PlusButton:hover{
+  background-color: rgba(100, 100, 100, 0.5);
+  color: rgb(80,80,80);
+}
+</style>
