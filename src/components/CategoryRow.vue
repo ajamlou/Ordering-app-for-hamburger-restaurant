@@ -1,6 +1,7 @@
 <template>
 
-  <div class="category">
+  <div class="category"
+  v-bind:class="{'extras':category >= 5}">
 
     <h2>{{ categoryName }}: </h2>
 
@@ -61,7 +62,7 @@ export default {
   text-align: center;
   grid-template-columns: 10% 90%;
   grid-template-rows: 12vh;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 255, 0, 0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
 }
@@ -75,6 +76,9 @@ export default {
   width:7em;
   display:table-cell;
   height:100%
+}
+.extras{
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 .ingredient:hover{
