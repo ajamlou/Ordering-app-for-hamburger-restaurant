@@ -16,7 +16,7 @@
         <div>
           <OrderItemToPrepare class="toPrepare"
           v-for="(order, key) in orders"
-          v-if="order.status == 'notStarted'"
+          v-if="order.status == 'not-started'"
           v-on:done="markDone(key)"
           :order-id="key"
           :order="order"
