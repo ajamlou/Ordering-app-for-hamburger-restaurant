@@ -3,7 +3,7 @@
   <div>
     <StaffViewModals>
     </StaffViewModals>
-    
+
     <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div id="orders">
@@ -58,10 +58,10 @@
     </OrderItem>
   </div>
 </div>
-<StaffViewFrontPage
+<StaffViewFrontModals
   @Visibility="kitchenButton"
   v-if = "kitchenButtonData === 'no show'">
-</StaffViewFrontPage>
+</StaffViewFrontModals>
 <!-- <div class="backButtonClass">
   <button id = "backButton" @click = "backButton"> STATISTIK </button>
 </div> -->
@@ -71,7 +71,7 @@
 
 </template>
 <script>
-import StaffViewFrontPage from '@/components/StaffViewFrontPage.vue'
+import StaffViewFrontModals from '@/components/StaffViewFrontModals.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -83,7 +83,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewFrontPage
+    StaffViewFrontModals
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
