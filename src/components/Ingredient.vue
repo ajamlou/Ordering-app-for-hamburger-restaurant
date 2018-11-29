@@ -1,11 +1,11 @@
 <template>
   <div class="ingredient" v-on:click="incrementCounter">
-    <label>
-      <!--<button v-on:click="incrementCounter">{{ counter }}</button>!-->
+    <div class="ingredient-name">
       {{item["ingredient_"+ lang]}}
-      <br>
-       {{item.selling_price}}:-<!--, {{item.stock}} pcs!-->
-    </label>
+    </div>
+    <div class="ingredient-price">
+       {{item.selling_price}}:-
+     </div>
   </div>
 </template>
 <script>
@@ -34,10 +34,18 @@ export default {
 }
 </script>
 <style scoped>
+.ingredient{
+  position:relative;
+}
 
 .ingredient:hover{
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
+}
+.ingredient-price{
+  position:absolute;
+  bottom:0;
+  width:100%;
 }
 
 </style>

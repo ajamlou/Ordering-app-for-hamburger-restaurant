@@ -32,7 +32,8 @@
     :lang="lang"
     :threshold="category.threshold"
     :itemCount="categoryItemCounter[category.categoryNr]"
-    @ModalInfo="switchVisibility">
+    @ModalInfo="switchVisibility"
+    @PopIngredient="removeFromOrder">
   </CategoryRow>
 
   <h1>{{uiLabels.sidesAndDrinks}}</h1>
@@ -45,7 +46,8 @@
   :lang="lang"
   :threshold="category.threshold"
   :itemCount="categoryItemCounter[category.categoryNr]"
-  @ModalInfo="switchVisibility">
+  @ModalInfo="switchVisibility"
+  @PopIngredient="removeFromOrder">
 </CategoryRow>
 <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
@@ -141,6 +143,15 @@ export default {
                   this.price += +item.selling_price;
                   this.isModalVisible = false;
                 },
+                removeFromOrder:function(item){
+                  this.categoryItemCounter[item.category]-=1;
+                  var i;
+                  for(i = 0; i < this.displayedIngredients.length; i++){
+                    if(this.displayedIngredients[i].ingredient_id === item.ingredient_id){
+                      this.displayedIngredients[i].pop();
+                    }
+                  }
+                },
                 placeOrder: function () {
                   var i,
                   //Wrap the order in an object
@@ -182,15 +193,16 @@ export default {
             }
 
 
-            .ingredient { /*Styr 1 enskild ingrediens-ruta*/
+            .ingredient{
               border: 1px solid #ccd;
-              padding: 1em;
-              /*background-image: url('~@/assets/exampleImage.jpg');*/
-              color: white;
+              background-color: rgba(255, 255, 255, 0.5);
+              font-size: 2em;
+              color: rgb(100,100,100);
               border-radius: 15px;
-              flex: 0 0 auto;
-              width:7em;
-              display:table-cell;
+              width:33%;
+              height:3em;
+              text-align: center;
+              margin:auto auto 7px auto;
             }
 
             .ingredient-wrapper{ /*Denna styr horisontell scroll*/

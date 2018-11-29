@@ -11,7 +11,8 @@
       v-if="item.category == category"
       :item="item"
       :lang="lang"
-      :key="item.ingredient_id">
+      :key="item.ingredient_id"
+      @click="$emit('popIngredient', item)">
     </Ingredient>
 
     <button @click="emitModalInfo"
@@ -80,11 +81,12 @@ export default {
 .PlusButton, .ingredient{
   border: 1px solid #ccd;
   background-color: rgba(255, 255, 255, 0.5);
-  font-size: 2em;
+  font-size: 1.5em;
   color: rgb(100,100,100);
   border-radius: 15px;
-  width:7em;
-  height:3em;
+  width:8em;
+  height:4em;
+  margin:3px 3px 3px;
 }
 .ingredient{
   text-align:center;
