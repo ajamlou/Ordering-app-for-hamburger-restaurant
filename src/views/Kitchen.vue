@@ -166,7 +166,7 @@ export default {
   position: fixed;
   font-size:16pt;
   border-radius: 4px;
-  border: 1px solid white;
+  border-bottom: 3px solid white;
   text-shadow: 2px 2px #696969;
   margin: auto;
   font-size: 3vh;
@@ -187,7 +187,7 @@ export default {
 
 #orders, #preparing, #finished {
   font-size: 1em;
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 6px;
 }
 
