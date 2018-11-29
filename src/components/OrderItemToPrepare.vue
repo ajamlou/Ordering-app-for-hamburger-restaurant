@@ -1,17 +1,17 @@
 <template>
   <!-- Note in this component that it is using another component -->
-<div>
-  <OrderItem
+  <div>
+    <OrderItem
     :ui-labels="uiLabels"
     :lang="lang"
     :order-id="orderId"
     :order="order">
   </OrderItem>
+  <button class = "btn-cancel" v-on:click="cancelOrder">
+    {{uiLabels.cancel}}
+  </button>
   <button v-on:click="orderDone">
     {{uiLabels.ready}}
-  </button>
-  <button v-on:click="cancelOrder">
-    {{uiLabels.cancel}}
   </button>
 </div>
 </template>
@@ -40,5 +40,9 @@ export default {
 }
 </script>
 <style scoped>
+
+.btn-cancel {
+
+}
 
 </style>
