@@ -1,6 +1,6 @@
 <template>
-
-<div id="welcome">
+<div class="masterDiv">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <OrderingViewFrontPage
   @Visibility="createBurgerButton"
   v-if = "createBurgerButtonData === 'no show'">
@@ -22,62 +22,30 @@
     @ModalInfo="switchVisibility">
   </modal>
 
-    <div id="categories-wrapper">
-      <CategoryRow v-for="category in burgerCategories"
-      :key="category.categoryNr"
-      :category="category.categoryNr"
-      :addedItems="displayedIngredients"
-      @ModalInfo="switchVisibility"
-      :categoryName="uiLabels[category.label]"
-      :lang="lang">
-    </CategoryRow>
+  <div id="categories-wrapper">
+    <CategoryRow v-for="category in burgerCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :addedItems="displayedIngredients"
+    @ModalInfo="switchVisibility"
+    :categoryName="uiLabels[category.label]"
+    :lang="lang">
+  </CategoryRow>
 
-    <h1>{{uiLabels.sidesAndDrinks}}</h1>
+  <h1>{{uiLabels.sidesAndDrinks}}</h1>
 
- <CategoryRow v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:addedItems="displayedIngredients"
-@ModalInfo="switchVisibility"
-:categoryName="uiLabels[category.label]"
-:lang="lang">
+  <CategoryRow v-for="category in extrasCategories"
+  :key="category.categoryNr"
+  :category="category.categoryNr"
+  :addedItems="displayedIngredients"
+  @ModalInfo="switchVisibility"
+  :categoryName="uiLabels[category.label]"
+  :lang="lang">
 </CategoryRow>
-<!--
-<div class="category">
-  <h2>{{ uiLabels.patty }}: </h2>
-  <div id="patty" class="ingredient-wrapper">
-  <Ingredient
-  ref="ingredient"
-  v-for="item in ingredients"
-  v-on:increment="addToOrder(item)"
-  v-if="item.category == 1"
-  :item="item"
-  :lang="lang"
-  :key="item.ingredient_id">
-</Ingredient>
+
 </div>
-</div> !-->
-
-    </div>
-
-    <h1>{{ uiLabels.order }}</h1>
-    {{ displayedIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
-    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-
-    <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-        <OrderItem
-                   v-for="(order, key) in orders"
-                   v-if="order.status !== 'done'"
-                   :order-id="key"
-                   :order="order"
-                   :ui-labels="uiLabels"
-                   :lang="lang"
-                   :key="key">
-    </OrderItem>
-    </div>
-    </div>
-    </div>
+</div>
+</div>
 </template>
 <script>
 //import the components that are used in the template, the name that you

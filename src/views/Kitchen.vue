@@ -2,14 +2,22 @@
 <template>
   <div>
 
-
+<div class="header-grid">
+    <div id="header1">
+      <h1>{{ uiLabels.ordersInQueue }}</h1>
+    </div>
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
+    </div>
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+    </div>
+  </div>
   <div id="kitchen-grid">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
     <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
-      </div>
+
       <div>
         <OrderItemToPrepare class="toPrepare"
         v-for="(order, key) in orders"
@@ -26,9 +34,7 @@
   </div>
 
   <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
-    </div>
+
     <div>
       <OrderItemToCook class="isPreparing"
       v-for="(order, key) in orders"
@@ -44,9 +50,7 @@
 </div>
 
 <div id="finished">
-  <div id="header3">
-    <h1>{{ uiLabels.ordersFinished }}</h1>
-  </div>
+
   <div>
     <OrderItem class="orderFinished"
     v-for="(order, key) in orders"
@@ -141,10 +145,20 @@ export default {
   height: 99vh;
 }
 
+.header-grid {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  height: 99vh;
+}
+
 #header1, #header2, #header3 {
   height: 10vh;
-  position: fixed;
   line-height: 4vh;
+  position: relative;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
@@ -158,7 +172,7 @@ export default {
   width: 25vw;
 }
 #header2 {
-  background: #00BFFF;
+  background: #FFA500;
   width: 50vw;
 }
 #header3 {
@@ -212,7 +226,7 @@ h1 {
 /* ccskod för knappar under denna kommentar */
 
 #selectButton, #statisticsButton, #storageButton{
-border: none;
+border: 2px solid white;
 color: white;
 text-shadow: 2px 2px #696969;
 cursor: pointer;
@@ -224,23 +238,12 @@ border-radius: 18px;
 width: 12vw;
 height: 10vh;
 margin: 5vh;
+background-color: #00b386;
 }
 
-#statisticsButton:hover {background-color: #8a0f5d}
-#storageButton:hover {background-color: #b37400}
+#statisticsButton:hover {background-color: #008060}
+#storageButton:hover {background-color: #008060}
 #selectButton:hover {background-color: #008060}
-
-#statisticsButton{
-  background-color: #C71585;
-}
-
-#storageButton {
-  background-color: #FFA500;
-}
-
-#selectButton {
-  background-color: #00b386;
-}
 
 .selectButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;
