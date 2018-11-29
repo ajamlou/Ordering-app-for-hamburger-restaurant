@@ -143,8 +143,8 @@ export default {
 
 #header1, #header2, #header3 {
   height: 10vh;
-  position: fixed;
   line-height: 4vh;
+  position: relative;
   font-size:16pt;
   border-radius: 4px;
   border: 1px solid white;
