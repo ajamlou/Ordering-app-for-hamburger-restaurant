@@ -3,26 +3,29 @@
     <div class="modal-mask">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" id="ing-mod">
+          <button
+            type="button"
+            class="close-button"
+            @click="$emit('switchVisibility')">
+            X
+          </button>
 
           <div class="modal-header">
             <slot name="header">
-              default header
+              Header
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-              default body
+              Body
             </slot>
           </div>
-
           <div class="modal-footer">
             <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('switchVisibility')">
-                STÄNG
-              </button>
+              Footer
+
             </slot>
           </div>
         </div>
@@ -51,7 +54,8 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
+  color: black;
 }
 
 .modal-wrapper {
@@ -67,7 +71,7 @@ export default {
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modal-header h3 {
@@ -79,8 +83,8 @@ export default {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
+.close-button {
+  /* float: right;
   margin: auto;
   color: white;
   height: 3vh;
@@ -91,10 +95,23 @@ export default {
   outline: none;
   border: none;
   border-radius: 5px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif; */
+
+  position:element(#ing-mod);
+  transform: translate(7.5em,-90%);
+  font-size: 3.2vh;
+  padding: 19px;
+  height:1em;
+  width:1em;
+  border-radius:3em;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background: #ff3333;
+    margin: auto;
 }
 
-.modal-default-button:hover {background-color: #4d0000}
+.close-button:hover {background-color: #660000}
 
 .modal-enter {
   opacity: 0;

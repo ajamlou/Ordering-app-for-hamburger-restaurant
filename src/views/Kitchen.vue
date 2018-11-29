@@ -218,9 +218,8 @@ h1 {
 #selectButton, #statisticsButton, #storageButton{
 border: none;
 color: white;
-  text-shadow: 2px 2px #696969;
-/* -webkit-text-stroke-width: 0.8px;
--webkit-text-stroke-color: #333333; */
+text-shadow: 2px 2px #696969;
+cursor: pointer;
 padding: 15px;
 text-decoration: none;
 display: inline-block;
