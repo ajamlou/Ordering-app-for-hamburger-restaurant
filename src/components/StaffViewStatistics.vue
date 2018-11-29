@@ -13,7 +13,7 @@
 
         <div class="modal-header">
           <slot name="header">
-            Header
+            Statistics
           </slot>
         </div>
 
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'StaffViewModals',
+  name: 'StaffViewStatistics',
 
   methods: {
   }
@@ -64,7 +64,7 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  width: 500px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -84,19 +84,6 @@ export default {
 }
 
 .close-button {
-  /* float: right;
-  margin: auto;
-  color: white;
-  height: 3vh;
-  background-color: #800000;
-  font-size: 2vh;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  font-family: 'Montserrat', sans-serif; */
-
   position:element(#ing-mod);
   transform: translate(7.5em,-90%);
   font-size: 3.2vh;

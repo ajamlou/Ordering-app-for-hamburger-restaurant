@@ -60,23 +60,23 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleStatistics()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleModal()">LAGER</button>
+  <button  id = "storageButton" @click="toggleStorage()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
 </div>
 
 <StaffViewStorage
-@switchVisibility="toggleModal"
-v-show= "modalVisibility === true">
+@switchVisibility="toggleStorage"
+v-show= "StorageVisibility === true">
 </StaffViewStorage>
 
 <StaffViewStatistics
-@switchVisibility = "toggleModal"
-v-show= "modalVisibility === true">
+@switchVisibility = "toggleStatistics"
+v-show = "StatisticsVisibility === true">
 </StaffViewStatistics>
 
 
@@ -87,6 +87,7 @@ v-show= "modalVisibility === true">
 </template>
 <script>
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
+import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -98,7 +99,8 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewStorage
+    StaffViewStorage,
+    StaffViewStatistics
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -106,7 +108,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      modalVisibility: false
+      StatisticsVisibility: false,
+      StorageVisibility: false
     }
   },
   methods: {
@@ -119,12 +122,20 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleModal: function(){
-      if (this.modalVisibility === true){
-        this.modalVisibility = false;
+    toggleStorage: function(){
+      if (this.StorageVisibility === true){
+        this.StorageVisibility = false;
       }
       else {
-        this.modalVisibility = true;
+        this.StorageVisibility = true;
+      }
+    },
+    toggleStatistics: function(){
+      if (this.StatisticsVisibility === true){
+        this.StatisticsVisibility = false;
+      }
+      else {
+        this.StatisticsVisibility = true;
       }
     },
     // backButton: function(){
