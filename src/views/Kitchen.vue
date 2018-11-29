@@ -224,15 +224,12 @@ border-radius: 18px;
 width: 12vw;
 height: 10vh;
 margin: 5vh;
+background-color: #00b386;
 }
 
 #statisticsButton:hover {background-color: #008060}
 #storageButton:hover {background-color: #008060}
 #selectButton:hover {background-color: #008060}
-
-#statisticsButton,#storageButton,#selectButton {
-  background-color: #00b386;
-}
 
 .selectButtonClass, .statisticsButtonClass, .storageButtonClass{
   margin: auto;
