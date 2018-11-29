@@ -27,7 +27,6 @@
 <style scoped>
 
 #buttonMesh {
-
 }
 
 #selectButton, #statisticsButton, #storageButton{

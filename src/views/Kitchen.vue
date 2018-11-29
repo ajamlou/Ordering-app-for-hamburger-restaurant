@@ -1,9 +1,6 @@
 
 <template>
   <div>
-    <StaffViewModals>
-    </StaffViewModals>
-
     <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div id="orders">
@@ -58,10 +55,10 @@
     </OrderItem>
   </div>
 </div>
-<StaffViewFrontModals
-  @Visibility="kitchenButton"
+<StaffViewModals
+  @Visibility="statisticsButton"
   v-if = "kitchenButtonData === 'no show'">
-</StaffViewFrontModals>
+</StaffViewModals>
 <!-- <div class="backButtonClass">
   <button id = "backButton" @click = "backButton"> STATISTIK </button>
 </div> -->
@@ -71,7 +68,7 @@
 
 </template>
 <script>
-import StaffViewFrontModals from '@/components/StaffViewFrontModals.vue'
+import StaffViewModals from '@/components/StaffViewModals.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
@@ -83,7 +80,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewFrontModals
+    StaffViewModals
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -101,7 +98,7 @@ export default {
     markCooked: function (orderid) {
       this.$store.state.socket.emit("orderStarted", orderid);
     },
-    kitchenButton: function(){
+    statisticsButton: function(){
       this.kitchenButtonData = "show";
     },
     // backButton: function(){
