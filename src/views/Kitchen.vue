@@ -20,7 +20,7 @@
         <div>
           <OrderItemToPrepare class="toPrepare"
           v-for="(order, key) in orders"
-          v-if="order.status !== 'done'"
+          v-if="order.status == 'notStarted'"
           v-on:done="markDone(key)"
           :order-id="key"
           :order="order"
@@ -36,16 +36,16 @@
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div>
-        <OrderItemToPrepare class="isPreparing"
+        <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
-        v-if="order.status !== 'done'"
-        v-on:done="markDone(key)"
+        v-if="order.status === 'done'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToPrepare>
+      </OrderItemToCook>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
     <div>
       <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
+      v-if="order.status === 'started'"
       :order-id="key"
       :order="order"
       :lang="lang"
@@ -79,13 +79,15 @@
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
+import OrderItemToCook from '@/components/OrderItemToCook.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 export default {
   name: 'Ordering',
   components: {
     OrderItem,
-    OrderItemToPrepare
+    OrderItemToPrepare,
+    OrderItemToCook
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -99,6 +101,9 @@ export default {
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
+    },
+    markCooked: function (orderid) {
+      this.$store.state.socket.emit("orderStarted", orderid);
     },
     kitchenButton: function(){
       this.kitchenButtonData = "show";
