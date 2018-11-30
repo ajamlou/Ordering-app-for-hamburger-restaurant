@@ -31,7 +31,7 @@
     :categoryName="uiLabels[category.label]"
     :lang="lang"
     :threshold="category.threshold"
-    :itemCount="categoryItemCounter[category.categoryNr]"
+    :itemCount="categoryItemCounter[category.categoryNr-1]"
     @ModalInfo="switchVisibility">
   </CategoryRow>
 
@@ -44,7 +44,7 @@
   :categoryName="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :itemCount="categoryItemCounter[category.categoryNr]"
+  :itemCount="categoryItemCounter[category.categoryNr -1]"
   @ModalInfo="switchVisibility">
 </CategoryRow>
 <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
@@ -83,7 +83,7 @@ export default {
     return {
       chosenIngredients: [],
       displayedIngredients: [],
-      categoryItemCounter: [0,0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
+      categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -133,7 +133,7 @@ export default {
                   this.createBurgerButtonData = "show";
                 },
                 addToOrder: function (item) {
-                  this.categoryItemCounter[item.category]+=1;
+                  this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
@@ -151,12 +151,15 @@ export default {
                   // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
                   this.$store.state.socket.emit('order', {order: order});
                   //set all counters to 0. Notice the use of $refs
-                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i += 1) {
+                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
                     this.$refs.modal.$refs.ingredient[i].resetCounter();
                   }
                   this.price = 0;
                   this.chosenIngredients = [];
                   this.displayedIngredients = [];
+                  for(i=0; i < this.categoryItemCounter.length; i++){
+                  this.categoryItemCounter[i] = 0;
+                }
                 }
               }
             }
@@ -182,15 +185,16 @@ export default {
             }
 
 
-            .ingredient { /*Styr 1 enskild ingrediens-ruta*/
+            .ingredient{
               border: 1px solid #ccd;
-              padding: 1em;
-              /*background-image: url('~@/assets/exampleImage.jpg');*/
-              color: white;
+              background-color: rgba(255, 255, 255, 0.5);
+              font-size: 2em;
+              color: rgb(100,100,100);
               border-radius: 15px;
-              flex: 0 0 auto;
-              width:7em;
-              display:table-cell;
+              width:33%;
+              height:3em;
+              text-align: center;
+              margin:auto auto 7px auto;
             }
 
             .ingredient-wrapper{ /*Denna styr horisontell scroll*/
