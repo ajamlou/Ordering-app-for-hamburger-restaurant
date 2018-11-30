@@ -87,6 +87,7 @@ export default {
   width:8em;
   height:4em;
   margin:3px 3px 3px;
+  cursor:pointer;
 }
 .ingredient{
   text-align:center;
