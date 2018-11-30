@@ -216,7 +216,8 @@ export default {
                 text-align: center;
             }
             #avbryt{
-                align-items: flex-start;
+                float: left;
+
             }
             button{
               float:right;
