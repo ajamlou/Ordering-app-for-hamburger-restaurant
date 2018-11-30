@@ -81,9 +81,9 @@ export default {
   // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
+      categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
       displayedIngredients: [],
-      categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -110,7 +110,8 @@ export default {
                   {categoryNr: 6,
                     label:"drinks",
                   threshold:5},
-                  ]
+                ],
+
                 }
               },
               created: function () {
@@ -127,7 +128,6 @@ export default {
                     this.modalCategory=category;
                     this.isModalVisible = true;
                   }
-
                 },
                 createBurgerButton: function(){
                   this.createBurgerButtonData = "show";
@@ -142,6 +142,7 @@ export default {
                   this.isModalVisible = false;
                 },
                 placeOrder: function () {
+                  if(this.chosenIngredients.length>0){
                   var i,
                   //Wrap the order in an object
                   order = {
@@ -161,6 +162,7 @@ export default {
                   this.categoryItemCounter[i] = 0;
                 }
                 }
+                }
               }
             }
             </script>
@@ -176,14 +178,14 @@ export default {
               margin:auto;
               width: 90%;
             }
-
+/*
             .example-panel {
               position: fixed;
               left:0;
               top:0;
               z-index: -2;
             }
-
+*/
 
             .ingredient{
               border: 1px solid #ccd;

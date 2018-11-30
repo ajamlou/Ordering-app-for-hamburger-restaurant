@@ -101,6 +101,7 @@ export default {
     height:3.2em;
     text-align: center;
     margin:5px auto 3px auto;
+    cursor:pointer;
   }
 
   .btn-close {
