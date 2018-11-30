@@ -7,12 +7,16 @@
     :order-id="orderId"
     :order="order">
   </OrderItem>
-  <button v-on:click="cancelOrder">
-    {{uiLabels.cancel}}
-  </button>
-  <button v-on:click="orderDone">
-    {{uiLabels.ready}}
-  </button>
+  <button id="cancelButton" v-on:click="cancelOrder">
+      {{uiLabels.cancel}}
+    </button>
+    <button id="sendToPreparing" v-on:click="orderDone">
+      {{uiLabels.ready}}
+    </button>
+    <!-- <button id="maximizeButton" v-on:click="maximizeOrder">
+      {{uiLabels.maximize}}
+    </button> -->
+
 </div>
 </template>
 <script>
@@ -40,6 +44,26 @@ export default {
 }
 </script>
 <style scoped>
+
+
+#cancelButton {
+  background-color: #ff3333;
+  border: 1px solid white;
+  border-radius: 3em;
+  color: white;
+}
+
+#maximizeButton {
+
+}
+
+#sendToPreparing {
+  background-color: #7d90b5;
+  border: 1px solid white;
+  border-radius: 3em;
+  color: white;
+}
+
 
 .btn-cancel {
 

@@ -7,9 +7,11 @@
     :order-id="orderId"
     :order="order">
   </OrderItem>
-  <button v-on:click="orderCooked">
+  <button id="orderCookedButton" v-on:click="orderCooked">
     {{uiLabels.ready}}
   </button>
+
+
 </div>
 </template>
 <script>
@@ -34,5 +36,12 @@ export default {
 }
 </script>
 <style scoped>
+#orderCookedButton {
+  background-color: #7d90b5;
+  border: 1px solid white;
+  border-radius: 3em;
+  color: white;
+}
+
 
 </style>
