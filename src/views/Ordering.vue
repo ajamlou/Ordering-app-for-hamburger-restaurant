@@ -184,18 +184,6 @@ export default {
     }
 
 
-<<<<<<< HEAD
-.ingredient { /*Styr 1 enskild ingrediens-ruta*/
-  border: 1px solid #ccd;
-  padding: 1em;
-  background-image: url('~@/assets/exampleImage.jpg');
-  color: white;
-  border-radius: 15px;
-  flex: 0 0 auto;
-  width:7em;
-  display:table-cell;
-}
-=======
             .ingredient{
               border: 1px solid #ccd;
               background-color: rgba(255, 255, 255, 0.5);
@@ -207,7 +195,6 @@ export default {
               text-align: center;
               margin:auto auto 7px auto;
             }
->>>>>>> 697b624012f950aa9042d6f1b8b0a5a5e3d27978
 
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
