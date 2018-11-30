@@ -2,103 +2,105 @@
 <template>
   <div>
 
-<div class="header-grid">
-    <div id="header1">
-      <h1>{{ uiLabels.ordersInQueue }}</h1>
-    </div>
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
-    </div>
-    <div id="header3">
-      <h1>{{ uiLabels.ordersFinished }}</h1>
-    </div>
-  </div>
-  <div id="kitchen-grid">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div id="kitchen-grid">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <div id="orders">
+      <div id="orders">
+        <div id="header1">
+          <h1>{{ uiLabels.ordersInQueue }}</h1>
+        </div>
+        <div class="allOrders">
+          <OrderItemToPrepare class="toPrepare"
+          v-for="(order, key) in orders"
+          v-if="order.status === 'not-started'"
+          v-on:cancel = "markCanceled(key)"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemToPrepare>
+      </div>
+    </div>
 
-      <div>
-        <OrderItemToPrepare class="toPrepare"
+    <div id="preparing">
+      <div id="header2">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
+      </div>
+      <div class="allOrders">
+        <OrderItemToCook class="isPreparing"
         v-for="(order, key) in orders"
-        v-if="order.status == 'not-started'"
-        v-on:done="markDone(key)"
-        v-on:cancel = "markCanceled(key)"
+        v-if="order.status === 'done'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToPrepare>
+      </OrderItemToCook>
     </div>
   </div>
 
-  <div id="preparing">
-
-    <div>
-      <OrderItemToCook class="isPreparing"
+  <div id="finished">
+    <div id="header3">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+    </div>
+    <div class="allOrders">
+      <OrderItem class="orderFinished"
       v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      v-on:cooked="markCooked(key)"
+      v-if="order.status === 'started'"
       :order-id="key"
       :order="order"
-      :ui-labels="uiLabels"
       :lang="lang"
+      :ui-labels="uiLabels"
       :key="key">
-    </OrderItemToCook>
+    </OrderItem>
   </div>
 </div>
 
-<div id="finished">
-
-  <div>
-    <OrderItem class="orderFinished"
-    v-for="(order, key) in orders"
-    v-if="order.status === 'started'"
-    :order-id="key"
-    :order="order"
-    :lang="lang"
-    :ui-labels="uiLabels"
-    :key="key">
-  </OrderItem>
-</div>
-</div>
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleModal()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleModal()">LAGER</button>
+  <button  id = "storageButton" @click="toggleVisibility(), decideContent()">LAGER</button>
 </div>
 <div class = "selectButtonClass">
-  <button  id = "selectButton" >MARKERA</button>
+  <button  id = "selectButton">MARKERA</button>
 </div>
 
-<StaffViewModals
-  @switchVisibility="toggleModal"
-  v-show= "modalVisibility === true">
-</StaffViewModals>
-<!-- <div class="backButtonClass">
-  <button id = "backButton" @click = "backButton"> STATISTIK </button>
-</div> -->
+
+<KitchenModal
+@switchVisibility = "toggleVisibility"
+:decideContent="decidedContent"
+v-show = "ModalVisibility === true">
+</KitchenModal>
+
+
 </div>
 
 </div>
 
 </template>
 <script>
-import StaffViewModals from '@/components/StaffViewModals.vue'
+//import methods and data that are shared between the component and kitchen views
+import KitchenModal from '@/components/KitchenModal.vue'
+import StaffViewStorage from '@/components/StaffViewStorage.vue'
+import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
-//import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
+
 export default {
   name: 'Ordering',
   components: {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
-    StaffViewModals
+    StaffViewStorage,
+    StaffViewStatistics,
+    KitchenModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -106,7 +108,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      modalVisibility: false
+      ModalVisibility: false,
+      decidedContent: "statistics"
     }
   },
   methods: {
@@ -117,14 +120,23 @@ export default {
       this.$store.state.socket.emit("orderStarted", orderid);
     },
     markCanceled: function (orderid) {
-      this.$store.state.socket.emit("markOrderCanceled", orderid);
+      this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleModal: function(){
-      if (this.modalVisibility === true){
-        this.modalVisibility = false;
+    toggleVisibility: function(){
+      if (this.ModalVisibility === true){
+        this.ModalVisibility = false;
       }
       else {
-        this.modalVisibility = true;
+        this.ModalVisibility = true;
+      }
+    },
+    decideContent: function(){
+      if (this.decidedContent === "statistics"){
+        this.decidedContent = "storage";
+        console.log(this.decidedContent);
+      }
+      else {
+        this.decidedContent = "statistics";
       }
     },
     // backButton: function(){
@@ -145,23 +157,17 @@ export default {
   height: 99vh;
 }
 
-.header-grid {
-  position: fixed;
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
-  color: white;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  height: 99vh;
+.allOrders {
+  margin-top: 10vh;
 }
 
 #header1, #header2, #header3 {
   height: 10vh;
   line-height: 4vh;
-  position: relative;
+  position: fixed;
   font-size:16pt;
   border-radius: 4px;
-  border: 1px solid white;
+  border-bottom: 3px solid white;
   text-shadow: 2px 2px #696969;
   margin: auto;
   font-size: 3vh;
@@ -182,7 +188,7 @@ export default {
 
 #orders, #preparing, #finished {
   font-size: 1em;
-  border: 2px solid white;
+  border: 3px solid white;
   border-radius: 6px;
 }
 
@@ -239,6 +245,7 @@ width: 12vw;
 height: 10vh;
 margin: 5vh;
 background-color: #00b386;
+
 }
 
 #statisticsButton:hover {background-color: #008060}

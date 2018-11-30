@@ -78,28 +78,29 @@ export default {
     width:45em;
     max-width:100%;
     max-height:60%;
+    padding-bottom: 15px;
   }
 
   .mod-bod{
     margin:auto;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
     overflow-y: auto;
     overflow-x: hidden;
-
   }
 
   .ingredient{
     border: 1px solid #ccd;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 2em;
+    font-size: 1.5em;
     color: rgb(100,100,100);
     border-radius: 15px;
-    width:33%;
-    height:3em;
+    width:32%;
+    height:3.2em;
     text-align: center;
-    margin:auto auto 7px auto;
+    margin:5px auto 3px auto;
   }
 
   .btn-close {

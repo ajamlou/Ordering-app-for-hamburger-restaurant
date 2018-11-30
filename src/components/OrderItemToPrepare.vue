@@ -7,7 +7,7 @@
     :order-id="orderId"
     :order="order">
   </OrderItem>
-  <button class = "btn-cancel" v-on:click="cancelOrder">
+  <button v-on:click="cancelOrder">
     {{uiLabels.cancel}}
   </button>
   <button v-on:click="orderDone">

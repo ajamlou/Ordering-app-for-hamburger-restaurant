@@ -5,43 +5,45 @@
       <div class="modal-wrapper">
         <div class="modal-container" id="ing-mod">
           <button
-            type="button"
-            class="close-button"
-            @click="$emit('switchVisibility')">
-            X
-          </button>
+          type="button"
+          class="close-button"
+          @click="$emit('switchVisibility')">
+          X
+        </button>
 
-          <div class="modal-header">
-            <slot name="header">
-              Header
-            </slot>
-          </div>
+        <StaffViewStorage v-show = "decideContent === 'storage'">
+        </StaffViewStorage>
 
-          <div class="modal-body">
-            <slot name="body">
-              Body
-            </slot>
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              Footer
+        <StaffViewStatistics v-show = "decideContent === 'statistics'">
+        </StaffViewStatistics>
 
-            </slot>
-          </div>
-        </div>
+
       </div>
     </div>
-  </transition>
-
+  </div>
+</transition>
 </template>
 
 <script>
+import StaffViewStorage from '@/components/StaffViewStorage.vue'
+import StaffViewStatistics from '@/components/StaffViewStatistics.vue'
 export default {
-  name: 'StaffViewModals',
+  name: 'KitchenModal',
 
+  props: {
+    decideContent:String
+
+  },
+  components:{
+    StaffViewStorage,
+    StaffViewStatistics
+  },
   methods: {
+
   }
 }
+
+
 </script>
 
 <style scoped>
@@ -64,7 +66,7 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  width: 500px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -84,19 +86,6 @@ export default {
 }
 
 .close-button {
-  /* float: right;
-  margin: auto;
-  color: white;
-  height: 3vh;
-  background-color: #800000;
-  font-size: 2vh;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  font-family: 'Montserrat', sans-serif; */
-
   position:element(#ing-mod);
   transform: translate(7.5em,-90%);
   font-size: 3.2vh;
@@ -108,7 +97,7 @@ export default {
   font-weight: bold;
   color: white;
   background: #ff3333;
-    margin: auto;
+  margin: auto;
 }
 
 .close-button:hover {background-color: #660000}

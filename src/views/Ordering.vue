@@ -27,9 +27,11 @@
     :key="category.categoryNr"
     :category="category.categoryNr"
     :addedItems="displayedIngredients"
-    @ModalInfo="switchVisibility"
     :categoryName="uiLabels[category.label]"
-    :lang="lang">
+    :lang="lang"
+    :threshold="category.threshold"
+    :itemCount="categoryItemCounter[category.categoryNr-1]"
+    @ModalInfo="switchVisibility">
   </CategoryRow>
 
   <h1>{{uiLabels.sidesAndDrinks}}</h1>
@@ -38,11 +40,13 @@
   :key="category.categoryNr"
   :category="category.categoryNr"
   :addedItems="displayedIngredients"
-  @ModalInfo="switchVisibility"
   :categoryName="uiLabels[category.label]"
-  :lang="lang">
+  :lang="lang"
+  :threshold="category.threshold"
+  :itemCount="categoryItemCounter[category.categoryNr -1]"
+  @ModalInfo="switchVisibility">
 </CategoryRow>
-
+<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -78,6 +82,7 @@ export default {
     return {
       chosenIngredients: [],
       displayedIngredients: [],
+      categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -85,75 +90,91 @@ export default {
       isModalVisible: false,
       burgerCategories:[
         {categoryNr: 4,
-        label:"bread"},
-        {categoryNr: 1,
-        label:"patty"},
-        {categoryNr: 2,
-        label: "garnish"},
-        {categoryNr: 3,
-        label:"sauce"}
-      ],
-      extrasCategories:[
-        {categoryNr: 5,
-        label:"sides"},
-        {categoryNr: 6,
-        label:"drinks"},
-      ]
-    }
-  },
-  created: function () {
-    this.$store.state.socket.on('orderNumber', function (data) {
-      this.orderNumber = data;
-    }.bind(this));
-  },
-  methods: {
-    switchVisibility: function(category) {
-      if (this.isModalVisible === true){
-        this.isModalVisible = false;
-      }
-      else {
-      this.modalCategory=category;
-      this.isModalVisible = true;
-    }
+          label:"bread",
+        threshold:1},
+          {categoryNr: 1,
+            label:"patty",
+          threshold:5},
+            {categoryNr: 2,
+              label: "garnish",
+            threshold: 5},
+              {categoryNr: 3,
+                label:"sauce",
+              threshold:5}
+              ],
+              extrasCategories:[
+                {categoryNr: 5,
+                  label:"sides",
+                threshold:5},
+                  {categoryNr: 6,
+                    label:"drinks",
+                  threshold:5},
+                  ]
+                }
+              },
+              created: function () {
+                this.$store.state.socket.on('orderNumber', function (data) {
+                  this.orderNumber = data;
+                }.bind(this));
+              },
+              methods: {
+                switchVisibility: function(category) {
+                  if (this.isModalVisible === true){
+                    this.isModalVisible = false;
+                  }
+                  else {
+                    this.modalCategory=category;
+                    this.isModalVisible = true;
+                  }
 
-    },
-      createBurgerButton: function(){
-      this.createBurgerButtonData = "show";
-    },
-    addToOrder: function (item) {
-      this.displayedIngredients.push(item);
-      if(item.category !== 5 && item.category !== 6){
-      this.chosenIngredients.push(item);
-    }
-      this.price += +item.selling_price;
-      this.isModalVisible = false;
-    },
-    placeOrder: function () {
-      var i,
-      //Wrap the order in an object
-        order = {
-          ingredients: this.chosenIngredients,
-          price: this.price
-        };
-      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      this.$store.state.socket.emit('order', {order: order});
-      //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i += 1) {
-        this.$refs.modal.$refs.ingredient[i].resetCounter();
-      }
-      this.price = 0;
-      this.chosenIngredients = [];
-      this.displayedIngredients = [];
-    }
-  }
-}
-</script>
-<style scoped>
-    /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
-    #ordering {
-        margin:auto;
-        width: 90%;
-    }
+                },
+                createBurgerButton: function(){
+                  this.createBurgerButtonData = "show";
+                },
+                addToOrder: function (item) {
+                  this.categoryItemCounter[item.category -1]+=1;
+                  this.displayedIngredients.push(item);
+                  if(item.category !== 5 && item.category !== 6){
+                    this.chosenIngredients.push(item);
+                  }
+                  this.price += +item.selling_price;
+                  this.isModalVisible = false;
+                },
+                placeOrder: function () {
+                  var i,
+                  //Wrap the order in an object
+                  order = {
+                    ingredients: this.chosenIngredients,
+                    price: this.price
+                  };
+                  // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+                  this.$store.state.socket.emit('order', {order: order});
+                  //set all counters to 0. Notice the use of $refs
+                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
+                    this.$refs.modal.$refs.ingredient[i].resetCounter();
+                  }
+                  this.price = 0;
+                  this.chosenIngredients = [];
+                  this.displayedIngredients = [];
+                  for(i=0; i < this.categoryItemCounter.length; i++){
+                  this.categoryItemCounter[i] = 0;
+                }
+                }
+              }
+            }
+            </script>
+            <style scoped>
+            /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
+            .masterDiv{
+              font-family: 'Montserrat', sans-serif;
+              height:100%;
+              margin-top:0px !important;
+              padding-top:0px !important;
+            }
+            #ordering {
+              margin:auto;
+              width: 90%;
+            }
 
     .example-panel {
         position: fixed;
@@ -163,6 +184,7 @@ export default {
     }
 
 
+<<<<<<< HEAD
 .ingredient { /*Styr 1 enskild ingrediens-ruta*/
   border: 1px solid #ccd;
   padding: 1em;
@@ -173,6 +195,19 @@ export default {
   width:7em;
   display:table-cell;
 }
+=======
+            .ingredient{
+              border: 1px solid #ccd;
+              background-color: rgba(255, 255, 255, 0.5);
+              font-size: 2em;
+              color: rgb(100,100,100);
+              border-radius: 15px;
+              width:33%;
+              height:3em;
+              text-align: center;
+              margin:auto auto 7px auto;
+            }
+>>>>>>> 697b624012f950aa9042d6f1b8b0a5a5e3d27978
 
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
