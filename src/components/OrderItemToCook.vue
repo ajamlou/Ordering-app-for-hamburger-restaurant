@@ -43,5 +43,7 @@ export default {
   color: white;
 }
 
+#orderCookedButton:active {border: 2px solid #d9d9d9;}
+
 
 </style>
