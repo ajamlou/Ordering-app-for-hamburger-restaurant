@@ -66,7 +66,8 @@ export default {
 }
 
 .modal-container {
-  width: 500px;
+  width: 50vw;
+  height: 40vh;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -86,8 +87,7 @@ export default {
 }
 
 .close-button {
-  position:element(#ing-mod);
-  transform: translate(7.5em,-90%);
+  transform: translate(27vw,-100%);
   font-size: 3.2vh;
   padding: 19px;
   height:1em;

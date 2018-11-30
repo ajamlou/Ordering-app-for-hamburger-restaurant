@@ -18,6 +18,7 @@
   "ingredients" : "Ingredienser",
   "ready" : "Klart",
   "order" : "Min burgare",
+  "maximize": "+",
   "language" : "English",
   "bread" : "Bröd",
   "patty" : "Protein",

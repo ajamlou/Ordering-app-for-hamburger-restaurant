@@ -10,6 +10,10 @@
   <button id="orderCookedButton" v-on:click="orderCooked">
     {{uiLabels.ready}}
   </button>
+  <!-- <button id="maximizeButton" v-on:click="maximizeOrder">
+    {{uiLabels.maximize}}
+  </button> -->
+
 
 
 </div>
@@ -43,7 +47,15 @@ export default {
   color: white;
 }
 
+/* #maximizeButton {
+  background-color: #4dff4d;
+  border: 1px solid white;
+  border-radius: 3em;
+  color: black;
+} */
+
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
+/* #maximizeButton:active {border: 2px solid #d9d9d9;} */
 
 
 </style>
