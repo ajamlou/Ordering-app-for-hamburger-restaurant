@@ -1,7 +1,7 @@
 <template>
   <button @click="emitModalInfo" class="PlusButton">
     <slot>+</slot>
-  <!--  <modal
+    <!--  <modal
     :category="category"
     v-show="isModalVisible"
     v-on:closeModal="switchVisibility"
@@ -21,22 +21,22 @@ export default {
   },
   data () {
     /*  return {
-        isModalVisible: false,
-      }; */
-    },
-    methods: {
-      emitModalInfo:function(){
-        this.$emit('ModalInfo', category)
-      },
-    /*  switchVisibility() {
-        if(this.isModalVisible){
-          this.isModalVisible = false
-        }
-        else{
-        this.isModalVisible = true}
-      }, */
-    },
-  };
+    isModalVisible: false,
+  }; */
+},
+methods: {
+  emitModalInfo:function(){
+    this.$emit('ModalInfo', category)
+  },
+  /*  switchVisibility() {
+  if(this.isModalVisible){
+  this.isModalVisible = false
+}
+else{
+this.isModalVisible = true}
+}, */
+},
+};
 </script>
 
 <style scoped>

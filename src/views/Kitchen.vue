@@ -60,10 +60,17 @@
 </div>
 
 <div class = "statisticsButtonClass">
+<<<<<<< HEAD
   <button  id = "statisticsButton" @click="toggleVisibility(), decideContent()">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
   <button  id = "storageButton" @click="toggleVisibility(), decideContent()">LAGER</button>
+=======
+  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
+</div>
+<div class = "storageButtonClass">
+  <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
+>>>>>>> 586c8d231249831d52e41e640d09e6b149662af6
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
@@ -130,10 +137,16 @@ export default {
         this.ModalVisibility = true;
       }
     },
+<<<<<<< HEAD
     decideContent: function(){
       if (this.decidedContent === "statistics"){
         this.decidedContent = "storage";
         console.log(this.decidedContent);
+=======
+    decideContent: function(string){
+      if (string === "l"){
+        this.decidedContent = "storage";
+>>>>>>> 586c8d231249831d52e41e640d09e6b149662af6
       }
       else {
         this.decidedContent = "statistics";
