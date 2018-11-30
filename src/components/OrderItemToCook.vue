@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     orderCooked: function () {
-      // sending 'done' message to parent component or view so that it
-      // can catch it with v-on:done in the component declaration
+      // sending 'cooked' message to parent component or view so that it
+      // can catch it with v-on:cooked in the component declaration
       this.$emit('cooked');
     }
   }

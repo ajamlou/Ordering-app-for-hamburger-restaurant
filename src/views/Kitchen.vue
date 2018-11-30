@@ -60,10 +60,10 @@
 </div>
 
 <div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent()">STATISTIK</button>
+  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
 </div>
 <div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleVisibility(), decideContent()">LAGER</button>
+  <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
 </div>
 <div class = "selectButtonClass">
   <button  id = "selectButton">MARKERA</button>
@@ -130,10 +130,9 @@ export default {
         this.ModalVisibility = true;
       }
     },
-    decideContent: function(){
-      if (this.decidedContent === "statistics"){
+    decideContent: function(string){
+      if (string === "l"){
         this.decidedContent = "storage";
-        console.log(this.decidedContent);
       }
       else {
         this.decidedContent = "statistics";

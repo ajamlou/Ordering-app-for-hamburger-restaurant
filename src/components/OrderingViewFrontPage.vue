@@ -1,42 +1,42 @@
 <template>
-<div>
+  <div>
     <div class = "createBurgerButtonClass">
-        <button id = "createBurgerButton" @click = "emitSwitchVisibility">SKAPA DIN BURGARE</button>
+      <button id = "createBurgerButton" @click = "emitSwitchVisibility">SKAPA DIN BURGARE</button>
     </div>
     <div class = "favoritesButtonClass">
-        <button  id = "favoritesButton">VÄLJ BLAND VÅRA FAVORITER</button>
+      <button  id = "favoritesButton">VÄLJ BLAND VÅRA FAVORITER</button>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'OrderingViewFrontPage',
+export default {
+  name: 'OrderingViewFrontPage',
 
-        methods: {
-            emitSwitchVisibility: function() {
-                this.$emit('Visibility')
-            }
-        }
+  methods: {
+    emitSwitchVisibility: function() {
+      this.$emit('Visibility')
     }
+  }
+}
 </script>
 
 <style scoped>
-    #createBurgerButton, #favoritesButton{
-        color: black;
-        padding: 50px;
-        display: grid;
-        font-size: 3vh;
-        border-radius: 10px;
-        margin: 10% auto;
-    }
+#createBurgerButton, #favoritesButton{
+  color: black;
+  padding: 50px;
+  display: grid;
+  font-size: 3vh;
+  border-radius: 10px;
+  margin: 10% auto;
+}
 
-    #favoritesButton{
-        background-color: firebrick;
-    }
+#favoritesButton{
+  background-color: firebrick;
+}
 
-    #createBurgerButton {
-        background-color: royalblue;
-    }
+#createBurgerButton {
+  background-color: royalblue;
+}
 
 </style>
