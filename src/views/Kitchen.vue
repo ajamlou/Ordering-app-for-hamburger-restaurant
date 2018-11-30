@@ -240,6 +240,8 @@ text-decoration: none;
 display: inline-block;
 font-size: 4vh;
 border-radius: 18px;
+font-size: 1.5vh;
+font-size: 1.5vw;
 width: 12vw;
 height: 10vh;
 margin: 5vh;
