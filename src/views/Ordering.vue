@@ -1,17 +1,18 @@
 <template>
-<div class="masterDiv">
-<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-<OrderingViewFrontPage
-  @Visibility="createBurgerButton"
-  v-if = "createBurgerButtonData === 'no show'">
-</OrderingViewFrontPage>
+  <div class="masterDiv">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div id="welcome">
+      <OrderingViewFrontPage
+      @Visibility="createBurgerButton"
+      v-if = "createBurgerButtonData === 'no show'">
+    </OrderingViewFrontPage>
+  </div>
 
-<div id="ordering" v-if = "createBurgerButtonData === 'show'">
-    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
-    <img class="example-panel" src="@/assets/exampleImage.jpg">
+  <div id="ordering" v-if = "createBurgerButtonData === 'show'">
+    <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
-    <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+    <h1>{{ uiLabels.myOrder }}</h1>
     <h2>{{ uiLabels.myBurger }} </h2>
     <modal ref="modal"
     :category="this.modalCategory"
@@ -176,12 +177,12 @@ export default {
               width: 90%;
             }
 
-    .example-panel {
-        position: fixed;
-        left:0;
-        top:0;
-        z-index: -2;
-    }
+            .example-panel {
+              position: fixed;
+              left:0;
+              top:0;
+              z-index: -2;
+            }
 
 
             .ingredient{
@@ -196,51 +197,35 @@ export default {
               margin:auto auto 7px auto;
             }
 
-.ingredient-wrapper{ /*Denna styr horisontell scroll*/
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y:hidden;
-  border-radius: 15px;
-  /*display: grid;
-  grid-gap: 0px;
-  grid-template-columns: repeat(10,10%);
-  grid-template-areas: "title";
-  text-align: center;*/
-}
-    #bestallning{
-        text-align: center;
-    }
-    #avbryt{
-        align-items: flex-start;
-    }
-.category{ /*Denna styr en kategori-rad*/
-  position:relative;
-  display:grid;
-  text-align: center;
-  grid-template-columns: 10% 90%;
-  grid-template-rows: 12vh;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
-  margin: 0 0.5em 1em;
-}
+            .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+              display: flex;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              overflow-y:hidden;
+              border-radius: 15px;
+              /*display: grid;
+              grid-gap: 0px;
+              grid-template-columns: repeat(10,10%);
+              grid-template-areas: "title";
+              text-align: center;*/
+            }
 
 
-    button{
-        float:right;
-        background-color: #ddd;
-        border: none;
-        color: black;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 16px;
-    }
-    button:hover{
-        background-color: #000;
-        color: white;
-    }
-</style>
+            button{
+              float:right;
+              background-color: #ddd;
+              border: none;
+              color: black;
+              padding: 10px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 16px;
+            }
+            button:hover{
+              background-color: #000;
+              color: white;
+            }
+            </style>
