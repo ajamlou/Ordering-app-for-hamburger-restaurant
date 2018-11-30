@@ -31,9 +31,8 @@
     :categoryName="uiLabels[category.label]"
     :lang="lang"
     :threshold="category.threshold"
-    :itemCount="categoryItemCounter[category.categoryNr]"
-    @ModalInfo="switchVisibility"
-    @PopIngredient="removeFromOrder">
+    :itemCount="categoryItemCounter[category.categoryNr-1]"
+    @ModalInfo="switchVisibility">
   </CategoryRow>
 
   <h1>{{uiLabels.sidesAndDrinks}}</h1>
@@ -45,9 +44,8 @@
   :categoryName="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :itemCount="categoryItemCounter[category.categoryNr]"
-  @ModalInfo="switchVisibility"
-  @PopIngredient="removeFromOrder">
+  :itemCount="categoryItemCounter[category.categoryNr -1]"
+  @ModalInfo="switchVisibility">
 </CategoryRow>
 <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
@@ -85,7 +83,7 @@ export default {
     return {
       chosenIngredients: [],
       displayedIngredients: [],
-      categoryItemCounter: [0,0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
+      categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       price: 0,
       createBurgerButtonData: "no show",
       orderNumber: "",
@@ -135,22 +133,13 @@ export default {
                   this.createBurgerButtonData = "show";
                 },
                 addToOrder: function (item) {
-                  this.categoryItemCounter[item.category]+=1;
+                  this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
                   }
                   this.price += +item.selling_price;
                   this.isModalVisible = false;
-                },
-                removeFromOrder:function(item){
-                  this.categoryItemCounter[item.category]-=1;
-                  var i;
-                  for(i = 0; i < this.displayedIngredients.length; i++){
-                    if(this.displayedIngredients[i].ingredient_id === item.ingredient_id){
-                      this.displayedIngredients[i].pop();
-                    }
-                  }
                 },
                 placeOrder: function () {
                   var i,
@@ -162,12 +151,15 @@ export default {
                   // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
                   this.$store.state.socket.emit('order', {order: order});
                   //set all counters to 0. Notice the use of $refs
-                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i += 1) {
+                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
                     this.$refs.modal.$refs.ingredient[i].resetCounter();
                   }
                   this.price = 0;
                   this.chosenIngredients = [];
                   this.displayedIngredients = [];
+                  for(i=0; i < this.categoryItemCounter.length; i++){
+                  this.categoryItemCounter[i] = 0;
+                }
                 }
               }
             }
