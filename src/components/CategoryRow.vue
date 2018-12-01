@@ -63,6 +63,7 @@ export default {
   width:10%;
   min-width: 120px;
   text-align: center;
+  align-self: center;
 }
 .box-wrapper{
   text-align: left;
@@ -92,7 +93,7 @@ export default {
 }
 .ingredient{
   text-align:center;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .extras{
   background-color: rgba(255,165,0,0.5);

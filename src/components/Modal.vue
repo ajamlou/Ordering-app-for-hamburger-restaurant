@@ -95,7 +95,7 @@ export default {
     border: 1px solid #ccd;
     background-color: rgba(255, 255, 255, 0.5);
     font-size: 1.5em;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
     color: rgb(100,100,100);
     border-radius: 15px;
     width:32%;
