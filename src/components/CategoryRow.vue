@@ -3,21 +3,22 @@
   <div class="category"
   v-bind:class="{'extras':category >= 5}">
   <div class="cat-title">
-    <h2>{{ categoryName }}: </h2>
+    <h2>{{ category_name }}: </h2>
   </div>
     <div class="box-wrapper">
 
-      <Ingredient v-for="item in addedItems"
+      <Ingredient
+      v-for="(item, index) in added_items"
       v-if="item.category == category"
       :item="item"
       :lang="lang"
       :key="item.ingredient_id"
-      @click="$emit('popIngredient', item)">
+      @increment="IngredientClicked(item,index)">
     </Ingredient>
 
     <button @click="emitModalInfo"
     class="PlusButton"
-    v-show="threshold > itemCount">
+    v-show="threshold > item_count">
       <slot>+</slot>
     </button>
 
@@ -33,11 +34,11 @@ import Ingredient from '@/components/Ingredient.vue'
 export default {
   props: {
     category: Number,
-    categoryName: String,
-    addedItems: Array,
+    category_name: String,
+    added_items: Array,
     lang: String,
     threshold: Number,
-    itemCount: Number
+    item_count: Number
   },
   components:{
     Ingredient
@@ -46,11 +47,12 @@ export default {
     return {}
   },
   methods: {
-    emitModalInfo:function(){
-      this.$emit('ModalInfo', this.category)
+    IngredientClicked:function(item,index){
+      console.log("Jag är i ingredientClicked");
+      this.$emit('ingredient_clicked',item,index);
     },
-    countOrders: function(){
-
+    emitModalInfo:function(){
+      this.$emit('modal_info', this.category)
     },
   }
 }
