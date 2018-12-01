@@ -84,7 +84,9 @@ export default {
   data: function() { //Not that data is a function!
     return {
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
+      /*chosenIngredients är de ingredienser som skickas till köket*/
       chosenIngredients: [],
+      /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
       price: 0,
       createBurgerButtonData: "no show",
@@ -122,6 +124,7 @@ export default {
                 }.bind(this));
               },
               methods: {
+                /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 switchVisibility: function(category) {
                   if (this.isModalVisible === true){
                     this.isModalVisible = false;
@@ -168,7 +171,7 @@ export default {
                 deleteIngredient: function(item,index) {
                   let i;
                   if(item.category < 5){
-
+                    /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/
                     for(i=0; i<this.chosenIngredients.length;i++){
                       if(this.chosenIngredients[i].ingredient_id===item.ingredient_id){
                         this.chosenIngredients.splice(i,1);
@@ -176,6 +179,7 @@ export default {
                       }
                     }
                   }
+                  /*tar bort exakt den ingrediens som blivit klickad på*/
                   this.displayedIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
                 }

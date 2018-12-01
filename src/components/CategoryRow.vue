@@ -33,12 +33,12 @@ import Ingredient from '@/components/Ingredient.vue'
 
 export default {
   props: {
-    category: Number,
-    category_name: String,
-    added_items: Array,
-    lang: String,
-    threshold: Number,
-    item_count: Number
+    category: Number,/*Denna bestämmer vilken kategori som preresenteras*/
+    category_name: String,/*uiLabel för kategori-rubriken*/
+    added_items: Array,/*Array av redan valda ingredienser*/
+    lang: String,/*Bestämmer vilket språk ingredienserna displayas med*/
+    threshold: Number,/*Tröskelvärde för hur många ingredienser som får väljas innan plusknappen försvinner*/
+    item_count: Number/*Jämförs mot tröskelvärdet*/
   },
   components:{
     Ingredient
@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     IngredientClicked:function(item,index){
-      console.log("Jag är i ingredientClicked");
       this.$emit('ingredient_clicked',item,index);
     },
     emitModalInfo:function(){
