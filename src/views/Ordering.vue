@@ -52,7 +52,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+<button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -247,8 +247,19 @@ export default {
           }
           #avbryt{
             float: left;
-
           }
+          #order-btn{
+            margin-bottom: 20px;
+            padding:20px 30px 20px 30px;
+            font-size: 2em;
+            background-color: rgb(0, 150, 0);
+          }
+          #order-btn:hover{
+            color:black;
+            background-color: rgb(0, 200, 0);
+            padding:25px 35px 25px 35px;
+          }
+
           button{
             float:right;
             background-color: #ddd;
