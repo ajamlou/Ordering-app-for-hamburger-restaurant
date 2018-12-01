@@ -74,7 +74,7 @@ export default {
   position:relative;
   display:flex;
   flex-wrap: wrap;
-  background-color: rgba(0, 255, 0, 0.5);
+  background-color: rgba(0,165,0,0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
   overflow:hidden;
@@ -95,15 +95,29 @@ export default {
   word-wrap: break-word;
 }
 .extras{
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255,165,0,0.5);
 }
 
 .ingredient:hover{
-  background-color:rgba(255, 255, 255, 0.5);
-  color: rgb(100,100,100);
+  background-color:rgba(200, 0, 0,0.9);
+  color: rgb(255,255,255);
 }
 .PlusButton:hover{
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
+}
+@media screen and (max-width:835px){
+  .category{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cat-title{
+    width:100%;
+  }
+
+  .box-wrapper{
+    justify-content: space-around;
+  }
 }
 </style>

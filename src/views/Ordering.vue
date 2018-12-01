@@ -32,7 +32,7 @@
     :lang="lang"
     :threshold="category.threshold"
     :item_count="categoryItemCounter[category.categoryNr-1]"
-    @ingredient_clicked="deleteIngredient"
+    @ingredient_clicked="removeFromOrder"
     @modal_info="switchVisibility">
   </CategoryRow>
 
@@ -46,9 +46,12 @@
   :lang="lang"
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr -1]"
-  @ingredient_clicked="deleteIngredient"
+  @ingredient_clicked="removeFromOrder"
   @modal_info="switchVisibility">
 </CategoryRow>
+<div class="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
 <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -168,7 +171,7 @@ export default {
                     }
                   }
                 },
-                deleteIngredient: function(item,index) {
+                removeFromOrder: function(item,index) {
                   let i;
                   if(item.category < 5){
                     /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/
@@ -182,6 +185,7 @@ export default {
                   /*tar bort exakt den ingrediens som blivit klickad på*/
                   this.displayedIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
+                  this.price -= item.selling_price;
                 }
               }
             }
@@ -194,6 +198,12 @@ export default {
               margin-top:0px !important;
               padding-top:0px !important;
             }
+
+            .price-div{
+            text-align: center;
+            font-size: 2em;
+            }
+
             #ordering {
               margin:auto;
               width: 90%;
