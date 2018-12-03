@@ -13,7 +13,7 @@ var io = require('socket.io')(http);
 // Configure webpack as middleware
 const webpack = require("webpack");
 
-webpackConfig.entry.app.unshift('webpack-hot-middleware/client');
+// webpackConfig.entry.app.unshift('webpack-hot-middleware/client');
 const compiler = webpack(webpackConfig);
 const devMiddleware = require('webpack-dev-middleware'); // eslint-disable-line
 app.use(devMiddleware(compiler, {
@@ -23,10 +23,10 @@ app.use(devMiddleware(compiler, {
     stats: {colors: true}
 }));
 
-const hotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
-app.use(hotMiddleware(compiler, {
-    log: console.log
-}));
+// const hotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line
+// app.use(hotMiddleware(compiler, {
+//     log: console.log
+// }));
 
 // Read in the "class" to store all our data on the server side
 // If you need to change how data is handled, check the dataHandler.js file!
@@ -37,9 +37,15 @@ data.initializeData();
 
 io.on('connection', function (socket) {
   // Send list of orders and text labels when a client connects
-  socket.emit('initialize', { orders: data.getAllOrders(),
-                          uiLabels: data.getUILabels(),
-                          ingredients: data.getIngredients() });
+  // socket.emit('initialize', { orders: data.getAllOrders(),
+  //                         uiLabels: data.getUILabels(),
+  //                         ingredients: data.getIngredients() });
+  setTimeout(function() {
+      socket.emit('initialize',
+        { orders: data.getAllOrders(),
+          uiLabels: data.getUILabels(),
+          ingredients: data.getIngredients() });
+}, 200);
 
   // When someone orders something
   socket.on('order', function (order) {

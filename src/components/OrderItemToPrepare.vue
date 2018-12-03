@@ -1,6 +1,7 @@
 <template>
 <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
+      <h3>#{{orderId}}</h3>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
@@ -17,7 +18,6 @@
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
-        :order-id="orderId"
         :order="order">
       </OrderItem>
     </b-collapse>
@@ -62,7 +62,7 @@ export default {
 }
 
 #sendToPreparing {
-  background-color: #4dffa6;
+  background-color: #00cc66;
 }
 
 #collapsibleButton {
@@ -75,7 +75,7 @@ export default {
 #collapsibleButton:active {border: 2px solid #d9d9d9;}
 
 #cancelButton:hover {background-color: #b30000}
-#sendToPreparing:hover {background-color: #00cc66}
+#sendToPreparing:hover {background-color: #008040}
 #collapsibleButton:hover {background-color: #0040ff}
 
 </style>
