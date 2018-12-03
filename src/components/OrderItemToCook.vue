@@ -5,12 +5,12 @@
     <button id="orderCookedButton" v-on:click="orderCooked">
       {{uiLabels.ready}}
     </button>
-    <b-btn v-b-toggle.order-id variant = "primary">
+    <b-btn v-b-toggle='orderId'  visible id= "collapsibleButton">
       +
     </b-btn>
   </div>
     <div>
-    <b-collapse class="mt-2" visible id = "order-id">
+    <b-collapse class="mt-2"  :id="orderId">
       <OrderItem
       :ui-labels="uiLabels"
       :lang="lang"
@@ -49,7 +49,6 @@ export default {
   border-radius: 3em;
   color: white;
 }
-
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
 /* #maximizeButton:active {border: 2px solid #d9d9d9;} */
 

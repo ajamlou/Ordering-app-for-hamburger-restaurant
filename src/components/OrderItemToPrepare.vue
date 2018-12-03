@@ -2,7 +2,7 @@
 <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <div>
-      <b-btn v-b-toggle.order-id id="collapsibleButton">
+      <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
     </div>
@@ -13,7 +13,7 @@
       {{uiLabels.ready}}
     </button>
     <div>
-      <b-collapse class="mt-2"  id = "order-id">
+      <b-collapse class="mt-2"  :id = "orderId">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
@@ -70,12 +70,17 @@ export default {
   border-radius: 3em;
 }
 
-#cancelButton:active {border: 2px solid #d9d9d9;}
+#cancelButton,
+#sendToPreparing,
+#collapsibleButton
+:active {border: 2px solid #d9d9d9}
+
+/* #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
-#collapsibleButton:active {border: 2px solid #d9d9d9;}
+#collapsibleButton:active {border: 2px solid #d9d9d9;} */
 
 #cancelButton:hover {background-color: #b30000}
 #sendToPreparing:hover {background-color: #0040ff}
-#collapsibleButton:hover {border: 2px solid #00cc66;}
+#collapsibleButton:hover {border: 2px solid #00cc66}
 
 </style>
