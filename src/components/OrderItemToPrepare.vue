@@ -1,5 +1,5 @@
 <template>
-  <!-- Note in this component that it is using another component -->
+<!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <OrderItem
     :ui-labels="uiLabels"
@@ -58,7 +58,7 @@ export default {
 }
 
 #sendToPreparing {
-  background-color: #668cff;
+  background-color: #3366ff;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
