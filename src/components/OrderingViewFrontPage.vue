@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="frontPage">
     <div class = "createBurgerButtonClass">
       <button id = "createBurgerButton" @click = "emitSwitchVisibility">SKAPA DIN BURGARE</button>
     </div>
@@ -15,13 +15,15 @@ export default {
 
   methods: {
     emitSwitchVisibility: function() {
-      this.$emit('Visibility')
+      this.$emit('Visibility','designBurger')
     }
   }
 }
 </script>
 
 <style scoped>
+.frontPage{
+}
 #createBurgerButton, #favoritesButton{
   color: black;
   padding: 50px;
