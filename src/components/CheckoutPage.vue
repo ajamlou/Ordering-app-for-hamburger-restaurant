@@ -1,5 +1,7 @@
 <template>
   <div id="checkout-div">
+    <div class="checkout-title">
+      {{uiLabels.yourOrder}}
 
   </div>
 </template>
@@ -10,13 +12,16 @@ export default{
   components:{
 
   },
+  props:{
+    uiLabels:Object
+  }
   data: function(){
     return{
 
     }
   },
   methods:{
-    
+
   }
 }
 </script>

@@ -77,6 +77,7 @@ import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
+import CheckoutPage from '@/components/Checkout.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
