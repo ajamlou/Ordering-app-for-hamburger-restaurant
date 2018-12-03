@@ -25,14 +25,17 @@ export default {
   font-size: 3vh;
   border-radius: 10px;
   margin: 10% auto;
+  cursor: pointer;
 }
 
 #favoritesButton{
   background-color: firebrick;
 }
+#favoritesButton:hover {background-color:orange}
 
 #createBurgerButton {
   background-color: royalblue;
 }
+#createBurgerButton:hover {background-color:lightblue}
 
 </style>
