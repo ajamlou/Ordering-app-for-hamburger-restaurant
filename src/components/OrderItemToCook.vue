@@ -1,21 +1,24 @@
 <template>
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
-<div>
-  <OrderItem
-    :ui-labels="uiLabels"
-    :lang="lang"
-    :order-id="orderId"
-    :order="order">
-  </OrderItem>
-  <button id="orderCookedButton" v-on:click="orderCooked">
-    {{uiLabels.ready}}
-  </button>
-  <!-- <button id="maximizeButton" v-on:click="maximizeOrder">
-    {{uiLabels.maximize}}
-  </button> -->
-
-
-
+  <div>
+  <div>
+    <button id="orderCookedButton" v-on:click="orderCooked">
+      {{uiLabels.ready}}
+    </button>
+    <b-btn v-b-toggle.order-id variant = "primary">
+      +
+    </b-btn>
+  </div>
+    <div>
+    <b-collapse class="mt-2" visible id = "order-id">
+      <OrderItem
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :order-id="orderId"
+      :order="order">
+    </OrderItem>
+  </b-collapse>
+</div>
 </div>
 </template>
 <script>
@@ -46,13 +49,6 @@ export default {
   border-radius: 3em;
   color: white;
 }
-
-/* #maximizeButton {
-  background-color: #4dff4d;
-  border: 1px solid white;
-  border-radius: 3em;
-  color: black;
-} */
 
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
 /* #maximizeButton:active {border: 2px solid #d9d9d9;} */
