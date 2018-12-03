@@ -9,9 +9,8 @@
   </div>
 
   <div id="ordering" v-show = "createBurgerButtonData === 'show'">
-    <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
+    <button v-on:click="switchLang()">{{ uiLabels.language }}</button> <!--Byt språk-knappen-->
+    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button> <!--Avbryt köp-knappen -->
     <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
     <h2>{{ uiLabels.myBurger }} </h2>
     <modal ref="modal"
@@ -242,10 +241,10 @@ export default {
             text-align: center;*/
           }
 
-          #bestallning{
+          #bestallning{ /* Beställningsrubriken */
             text-align: center;
           }
-          #avbryt{
+          #avbryt{ /* Avbryt-knappen */
             float: left;
           }
           #order-btn{
