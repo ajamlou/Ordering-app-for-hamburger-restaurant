@@ -76,6 +76,7 @@
 <KitchenModal
 @switchVisibility = "toggleVisibility"
 :decideContent="decidedContent"
+:ingredients = "ingredients"
 v-show = "ModalVisibility === true">
 </KitchenModal>
 
