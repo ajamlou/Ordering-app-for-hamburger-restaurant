@@ -5,6 +5,7 @@ This skeleton code contains a back-end for your burger ordering system as well a
 ## Project setup
 ```
 npm install
+npm i bootstrap-vue
 ```
 
 ### Compiles and hot-reloads for development

@@ -76,6 +76,7 @@
 <KitchenModal
 @switchVisibility = "toggleVisibility"
 :decideContent="decidedContent"
+:ingredients = "ingredients"
 v-show = "ModalVisibility === true">
 </KitchenModal>
 
@@ -218,7 +219,7 @@ export default {
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  height: 15vh;
+  min-height: 15vh;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;

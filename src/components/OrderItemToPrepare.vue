@@ -2,18 +2,18 @@
 <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <div>
-      <button id="cancelButton" v-on:click="cancelOrder">
-        {{uiLabels.cancel}}
-      </button>
-      <button id="sendToPreparing" v-on:click="orderDone">
-        {{uiLabels.ready}}
-      </button>
-      <b-btn v-b-toggle.order-id variant = "primary">
-        Toggle Collapse
+      <b-btn v-b-toggle.order-id id="collapsibleButton">
+        +
       </b-btn>
     </div>
+    <button id="cancelButton" v-on:click="cancelOrder">
+      {{uiLabels.cancel}}
+    </button>
+    <button id="sendToPreparing" v-on:click="orderDone">
+      {{uiLabels.ready}}
+    </button>
     <div>
-      <b-collapse class="mt-2" visible :id = "order-id">
+      <b-collapse class="mt-2"  id = "order-id">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
@@ -51,30 +51,31 @@ export default {
 <style scoped>
 
 
-#cancelButton {
-  background-color: #ff3333;
+#cancelButton, #sendToPreparing {
   border: 1px solid white;
   border-radius: 3em;
   color: white;
 }
 
+#cancelButton {
+  background-color: #ff3333;
+}
 
 #sendToPreparing {
   background-color: #3366ff;
-  border: 1px solid white;
+}
+
+#collapsibleButton {
+  background-color: #4dffa6;
   border-radius: 3em;
-  color: white;
 }
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
+#collapsibleButton:active {border: 2px solid #d9d9d9;}
 
 #cancelButton:hover {background-color: #b30000}
 #sendToPreparing:hover {background-color: #0040ff}
-
-
-.btn-cancel {
-
-}
+#collapsibleButton:hover {border: 2px solid #00cc66;}
 
 </style>
