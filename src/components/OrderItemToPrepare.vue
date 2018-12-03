@@ -2,7 +2,7 @@
 <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <div>
-      <b-btn v-b-toggle.order-id id="primary">
+      <b-btn v-b-toggle.order-id id="collapsibleButton">
         +
       </b-btn>
     </div>
@@ -58,18 +58,24 @@ export default {
 }
 
 #cancelButton {
-    background-color: #ff3333;
+  background-color: #ff3333;
 }
 
 #sendToPreparing {
   background-color: #3366ff;
 }
 
+#collapsibleButton {
+  background-color: #4dffa6;
+  border-radius: 3em;
+}
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
+#collapsibleButton:active {border: 2px solid #d9d9d9;}
 
 #cancelButton:hover {background-color: #b30000}
 #sendToPreparing:hover {background-color: #0040ff}
+#collapsibleButton:hover {border: 2px solid #00cc66;}
 
 </style>
