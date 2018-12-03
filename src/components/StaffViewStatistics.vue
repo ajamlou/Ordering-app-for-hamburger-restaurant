@@ -1,15 +1,12 @@
 <template>
   <div>
     <div>
-    <b-btn @click="showCollapse = !showCollapse"
-           :class="showCollapse ? 'collapsed' : null"
-           aria-controls="collapse4"
-           :aria-expanded="showCollapse ? 'true' : 'false'">
+    <b-btn v-b-toggle.collapse1 variant = "primary">
       Toggle Collapse
     </b-btn>
-    <b-collapse class="mt-2" v-model="showCollapse" id="collapse4">
+    <b-collapse class="mt-2" v-model="showCollapse" id="collapse1">
       <b-card>
-        I should start open!
+        Hej Kevin
       </b-card>
     </b-collapse>
   </div>
@@ -20,8 +17,8 @@
 export default {
   name: 'StaffViewStatistics',
   data:function(){
-     // showCollapse:  true
-   },
+  return{showCollapse:  false};
+},
   methods: {
   }
 }
