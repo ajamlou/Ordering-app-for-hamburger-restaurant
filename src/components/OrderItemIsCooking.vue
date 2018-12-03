@@ -1,20 +1,20 @@
 <template>
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
   <div>
+    <h4>#{{orderId}}</h4>
   <div>
     <button id="orderCookedButton" v-on:click="orderCooked">
       {{uiLabels.ready}}
     </button>
-    <b-btn v-b-toggle='orderId'  visible id= "collapsibleButton">
+    <b-btn v-b-toggle='orderId' id= "collapsibleButton">
       +
     </b-btn>
   </div>
     <div>
-    <b-collapse class="mt-2"  :id="orderId">
+    <b-collapse class="collapsibleBtn" visible :id="orderId">
       <OrderItem
       :ui-labels="uiLabels"
       :lang="lang"
-      :order-id="orderId"
       :order="order">
     </OrderItem>
   </b-collapse>
@@ -58,6 +58,7 @@ export default {
 #collapsibleButton {
   background-color: #3366ff;
   border-radius: 3em;
+  margin: 1vh;
 }
 
 </style>

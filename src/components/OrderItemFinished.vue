@@ -1,6 +1,7 @@
 <template>
 <!-- Egen komponent för att kunna hantera det som sker i "Färdiga" enklare -->
   <div>
+      <h4>#{{orderId}}</h4>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
@@ -11,7 +12,6 @@
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
-        :order-id="orderId"
         :order="order">
       </OrderItem>
     </b-collapse>

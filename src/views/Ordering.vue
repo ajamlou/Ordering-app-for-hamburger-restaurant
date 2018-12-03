@@ -1,36 +1,36 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="welcome" v-show = "currentView === 'frontPage'">
+    <div id="welcome" v-if = "currentView === 'frontPage'">
       <OrderingViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
 
-  <div>
-    <FavoritesPage
-    v-if = "currentView === 'favoritesPage'">
-  </FavoritesPage>
-</div>
 
-<div id="ordering" v-if = "currentView === 'designPage'">
-  <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-  <button id= "avbryt"
-  @click= "goBack">
-  {{ uiLabels.back }}</button>
+  <div v-if = "currentView === 'favoritesPage'">
+<FavoritesPage>
+</FavoritesPage>
+  </div>
 
-  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
-  <h2>{{ uiLabels.myBurger }} </h2>
-  <modal ref="modal"
-  :category="this.modalCategory"
-  v-show="this.isModalVisible === true"
-  :ingredients="ingredients"
-  :lang="lang"
-  @addOrder="addToOrder"
-  @ModalInfo="switchVisibility">
-</modal>
+  <div id="ordering" v-if = "currentView === 'designPage'">
+    <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <button id= "avbryt"
+    @click= "goBack">
+    {{ uiLabels.back }}</button>
+
+    <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+    <h2>{{ uiLabels.myBurger }} </h2>
+    <modal ref="modal"
+    :category="this.modalCategory"
+    v-show="this.isModalVisible === true"
+    :ingredients="ingredients"
+    :lang="lang"
+    @addOrder="addToOrder"
+    @ModalInfo="switchVisibility">
+  </modal>
 
 <div id="categories-wrapper">
   <CategoryRow v-for="category in burgerCategories"
@@ -102,7 +102,7 @@ export default {
       chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
-      breadcrumbs:['frontPage'], /*Denna sparar i vilken ordning olika views har ändrats i*/
+      breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
       modalCategory:0,
@@ -151,9 +151,16 @@ export default {
                 },
 
                 changeView: function(view){
+                  this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
                   this.currentView = view;
-                  this.breadcrumbs.push(view);
                 },
+                /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
+                goBack: function(){
+                  if(this.breadcrumbs.length>0){
+                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                  this.breadcrumbs.pop();
+                }
+              },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
@@ -201,12 +208,7 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
-                goBack: function(){
-                  if(this.breadcrumbs.length>0){
-                    this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
-                    this.breadcrumbs.pop();
-                  }
-                }
+
               }
             }
             </script>
