@@ -50,7 +50,7 @@
       <h1>{{ uiLabels.ordersFinished }}</h1>
     </div>
     <div class="allOrders">
-      <OrderItem class="orderFinished"
+      <OrderItemFinished class="orderFinished"
       v-for="(order, key) in orders"
       v-if="order.status === 'started'"
       :order-id="key"
@@ -58,7 +58,7 @@
       :lang="lang"
       :ui-labels="uiLabels"
       :key="key">
-    </OrderItem>
+    </OrderItemFinished>
   </div>
 </div>
 
@@ -94,6 +94,7 @@ import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemToCook from '@/components/OrderItemToCook.vue'
+import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
 export default {
@@ -102,6 +103,7 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemToCook,
+    OrderItemFinished,
     StaffViewStorage,
     StaffViewStatistics,
     KitchenModal
@@ -168,12 +170,11 @@ export default {
   height: 10vh;
   line-height: 4vh;
   position: fixed;
-  font-size:16pt;
+  font-size: 4vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
   text-shadow: 2px 2px #696969;
   margin: auto;
-  font-size: 3vh;
 }
 
 #header1 {
@@ -219,7 +220,7 @@ export default {
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  height: 15vh;
+  min-height: 15vh;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;

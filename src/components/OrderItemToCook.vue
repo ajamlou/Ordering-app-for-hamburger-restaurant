@@ -1,21 +1,24 @@
 <template>
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
-<div>
-  <OrderItem
-    :ui-labels="uiLabels"
-    :lang="lang"
-    :order-id="orderId"
-    :order="order">
-  </OrderItem>
-  <button id="orderCookedButton" v-on:click="orderCooked">
-    {{uiLabels.ready}}
-  </button>
-  <!-- <button id="maximizeButton" v-on:click="maximizeOrder">
-    {{uiLabels.maximize}}
-  </button> -->
-
-
-
+  <div>
+  <div>
+    <button id="orderCookedButton" v-on:click="orderCooked">
+      {{uiLabels.ready}}
+    </button>
+    <b-btn v-b-toggle='orderId'  visible id= "collapsibleButton">
+      +
+    </b-btn>
+  </div>
+    <div>
+    <b-collapse class="mt-2"  :id="orderId">
+      <OrderItem
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :order-id="orderId"
+      :order="order">
+    </OrderItem>
+  </b-collapse>
+</div>
 </div>
 </template>
 <script>
@@ -41,22 +44,20 @@ export default {
 </script>
 <style scoped>
 #orderCookedButton {
-  background-color: #3366ff;
+  background-color: #4dffa6;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
 }
-
-/* #maximizeButton {
-  background-color: #4dff4d;
-  border: 1px solid white;
-  border-radius: 3em;
-  color: black;
-} */
-
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
-/* #maximizeButton:active {border: 2px solid #d9d9d9;} */
+#collapsibleButton:active {border: 2px solid #d9d9d9;}
 
-#orderCookedButton:hover {background-color: #0040ff}
+#orderCookedButton:hover {background-color: #00cc66}
+#collapsibleButton:hover {background-color: #0040ff}
+
+#collapsibleButton {
+  background-color: #3366ff;
+  border-radius: 3em;
+}
 
 </style>
