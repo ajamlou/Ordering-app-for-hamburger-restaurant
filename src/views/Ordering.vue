@@ -15,8 +15,8 @@
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt"
-    @click= "$router.go()">
-    {{ uiLabels.cancelOrder }}</button>
+    @click= "goBack">
+    {{ uiLabels.back }}</button>
 
     <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
     <h2>{{ uiLabels.myBurger }} </h2>
@@ -196,6 +196,12 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                goBack: function(){
+                  if(this.breadcrumbs.length>0){
+                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                  this.breadcrumbs.pop();
+                }
+                }
               }
             }
             </script>
