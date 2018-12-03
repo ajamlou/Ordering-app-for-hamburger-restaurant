@@ -144,9 +144,6 @@ export default {
         this.decidedContent = "statistics";
       }
     },
-    // backButton: function(){
-    //   this.kitchenButtonData = "no show";
-    // }
   }
 }
 </script>
