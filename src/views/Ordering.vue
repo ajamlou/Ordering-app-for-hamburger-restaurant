@@ -8,13 +8,13 @@
     </OrderingViewFrontPage>
   </div>
 
-
+  
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
-<FavoritesPage>
-</FavoritesPage>
+    <FavoritesPage>
+    </FavoritesPage>
   </div>
 
   <div id="ordering" v-if = "currentView === 'designPage'">
@@ -35,31 +35,31 @@
     @ModalInfo="switchVisibility">
   </modal>
 
-<div id="categories-wrapper">
-  <CategoryRow v-for="category in burgerCategories"
+  <div id="categories-wrapper">
+    <CategoryRow v-for="category in burgerCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :added_items="displayedIngredients"
+    :category_name="uiLabels[category.label]"
+    :lang="lang"
+    :threshold="category.threshold"
+    :item_count="categoryItemCounter[category.categoryNr-1]"
+    @ingredient_clicked="removeFromOrder"
+    @modal_info="switchVisibility">
+  </CategoryRow>
+
+  <h1>{{uiLabels.sidesAndDrinks}}</h1>
+
+  <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="displayedIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr-1]"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
   @ingredient_clicked="removeFromOrder"
   @modal_info="switchVisibility">
-</CategoryRow>
-
-<h1>{{uiLabels.sidesAndDrinks}}</h1>
-
-<CategoryRow v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="displayedIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@ingredient_clicked="removeFromOrder"
-@modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
@@ -160,10 +160,10 @@ export default {
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
                   if(this.breadcrumbs.length>0){
-                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
-                  this.breadcrumbs.pop();
-                }
-              },
+                    this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                    this.breadcrumbs.pop();
+                  }
+                },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
