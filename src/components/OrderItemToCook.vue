@@ -1,5 +1,5 @@
 <template>
-  <!-- Note in this component that it is using another component -->
+  <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
 <div>
   <OrderItem
     :ui-labels="uiLabels"
@@ -41,7 +41,7 @@ export default {
 </script>
 <style scoped>
 #orderCookedButton {
-  background-color: #7d90b5;
+  background-color: #3366ff;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -57,5 +57,6 @@ export default {
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
 /* #maximizeButton:active {border: 2px solid #d9d9d9;} */
 
+#orderCookedButton:hover {background-color: #0040ff}
 
 </style>

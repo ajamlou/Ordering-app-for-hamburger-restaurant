@@ -5,6 +5,7 @@
     <div id="kitchen-grid">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
+<!-- Här skapas beställningarna i "Inkomna". -->
       <div id="orders">
         <div id="header1">
           <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -24,6 +25,7 @@
       </div>
     </div>
 
+<!-- Här skapas beställningarna i "Tillagas". -->
     <div id="preparing">
       <div id="header2">
         <h1>{{ uiLabels.ordersPreparing }}</h1>
@@ -42,6 +44,7 @@
     </div>
   </div>
 
+<!-- Här skapas beställningarna i "Färdiga". -->
   <div id="finished">
     <div id="header3">
       <h1>{{ uiLabels.ordersFinished }}</h1>
@@ -69,7 +72,7 @@
   <button  id = "selectButton">MARKERA</button>
 </div>
 
-
+<!-- Om modalen för statisitk- och lagerknappen ska visas eller ej-->
 <KitchenModal
 @switchVisibility = "toggleVisibility"
 :decideContent="decidedContent"
@@ -193,6 +196,12 @@ export default {
 
 #preparing {
   width: 50vw;
+  margin-right: 0;
+  padding-right: 0;
+}
+#finished {
+  margin-left: 0;
+  padding-left: 0;
 }
 #orders, #finished {
   width: 25vw;
