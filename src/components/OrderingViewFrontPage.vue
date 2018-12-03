@@ -1,10 +1,10 @@
 <template>
   <div class="frontPage">
     <div class = "createBurgerButtonClass">
-      <button id = "createBurgerButton" @click = "emitSwitchVisibility">SKAPA DIN BURGARE</button>
+      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA DIN BURGARE</button>
     </div>
     <div class = "favoritesButtonClass">
-      <button  id = "favoritesButton">VÄLJ BLAND VÅRA FAVORITER</button>
+      <button  id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ BLAND VÅRA FAVORITER</button>
     </div>
   </div>
 </template>
@@ -12,10 +12,9 @@
 <script>
 export default {
   name: 'OrderingViewFrontPage',
-
   methods: {
-    emitSwitchVisibility: function() {
-      this.$emit('Visibility','designBurger')
+    emitSwitchVisibility: function(view) {
+      this.$emit('Visibility',view)
     }
   }
 }

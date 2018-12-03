@@ -3,15 +3,18 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="welcome" v-show = "currentView === 'frontPage'">
       <OrderingViewFrontPage
-      @Visibility="changeView">
+      @Visibility="changeView"
+      v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
 
-  <div class ="Checkout"
-  v-show = "currentView === 'checkout'">
+  <div>
+<FavoritesPage
+v-if = "currentView === 'favoritesPage'">
+</FavoritesPage>
   </div>
 
-  <div id="ordering" v-show = "currentView === 'designBurger'">
+  <div id="ordering" v-if = "currentView === 'designBurger'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt"
@@ -74,7 +77,7 @@ import OrderItem from '@/components/OrderItem.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
-
+import FavoritesPage from '@/components/FavoritesPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -87,7 +90,8 @@ export default {
     OrderItem,
     CategoryRow,
     Modal,
-    OrderingViewFrontPage
+    OrderingViewFrontPage,
+    FavoritesPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -145,6 +149,7 @@ export default {
                     this.isModalVisible = true;
                   }
                 },
+
                 changeView: function(view){
                   this.currentView = view;
                   this.breadcrumbs.push(view);
@@ -216,8 +221,8 @@ export default {
             }
 
             .price-div{
-            text-align: center;
-            font-size: 2em;
+              text-align: center;
+              font-size: 2em;
             }
 
             #ordering {
