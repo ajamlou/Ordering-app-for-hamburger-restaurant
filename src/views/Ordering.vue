@@ -246,10 +246,10 @@ export default {
             text-align: center;*/
           }
 
-          #bestallning{
+          #bestallning{ /* Beställningsrubriken */
             text-align: center;
           }
-          #avbryt{
+          #avbryt{ /* Avbryt-knappen */
             float: left;
           }
           #order-btn{

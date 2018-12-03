@@ -1,22 +1,27 @@
 <template>
-  <!-- Note in this component that it is using another component -->
+<!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
-    <OrderItem
-    :ui-labels="uiLabels"
-    :lang="lang"
-    :order-id="orderId"
-    :order="order">
-  </OrderItem>
-  <button id="cancelButton" v-on:click="cancelOrder">
-      {{uiLabels.cancel}}
-    </button>
-    <button id="sendToPreparing" v-on:click="orderDone">
-      {{uiLabels.ready}}
-    </button>
-    <!-- <button id="maximizeButton" v-on:click="maximizeOrder">
-      {{uiLabels.maximize}}
-    </button> -->
-
+    <div>
+      <button id="cancelButton" v-on:click="cancelOrder">
+        {{uiLabels.cancel}}
+      </button>
+      <button id="sendToPreparing" v-on:click="orderDone">
+        {{uiLabels.ready}}
+      </button>
+      <b-btn v-b-toggle.order-id variant = "primary">
+        Toggle Collapse
+      </b-btn>
+    </div>
+    <div>
+      <b-collapse class="mt-2" visible :id = "order-id">
+        <OrderItem
+        :ui-labels="uiLabels"
+        :lang="lang"
+        :order-id="orderId"
+        :order="order">
+      </OrderItem>
+    </b-collapse>
+  </div>
 </div>
 </template>
 <script>
@@ -53,12 +58,9 @@ export default {
   color: white;
 }
 
-#maximizeButton {
-
-}
 
 #sendToPreparing {
-  background-color: #7d90b5;
+  background-color: #3366ff;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -66,6 +68,9 @@ export default {
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
+
+#cancelButton:hover {background-color: #b30000}
+#sendToPreparing:hover {background-color: #0040ff}
 
 
 .btn-cancel {
