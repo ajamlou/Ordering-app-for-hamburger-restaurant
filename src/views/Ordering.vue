@@ -10,6 +10,9 @@
 
 
   <div v-if = "currentView === 'favoritesPage'">
+    <button class = "avbryt"
+    @click= "goBack">
+    {{ uiLabels.back }}</button>
 <FavoritesPage>
 </FavoritesPage>
   </div>
@@ -17,7 +20,7 @@
   <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    <button id= "avbryt"
+    <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
 
@@ -268,7 +271,7 @@ export default {
           #bestallning{ /* Beställningsrubriken */
             text-align: center;
           }
-          #avbryt{ /* Avbryt-knappen */
+          .avbryt{ /* Avbryt-knappen */
             float: left;
           }
           #order-btn{
