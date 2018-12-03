@@ -7,10 +7,19 @@
   </div>
 
   <div class="modal-body">
-    <slot name="body">
-      {{ ingredients }}
-    </slot>
+    <div v-for="ingredient in ingredients"
+    class="ing-container">
+      <div>
+        {{ingredient.ingredient_sv}}
+      </div>
+      <div>
+        {{ingredient.selling_price}}
+      </div>
+      <div>
+        {{ingredient.stock}}
+      </div>
   </div>
+</div>
 
   <div class="modal-footer">
     <slot name="footer">
@@ -38,5 +47,10 @@ export default {
 </script>
 
 <style scoped>
+.ing-container{
+  display:grid;
+  grid-template-columns: 30% 30% 30%;
+  text-align: center;
+}
 
 </style>
