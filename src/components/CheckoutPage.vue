@@ -1,20 +1,21 @@
 <template>
   <div id="checkout-div">
-    <div class="checkout-title">
+    <div id="checkout-title">
       {{uiLabels.yourOrder}}
+    </div>
 
   </div>
 </template>
 
 <script>
 export default{
-  name:'Checkout',
+  name:'CheckoutPage',
   components:{
 
   },
   props:{
     uiLabels:Object
-  }
+  },
   data: function(){
     return{
 
