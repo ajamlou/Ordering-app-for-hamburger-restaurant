@@ -14,7 +14,7 @@ v-if = "currentView === 'favoritesPage'">
 </FavoritesPage>
   </div>
 
-  <div id="ordering" v-if = "currentView === 'designBurger'">
+  <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt"
@@ -102,7 +102,7 @@ export default {
       chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
-      breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
+      breadcrumbs:['frontPage'], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
       modalCategory:0,
