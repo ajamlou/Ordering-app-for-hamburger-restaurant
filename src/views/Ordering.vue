@@ -1,16 +1,15 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="welcome" v-show = "currentView === 'frontPage'">
+    <div id="welcome" v-if = "currentView === 'frontPage'">
       <OrderingViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
 
-  <div>
-<FavoritesPage
-v-if = "currentView === 'favoritesPage'">
+  <div v-if = "currentView === 'favoritesPage'">
+<FavoritesPage>
 </FavoritesPage>
   </div>
 
@@ -102,7 +101,7 @@ export default {
       chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
-      breadcrumbs:['frontPage'], /*Denna sparar i vilken ordning olika views har ändrats i*/
+      breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
       modalCategory:0,
@@ -151,9 +150,16 @@ export default {
                 },
 
                 changeView: function(view){
+                  this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
                   this.currentView = view;
-                  this.breadcrumbs.push(view);
                 },
+                /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
+                goBack: function(){
+                  if(this.breadcrumbs.length>0){
+                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                  this.breadcrumbs.pop();
+                }
+              },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
@@ -201,12 +207,6 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
-                goBack: function(){
-                  if(this.breadcrumbs.length>0){
-                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
-                  this.breadcrumbs.pop();
-                }
-                }
               }
             }
             </script>
