@@ -3,12 +3,12 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="welcome">
       <OrderingViewFrontPage
-      @Visibility="createBurgerButton"
-      v-if = "createBurgerButtonData === 'no show'">
+      @Visibility="changeView"
+      v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
 
-  <div id="ordering" v-if = "createBurgerButtonData === 'show'">
+  <div id="ordering" v-if = "currentView === 'designBurger'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
@@ -52,6 +52,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
+<button id="next-btn" @click="goToCheckout">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -92,10 +93,10 @@ export default {
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
       price: 0,
-      createBurgerButtonData: "no show",
       orderNumber: "",
       modalCategory:0,
       isModalVisible: false,
+      currentView: "frontPage",
       burgerCategories:[
         {categoryNr: 4,
           label:"bread",
@@ -137,8 +138,8 @@ export default {
                     this.isModalVisible = true;
                   }
                 },
-                createBurgerButton: function(){
-                  this.createBurgerButtonData = "show";
+                changeView: function(){
+                  this.currentView = "designBurger";
                 },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
@@ -186,6 +187,9 @@ export default {
                   this.displayedIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
+                },
+                goToCheckout: function(){
+
                 }
               }
             }
