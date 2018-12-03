@@ -11,7 +11,7 @@
     </b-btn>
   </div>
     <div>
-    <b-collapse class="mt-2" visible :id="orderId">
+    <b-collapse class="collapsibleBtn" visible :id="orderId">
       <OrderItem
       :ui-labels="uiLabels"
       :lang="lang"
@@ -59,7 +59,6 @@ export default {
   background-color: #3366ff;
   border-radius: 3em;
   margin: 1vh;
-  position: relative;
 }
 
 </style>

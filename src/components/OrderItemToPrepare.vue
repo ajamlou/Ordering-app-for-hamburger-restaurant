@@ -1,5 +1,5 @@
 <template>
-<!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
+  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
       <h4>#{{orderId}}</h4>
     <div>
@@ -14,7 +14,7 @@
       {{uiLabels.ready}}
     </button>
     <div>
-      <b-collapse class="mt-2" visible :id = "orderId">
+      <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
@@ -63,7 +63,7 @@ export default {
 }
 
 #sendToPreparing {
-  background-color: #00cc66;
+  background-color: #4dffa6;
 }
 
 #collapsibleButton {
@@ -77,7 +77,7 @@ export default {
 #collapsibleButton:active {border: 2px solid #d9d9d9;}
 
 #cancelButton:hover {background-color: #b30000}
-#sendToPreparing:hover {background-color: #008040}
+#sendToPreparing:hover {background-color: #00cc66}
 #collapsibleButton:hover {background-color: #0040ff}
 
 </style>

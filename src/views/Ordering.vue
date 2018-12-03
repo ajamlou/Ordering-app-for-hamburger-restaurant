@@ -37,31 +37,31 @@
     @ModalInfo="switchVisibility">
   </modal>
 
-  <div id="categories-wrapper">
-    <CategoryRow v-for="category in burgerCategories"
-    :key="category.categoryNr"
-    :category="category.categoryNr"
-    :added_items="displayedIngredients"
-    :category_name="uiLabels[category.label]"
-    :lang="lang"
-    :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr-1]"
-    @ingredient_clicked="removeFromOrder"
-    @modal_info="switchVisibility">
-  </CategoryRow>
-
-  <h1>{{uiLabels.sidesAndDrinks}}</h1>
-
-  <CategoryRow v-for="category in extrasCategories"
+<div id="categories-wrapper">
+  <CategoryRow v-for="category in burgerCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="displayedIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
+  :item_count="categoryItemCounter[category.categoryNr-1]"
   @ingredient_clicked="removeFromOrder"
   @modal_info="switchVisibility">
+</CategoryRow>
+
+<h1>{{uiLabels.sidesAndDrinks}}</h1>
+
+<CategoryRow v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="displayedIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@ingredient_clicked="removeFromOrder"
+@modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
@@ -215,6 +215,7 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+
               }
             }
             </script>

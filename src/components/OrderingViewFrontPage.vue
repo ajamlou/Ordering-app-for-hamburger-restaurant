@@ -1,11 +1,7 @@
 <template>
-  <div class="frontPage">
-    <div class = "createBurgerButtonClass">
+  <div>
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA DIN BURGARE</button>
-    </div>
-    <div class = "favoritesButtonClass">
-      <button  id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ BLAND VÅRA FAVORITER</button>
-    </div>
+      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ BLAND VÅRA FAVORITER</button>
   </div>
 </template>
 
@@ -21,8 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.frontPage{
-}
+
 #createBurgerButton, #favoritesButton{
   color: black;
   padding: 50px;
@@ -30,14 +25,17 @@ export default {
   font-size: 3vh;
   border-radius: 10px;
   margin: 10% auto;
+  cursor: pointer;
 }
 
 #favoritesButton{
   background-color: firebrick;
 }
+#favoritesButton:hover {background-color:orange}
 
 #createBurgerButton {
   background-color: royalblue;
 }
+#createBurgerButton:hover {background-color:lightblue}
 
 </style>

@@ -99,6 +99,7 @@ import sharedVueStuff from '@/components/sharedVueStuff.js'
 
 export default {
   name: 'Ordering',
+  // selectAll: false,
   components: {
     OrderItem,
     OrderItemToPrepare,
@@ -144,6 +145,14 @@ export default {
         this.decidedContent = "statistics";
       }
     },
+    // select() {
+		// 	this.selected = [];
+		// 	if (!this.selectAll) {
+		// 		for (let i in this.items) {
+		// 			this.selected.push(this.items[i].id);
+		// 		}
+		// 	}
+		// }
   }
 }
 </script>
@@ -157,6 +166,7 @@ export default {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   height: 99vh;
+  text-transform: uppercase;
 }
 
 .allOrders {
@@ -165,14 +175,11 @@ export default {
 
 #header1, #header2, #header3 {
   height: 10vh;
-  line-height: 4vh;
   position: fixed;
-  font-size: 4vh;
+  font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
-  border-left: 3px solid white;
-  border-right: 3px solid white;
-  text-shadow: 2px 2px #696969;
+  text-shadow: 2px 2px #737373;
   margin: auto;
 }
 
@@ -183,6 +190,8 @@ export default {
 #header2 {
   background: #FFA500;
   width: 50vw;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
 }
 #header3 {
   background: #00FF7F;
