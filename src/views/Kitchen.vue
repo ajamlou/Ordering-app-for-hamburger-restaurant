@@ -170,6 +170,8 @@ export default {
   font-size: 4vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
   text-shadow: 2px 2px #696969;
   margin: auto;
 }

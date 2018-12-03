@@ -1,7 +1,7 @@
 <template>
 <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
-      <h3>#{{orderId}}</h3>
+      <h4>#{{orderId}}</h4>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
@@ -55,6 +55,7 @@ export default {
   border: 1px solid white;
   border-radius: 3em;
   color: white;
+  margin: 0.5vh;
 }
 
 #cancelButton {
@@ -68,6 +69,7 @@ export default {
 #collapsibleButton {
   background-color: #3366ff;
   border-radius: 3em;
+  margin: 0.5vh;
 }
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
