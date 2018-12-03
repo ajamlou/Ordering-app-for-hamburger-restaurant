@@ -8,21 +8,19 @@
     </OrderingViewFrontPage>
   </div>
 
-  <div id="favouritePage" v-if = "currentView === 'favoritesPage'">
-<FavoritesPage>
-</FavoritesPage>
-  </div>
-
-  <div id="checkoutPage" v-if = "currentView === 'checkoutPage'">
-    <CheckoutPage
-    :uiLabels="uiLabels">
-    </checkoutPage>
+  
+  <div v-if = "currentView === 'favoritesPage'">
+    <button class = "avbryt"
+    @click= "goBack">
+    {{ uiLabels.back }}</button>
+    <FavoritesPage>
+    </FavoritesPage>
   </div>
 
   <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-    <button @click="switchLang()">{{ uiLabels.language }}</button>
-    <button id= "avbryt"
+    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
 
@@ -37,36 +35,36 @@
     @ModalInfo="switchVisibility">
   </modal>
 
-<div id="categories-wrapper">
-  <CategoryRow v-for="category in burgerCategories"
+  <div id="categories-wrapper">
+    <CategoryRow v-for="category in burgerCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :added_items="displayedIngredients"
+    :category_name="uiLabels[category.label]"
+    :lang="lang"
+    :threshold="category.threshold"
+    :item_count="categoryItemCounter[category.categoryNr-1]"
+    @ingredient_clicked="removeFromOrder"
+    @modal_info="switchVisibility">
+  </CategoryRow>
+
+  <h1>{{uiLabels.sidesAndDrinks}}</h1>
+
+  <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="displayedIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr-1]"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
   @ingredient_clicked="removeFromOrder"
   @modal_info="switchVisibility">
-</CategoryRow>
-
-<h1>{{uiLabels.sidesAndDrinks}}</h1>
-
-<CategoryRow v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="displayedIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@ingredient_clicked="removeFromOrder"
-@modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="changeView('checkoutPage')">Nästa</button>
+<button id="next-btn" @click="changeView('checkout')">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -83,7 +81,6 @@ import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
-import CheckoutPage from '@/components/CheckoutPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -97,8 +94,7 @@ export default {
     CategoryRow,
     Modal,
     OrderingViewFrontPage,
-    FavoritesPage,
-    CheckoutPage
+    FavoritesPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -164,10 +160,10 @@ export default {
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
                   if(this.breadcrumbs.length>0){
-                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
-                  this.breadcrumbs.pop();
-                }
-              },
+                    this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                    this.breadcrumbs.pop();
+                  }
+                },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
@@ -275,7 +271,7 @@ export default {
           #bestallning{ /* Beställningsrubriken */
             text-align: center;
           }
-          #avbryt{ /* Avbryt-knappen */
+          .avbryt{ /* Avbryt-knappen */
             float: left;
           }
           #order-btn{
