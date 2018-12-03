@@ -95,10 +95,11 @@ export default {
     border: 1px solid #ccd;
     background-color: rgba(255, 255, 255, 0.5);
     font-size: 1.5em;
+    overflow-wrap: break-word;
     color: rgb(100,100,100);
     border-radius: 15px;
     width:32%;
-    height:3.2em;
+    height:4em;
     text-align: center;
     margin:5px auto 3px auto;
     cursor:pointer;

@@ -3,21 +3,22 @@
   <div class="category"
   v-bind:class="{'extras':category >= 5}">
   <div class="cat-title">
-    <h2>{{ categoryName }}: </h2>
+    <h2>{{ category_name }}: </h2>
   </div>
     <div class="box-wrapper">
 
-      <Ingredient v-for="item in addedItems"
+      <Ingredient
+      v-for="(item, index) in added_items"
       v-if="item.category == category"
       :item="item"
       :lang="lang"
       :key="item.ingredient_id"
-      @click="$emit('popIngredient', item)">
+      @increment="IngredientClicked(item,index)">
     </Ingredient>
 
     <button @click="emitModalInfo"
     class="PlusButton"
-    v-show="threshold > itemCount">
+    v-show="threshold > item_count">
       <slot>+</slot>
     </button>
 
@@ -32,12 +33,12 @@ import Ingredient from '@/components/Ingredient.vue'
 
 export default {
   props: {
-    category: Number,
-    categoryName: String,
-    addedItems: Array,
-    lang: String,
-    threshold: Number,
-    itemCount: Number
+    category: Number,/*Denna bestämmer vilken kategori som preresenteras*/
+    category_name: String,/*uiLabel för kategori-rubriken*/
+    added_items: Array,/*Array av redan valda ingredienser*/
+    lang: String,/*Bestämmer vilket språk ingredienserna displayas med*/
+    threshold: Number,/*Tröskelvärde för hur många ingredienser som får väljas innan plusknappen försvinner*/
+    item_count: Number/*Jämförs mot tröskelvärdet*/
   },
   components:{
     Ingredient
@@ -46,11 +47,11 @@ export default {
     return {}
   },
   methods: {
-    emitModalInfo:function(){
-      this.$emit('ModalInfo', this.category)
+    IngredientClicked:function(item,index){
+      this.$emit('ingredient_clicked',item,index);
     },
-    countOrders: function(){
-
+    emitModalInfo:function(){
+      this.$emit('modal_info', this.category)
     },
   }
 }
@@ -62,6 +63,7 @@ export default {
   width:10%;
   min-width: 120px;
   text-align: center;
+  align-self: center;
 }
 .box-wrapper{
   text-align: left;
@@ -73,7 +75,7 @@ export default {
   position:relative;
   display:flex;
   flex-wrap: wrap;
-  background-color: rgba(0, 255, 0, 0.5);
+  background-color: rgba(0,165,0,0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
   overflow:hidden;
@@ -91,18 +93,32 @@ export default {
 }
 .ingredient{
   text-align:center;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .extras{
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255,165,0,0.5);
 }
 
 .ingredient:hover{
-  background-color:rgba(255, 255, 255, 0.5);
-  color: rgb(100,100,100);
+  background-color:rgba(200, 0, 0,0.9);
+  color: rgb(255,255,255);
 }
 .PlusButton:hover{
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
+}
+@media screen and (max-width:835px){
+  .category{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cat-title{
+    width:100%;
+  }
+
+  .box-wrapper{
+    justify-content: space-around;
+  }
 }
 </style>

@@ -27,12 +27,13 @@
     <CategoryRow v-for="category in burgerCategories"
     :key="category.categoryNr"
     :category="category.categoryNr"
-    :addedItems="displayedIngredients"
-    :categoryName="uiLabels[category.label]"
+    :added_items="displayedIngredients"
+    :category_name="uiLabels[category.label]"
     :lang="lang"
     :threshold="category.threshold"
-    :itemCount="categoryItemCounter[category.categoryNr-1]"
-    @ModalInfo="switchVisibility">
+    :item_count="categoryItemCounter[category.categoryNr-1]"
+    @ingredient_clicked="removeFromOrder"
+    @modal_info="switchVisibility">
   </CategoryRow>
 
   <h1>{{uiLabels.sidesAndDrinks}}</h1>
@@ -40,14 +41,18 @@
   <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
-  :addedItems="displayedIngredients"
-  :categoryName="uiLabels[category.label]"
+  :added_items="displayedIngredients"
+  :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :itemCount="categoryItemCounter[category.categoryNr -1]"
-  @ModalInfo="switchVisibility">
+  :item_count="categoryItemCounter[category.categoryNr -1]"
+  @ingredient_clicked="removeFromOrder"
+  @modal_info="switchVisibility">
 </CategoryRow>
-<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+<div class="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
+<button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -82,7 +87,9 @@ export default {
   data: function() { //Not that data is a function!
     return {
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
+      /*chosenIngredients är de ingredienser som skickas till köket*/
       chosenIngredients: [],
+      /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
       price: 0,
       createBurgerButtonData: "no show",
@@ -92,25 +99,25 @@ export default {
       burgerCategories:[
         {categoryNr: 4,
           label:"bread",
-        threshold:1},
+          threshold:1},
           {categoryNr: 1,
             label:"patty",
-          threshold:5},
+            threshold:5},
             {categoryNr: 2,
               label: "garnish",
-            threshold: 5},
+              threshold: 5},
               {categoryNr: 3,
                 label:"sauce",
-              threshold:5}
+                threshold:5}
               ],
               extrasCategories:[
                 {categoryNr: 5,
                   label:"sides",
-                threshold:5},
+                  threshold:5},
                   {categoryNr: 6,
                     label:"drinks",
-                  threshold:5},
-                ],
+                    threshold:5},
+                  ],
 
                 }
               },
@@ -120,6 +127,7 @@ export default {
                 }.bind(this));
               },
               methods: {
+                /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 switchVisibility: function(category) {
                   if (this.isModalVisible === true){
                     this.isModalVisible = false;
@@ -143,25 +151,41 @@ export default {
                 },
                 placeOrder: function () {
                   if(this.chosenIngredients.length>0){
-                  var i,
-                  //Wrap the order in an object
-                  order = {
-                    ingredients: this.chosenIngredients,
-                    price: this.price
-                  };
-                  // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-                  this.$store.state.socket.emit('order', {order: order});
-                  //set all counters to 0. Notice the use of $refs
-                  for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-                    this.$refs.modal.$refs.ingredient[i].resetCounter();
+                    var i,
+                    //Wrap the order in an object
+                    order = {
+                      ingredients: this.chosenIngredients,
+                      price: this.price
+                    };
+                    // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+                    this.$store.state.socket.emit('order', {order: order});
+                    //set all counters to 0. Notice the use of $refs
+                    for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
+                      this.$refs.modal.$refs.ingredient[i].resetCounter();
+                    }
+                    this.price = 0;
+                    this.chosenIngredients = [];
+                    this.displayedIngredients = [];
+                    for(i=0; i < this.categoryItemCounter.length; i++){
+                      this.categoryItemCounter[i] = 0;
+                    }
                   }
-                  this.price = 0;
-                  this.chosenIngredients = [];
-                  this.displayedIngredients = [];
-                  for(i=0; i < this.categoryItemCounter.length; i++){
-                  this.categoryItemCounter[i] = 0;
-                }
-                }
+                },
+                removeFromOrder: function(item,index) {
+                  let i;
+                  if(item.category < 5){
+                    /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/
+                    for(i=0; i<this.chosenIngredients.length;i++){
+                      if(this.chosenIngredients[i].ingredient_id===item.ingredient_id){
+                        this.chosenIngredients.splice(i,1);
+                        break;
+                      }
+                    }
+                  }
+                  /*tar bort exakt den ingrediens som blivit klickad på*/
+                  this.displayedIngredients.splice(index,1);
+                  this.categoryItemCounter[item.category-1]-=1;
+                  this.price -= item.selling_price;
                 }
               }
             }
@@ -174,66 +198,83 @@ export default {
               margin-top:0px !important;
               padding-top:0px !important;
             }
+
+            .price-div{
+            text-align: center;
+            font-size: 2em;
+            }
+
             #ordering {
               margin:auto;
               width: 90%;
             }
-/*
+            /*
             .example-panel {
-              position: fixed;
-              left:0;
-              top:0;
-              z-index: -2;
-            }
-*/
+            position: fixed;
+            left:0;
+            top:0;
+            z-index: -2;
+          }
+          */
 
-            .ingredient{
-              border: 1px solid #ccd;
-              background-color: rgba(255, 255, 255, 0.5);
-              font-size: 2em;
-              color: rgb(100,100,100);
-              border-radius: 15px;
-              width:33%;
-              height:3em;
-              text-align: center;
-              margin:auto auto 7px auto;
-            }
+          .ingredient{
+            border: 1px solid #ccd;
+            background-color: rgba(255, 255, 255, 0.5);
+            font-size: 2em;
+            color: rgb(100,100,100);
+            border-radius: 15px;
+            width:33%;
+            height:3em;
+            text-align: center;
+            margin:auto auto 7px auto;
+          }
 
-            .ingredient-wrapper{ /*Denna styr horisontell scroll*/
-              display: flex;
-              flex-wrap: nowrap;
-              overflow-x: auto;
-              overflow-y:hidden;
-              border-radius: 15px;
-              /*display: grid;
-              grid-gap: 0px;
-              grid-template-columns: repeat(10,10%);
-              grid-template-areas: "title";
-              text-align: center;*/
-            }
+          .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y:hidden;
+            border-radius: 15px;
+            /*display: grid;
+            grid-gap: 0px;
+            grid-template-columns: repeat(10,10%);
+            grid-template-areas: "title";
+            text-align: center;*/
+          }
 
-            #bestallning{
-                text-align: center;
-            }
-            #avbryt{
-                float: left;
+          #bestallning{
+            text-align: center;
+          }
+          #avbryt{
+            float: left;
+          }
+          #order-btn{
+            margin-bottom: 20px;
+            padding:20px 30px 20px 30px;
+            font-size: 2em;
+            background-color: rgb(0, 150, 0);
+          }
+          #order-btn:hover{
+            color:black;
+            background-color: rgb(0, 200, 0);
+            padding:25px 35px 25px 35px;
+          }
 
-            }
-            button{
-              float:right;
-              background-color: #ddd;
-              border: none;
-              color: black;
-              padding: 10px 20px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              margin: 4px 2px;
-              cursor: pointer;
-              border-radius: 16px;
-            }
-            button:hover{
-              background-color: #000;
-              color: white;
-            }
-            </style>
+          button{
+            float:right;
+            background-color: #ddd;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 16px;
+          }
+          button:hover{
+            background-color: #000;
+            color: white;
+          }
+          </style>
