@@ -15,7 +15,7 @@
 
   <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <button @click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
