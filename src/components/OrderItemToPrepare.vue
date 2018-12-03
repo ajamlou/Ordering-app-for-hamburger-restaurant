@@ -1,5 +1,5 @@
 <template>
-  <!-- Note in this component that it is using another component -->
+<!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <div>
       <button id="cancelButton" v-on:click="cancelOrder">
@@ -60,7 +60,7 @@ export default {
 
 
 #sendToPreparing {
-  background-color: #7d90b5;
+  background-color: #3366ff;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -68,6 +68,9 @@ export default {
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
+
+#cancelButton:hover {background-color: #b30000}
+#sendToPreparing:hover {background-color: #0040ff}
 
 
 .btn-cancel {
