@@ -193,6 +193,12 @@ export default {
 
 #preparing {
   width: 50vw;
+  margin-right: 0;
+  padding-right: 0;
+}
+#finished {
+  margin-left: 0;
+  padding-left: 0;
 }
 #orders, #finished {
   width: 25vw;

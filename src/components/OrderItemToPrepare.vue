@@ -58,7 +58,7 @@ export default {
 }
 
 #sendToPreparing {
-  background-color: #7d90b5;
+  background-color: #668cff;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -66,6 +66,9 @@ export default {
 
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
+
+#cancelButton:hover {background-color: #b30000}
+#sendToPreparing:hover {background-color: #0040ff}
 
 
 .btn-cancel {
