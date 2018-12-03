@@ -13,7 +13,7 @@
       {{uiLabels.ready}}
     </button>
     <div>
-      <b-collapse class="mt-2"  :id = "orderId">
+      <b-collapse class="mt-2" visible :id = "orderId">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"

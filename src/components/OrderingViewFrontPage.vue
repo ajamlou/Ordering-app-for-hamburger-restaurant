@@ -4,7 +4,7 @@
       <button id = "createBurgerButton" @click = "emitSwitchVisibility">SKAPA DIN BURGARE</button>
     </div>
     <div class = "favoritesButtonClass">
-      <button  id = "favoritesButton">VÄLJ BLAND VÅRA FAVORITER</button>
+      <button  id = "favoritesButton" @click = "switchVisibility">VÄLJ BLAND VÅRA FAVORITER</button>
     </div>
   </div>
 </template>
@@ -16,6 +16,9 @@ export default {
   methods: {
     emitSwitchVisibility: function() {
       this.$emit('Visibility')
+    },
+    switchVisibility: function(){
+      this.$emit('favVisibility')
     }
   }
 }

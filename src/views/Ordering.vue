@@ -3,9 +3,16 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <div id="welcome">
       <OrderingViewFrontPage
-      @Visibility="changeView"
+      @Visibility="changeView('designBurger')"
+      @favVisibility="changeView('favoritesPage')"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
+  </div>
+
+  <div>
+<FavoritesPage
+v-if = "currentView === 'favoritesPage'">
+</FavoritesPage>
   </div>
 
   <div id="ordering" v-if = "currentView === 'designBurger'">
@@ -68,7 +75,7 @@ import OrderItem from '@/components/OrderItem.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
-
+import FavoritesPage from '@/components/FavoritesPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -81,7 +88,8 @@ export default {
     OrderItem,
     CategoryRow,
     Modal,
-    OrderingViewFrontPage
+    OrderingViewFrontPage,
+    FavoritesPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -138,8 +146,8 @@ export default {
                     this.isModalVisible = true;
                   }
                 },
-                changeView: function(){
-                  this.currentView = "designBurger";
+                changeView: function(data){
+                  this.currentView = data;
                 },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
@@ -204,8 +212,8 @@ export default {
             }
 
             .price-div{
-            text-align: center;
-            font-size: 2em;
+              text-align: center;
+              font-size: 2em;
             }
 
             #ordering {
