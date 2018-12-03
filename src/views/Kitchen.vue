@@ -31,7 +31,7 @@
         <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div class="allOrders">
-        <OrderItemToCook class="isPreparing"
+        <OrderItemIsCooking class="isPreparing"
         v-for="(order, key) in orders"
         v-if="order.status === 'done'"
         v-on:cooked="markCooked(key)"
@@ -40,7 +40,7 @@
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemToCook>
+      </OrderItemIsCooking>
     </div>
   </div>
 
@@ -93,7 +93,7 @@ import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
-import OrderItemToCook from '@/components/OrderItemToCook.vue'
+import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -102,7 +102,7 @@ export default {
   components: {
     OrderItem,
     OrderItemToPrepare,
-    OrderItemToCook,
+    OrderItemIsCooking,
     OrderItemFinished,
     StaffViewStorage,
     StaffViewStatistics,
