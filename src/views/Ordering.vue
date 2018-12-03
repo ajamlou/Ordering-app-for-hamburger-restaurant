@@ -1,17 +1,26 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="welcome">
+    <div id="welcome" v-show = "currentView === 'frontPage'">
       <OrderingViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
 
-  <div id="ordering" v-if = "currentView === 'designBurger'">
+  <div>
+<FavoritesPage
+v-if = "currentView === 'favoritesPage'">
+</FavoritesPage>
+  </div>
+
+  <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
+    <button id= "avbryt"
+    @click= "goBack">
+    {{ uiLabels.back }}</button>
+
     <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
     <h2>{{ uiLabels.myBurger }} </h2>
     <modal ref="modal"
@@ -52,7 +61,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="goToCheckout">Nästa</button>
+<button id="next-btn" @click="changeView('checkout')">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -68,7 +77,7 @@ import OrderItem from '@/components/OrderItem.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
-
+import FavoritesPage from '@/components/FavoritesPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -81,7 +90,8 @@ export default {
     OrderItem,
     CategoryRow,
     Modal,
-    OrderingViewFrontPage
+    OrderingViewFrontPage,
+    FavoritesPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -92,6 +102,7 @@ export default {
       chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
+      breadcrumbs:['frontPage'], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
       modalCategory:0,
@@ -138,8 +149,10 @@ export default {
                     this.isModalVisible = true;
                   }
                 },
-                changeView: function(){
-                  this.currentView = "designBurger";
+
+                changeView: function(view){
+                  this.currentView = view;
+                  this.breadcrumbs.push(view);
                 },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
@@ -188,8 +201,11 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
-                goToCheckout: function(){
-
+                goBack: function(){
+                  if(this.breadcrumbs.length>0){
+                  this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
+                  this.breadcrumbs.pop();
+                }
                 }
               }
             }
@@ -201,11 +217,12 @@ export default {
               height:100%;
               margin-top:0px !important;
               padding-top:0px !important;
+              background-color:#f8ffd6;
             }
 
             .price-div{
-            text-align: center;
-            font-size: 2em;
+              text-align: center;
+              font-size: 2em;
             }
 
             #ordering {
