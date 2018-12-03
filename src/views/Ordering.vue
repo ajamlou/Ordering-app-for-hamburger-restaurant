@@ -1,10 +1,9 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="welcome">
+    <div id="welcome" v-show = "currentView === 'frontPage'">
       <OrderingViewFrontPage
-      @Visibility="changeView('designBurger')"
-      @favVisibility="changeView('favoritesPage')"
+      @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
@@ -18,7 +17,10 @@ v-if = "currentView === 'favoritesPage'">
   <div id="ordering" v-if = "currentView === 'designBurger'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
+    <button id= "avbryt"
+    @click= "$router.go()">
+    {{ uiLabels.cancelOrder }}</button>
+
     <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
     <h2>{{ uiLabels.myBurger }} </h2>
     <modal ref="modal"
@@ -59,7 +61,7 @@ v-if = "currentView === 'favoritesPage'">
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="goToCheckout">Nästa</button>
+<button id="next-btn" @click="changeView('checkout')">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -100,6 +102,7 @@ export default {
       chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
+      breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
       modalCategory:0,
@@ -146,8 +149,10 @@ export default {
                     this.isModalVisible = true;
                   }
                 },
-                changeView: function(data){
-                  this.currentView = data;
+
+                changeView: function(view){
+                  this.currentView = view;
+                  this.breadcrumbs.push(view);
                 },
                 addToOrder: function (item) {
                   this.categoryItemCounter[item.category -1]+=1;
@@ -196,9 +201,6 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
-                goToCheckout: function(){
-
-                }
               }
             }
             </script>
@@ -209,6 +211,7 @@ export default {
               height:100%;
               margin-top:0px !important;
               padding-top:0px !important;
+              background-color:#f8ffd6;
             }
 
             .price-div{

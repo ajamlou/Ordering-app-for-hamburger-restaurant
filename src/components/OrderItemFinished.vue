@@ -6,14 +6,14 @@
         +
       </b-btn>
     </div>
-    <button id="cancelButton" v-on:click="cancelOrder">
+    <!-- <button id="cancelButton" v-on:click="cancelOrder">
       {{uiLabels.cancel}}
     </button>
     <button id="sendToPreparing" v-on:click="orderDone">
       {{uiLabels.ready}}
-    </button>
+    </button> -->
     <div>
-      <b-collapse class="mt-2" visible :id = "orderId">
+      <b-collapse class="mt-2"  :id = "orderId">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
@@ -51,7 +51,7 @@ export default {
 <style scoped>
 
 
-#cancelButton, #sendToPreparing {
+/* #cancelButton, #sendToPreparing {
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -63,19 +63,19 @@ export default {
 
 #sendToPreparing {
   background-color: #4dffa6;
-}
+} */
 
 #collapsibleButton {
   background-color: #3366ff;
   border-radius: 3em;
 }
 
-#cancelButton:active {border: 2px solid #d9d9d9;}
-#sendToPreparing:active {border: 2px solid #d9d9d9;}
+/* #cancelButton:active {border: 2px solid #d9d9d9;}
+#sendToPreparing:active {border: 2px solid #d9d9d9;} */
 #collapsibleButton:active {border: 2px solid #d9d9d9;}
 
-#cancelButton:hover {background-color: #b30000}
-#sendToPreparing:hover {background-color: #00cc66}
+/* #cancelButton:hover {background-color: #b30000}
+#sendToPreparing:hover {background-color: #00cc66} */
 #collapsibleButton:hover {background-color: #0040ff}
 
 </style>

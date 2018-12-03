@@ -61,7 +61,7 @@ export default {
 <style scoped>
 .cat-title{
   width:10%;
-  min-width: 120px;
+  min-width: 155px;
   text-align: center;
   align-self: center;
 }

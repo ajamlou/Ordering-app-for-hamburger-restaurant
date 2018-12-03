@@ -44,14 +44,20 @@ export default {
 </script>
 <style scoped>
 #orderCookedButton {
-  background-color: #3366ff;
+  background-color: #4dffa6;
   border: 1px solid white;
   border-radius: 3em;
   color: white;
 }
 #orderCookedButton:active {border: 2px solid #d9d9d9;}
-/* #maximizeButton:active {border: 2px solid #d9d9d9;} */
+#collapsibleButton:active {border: 2px solid #d9d9d9;}
 
-#orderCookedButton:hover {background-color: #0040ff}
+#orderCookedButton:hover {background-color: #00cc66}
+#collapsibleButton:hover {background-color: #0040ff}
+
+#collapsibleButton {
+  background-color: #3366ff;
+  border-radius: 3em;
+}
 
 </style>
