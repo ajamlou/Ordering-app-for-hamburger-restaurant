@@ -11,7 +11,9 @@
           X
         </button>
 
-        <StaffViewStorage v-show = "decideContent === 'storage'">
+        <StaffViewStorage
+        v-show = "decideContent === 'storage'"
+        :ingredients="ingredients">
         </StaffViewStorage>
 
         <StaffViewStatistics v-show = "decideContent === 'statistics'">
@@ -31,7 +33,8 @@ export default {
   name: 'KitchenModal',
 
   props: {
-    decideContent:String
+    decideContent:String,
+    ingredients: Array
 
   },
   components:{

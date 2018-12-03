@@ -65,6 +65,7 @@ export default {
   background-color: #3366ff;
 }
 
+
 #cancelButton:active {border: 2px solid #d9d9d9;}
 #sendToPreparing:active {border: 2px solid #d9d9d9;}
 
