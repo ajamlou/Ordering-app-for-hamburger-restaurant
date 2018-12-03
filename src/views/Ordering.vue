@@ -8,7 +8,7 @@
     </OrderingViewFrontPage>
   </div>
 
-  <div id="ordering" v-if = "createBurgerButtonData === 'show'">
+  <div id="ordering" v-show = "createBurgerButtonData === 'show'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
     <button id= "avbryt" v-on:click= "$router.go()">{{ uiLabels.cancelOrder }}</button>
