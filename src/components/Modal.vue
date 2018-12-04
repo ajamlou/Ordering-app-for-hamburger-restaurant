@@ -12,7 +12,7 @@
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
-        v-on:increment="$emit('addOrder',item)"
+        @ingredient_clicked="emitAddOrder"
         v-if="item.category == category"
         :item="item"
         :lang="lang"
@@ -37,6 +37,12 @@ export default {
     ingredients: Array,
     lang: String
   },
+  methods:{
+    emitAddOrder:function(){
+      
+    $emit('addOrder',item);
+  }
+  }
       }
 
 </script>
