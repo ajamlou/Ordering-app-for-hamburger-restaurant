@@ -12,7 +12,7 @@
       v-if="item.category == category"
       :item="item"
       :lang="lang"
-      :key="item.ingredient_id"
+      :key="index"
       @increment="IngredientClicked(item,index)">
     </Ingredient>
 
