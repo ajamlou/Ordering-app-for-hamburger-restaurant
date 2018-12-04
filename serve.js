@@ -37,15 +37,9 @@ data.initializeData();
 
 io.on('connection', function (socket) {
   // Send list of orders and text labels when a client connects
-  // socket.emit('initialize', { orders: data.getAllOrders(),
-  //                         uiLabels: data.getUILabels(),
-  //                         ingredients: data.getIngredients() });
-  setTimeout(function() {
-      socket.emit('initialize',
-        { orders: data.getAllOrders(),
-          uiLabels: data.getUILabels(),
-          ingredients: data.getIngredients() });
-}, 200);
+  socket.emit('initialize', { orders: data.getAllOrders(),
+                          uiLabels: data.getUILabels(),
+                          ingredients: data.getIngredients() });
 
   // When someone orders something
   socket.on('order', function (order) {
