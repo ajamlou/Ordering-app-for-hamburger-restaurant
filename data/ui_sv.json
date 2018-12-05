@@ -33,5 +33,7 @@
   "burger" : "Burgare",
   "back2": "TILLBAKA",
   "quantity" : "Antal",
-  "unitprice" : "Styckpris"
+  "unitprice" : "Styckpris",
+  "remove" : "Ta bort",
+  "modify" : "Ändra"
 }

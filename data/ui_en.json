@@ -30,5 +30,7 @@
   "back" : "Go back",
   "burger" : "Burger",
   "quantity" : "Quantity",
-  "unitprice" : "Unit price"
+  "unitprice" : "Unit price",
+  "remove" : "Remove",
+  "modify" : "Modify"
 }

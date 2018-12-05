@@ -22,53 +22,54 @@
     :uiLabels="uiLabels"
     :orders="ordersArray"
     :lang="lang"
-    @go_back="goBack">
+    @go_back="goBack"
+    @modify_order="modifyOrder">
   </CheckoutPage>
-  </div>
+</div>
 
-  <div id="ordering" v-if = "currentView === 'designPage'">
-    <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    <button class = "avbryt"
-    @click= "goBack">
-    {{ uiLabels.back }}</button>
+<div id="ordering" v-if = "currentView === 'designPage'">
+  <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  <button class = "avbryt"
+  @click= "goBack">
+  {{ uiLabels.back }}</button>
 
-    <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
-    <h2>{{ uiLabels.myBurger }} </h2>
-    <modal ref="modal"
-    :category="this.modalCategory"
-    v-show="this.isModalVisible === true"
-    :ingredients="ingredients"
-    :lang="lang"
-    @addOrder="addToOrder"
-    @ModalInfo="switchVisibility">
-  </modal>
+  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+  <h2>{{ uiLabels.myBurger }} </h2>
+  <modal ref="modal"
+  :category="this.modalCategory"
+  v-show="this.isModalVisible === true"
+  :ingredients="ingredients"
+  :lang="lang"
+  @addOrder="addToOrder"
+  @ModalInfo="switchVisibility">
+</modal>
 
-  <div id="categories-wrapper">
-    <CategoryRow v-for="category in burgerCategories"
-    :key="category.categoryNr"
-    :category="category.categoryNr"
-    :added_items="displayedIngredients"
-    :category_name="uiLabels[category.label]"
-    :lang="lang"
-    :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr-1]"
-    @remove_ingredient="removeFromOrder"
-    @modal_info="switchVisibility">
-  </CategoryRow>
-
-  <h1>{{uiLabels.extras}}</h1>
-
-  <CategoryRow v-for="category in extrasCategories"
+<div id="categories-wrapper">
+  <CategoryRow v-for="category in burgerCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="displayedIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
+  :item_count="categoryItemCounter[category.categoryNr-1]"
   @remove_ingredient="removeFromOrder"
   @modal_info="switchVisibility">
+</CategoryRow>
+
+<h1>{{uiLabels.extras}}</h1>
+
+<CategoryRow v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="displayedIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@remove_ingredient="removeFromOrder"
+@modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
@@ -120,6 +121,9 @@ export default {
       price: 0,
       orderNumber: "",
       ordersArray:[], /*Sparar enskilda orders i en array*/
+      units:1, /*Extra viktig främst när vi ändrar en order*/
+      modifyOrderIndex:0, /*Håller koll så att när en order ändras från checkout läggs ordern tillbaka på samma ställe igen*/
+      isModifying:false, /*Ändras till true när vi ändrar en order, har effekt på addToCheckout*/
       modalCategory:0,
       isModalVisible: false,
       currentView: "frontPage",
@@ -222,13 +226,31 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                modifyOrder:function(ingredients,units,index){
+                  this.displayedIngredients=ingredients;
+                  this.units=units;
+                  this.modifyOrderIndex=index;
+                  this.isModifying = true;
+                  this.changeView('designPage');
+
+                },
+                /*Tar displayed ingredients och price och wrappar till ett objekt.
+                Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
                 addToCheckout: function(){
-                  /*Tar displayed ingredients och price och wrappar till ett objekt.
-                  Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
-                  this.ordersArray.push({"ingredients": this.displayedIngredients,
-                                        "price":this.price,
-                                        "units":1});
-                  this.changeView('checkoutPage');
+                  let order ={"ingredients": this.displayedIngredients,
+                  "price":this.price,
+                  "units":this.units};
+
+                  if(this.isModifying){
+                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i orderArray*/
+                    this.ordersArray.splice(this.modifyOrderIndex,0,order);
+                    this.units=1;
+                    this.isModifying=false;
+                  }
+                  else{
+                  this.ordersArray.push(order);
+                }
+                this.changeView('checkoutPage');
                 }
 
               }

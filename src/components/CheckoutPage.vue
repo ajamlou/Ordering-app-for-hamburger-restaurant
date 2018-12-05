@@ -11,7 +11,9 @@
     :id = "index"
     :order = "order"
     :uiLabels = "uiLabels"
-    :lang="lang">
+    :lang="lang"
+    @remove_order="removeOrder"
+    @modify_order="modifyOrder">
     </OrderInCheckout>
 
     <p>{{uiLabels.sum}}: {{totalPrice}}:-</p>
@@ -44,10 +46,19 @@ export default{
     goBack:function(){
       this.orders.pop();
       this.$emit('go_back');
+    },
+    removeOrder:function(index){
+      this.orders.splice(index,1);
+    },
+    modifyOrder:function(ingredients,units,index){
+      this.$emit('modify_order',ingredients,units,index);
+      this.orders.splice(index,1);
+
     }
 
   },
   computed:{
+    /*Räknar ut det totala priset av en beställning*/
     totalPrice:function(){
       let counter = 0;
       let i;
@@ -55,7 +66,7 @@ export default{
         counter += this.orders[i].price*this.orders[i].units;
       }
       return counter;
-    }
+    },
   }
 }
 </script>
