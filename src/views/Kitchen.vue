@@ -8,7 +8,7 @@
       v-if = "currentView === 'kitchenFrontPage'">
     </KitchenViewFrontPage>
   </div>
-  <div id="prepp-grid" v-show="currentView === 'preppPage'">
+  <div id="prepp" v-show="currentView === 'preppPage'">
     <PreppView>
     </PreppView>
   </div>
