@@ -16,6 +16,7 @@
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
+        :onlypatty="true"
         :ui-labels="uiLabels"
         :lang="lang"
         :order="order">

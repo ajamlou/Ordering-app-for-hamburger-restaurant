@@ -17,6 +17,15 @@
     </FavoritesPage>
   </div>
 
+  <div v-if = "currentView === 'checkoutPage'">
+    <CheckoutPage
+    :uiLabels="uiLabels"
+    :orders="ordersArray"
+    :lang="lang"
+    @go_back="goBack">
+  </CheckoutPage>
+  </div>
+
   <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -44,11 +53,11 @@
     :lang="lang"
     :threshold="category.threshold"
     :item_count="categoryItemCounter[category.categoryNr-1]"
-    @ingredient_clicked="removeFromOrder"
+    @remove_ingredient="removeFromOrder"
     @modal_info="switchVisibility">
   </CategoryRow>
 
-  <h1>{{uiLabels.sidesAndDrinks}}</h1>
+  <h1>{{uiLabels.extras}}</h1>
 
   <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
@@ -58,13 +67,13 @@
   :lang="lang"
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr -1]"
-  @ingredient_clicked="removeFromOrder"
+  @remove_ingredient="removeFromOrder"
   @modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="changeView('checkout')">Nästa</button>
+<button id="next-btn" @click="addToCheckout">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -81,6 +90,7 @@ import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
+import CheckoutPage from '@/components/CheckoutPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -94,7 +104,8 @@ export default {
     CategoryRow,
     Modal,
     OrderingViewFrontPage,
-    FavoritesPage
+    FavoritesPage,
+    CheckoutPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -108,6 +119,7 @@ export default {
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
+      ordersArray:[], /*Sparar enskilda orders i en array*/
       modalCategory:0,
       isModalVisible: false,
       currentView: "frontPage",
@@ -133,7 +145,6 @@ export default {
                     label:"drinks",
                     threshold:5},
                   ],
-
                 }
               },
               created: function () {
@@ -165,13 +176,13 @@ export default {
                   }
                 },
                 addToOrder: function (item) {
+                  this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
                   }
                   this.price += +item.selling_price;
-                  this.isModalVisible = false;
                 },
                 placeOrder: function () {
                   if(this.chosenIngredients.length>0){
@@ -211,6 +222,14 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                addToCheckout: function(){
+                  /*Tar displayed ingredients och price och wrappar till ett objekt.
+                  Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
+                  this.ordersArray.push({"ingredients": this.displayedIngredients,
+                                        "price":this.price,
+                                        "units":1});
+                  this.changeView('checkoutPage');
+                }
 
               }
             }

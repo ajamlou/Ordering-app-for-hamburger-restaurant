@@ -26,6 +26,9 @@
   "sides" : "Sides",
   "drinks" : "Drinks",
   "myBurger" : "Design your burger",
-  "sidesAndDrinks" : "Sides & drinks",
-  "back" : "Go back"
+  "extras" : "Sides & drinks",
+  "back" : "Go back",
+  "burger" : "Burger",
+  "quantity" : "Quantity",
+  "unitprice" : "Unit price"
 }

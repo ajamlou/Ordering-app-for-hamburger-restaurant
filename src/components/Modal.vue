@@ -12,7 +12,7 @@
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
-        v-on:increment="$emit('addOrder',item)"
+        @ingredient_clicked="emitAddOrder(item)"
         v-if="item.category == category"
         :item="item"
         :lang="lang"
@@ -37,6 +37,11 @@ export default {
     ingredients: Array,
     lang: String
   },
+  methods:{
+    emitAddOrder:function(item){
+    this.$emit('addOrder',item);
+  }
+  }
       }
 
 </script>
@@ -77,7 +82,7 @@ export default {
     border-radius: 15px;
     width:45em;
     max-width:100%;
-    max-height:60%;
+    max-height:70%;
     padding-bottom: 15px;
   }
 
@@ -87,7 +92,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 

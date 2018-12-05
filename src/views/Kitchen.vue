@@ -1,84 +1,87 @@
 
 <template>
   <div>
-
-    <div id="kitchen-grid">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
-<!-- Här skapas beställningarna i "Inkomna". -->
-      <div id="orders">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersInQueue }}</h1>
-        </div>
-        <div class="allOrders">
-          <OrderItemToPrepare class="toPrepare"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'not-started'"
-          v-on:cancel = "markCanceled(key)"
-          v-on:done="markDone(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemToPrepare>
-      </div>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div id="kitchenFront" v-if = "currentView === 'kitchenFrontPage'">
+      <KitchenViewFrontPage
+      @Visibility="changeView"
+      v-if = "currentView === 'kitchenFrontPage'">
+    </KitchenViewFrontPage>
+  </div>
+  <div id="prepp" v-show="currentView === 'preppPage'">
+    <PreppView>
+    </PreppView>
+    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+      <button id = "backButton">
+        {{ uiLabels.back2 }}
+      </button>
     </div>
+  </div>
 
-<!-- Här skapas beställningarna i "Tillagas". -->
-    <div id="preparing">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
+  <div id="kitchen-grid" v-show="currentView === 'grillPage'">
+
+    <!-- Här skapas beställningarna i "Inkomna". -->
+    <div id="orders">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersInQueue }}</h1>
       </div>
       <div class="allOrders">
-        <OrderItemIsCooking class="isPreparing"
+        <OrderItemToPrepare class="toPrepare"
         v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
+        v-if="order.status === 'not-started'"
+        v-on:cancel = "markCanceled(key)"
+        v-on:done="markDone(key)"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
         :key="key">
-      </OrderItemIsCooking>
+      </OrderItemToPrepare>
     </div>
   </div>
 
-<!-- Här skapas beställningarna i "Färdiga". -->
-  <div id="finished">
-    <div id="header3">
-      <h1>{{ uiLabels.ordersFinished }}</h1>
+  <!-- Här skapas beställningarna i "Tillagas". -->
+  <div id="preparing">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
     </div>
     <div class="allOrders">
-      <OrderItemFinished class="orderFinished"
+      <OrderItemIsCooking class="isPreparing"
       v-for="(order, key) in orders"
-      v-if="order.status === 'started'"
+      v-if="order.status === 'done'"
+      v-on:cooked="markCooked(key)"
       :order-id="key"
       :order="order"
-      :lang="lang"
       :ui-labels="uiLabels"
+      :lang="lang"
       :key="key">
-    </OrderItemFinished>
+    </OrderItemIsCooking>
   </div>
 </div>
 
-<div class = "statisticsButtonClass">
-  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
-</div>
-<div class = "storageButtonClass">
-  <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
-</div>
-<div class = "selectButtonClass">
-  <button  id = "selectButton">MARKERA</button>
+<div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+  <button id = "backButton">
+    {{ uiLabels.back2 }}</button>
 </div>
 
+
+<!-- <div class = "statisticsButtonClass">
+<button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
+</div>
+<div class = "storageButtonClass">
+<button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
+</div>
+<div class = "selectButtonClass">
+<button  id = "selectButton">MARKERA</button>
+</div> -->
+
 <!-- Om modalen för statisitk- och lagerknappen ska visas eller ej-->
-<KitchenModal
+<!-- <KitchenModal
 @switchVisibility = "toggleVisibility"
 :decideContent="decidedContent"
 :ingredients = "ingredients"
 v-show = "ModalVisibility === true">
-</KitchenModal>
+</KitchenModal> -->
 
 
 </div>
@@ -96,6 +99,8 @@ import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
+import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
+import PreppView from '@/components/PreppView.vue'
 
 export default {
   name: 'Ordering',
@@ -107,7 +112,9 @@ export default {
     OrderItemFinished,
     StaffViewStorage,
     StaffViewStatistics,
-    KitchenModal
+    KitchenModal,
+    KitchenViewFrontPage,
+    PreppView
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -115,8 +122,9 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      ModalVisibility: false,
-      decidedContent: "statistics"
+      //ModalVisibility: false,
+      //decidedContent: "statistics",
+      currentView: "kitchenFrontPage"
     }
   },
   methods: {
@@ -129,30 +137,9 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleVisibility: function(){
-      if (this.ModalVisibility === true){
-        this.ModalVisibility = false;
-      }
-      else {
-        this.ModalVisibility = true;
-      }
+    changeView: function(view){
+      this.currentView = view;
     },
-    decideContent: function(string){
-      if (string === "l"){
-        this.decidedContent = "storage";
-      }
-      else {
-        this.decidedContent = "statistics";
-      }
-    },
-    // select() {
-		// 	this.selected = [];
-		// 	if (!this.selectAll) {
-		// 		for (let i in this.items) {
-		// 			this.selected.push(this.items[i].id);
-		// 		}
-		// 	}
-		// }
   }
 }
 </script>
@@ -161,11 +148,11 @@ export default {
 #kitchen-grid {
   display: grid;
   position: fixed;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 50% 50%;
   color: white;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  height: 99vh;
+  height: 90vh;
   text-transform: uppercase;
 }
 
@@ -173,8 +160,9 @@ export default {
   margin-top: 10vh;
 }
 
-#header1, #header2, #header3 {
+#header1, #header2 {
   height: 10vh;
+  width: 50vw;
   position: fixed;
   font-size: 5vh;
   border-radius: 4px;
@@ -185,50 +173,34 @@ export default {
 
 #header1 {
   background: #DC143C;
-  width: 25vw;
 }
 #header2 {
   background: #FFA500;
-  width: 50vw;
   border-left: 3px solid white;
   border-right: 3px solid white;
 }
-#header3 {
-  background: #00FF7F;
-  width: 25vw;
-}
 
-#orders, #preparing, #finished {
+#orders, #preparing {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
-}
-
-#preparing {
   width: 50vw;
-  margin-right: 0;
-  padding-right: 0;
-}
-#finished {
-  margin-left: 0;
-  padding-left: 0;
-}
-#orders, #finished {
-  width: 25vw;
 }
 
-.toPrepare, .orderFinished {
+
+.toPrepare {
   width: 42%;
 }
 .isPreparing {
   width: 30%;
 }
 
-.toPrepare, .isPreparing, .orderFinished {
+.toPrepare, .isPreparing {
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  min-height: 15vh;
+  min-height: 10vh;
+  width: 10vw;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;
@@ -237,7 +209,7 @@ export default {
   background-color: black;
 }
 
-.isPreparing, .toPrepare, .orderFinished, #orders, #header1, #preparing, #header2, #finished, #header3 {
+.isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
   overflow: auto
 }
 
@@ -249,34 +221,30 @@ h1 {
 
 /* ccskod för knappar under denna kommentar */
 
-#selectButton, #statisticsButton, #storageButton{
-border: 2px solid white;
-color: white;
-text-shadow: 2px 2px #696969;
-cursor: pointer;
-padding: 15px;
-text-decoration: none;
-display: inline-block;
-font-size: 4vh;
-border-radius: 18px;
-font-size: 1.9vh;
-font-size: 1.9vw;
-width: 12vw;
-height: 10vh;
-margin: 5vh;
-background-color: #00b386;
+.backButtonClass {
+  position: relative;
 }
 
-#statisticsButton:hover {background-color: #008060}
-#storageButton:hover {background-color: #008060}
-#selectButton:hover {background-color: #008060}
-
-#statisticsButton:active {border: 2px solid grey;}
-#storageButton:active {border: 2px solid grey;}
-#selectButton:active {border: 2px solid grey;}
-
-.selectButtonClass, .statisticsButtonClass, .storageButtonClass{
-  margin: auto;
+#backButton{
+  border: 2px solid white;
+  color: white;
+  text-shadow: 2px 2px #696969;
+  background-color: #00b386;
+  cursor: pointer;
+  padding: 5px;
+  text-decoration: none;
+  font-size: 4vh;
+  border-radius: 18px;
+  font-size: 1.9vh;
+  font-size: 1.9vw;
+  width: 12vw;
+  height: 10vh;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+  float: left;
 }
+#backButton:hover {background-color: #008060}
+#backButton:active {border: 2px solid grey;}
 
 </style>
