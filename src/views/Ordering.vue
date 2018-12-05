@@ -18,6 +18,12 @@
     </FavoritesPage>
   </div>
 
+  <div v-if = "currentView === 'checkoutPage'">
+    <CheckoutPage
+    :uiLabels="uiLabels">
+  </CheckoutPage>
+  </div>
+
   <div id="ordering" v-if = "currentView === 'designPage'">
     <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -65,7 +71,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="changeView('checkout')">Nästa</button>
+<button id="next-btn" @click="changeView('checkoutPage'),addToCheckout">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -82,6 +88,7 @@ import CategoryRow from '@/components/CategoryRow.vue'
 import Modal from '@/components/Modal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
+import CheckoutPage from '@/components/CheckoutPage.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 
@@ -95,7 +102,8 @@ export default {
     CategoryRow,
     Modal,
     OrderingViewFrontPage,
-    FavoritesPage
+    FavoritesPage,
+    CheckoutPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
@@ -134,6 +142,8 @@ export default {
                     label:"drinks",
                     threshold:5},
                   ],
+
+                  orders:[]
 
                 }
               },
@@ -212,6 +222,13 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                addToCheckout: function(){
+                  let order = {
+                    ingredients: this.displayedIngredients,
+                    price:this.price
+                  };
+                  this.orders.push(order);
+                }
 
               }
             }

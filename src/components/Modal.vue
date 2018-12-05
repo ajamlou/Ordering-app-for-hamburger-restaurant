@@ -82,7 +82,7 @@ export default {
     border-radius: 15px;
     width:45em;
     max-width:100%;
-    max-height:60%;
+    height:70%;
     padding-bottom: 15px;
   }
 
