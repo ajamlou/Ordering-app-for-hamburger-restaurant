@@ -48,8 +48,9 @@
   </div>
 </div>
 
-<div class = "backButtonClass">
-  <button  id = "backButton">TILLBAKA</button>
+<div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+  <button id = "backButton">
+    {{ uiLabels.back2 }}</button>
 </div>
 
 <!-- Här skapas beställningarna i "Färdiga". -->
@@ -243,7 +244,8 @@ width: 25vw;
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  min-height: 15vh;
+  min-height: 10vh;
+  width: 10vw;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;
