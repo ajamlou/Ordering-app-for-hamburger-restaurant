@@ -3,18 +3,32 @@
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
     </div>
+    <div id="checkout-wrapper">
+    <OrderInCheckout
+    v-for = "(order, index) in orders"
+    :key ="index"
+    :id = "index"
+    :item = "order"
+    :uiLabels = "uiLabels">
+    </OrderInCheckout>
+      </div>
 
-  </div>
+    </div>
 </template>
 
 <script>
+import OrderInCheckout from '@/components/OrderInCheckout.vue'
+
 export default{
   name:'CheckoutPage',
+
   components:{
+    OrderInCheckout
 
   },
   props:{
-    uiLabels:Object
+    uiLabels:Object,
+    orders: Array
   },
   data: function(){
     return{
