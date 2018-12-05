@@ -8,8 +8,9 @@
     v-for = "(order, index) in orders"
     :key ="index"
     :id = "index"
-    :item = "order"
-    :uiLabels = "uiLabels">
+    :order = "order"
+    :uiLabels = "uiLabels"
+    :lang="lang">
     </OrderInCheckout>
       </div>
 
@@ -28,7 +29,8 @@ export default{
   },
   props:{
     uiLabels:Object,
-    orders: Array
+    orders: Array,
+    lang: String
   },
   data: function(){
     return{
