@@ -1,5 +1,6 @@
 <template>
   <div id="checkout-div">
+    <button @click="goBack">{{uiLabels.back}}</button>
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
     </div>
@@ -12,6 +13,8 @@
     :uiLabels = "uiLabels"
     :lang="lang">
     </OrderInCheckout>
+
+    <p>{{uiLabels.sum}}: {{totalPrice}}:-</p>
       </div>
 
     </div>
@@ -38,7 +41,21 @@ export default{
     }
   },
   methods:{
+    goBack:function(){
+      this.orders.pop();
+      this.$emit('go_back');
+    }
 
+  },
+  computed:{
+    totalPrice:function(){
+      let counter = 0;
+      let i;
+      for(i=0; i<this.orders.length; i++){
+        counter += this.orders[i].price*this.orders[i].units;
+      }
+      return counter;
+    }
   }
 }
 </script>

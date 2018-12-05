@@ -21,7 +21,8 @@
     <CheckoutPage
     :uiLabels="uiLabels"
     :orders="ordersArray"
-    :lang="lang">
+    :lang="lang"
+    @go_back="goBack">
   </CheckoutPage>
   </div>
 
@@ -225,7 +226,8 @@ export default {
                   /*Tar displayed ingredients och price och wrappar till ett objekt.
                   Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
                   this.ordersArray.push({"ingredients": this.displayedIngredients,
-                                    "price":this.price});
+                                        "price":this.price,
+                                        "units":1});
                   this.changeView('checkoutPage');
                 }
 
