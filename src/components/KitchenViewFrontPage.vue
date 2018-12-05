@@ -5,10 +5,8 @@
   <button id = "grillButton" @click = "emitSwitchVisibility('grillPage')">GRILL</button>
   <button  id = "preppButton" @click = "emitSwitchVisibility('preppPage')">PREPP</button>
 
-  <div class = "statisticsButtonClass">
+  <div>
   <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
-  </div>
-  <div class = "storageButtonClass">
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
   </div>
 
@@ -74,7 +72,7 @@ export default {
   height:100vh;
   margin-top:0px !important;
   padding-top:0px !important;
-  background-color:#f8ffd6;
+  background-color: lightyellow;
 }
 
 #grillButton, #preppButton{

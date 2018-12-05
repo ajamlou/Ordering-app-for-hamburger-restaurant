@@ -92,7 +92,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 
