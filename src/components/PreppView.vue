@@ -1,20 +1,25 @@
 <template>
   <div class="master-div">
-    <h1>PREPPPPPING</h1>
-
-    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
-      <button id = "backButton">
-        {{ uiLabels.back2 }}
-      </button>
+    <h1>Testheader</h1>
     </div>
   </div>
 </template>
 
 <script>
-import sharedVueStuff from '@/components/sharedVueStuff.js'
+// import sharedVueStuff from '@/components/sharedVueStuff.js'
+// import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
+// import OrderItemFinished from '@/components/OrderItemFinished.vue'
+// import OrderItem from '@/components/OrderItem.vue'
 
 export default {
-  mixins: [sharedVueStuff]
+    // name: 'Ordering',
+    // components: {
+    //   OrderItem,
+    //   OrderItemIsCooking,
+    //   OrderItemFinished,
+    //   KitchenViewFrontPage,
+    // },
+  // mixins: [sharedVueStuff]
 }
 </script>
 

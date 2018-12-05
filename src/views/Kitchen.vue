@@ -9,6 +9,11 @@
     </KitchenViewFrontPage>
   </div>
   <div id="prepp" v-show="currentView === 'preppPage'">
+    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+      <button id = "backButton">
+        {{ uiLabels.back2 }}
+      </button>
+    </div>
     <PreppView>
     </PreppView>
   </div>
