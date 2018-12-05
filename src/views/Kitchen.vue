@@ -1,10 +1,14 @@
 
 <template>
   <div>
-
-    <div id="kitchen-grid">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div id="kitchenFront" v-if = "currentView === 'kitchenFrontPage'">
+      <KitchenViewFrontPage
+      @Visibility="changeView"
+      v-if = "currentView === 'kitchenFrontPage'">
+    </KitchenViewFrontPage>
+  </div>
+    <div id="kitchen-grid" v-show="currentView === 'grillPage'">
 <!-- Här skapas beställningarna i "Inkomna". -->
       <div id="orders">
         <div id="header1">
@@ -96,6 +100,7 @@ import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
+import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
 
 export default {
   name: 'Ordering',
@@ -107,7 +112,8 @@ export default {
     OrderItemFinished,
     StaffViewStorage,
     StaffViewStatistics,
-    KitchenModal
+    KitchenModal,
+    KitchenViewFrontPage
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -116,7 +122,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       ModalVisibility: false,
-      decidedContent: "statistics"
+      decidedContent: "statistics",
+      currentView: "kitchenFrontPage"
     }
   },
   methods: {
@@ -145,7 +152,11 @@ export default {
         this.decidedContent = "statistics";
       }
     },
+    changeView: function(view){
+      this.currentView = view;
+    },
     // select() {
+
 		// 	this.selected = [];
 		// 	if (!this.selectAll) {
 		// 		for (let i in this.items) {
