@@ -14,6 +14,7 @@
   </div>
 
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
+
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
       <div id="header1">
@@ -133,8 +134,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      ModalVisibility: false,
-      decidedContent: "statistics",
+      //ModalVisibility: false,
+      //decidedContent: "statistics",
       currentView: "kitchenFrontPage"
     }
   },
@@ -147,22 +148,22 @@ export default {
     },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
-    },
-    toggleVisibility: function(){
-      if (this.ModalVisibility === true){
-        this.ModalVisibility = false;
-      }
-      else {
-        this.ModalVisibility = true;
-      }
-    },
-    decideContent: function(string){
-      if (string === "l"){
-        this.decidedContent = "storage";
-      }
-      else {
-        this.decidedContent = "statistics";
-      }
+    // },
+    // toggleVisibility: function(){
+    //   if (this.ModalVisibility === true){
+    //     this.ModalVisibility = false;
+    //   }
+    //   else {
+    //     this.ModalVisibility = true;
+    //   }
+    // },
+    // decideContent: function(string){
+    //   if (string === "l"){
+    //     this.decidedContent = "storage";
+    //   }
+    //   else {
+    //     this.decidedContent = "statistics";
+    //   }
     },
     changeView: function(view){
       this.currentView = view;
