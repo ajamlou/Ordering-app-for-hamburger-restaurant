@@ -8,7 +8,7 @@
     </OrderingViewFrontPage>
   </div>
 
-  
+
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
     @click= "goBack">
