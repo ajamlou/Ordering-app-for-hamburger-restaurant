@@ -20,7 +20,7 @@ export default {
   name: 'PreppPage',
   components: {
 
-  }
+  },
   mixins: [sharedVueStuff],
 }
 // import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
