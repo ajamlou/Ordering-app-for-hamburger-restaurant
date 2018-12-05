@@ -1,64 +1,138 @@
 <template>
   <div class="master-div">
-    <!-- <h1>Testheader</h1> -->
-    <div id="preparing">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div class="prepp-grid">
+
+<!-- Hit skickas beställningarna som ska tillagas. -->
+      <div id="preparing">
+        <div id="header1">
+          <h1>{{ uiLabels.ordersPreparing }}</h1>
+        </div>
+        <div class="allOrders">
+          <OrderItemIsCooking class="isCooking"
+          v-for="(order, key) in orders"
+          v-if="order.status === 'done'"
+          v-on:cooked="markCooked(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+        </OrderItemIsCooking>
+      </div>
+    </div>
+
+    <!-- Här hamnar beställningarna som är färdiga. -->
+    <div id="finished">
       <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
+        <h1>{{ uiLabels.ordersFinished }}</h1>
       </div>
       <div class="allOrders">
-        <OrderItemIsCooking class="isPreparing"
+        <OrderItemFinished class="isFinished"
         v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
+        v-if="order.status === 'started'"
         :order-id="key"
         :order="order"
-        :ui-labels="uiLabels"
         :lang="lang"
+        :ui-labels="uiLabels"
         :key="key">
-      </OrderItemIsCooking>
+      </OrderItemFinished>
     </div>
   </div>
-  </div>
+</div>
+</div>
 </template>
 
 <script>
- import sharedVueStuff from '@/components/sharedVueStuff.js'
- import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
-// import OrderItemFinished from '@/components/OrderItemFinished.vue'
+import sharedVueStuff from '@/components/sharedVueStuff.js'
+import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
+import OrderItemFinished from '@/components/OrderItemFinished.vue'
 // import OrderItem from '@/components/OrderItem.vue'
 
 export default {
-     name: 'Ordering',
-     components: {
+  name: 'Ordering',
+  components: {
     //   OrderItem,
-       OrderItemIsCooking,
-    //   OrderItemFinished,
-    //   KitchenViewFrontPage,
-     },
-   mixins: [sharedVueStuff]
+    OrderItemIsCooking,
+    OrderItemFinished,
+  },
+  mixins: [sharedVueStuff]
 }
 
+// methods: {
+//   markCooked: function (orderid) {
+//     this.$store.state.socket.emit("orderStarted", orderid);
+//   }
+// }
 </script>
 
 <style scoped>
-#backButton{
-  border: 2px solid white;
+.prepp-grid {
   color: white;
-  text-shadow: 2px 2px #696969;
-  background-color: #00b386;
-  cursor: pointer;
-  padding: 5px;
-  text-decoration: none;
-  font-size: 4vh;
-  border-radius: 18px;
-  font-size: 1.9vh;
-  font-size: 1.9vw;
-  width: 12vw;
-  height: 10vh;
-  margin-top: 1vh;
-  margin-left: 0;
-  margin-bottom: 1vh;
+  display: grid;
+  position: fixed;
+  grid-template-columns: 50% 50%;
+  color: white;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  height: 90vh;
+  text-transform: uppercase;
 }
-#backButton:hover {background-color: #008060}
-#backButton:active {border: 2px solid grey;}
-<style>
+
+.allOrders {
+  margin-top: 10vh;
+}
+
+#header1, #header2 {
+  height: 10vh;
+  width: 50vw;
+  position: fixed;
+  font-size: 5vh;
+  border-radius: 4px;
+  border-bottom: 3px solid white;
+  text-shadow: 2px 2px #737373;
+  margin: auto;
+}
+
+#header1 {
+  background: #FFA500;
+  border-right: 2px solid white;
+}
+#header2 {
+  background: #00FF7F;
+  border-left: 2px solid white;
+}
+
+#preparing, #finished {
+  font-size: 1em;
+  border: 3px solid white;
+  border-radius: 6px;
+  width: 50vw;
+}
+
+.isCooking {
+  width: 60%;
+}
+
+.isFinished {
+  width: 40%;
+}
+
+.isCooking, .isFinished {
+  border: 2px solid white;
+  font-size: 1.8vh;
+  float: left;
+  min-height: 10vh;
+  width: 10vw;
+  margin: 8px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 3px solid white;
+  background-color: black;
+}
+
+.isCooking, .isFinished, #header1, #header2, #preparing, #finished{
+  overflow: auto
+}
+</style>

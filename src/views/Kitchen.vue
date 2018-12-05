@@ -19,6 +19,7 @@
   </div>
 
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
+
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
       <div id="header1">
@@ -63,23 +64,6 @@
     {{ uiLabels.back2 }}</button>
 </div>
 
-<!-- Här skapas beställningarna i "Färdiga". -->
-<!-- <div id="finished">
-<div id="header3">
-<h1>{{ uiLabels.ordersFinished }}</h1>
-</div>
-<div class="allOrders">
-<OrderItemFinished class="orderFinished"
-v-for="(order, key) in orders"
-v-if="order.status === 'started'"
-:order-id="key"
-:order="order"
-:lang="lang"
-:ui-labels="uiLabels"
-:key="key">
-</OrderItemFinished>
-</div>
-</div> -->
 
 <!-- <div class = "statisticsButtonClass">
 <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
@@ -138,8 +122,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      ModalVisibility: false,
-      decidedContent: "statistics",
+      //ModalVisibility: false,
+      //decidedContent: "statistics",
       currentView: "kitchenFrontPage"
     }
   },
@@ -153,34 +137,9 @@ export default {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    toggleVisibility: function(){
-      if (this.ModalVisibility === true){
-        this.ModalVisibility = false;
-      }
-      else {
-        this.ModalVisibility = true;
-      }
-    },
-    decideContent: function(string){
-      if (string === "l"){
-        this.decidedContent = "storage";
-      }
-      else {
-        this.decidedContent = "statistics";
-      }
-    },
     changeView: function(view){
       this.currentView = view;
     },
-    // select() {
-
-    // 	this.selected = [];
-    // 	if (!this.selectAll) {
-    // 		for (let i in this.items) {
-    // 			this.selected.push(this.items[i].id);
-    // 		}
-    // 	}
-    // }
   }
 }
 </script>
@@ -220,10 +179,6 @@ export default {
   border-left: 3px solid white;
   border-right: 3px solid white;
 }
-/* #header3 {
-background: #00FF7F;
-width: 25vw;
-} */
 
 #orders, #preparing {
   font-size: 1em;
@@ -232,18 +187,6 @@ width: 25vw;
   width: 50vw;
 }
 
-/* #preparing {
-
-margin-right: 0;
-padding-right: 0;
-}
-#finished {
-margin-left: 0;
-padding-left: 0;
-}
-#orders, #finished {
-width: 25vw;
-} */
 
 .toPrepare {
   width: 42%;
@@ -277,6 +220,11 @@ h1 {
 }
 
 /* ccskod för knappar under denna kommentar */
+
+.backButtonClass {
+  position: relative;
+}
+
 #backButton{
   border: 2px solid white;
   color: white;
@@ -292,41 +240,11 @@ h1 {
   width: 12vw;
   height: 10vh;
   margin-top: 1vh;
-  margin-left: 0;
+  margin-left: 1vw;
   margin-bottom: 1vh;
+  float: left;
 }
 #backButton:hover {background-color: #008060}
 #backButton:active {border: 2px solid grey;}
-
-
-/* #selectButton, #statisticsButton, #storageButton{
-border: 2px solid white;
-color: white;
-text-shadow: 2px 2px #696969;
-cursor: pointer;
-padding: 15px;
-text-decoration: none;
-display: inline-block;
-font-size: 4vh;
-border-radius: 18px;
-font-size: 1.9vh;
-font-size: 1.9vw;
-width: 12vw;
-height: 10vh;
-margin: 5vh;
-background-color: #00b386;
-}
-
-#statisticsButton:hover {background-color: #008060}
-#storageButton:hover {background-color: #008060}
-#selectButton:hover {background-color: #008060}
-
-#statisticsButton:active {border: 2px solid grey;}
-#storageButton:active {border: 2px solid grey;}
-#selectButton:active {border: 2px solid grey;}
-
-.selectButtonClass, .statisticsButtonClass, .storageButtonClass{
-margin: auto;
-} */
 
 </style>
