@@ -19,11 +19,13 @@ export default {
 <style scoped>
 #favoritesButton, #createBurgerButton {
   color: black;
-  padding: 50px;
+  padding: 10vh;
   display: grid;
   font-size: 3vh;
-  border-radius: 10px;
-  margin: 10% auto;
+  border-radius: 1vh;
+  border-color: black;
+  margin: 10vh auto;
+  align-items: center;
   cursor: pointer;
 }
 
