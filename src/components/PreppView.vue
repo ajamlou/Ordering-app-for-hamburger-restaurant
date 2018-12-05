@@ -1,55 +1,26 @@
 <template>
-
-<div>
-<h1>PREPPPPPING</h1>
-
-
-<div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
-  <button id = "backButton">
-    {{ uiLabels.back2 }}
-    </button>
-</div>
-</div>
-
+  <div class="master-div">
+    <h1>Testheader</h1>
+    </div>
+  </div>
 </template>
 
 <script>
-import sharedVueStuff from '@/components/sharedVueStuff.js'
-
-export default {
-  name: 'PreppPage',
-  components: {
-
-  },
-  mixins: [sharedVueStuff],
-}
-// import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
+// import sharedVueStuff from '@/components/sharedVueStuff.js'
 // import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 // import OrderItemFinished from '@/components/OrderItemFinished.vue'
 // import OrderItem from '@/components/OrderItem.vue'
-//
-// export default {
-//   name: 'PreppView',
-//   components: {
-//     OrderItem,
-//     OrderItemIsCooking,
-//     OrderItemFinished,
-//     KitchenViewFrontPage,
-//     PreppView
-//   },
-//   data: function(){
-//     return {
-//       chosenIngredients: [],
-//       price: 0,
-//       // currentView: "kitchenFrontPage"
-//     }
-//   },
-//   changeView: function(view){
-//     this.currentView = view;
-//   },
-// }
-//
 
+export default {
+    // name: 'Ordering',
+    // components: {
+    //   OrderItem,
+    //   OrderItemIsCooking,
+    //   OrderItemFinished,
+    //   KitchenViewFrontPage,
+    // },
+  // mixins: [sharedVueStuff]
+}
 </script>
 
 <style scoped>
@@ -73,4 +44,4 @@ export default {
 }
 #backButton:hover {background-color: #008060}
 #backButton:active {border: 2px solid grey;}
-</style>
+<style>

@@ -8,9 +8,14 @@
       v-if = "currentView === 'kitchenFrontPage'">
     </KitchenViewFrontPage>
   </div>
-  <div id="prepp-grid" v-show="currentView === 'preppPage'">
+  <div id="prepp" v-show="currentView === 'preppPage'">
     <PreppView>
     </PreppView>
+    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+      <button id = "backButton">
+        {{ uiLabels.back2 }}
+      </button>
+    </div>
   </div>
 
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
