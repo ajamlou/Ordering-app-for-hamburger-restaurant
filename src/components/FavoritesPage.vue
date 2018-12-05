@@ -1,5 +1,8 @@
 <template>
-  <div class = "favWrapper">
+  <div class = "wrapper">
+    <div v-for="item in ingredients">
+      {{item.ingredient_id}}
+    </div>
     <div class = "favorites" v-for = "item in favBurgers" :key = "item.id">
       <h1 class = "header">{{item.name}}</h1>
       <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
@@ -21,9 +24,9 @@ export default {
         {name:'Beefinator',
         id: 1,
         pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-        bun: "Brioshe",
-        protein: "Hummer",
-        sauce: "Grillsås"
+        bun: 50,
+        protein: 6,
+        sauce: 35
       },
       {name:'Vegginator',
       id: 2,
@@ -41,6 +44,17 @@ export default {
   }
 ]
 }
+},
+props:{
+ingredients:Array
+},
+computed:{
+  favBurgers.bun: function(){
+    return this.bun
+  }
+},
+methods:{
+
 }
 }
 </script>
@@ -56,7 +70,7 @@ export default {
   height: 320px;
 }
 
-.favWrapper{
+.wrapper{
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
