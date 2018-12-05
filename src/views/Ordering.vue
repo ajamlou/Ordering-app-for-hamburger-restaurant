@@ -74,7 +74,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="addToCheckout">Nästa</button>
+<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -174,6 +174,10 @@ export default {
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
+                  /*Om vi ändrar en order och sedan klickar på tillbaka, lägg tilbaka ordern i ordersArray*/
+                  if(this.isModifying){
+                    this.addToCheckout();
+                  }
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
@@ -250,7 +254,6 @@ export default {
                   else{
                   this.ordersArray.push(order);
                 }
-                this.changeView('checkoutPage');
                 }
 
               }
