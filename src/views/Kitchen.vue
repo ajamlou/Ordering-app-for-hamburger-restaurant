@@ -8,6 +8,11 @@
       v-if = "currentView === 'kitchenFrontPage'">
     </KitchenViewFrontPage>
   </div>
+  <div id="prepp-grid" v-show="currentView === 'preppPage'">
+    <PreppView>
+    </PreppView>
+  </div>
+
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
@@ -106,6 +111,7 @@ import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
+import PreppView from '@/components/PreppView.vue'
 
 export default {
   name: 'Ordering',
@@ -118,7 +124,8 @@ export default {
     StaffViewStorage,
     StaffViewStatistics,
     KitchenModal,
-    KitchenViewFrontPage
+    KitchenViewFrontPage,
+    PreppView
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
