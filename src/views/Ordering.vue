@@ -171,7 +171,7 @@ export default {
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
                   }
-                  this.price += +item.selling_price;            
+                  this.price += +item.selling_price;
                 },
                 placeOrder: function () {
                   if(this.chosenIngredients.length>0){
