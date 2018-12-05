@@ -2,7 +2,15 @@
   <div>
   <div class="modal-header">
     <slot name="header">
-      Lagerstatus
+      <div>
+        Vara
+      </div>
+      <div>
+        Antal
+      </div>
+      <div>
+        Säljpris
+      </div>
     </slot>
   </div>
 
@@ -47,10 +55,16 @@ export default {
 </script>
 
 <style scoped>
-.ing-container{
-  display:grid;
+.modal-header{
+  display: grid;
   grid-template-columns: 30% 30% 30%;
   text-align: center;
+}
+.ing-container{
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  text-align: center;
+  overflow: auto;
 }
 
 </style>

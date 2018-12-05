@@ -22,7 +22,7 @@ export default {
   padding: 10vh;
   display: grid;
   font-size: 3vh;
-  border-radius: 1vh;
+  border-radius: 3vh;
   border-color: black;
   margin: 10vh auto;
   align-items: center;
@@ -34,6 +34,7 @@ export default {
 }
 #favoritesButton:hover {
   background-color: orange;
+  border-color: orange;
 }
 
 #createBurgerButton {
@@ -41,5 +42,6 @@ export default {
 }
 #createBurgerButton:hover {
   background-color: lightblue;
+  border-color: lightblue;
 }
 </style>

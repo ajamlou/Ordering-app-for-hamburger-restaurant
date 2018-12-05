@@ -19,7 +19,9 @@
 
   <div v-if = "currentView === 'checkoutPage'">
     <CheckoutPage
-    :uiLabels="uiLabels">
+    :uiLabels="uiLabels"
+    :orders="ordersArray"
+    :lang="lang">
   </CheckoutPage>
   </div>
 
@@ -54,7 +56,7 @@
     @modal_info="switchVisibility">
   </CategoryRow>
 
-  <h1>{{uiLabels.sidesAndDrinks}}</h1>
+  <h1>{{uiLabels.extras}}</h1>
 
   <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
@@ -70,7 +72,7 @@
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="changeView('checkoutPage'),addToCheckout">Nästa</button>
+<button id="next-btn" @click="addToCheckout">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -116,6 +118,7 @@ export default {
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
+      ordersArray:[], /*Sparar enskilda orders i en array*/
       modalCategory:0,
       isModalVisible: false,
       currentView: "frontPage",
@@ -141,9 +144,6 @@ export default {
                     label:"drinks",
                     threshold:5},
                   ],
-
-                  orders:[]
-
                 }
               },
               created: function () {
@@ -222,11 +222,11 @@ export default {
                   this.price -= item.selling_price;
                 },
                 addToCheckout: function(){
-                  let order = {
-                    ingredients: this.displayedIngredients,
-                    price:this.price
-                  };
-                  this.orders.push(order);
+                  /*Tar displayed ingredients och price och wrappar till ett objekt.
+                  Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
+                  this.ordersArray.push({"ingredients": this.displayedIngredients,
+                                    "price":this.price});
+                  this.changeView('checkoutPage');
                 }
 
               }

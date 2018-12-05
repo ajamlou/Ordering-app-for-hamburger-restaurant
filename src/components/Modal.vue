@@ -82,7 +82,7 @@ export default {
     border-radius: 15px;
     width:45em;
     max-width:100%;
-    height:70%;
+    max-height:70%;
     padding-bottom: 15px;
   }
 
@@ -92,7 +92,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 

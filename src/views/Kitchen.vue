@@ -8,9 +8,14 @@
       v-if = "currentView === 'kitchenFrontPage'">
     </KitchenViewFrontPage>
   </div>
-  <div id="prepp-grid" v-show="currentView === 'preppPage'">
+  <div id="prepp" v-show="currentView === 'preppPage'">
     <PreppView>
     </PreppView>
+    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+      <button id = "backButton">
+        {{ uiLabels.back2 }}
+      </button>
+    </div>
   </div>
 
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
@@ -59,23 +64,6 @@
     {{ uiLabels.back2 }}</button>
 </div>
 
-<!-- Här skapas beställningarna i "Färdiga". -->
-<!-- <div id="finished">
-<div id="header3">
-<h1>{{ uiLabels.ordersFinished }}</h1>
-</div>
-<div class="allOrders">
-<OrderItemFinished class="orderFinished"
-v-for="(order, key) in orders"
-v-if="order.status === 'started'"
-:order-id="key"
-:order="order"
-:lang="lang"
-:ui-labels="uiLabels"
-:key="key">
-</OrderItemFinished>
-</div>
-</div> -->
 
 <!-- <div class = "statisticsButtonClass">
 <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
