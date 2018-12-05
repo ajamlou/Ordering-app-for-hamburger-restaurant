@@ -21,21 +21,21 @@ export default {
         {name:'Beefinator',
         id: 1,
         pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-        bun: "Brioshe",
+        bun: "Brioche",
         protein: "Hummer",
         sauce: "Grillsås"
       },
       {name:'Vegginator',
       id: 2,
       pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-      bun: "Brioshe",
+      bun: "Brioche",
       protein: "Hummer",
       sauce: "Grillsås"
     },
     {name:'Veganinator',
     id:3,
     pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-    bun: "Brioshe",
+    bun: "Brioche",
     protein: "Hummer",
     sauce: "Grillsås"
   }
