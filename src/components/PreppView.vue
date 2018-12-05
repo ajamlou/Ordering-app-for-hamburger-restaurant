@@ -70,7 +70,7 @@ export default {
 .prepp-grid {
   color: white;
   display: grid;
-  position: relative;
+  position: fixed;
   grid-template-columns: 50% 50%;
   color: white;
   text-align: center;
@@ -96,34 +96,20 @@ export default {
 
 #header1 {
   background: #FFA500;
+  border-right: 2px solid white;
 }
 #header2 {
   background: #00FF7F;
+  border-left: 2px solid white;
 }
 
-#preparing {
+#preparing, #finished {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
   width: 50vw;
 }
 
-/* #preparing {
-
-margin-right: 0;
-padding-right: 0;
-}
-#finished {
-margin-left: 0;
-padding-left: 0;
-}
-#orders, #finished {
-width: 25vw;
-} */
-
-/* .toPrepare {
-width: 42%;
-} */
 .isCooking {
   width: 60%;
 }
