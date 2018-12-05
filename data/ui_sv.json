@@ -27,9 +27,11 @@
   "sides" : "Tillbehör",
   "drinks" : "Dryck",
   "myBurger" : "Designa din hamburgare",
-  "sidesAndDrinks" : "Tillbehör & dryck",
+  "extras" : "Tillbehör & dryck",
   "cancel": "Avbryt",
   "back" : "Gå tillbaka",
   "burger" : "Burgare",
-  "back2": "TILLBAKA"
+  "back2": "TILLBAKA",
+  "quantity" : "Antal",
+  "unitprice" : "Styckpris"
 }
