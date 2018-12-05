@@ -8,7 +8,7 @@
     </OrderingViewFrontPage>
   </div>
 
-  
+
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
     @click= "goBack">
@@ -44,7 +44,7 @@
     :lang="lang"
     :threshold="category.threshold"
     :item_count="categoryItemCounter[category.categoryNr-1]"
-    @ingredient_clicked="removeFromOrder"
+    @remove_ingredient="removeFromOrder"
     @modal_info="switchVisibility">
   </CategoryRow>
 
@@ -58,7 +58,7 @@
   :lang="lang"
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr -1]"
-  @ingredient_clicked="removeFromOrder"
+  @remove_ingredient="removeFromOrder"
   @modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
@@ -165,13 +165,13 @@ export default {
                   }
                 },
                 addToOrder: function (item) {
+                  this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
                   if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
                   }
-                  this.price += +item.selling_price;
-                  this.isModalVisible = false;
+                  this.price += +item.selling_price;            
                 },
                 placeOrder: function () {
                   if(this.chosenIngredients.length>0){
