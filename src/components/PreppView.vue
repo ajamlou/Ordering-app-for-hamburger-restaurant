@@ -70,7 +70,7 @@ export default {
 .prepp-grid {
   color: white;
   display: grid;
-  position: fixed;
+  position: relative;
   grid-template-columns: 50% 50%;
   color: white;
   text-align: center;
