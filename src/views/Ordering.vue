@@ -71,7 +71,7 @@
 :threshold="category.threshold"
 :item_count="categoryItemCounter[category.categoryNr -1]"
 @remove_ingredient="removeFromMenu"
-@modal_info="switchVisibility">
+@info_to_modal="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-

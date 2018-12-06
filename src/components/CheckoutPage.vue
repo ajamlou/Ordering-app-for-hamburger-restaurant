@@ -4,14 +4,16 @@
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
     </div>
-    <div id="checkout-wrapper">
-      <div id="add-btn-div" @click="newMenu">
-        <div id="add-btn-top">
-          <h5>Klicka för att lägga till en burgare</h5>
-        </div>
-        <p>+</p>
+    <div id="btn-order-wrap">
+    <div id="add-btn-div" @click="newMenu">
+      <div id="add-btn-top">
+        <h5>Klicka för att lägga till en burgare</h5>
       </div>
+      <p>+</p>
+    </div>
+    <div id="checkout-wrapper">
       <OrderInCheckout
+      class="flex-item"
       v-for = "(menu, index) in menus"
       :key ="index"
       :id = "index"
@@ -21,6 +23,7 @@
       @remove_menu="removeMenu"
       @modify_menu="modifyMenu">
     </OrderInCheckout>
+  </div>
   </div>
   <div id="checkout-foot">
     <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
@@ -89,20 +92,31 @@ export default{
 </script>
 
 <style scoped>
+#btn-order-wrap{
+  position:relative;
+  display:flex;
+  flex-wrap: nowrap;
+}
 #checkout-wrapper{
   display:flex;
+  flex-wrap: nowrap;
   text-align: center;
-  margin:3em 0 0 1em;
+  overflow-x: auto;
+}
+.flex-item{
+  flex: 0 0 auto;
 }
 
 #add-btn-div{
   display:flex;
   flex-direction: column;
   word-wrap: break-word;
-  max-width:20%;
+  text-align: center;
+  max-width:15%;
   align-items:stretch;
   background-color:rgba(255, 255, 255, 0.9);
   cursor:pointer;
+  flex: 0 0 auto;
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
