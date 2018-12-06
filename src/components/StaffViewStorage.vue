@@ -16,7 +16,8 @@
 
   <div class="modal-body">
     <div v-for="ingredient in ingredients"
-    class="ing-container">
+    class="ing-container"
+    :key="ingredient.ingredient_id">
       <div>
         {{ingredient.ingredient_sv}}
       </div>

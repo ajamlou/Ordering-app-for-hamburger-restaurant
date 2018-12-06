@@ -5,7 +5,8 @@
     <div id="kitchenFront" v-if = "currentView === 'kitchenFrontPage'">
       <KitchenViewFrontPage
       @Visibility="changeView"
-      v-if = "currentView === 'kitchenFrontPage'">
+      v-if = "currentView === 'kitchenFrontPage'"
+      :ingredients="ingredients">
     </KitchenViewFrontPage>
   </div>
   <div id="prepp" v-show="currentView === 'preppPage'">

@@ -25,7 +25,6 @@
 import KitchenModal from '@/components/KitchenModal.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
-import sharedVueStuff from '@/components/sharedVueStuff.js'
 
 
 export default {
@@ -35,7 +34,9 @@ export default {
     StaffViewStorage,
     StaffViewStatistics
   },
-  mixins: [sharedVueStuff],
+  props:{
+    ingredients:Array
+  },
   data: function(){
     return {
       ModalVisibility: false,
