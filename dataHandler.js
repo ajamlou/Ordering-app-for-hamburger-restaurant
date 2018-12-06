@@ -97,6 +97,7 @@ Data.prototype.addOrder = function (order) {
 /*Detta körs när man beställer från checkoutPage*/
 else{
   i = order.order.menus;
+  console.log(i);
   /*Här tar vi ut alla menyer ur en order*/
   for(j=0;j < i.length;j++){
     /*Här går vi igenom alla ingredienser, en meny i taget*/
@@ -104,7 +105,7 @@ else{
       transId += 1;
       transactions.push({transaction_id: transId,
                          ingredient_id: i[j].ingredients[k].ingredient_id,
-                         change: - 1});
+                         change: - 1*i[j].units});
     }
   }
 }

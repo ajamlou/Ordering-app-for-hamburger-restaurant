@@ -50,7 +50,7 @@
   <CategoryRow v-for="category in burgerCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
-  :added_items="displayedIngredients"
+  :added_items="chosenIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
@@ -64,7 +64,7 @@
 <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
-:added_items="displayedIngredients"
+:added_items="chosenIngredients"
 :category_name="uiLabels[category.label]"
 :lang="lang"
 :threshold="category.threshold"
@@ -114,10 +114,7 @@ export default {
   data: function() { //Not that data is a function!
     return {
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
-      /*chosenIngredients är de ingredienser som skickas till köket*/
-      //chosenIngredients: [],
-      /*displayedIngredients är de ingredienser som visas i Ordering*/
-      displayedIngredients: [],
+      chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
@@ -187,18 +184,15 @@ export default {
                 addToMenu: function (item) {
                   this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
-                  this.displayedIngredients.push(item);
-                  /*/if(item.category !== 5 && item.category !== 6){
-                    this.chosenIngredients.push(item);
-                  }*/
+                  this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
                 },
                 placeOrder: function () {
-                  if(this.displayedIngredients.length>0){
+                  if(this.chosenIngredients.length>0){
                     var i,
                     //Wrap the order in an object
                     order = {
-                      ingredients: this.displayedIngredients,
+                      ingredients: this.chosenIngredients,
                       price: this.price
                     };
                     // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
@@ -208,41 +202,29 @@ export default {
                       this.$refs.modal.$refs.ingredient[i].resetCounter();
                     }*/
                     this.price = 0;
-                    //this.chosenIngredients = [];
-                    this.displayedIngredients = [];
+                    this.chosenIngredients = [];
                     for(i=0; i < this.categoryItemCounter.length; i++){
                       this.categoryItemCounter[i] = 0;
                     }
                   }
                 },
                 removeFromMenu: function(item,index) {
-                  let i;
-                  /*if(item.category < 5){
-                    loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå
-                    for(i=0; i<this.chosenIngredients.length;i++){
-                      if(this.chosenIngredients[i].ingredient_id===item.ingredient_id){
-                        this.chosenIngredients.splice(i,1);
-                        break;
-                      }
-                    }
-                  }*/
-                  /*tar bort exakt den ingrediens som blivit klickad på*/
-                  this.displayedIngredients.splice(index,1);
+                  this.chosenIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
                 modifyMenu:function(ingredients,units,index){
-                  this.displayedIngredients=ingredients;
+                  this.chosenIngredients=ingredients;
                   this.units=units;
                   this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');
 
                 },
-                /*Tar displayed ingredients och price och wrappar till ett objekt.
+                /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
                 addToCheckout: function(){
-                  let order ={"ingredients": this.displayedIngredients,
+                  let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
                   "units":this.units};
 
@@ -261,13 +243,12 @@ export default {
                 for(i=0;i<this.categoryItemCounter.length;i++){
                 this.categoryItemCounter[i]=0;
               }
-                //this.chosenIngredients = [];
-                this.displayedIngredients = [];
+                this.chosenIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
               },
               clearAll:function(){
-                this.displayedIngredients = [];
+                this.chosenIngredients = [];
                 this.menusArray=[];
                 this.price = 0;
               }
