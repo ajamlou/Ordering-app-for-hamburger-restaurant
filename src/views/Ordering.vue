@@ -224,6 +224,7 @@ export default {
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
                 addToCheckout: function(){
+                  if(this.chosenIngredients.length>0){
                   let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
                   "units":this.units};
@@ -237,6 +238,10 @@ export default {
                   else{
                   this.menusArray.push(order);
                 }
+              }
+              /*Lägg in en else-sats som skickar upp en modal
+              som varnar för att du försöker lägga en tom
+              beställning*/
               },
               newMenu:function(){
                 let i;
