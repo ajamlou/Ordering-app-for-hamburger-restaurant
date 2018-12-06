@@ -38,9 +38,8 @@
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
   <h2>{{ uiLabels.myBurger }} </h2>
   <modal ref="modal"
-  :category="this.modalCategory"
-  v-show="this.isModalVisible === true"
-  :ingredients="ingredients"
+  v-show="this.isModalVisible"
+  :ingredients="ingredients.filter(item=>item.category===modalCategory)"
   :lang="lang"
   @add_ingredient="addToMenu"
   @ModalInfo="switchVisibility">
@@ -157,7 +156,7 @@ export default {
               methods: {
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 switchVisibility: function(category) {
-                  if (this.isModalVisible === true){
+                  if (this.isModalVisible){
                     this.isModalVisible = false;
                   }
                   else {
@@ -167,6 +166,7 @@ export default {
                 },
 
                 changeView: function(view){
+                  /*Gör så att vi inte kan byta vy med en tom order*/
                   if(this.chosenIngredients.length <= 0){
                     if(view==='checkoutPage'){
                       return;

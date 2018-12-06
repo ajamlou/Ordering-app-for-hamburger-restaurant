@@ -13,7 +13,6 @@
         ref="ingredient"
         v-for="item in ingredients"
         @ingredient_clicked="emitAddIngredient(item)"
-        v-if="item.category == category"
         :item="item"
         :lang="lang"
         :key="item.ingredient_id">
@@ -33,7 +32,6 @@ export default {
     Ingredient
   },
   props: {
-    category: Number,
     ingredients: Array,
     lang: String
   },
