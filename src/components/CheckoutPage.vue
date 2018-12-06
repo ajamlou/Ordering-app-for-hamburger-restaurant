@@ -83,12 +83,12 @@ export default{
   computed:{
     /*Räknar ut det totala priset av en beställning*/
     totalPrice:function(){
-      let counter = 0;
-      let i;
-      for(i=0; i<this.menus.length; i++){
-        counter += this.menus[i].price*this.menus[i].units;
-      }
-      return counter;
+      /*reduce() tar in en valfri variabel (sum) som sätts till
+      ett värde (0) och itererar sedan över alla objekt i arrayen
+      (jämför m. v-for="menu in menus")*/
+      let totalPrice = this.menus.reduce((sum,menu) =>
+      sum + menu.price*menu.units,0);
+      return totalPrice;
     },
   }
 }

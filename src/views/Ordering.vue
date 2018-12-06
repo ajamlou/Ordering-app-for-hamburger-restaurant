@@ -249,10 +249,7 @@ export default {
                 beställning*/
               },
               newMenu:function(){
-                let i;
-                for(i=0;i<this.categoryItemCounter.length;i++){
-                  this.categoryItemCounter[i]=0;
-                }
+                this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
                 this.chosenIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
