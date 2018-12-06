@@ -37,7 +37,7 @@ export default {
   props:{
     ingredients:Array
   },
-  data: function(){ 
+  data: function(){
     return {
       ModalVisibility: false,
       decidedContent: ""

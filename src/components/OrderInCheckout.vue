@@ -3,7 +3,7 @@
     <h5>{{uiLabels.burger}} {{id +1}} </h5>
     <h6>Din burgare:</h6>
     <div
-    v-for="(ingredient,index) in order.ingredients"
+    v-for="(ingredient,index) in menu.ingredients"
     v-if="ingredient.category < 5 "
     :key="index">
     {{ingredient["ingredient_"+ lang]}}
@@ -12,21 +12,23 @@
 
   <h6 v-if="existsExtras">{{uiLabels.extras}}:</h6>
   <div
-  v-for="(ingredient,index) in order.ingredients"
+  v-for="(ingredient,index) in menu.ingredients"
   v-if="ingredient.category > 4 "
   :key="index">
   {{ingredient["ingredient_"+ lang]}}
 </div>
 <div class="ord-check-foot">
-  {{uiLabels.unitprice}}: {{order.price}}:-
+  {{uiLabels.unitprice}}: {{menu.price}}:-
   <br>
   <div class="ord-quant">
     <label>{{uiLabels.quantity}}:</label><input
     type="number"
-    v-model="order.units">
+    v-model="menu.units"
+    min="1"
+    max="99">
     <div class="btns">
-      <button @click="removeOrder">{{uiLabels.remove}}</button>
-      <button @click="modifyOrder">{{uiLabels.modify}}</button>
+      <button @click="removeMenu">{{uiLabels.remove}}</button>
+      <button @click="modifyMenu">{{uiLabels.modify}}</button>
     </div>
   </div>
 </div>
@@ -40,16 +42,16 @@ export default{
   },
   props:{
     id: Number,
-    order:Object,
+    menu:Object,
     uiLabels: Object,
     lang: String
   },
   methods:{
-    removeOrder:function(){
-      this.$emit('remove_order',this.id);
+    removeMenu:function(){
+      this.$emit('remove_menu',this.id);
     },
-    modifyOrder:function(){
-      this.$emit('modify_order', this.order.ingredients, this.order.units,this.id);
+    modifyMenu:function(){
+      this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id);
       this.$emit('change_view','designPage');
     },
   },
@@ -57,8 +59,8 @@ export default{
     existsExtras:function(){
       let extras = false;
       let i;
-      for(i=0; i<this.order.ingredients.length;i++){
-        if(this.order.ingredients[i].category > 4){
+      for(i=0; i<this.menu.ingredients.length;i++){
+        if(this.menu.ingredients[i].category > 4){
           extras = true;
           return extras;
         }

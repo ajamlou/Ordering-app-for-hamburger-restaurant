@@ -5,21 +5,21 @@
       {{uiLabels.yourOrder}}
     </div>
     <div id="checkout-wrapper">
-      <div id="add-btn-div" @click="newOrder">
+      <div id="add-btn-div" @click="newMenu">
         <div id="add-btn-top">
           <h5>Klicka för att lägga till en burgare</h5>
         </div>
         <p>+</p>
     </div>
     <OrderInCheckout
-    v-for = "(order, index) in orders"
+    v-for = "(menu, index) in menus"
     :key ="index"
     :id = "index"
-    :order = "order"
+    :menu = "menu"
     :uiLabels = "uiLabels"
     :lang="lang"
-    @remove_order="removeOrder"
-    @modify_order="modifyOrder">
+    @remove_menu="removeMenu"
+    @modify_menu="modifyMenu">
     </OrderInCheckout>
     </div>
     <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
@@ -39,7 +39,7 @@ export default{
   },
   props:{
     uiLabels:Object,
-    orders: Array,
+    menus: Array,
     lang: String
   },
   data: function(){
@@ -49,18 +49,18 @@ export default{
   },
   methods:{
     goBack:function(){
-      this.orders.pop();
+      this.menus.pop();
       this.$emit('go_back');
     },
-    removeOrder:function(index){
-      this.orders.splice(index,1);
+    removeMenu:function(index){
+      this.menus.splice(index,1);
     },
-    modifyOrder:function(ingredients,units,index){
-      this.$emit('modify_order',ingredients,units,index);
-      this.orders.splice(index,1);
+    modifyMenu:function(ingredients,units,index){
+      this.$emit('modify_menu',ingredients,units,index);
+      this.menus.splice(index,1);
     },
-    newOrder:function(){
-      this.$emit('new_order');
+    newMenu:function(){
+      this.$emit('new_menu');
     }
 
   },
@@ -69,8 +69,8 @@ export default{
     totalPrice:function(){
       let counter = 0;
       let i;
-      for(i=0; i<this.orders.length; i++){
-        counter += this.orders[i].price*this.orders[i].units;
+      for(i=0; i<this.menus.length; i++){
+        counter += this.menus[i].price*this.menus[i].units;
       }
       return counter;
     },

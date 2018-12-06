@@ -20,11 +20,11 @@
   <div v-if = "currentView === 'checkoutPage'">
     <CheckoutPage
     :uiLabels="uiLabels"
-    :orders="ordersArray"
+    :menus="menusArray"
     :lang="lang"
     @go_back="goBack"
-    @new_order="newOrder"
-    @modify_order="modifyOrder">
+    @new_menu="newMenu"
+    @modify_menu="modifyMenu">
   </CheckoutPage>
 </div>
 
@@ -121,10 +121,10 @@ export default {
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
-      ordersArray:[], /*Sparar enskilda orders i en array*/
-      units:1, /*Extra viktig främst när vi ändrar en order*/
-      modifyOrderIndex:0, /*Håller koll så att när en order ändras från checkout läggs ordern tillbaka på samma ställe igen*/
-      isModifying:false, /*Ändras till true när vi ändrar en order, har effekt på addToCheckout*/
+      menusArray:[], /*Sparar enskilda menyer i en array*/
+      units:1, /*Extra viktig främst när vi ändrar en meny*/
+      modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
+      isModifying:false, /*Ändras till true när vi ändrar en meny, har effekt på addToCheckout*/
       modalCategory:0,
       isModalVisible: false,
       currentView: "frontPage",
@@ -231,10 +231,10 @@ export default {
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
-                modifyOrder:function(ingredients,units,index){
+                modifyMenu:function(ingredients,units,index){
                   this.displayedIngredients=ingredients;
                   this.units=units;
-                  this.modifyOrderIndex=index;
+                  this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');
 
@@ -248,15 +248,15 @@ export default {
 
                   if(this.isModifying){
                     /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i orderArray*/
-                    this.ordersArray.splice(this.modifyOrderIndex,0,order);
+                    this.menusArray.splice(this.modifyMenuIndex,0,order);
                     this.units=1;
                     this.isModifying=false;
                   }
                   else{
-                  this.ordersArray.push(order);
+                  this.menusArray.push(order);
                 }
               },
-              newOrder:function(){
+              newMenu:function(){
                 let i;
                 for(i=0;i<this.categoryItemCounter.length;i++){
                 this.categoryItemCounter[i]=0;
