@@ -71,12 +71,10 @@ export default{
 }
 </script>
 <style scoped>
-.ord-check-div{
-  text-align: center;
-}
 
-.ord-quant{
-  vertical-align: middle;
+.ord-check-div{
+  background-color:rgba(255,255,255,0.9);
+  border: 1px solid rgb(100,100,100);
 }
 
 .ord-quant input{

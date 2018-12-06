@@ -23,6 +23,7 @@
     :orders="ordersArray"
     :lang="lang"
     @go_back="goBack"
+    @new_order="newOrder"
     @modify_order="modifyOrder">
   </CheckoutPage>
 </div>
@@ -254,7 +255,17 @@ export default {
                   else{
                   this.ordersArray.push(order);
                 }
-                }
+              },
+              newOrder:function(){
+                let i;
+                for(i=0;i<this.categoryItemCounter.length;i++){
+                this.categoryItemCounter[i]=0;
+              }
+                this.chosenIngredients = [];
+                this.displayedIngredients = [];
+                this.price = 0;
+                this.changeView('designPage');
+              }
 
               }
             }

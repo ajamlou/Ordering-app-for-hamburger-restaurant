@@ -15,9 +15,15 @@
     @remove_order="removeOrder"
     @modify_order="modifyOrder">
     </OrderInCheckout>
-
-    <p>{{uiLabels.sum}}: {{totalPrice}}:-</p>
+    <div id="add-btn-div" @click="newOrder">
+      <div id="add-btn-top">
+        <h5>Klicka för att lägga till en burgare</h5>
       </div>
+      <p>+</p>
+  </div>
+
+      </div>
+    <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
 
     </div>
 </template>
@@ -53,7 +59,9 @@ export default{
     modifyOrder:function(ingredients,units,index){
       this.$emit('modify_order',ingredients,units,index);
       this.orders.splice(index,1);
-
+    },
+    newOrder:function(){
+      this.$emit('new_order');
     }
 
   },
@@ -72,4 +80,28 @@ export default{
 </script>
 
 <style scoped>
+#checkout-wrapper{
+  display:flex;
+  text-align: center;
+  margin:3em 0 0 1em;
+}
+
+#add-btn-div{
+  display:flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  max-width:20%;
+  align-items:stretch;
+  background-color:rgba(255, 255, 255, 0.9);
+  cursor:pointer;
+}
+#add-btn-div:hover{
+  background-color:rgba(100, 100, 100, 0.9);
+}
+#add-btn-div>p{
+  margin:auto;
+  font-size: 2em;
+}
+
+
 </style>
