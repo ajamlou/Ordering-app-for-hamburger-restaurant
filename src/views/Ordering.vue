@@ -7,7 +7,7 @@
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
-
+{{this.orderNumber}}
 
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
@@ -24,7 +24,8 @@
     :lang="lang"
     @go_back="goBack"
     @new_menu="newMenu"
-    @modify_menu="modifyMenu">
+    @modify_menu="modifyMenu"
+    @clear_all="clearAll">
   </CheckoutPage>
 </div>
 
@@ -265,6 +266,11 @@ export default {
                 this.displayedIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
+              },
+              clearAll:function(){
+                this.displayedIngredients = [];
+                this.menusArray=[];
+                this.price = 0;
               }
 
               }

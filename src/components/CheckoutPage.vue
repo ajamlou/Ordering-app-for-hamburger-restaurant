@@ -10,21 +10,24 @@
           <h5>Klicka för att lägga till en burgare</h5>
         </div>
         <p>+</p>
-    </div>
-    <OrderInCheckout
-    v-for = "(menu, index) in menus"
-    :key ="index"
-    :id = "index"
-    :menu = "menu"
-    :uiLabels = "uiLabels"
-    :lang="lang"
-    @remove_menu="removeMenu"
-    @modify_menu="modifyMenu">
+      </div>
+      <OrderInCheckout
+      v-for = "(menu, index) in menus"
+      :key ="index"
+      :id = "index"
+      :menu = "menu"
+      :uiLabels = "uiLabels"
+      :lang="lang"
+      @remove_menu="removeMenu"
+      @modify_menu="modifyMenu">
     </OrderInCheckout>
-    </div>
+  </div>
+  <div id="checkout-foot">
     <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+    <button id="order-btn2" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+  </div>
 
-    </div>
+</div>
 </template>
 
 <script>
@@ -61,8 +64,15 @@ export default{
     },
     newMenu:function(){
       this.$emit('new_menu');
+    },
+    placeOrder: function () {
+      if(this.menus.length>0){
+        let menus = {menus: this.menus};
+        // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+        this.$store.state.socket.emit('order', {order: menus});
+        this.$emit('clear_all');
+      }
     }
-
   },
   computed:{
     /*Räknar ut det totala priset av en beställning*/

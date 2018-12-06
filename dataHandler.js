@@ -82,13 +82,32 @@ Data.prototype.addOrder = function (order) {
     //find out the currently highest transaction id
     transId =  transactions[transactions.length - 1].transaction_id,
     i = order.order.ingredients,
+    j,
     k;
+    /*Nedanstående kod körs bara om man beställer direkt från designPage*/
+    if(order.order.ingredients != undefined){
   for (k = 0; k < i.length; k += 1) {
     transId += 1;
     transactions.push({transaction_id: transId,
                        ingredient_id: i[k].ingredient_id,
                        change: - 1});
   }
+}
+
+/*Detta körs när man beställer från checkoutPage*/
+else{
+  i = order.order.menus;
+  /*Här tar vi ut alla menyer ur en order*/
+  for(j=0;j < i.length;j++){
+    /*Här går vi igenom alla ingredienser, en meny i taget*/
+    for(k=0;k<i[j].ingredients.length;k++){
+      transId += 1;
+      transactions.push({transaction_id: transId,
+                         ingredient_id: i[j].ingredients[k].ingredient_id,
+                         change: - 1});
+    }
+  }
+}
     return orderId;
 };
 
