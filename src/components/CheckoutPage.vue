@@ -5,6 +5,12 @@
       {{uiLabels.yourOrder}}
     </div>
     <div id="checkout-wrapper">
+      <div id="add-btn-div" @click="newOrder">
+        <div id="add-btn-top">
+          <h5>Klicka för att lägga till en burgare</h5>
+        </div>
+        <p>+</p>
+    </div>
     <OrderInCheckout
     v-for = "(order, index) in orders"
     :key ="index"
@@ -15,14 +21,7 @@
     @remove_order="removeOrder"
     @modify_order="modifyOrder">
     </OrderInCheckout>
-    <div id="add-btn-div" @click="newOrder">
-      <div id="add-btn-top">
-        <h5>Klicka för att lägga till en burgare</h5>
-      </div>
-      <p>+</p>
-  </div>
-
-      </div>
+    </div>
     <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
 
     </div>
