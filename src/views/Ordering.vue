@@ -42,7 +42,7 @@
   v-show="this.isModalVisible === true"
   :ingredients="ingredients"
   :lang="lang"
-  @addOrder="addToOrder"
+  @add_ingredient="addToMenu"
   @ModalInfo="switchVisibility">
 </modal>
 
@@ -55,8 +55,8 @@
   :lang="lang"
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr-1]"
-  @remove_ingredient="removeFromOrder"
-  @modal_info="switchVisibility">
+  @remove_ingredient="removeFromMenu"
+  @info_to_modal="switchVisibility">
 </CategoryRow>
 
 <h1>{{uiLabels.extras}}</h1>
@@ -69,7 +69,7 @@
 :lang="lang"
 :threshold="category.threshold"
 :item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromOrder"
+@remove_ingredient="removeFromMenu"
 @modal_info="switchVisibility">
 </CategoryRow>
 <div class="price-div">
@@ -184,7 +184,7 @@ export default {
                     this.breadcrumbs.pop();
                   }
                 },
-                addToOrder: function (item) {
+                addToMenu: function (item) {
                   this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
@@ -204,9 +204,9 @@ export default {
                     // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
                     this.$store.state.socket.emit('order', {order: order});
                     //set all counters to 0. Notice the use of $refs
-                    for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
+                    /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
                       this.$refs.modal.$refs.ingredient[i].resetCounter();
-                    }
+                    }*/
                     this.price = 0;
                     this.chosenIngredients = [];
                     this.displayedIngredients = [];
@@ -215,7 +215,7 @@ export default {
                     }
                   }
                 },
-                removeFromOrder: function(item,index) {
+                removeFromMenu: function(item,index) {
                   let i;
                   if(item.category < 5){
                     /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/

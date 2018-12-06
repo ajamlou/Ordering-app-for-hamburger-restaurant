@@ -12,7 +12,7 @@
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
-        @ingredient_clicked="emitAddOrder(item)"
+        @ingredient_clicked="emitAddIngredient(item)"
         v-if="item.category == category"
         :item="item"
         :lang="lang"
@@ -38,8 +38,8 @@ export default {
     lang: String
   },
   methods:{
-    emitAddOrder:function(item){
-    this.$emit('addOrder',item);
+    emitAddIngredient:function(item){
+    this.$emit('add_ingredient',item);
   }
   }
       }
