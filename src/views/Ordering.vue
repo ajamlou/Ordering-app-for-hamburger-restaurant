@@ -7,7 +7,6 @@
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
   </div>
-{{this.orderNumber}}
 
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
@@ -116,7 +115,7 @@ export default {
     return {
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       /*chosenIngredients är de ingredienser som skickas till köket*/
-      chosenIngredients: [],
+      //chosenIngredients: [],
       /*displayedIngredients är de ingredienser som visas i Ordering*/
       displayedIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
@@ -189,17 +188,17 @@ export default {
                   this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.displayedIngredients.push(item);
-                  if(item.category !== 5 && item.category !== 6){
+                  /*/if(item.category !== 5 && item.category !== 6){
                     this.chosenIngredients.push(item);
-                  }
+                  }*/
                   this.price += +item.selling_price;
                 },
                 placeOrder: function () {
-                  if(this.chosenIngredients.length>0){
+                  if(this.displayedIngredients.length>0){
                     var i,
                     //Wrap the order in an object
                     order = {
-                      ingredients: this.chosenIngredients,
+                      ingredients: this.displayedIngredients,
                       price: this.price
                     };
                     // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
@@ -209,7 +208,7 @@ export default {
                       this.$refs.modal.$refs.ingredient[i].resetCounter();
                     }*/
                     this.price = 0;
-                    this.chosenIngredients = [];
+                    //this.chosenIngredients = [];
                     this.displayedIngredients = [];
                     for(i=0; i < this.categoryItemCounter.length; i++){
                       this.categoryItemCounter[i] = 0;
@@ -218,15 +217,15 @@ export default {
                 },
                 removeFromMenu: function(item,index) {
                   let i;
-                  if(item.category < 5){
-                    /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/
+                  /*if(item.category < 5){
+                    loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå
                     for(i=0; i<this.chosenIngredients.length;i++){
                       if(this.chosenIngredients[i].ingredient_id===item.ingredient_id){
                         this.chosenIngredients.splice(i,1);
                         break;
                       }
                     }
-                  }
+                  }*/
                   /*tar bort exakt den ingrediens som blivit klickad på*/
                   this.displayedIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
@@ -262,7 +261,7 @@ export default {
                 for(i=0;i<this.categoryItemCounter.length;i++){
                 this.categoryItemCounter[i]=0;
               }
-                this.chosenIngredients = [];
+                //this.chosenIngredients = [];
                 this.displayedIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
