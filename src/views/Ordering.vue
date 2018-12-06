@@ -167,8 +167,13 @@ export default {
                 },
 
                 changeView: function(view){
-                  this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
-                  this.currentView = view;
+                  if(this.chosenIngredients.length <= 0){
+                    if(view==='checkoutPage'){
+                      return;
+                    }
+                  }
+                    this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
+                    this.currentView = view;
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -199,32 +204,32 @@ export default {
                     this.$store.state.socket.emit('order', {order: order});
                     //set all counters to 0. Notice the use of $refs
                     /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-                      this.$refs.modal.$refs.ingredient[i].resetCounter();
-                    }*/
-                    this.price = 0;
-                    this.chosenIngredients = [];
-                    for(i=0; i < this.categoryItemCounter.length; i++){
-                      this.categoryItemCounter[i] = 0;
-                    }
+                    this.$refs.modal.$refs.ingredient[i].resetCounter();
+                  }*/
+                  this.price = 0;
+                  this.chosenIngredients = [];
+                  for(i=0; i < this.categoryItemCounter.length; i++){
+                    this.categoryItemCounter[i] = 0;
                   }
-                },
-                removeFromMenu: function(item,index) {
-                  this.chosenIngredients.splice(index,1);
-                  this.categoryItemCounter[item.category-1]-=1;
-                  this.price -= item.selling_price;
-                },
-                modifyMenu:function(ingredients,units,index){
-                  this.chosenIngredients=ingredients;
-                  this.units=units;
-                  this.modifyMenuIndex=index;
-                  this.isModifying = true;
-                  this.changeView('designPage');
+                }
+              },
+              removeFromMenu: function(item,index) {
+                this.chosenIngredients.splice(index,1);
+                this.categoryItemCounter[item.category-1]-=1;
+                this.price -= item.selling_price;
+              },
+              modifyMenu:function(ingredients,units,index){
+                this.chosenIngredients=ingredients;
+                this.units=units;
+                this.modifyMenuIndex=index;
+                this.isModifying = true;
+                this.changeView('designPage');
 
-                },
-                /*Tar chosen ingredients och price och wrappar till ett objekt.
-                Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
-                addToCheckout: function(){
-                  if(this.chosenIngredients.length>0){
+              },
+              /*Tar chosen ingredients och price och wrappar till ett objekt.
+              Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
+              addToCheckout: function(){
+                if(this.chosenIngredients.length>0){
                   let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
                   "units":this.units};
@@ -236,18 +241,18 @@ export default {
                     this.isModifying=false;
                   }
                   else{
-                  this.menusArray.push(order);
+                    this.menusArray.push(order);
+                  }
                 }
-              }
-              /*Lägg in en else-sats som skickar upp en modal
-              som varnar för att du försöker lägga en tom
-              beställning*/
+                /*Lägg in en else-sats som skickar upp en modal
+                som varnar för att du försöker lägga en tom
+                beställning*/
               },
               newMenu:function(){
                 let i;
                 for(i=0;i<this.categoryItemCounter.length;i++){
-                this.categoryItemCounter[i]=0;
-              }
+                  this.categoryItemCounter[i]=0;
+                }
                 this.chosenIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
@@ -258,95 +263,95 @@ export default {
                 this.price = 0;
               }
 
-              }
             }
-            </script>
-            <style scoped>
-            /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
-            .masterDiv{
-              font-family: 'Montserrat', sans-serif;
-              height:100%;
-              margin-top:0px !important;
-              padding-top:0px !important;
-              background-color:#f8ffd6;
-            }
-
-            .price-div{
-              text-align: center;
-              font-size: 2em;
-            }
-
-            #ordering {
-              margin:auto;
-              width: 90%;
-            }
-            /*
-            .example-panel {
-            position: fixed;
-            left:0;
-            top:0;
-            z-index: -2;
           }
-          */
+          </script>
+          <style scoped>
+          /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
+          .masterDiv{
+            font-family: 'Montserrat', sans-serif;
+            height:100%;
+            margin-top:0px !important;
+            padding-top:0px !important;
+            background-color:#f8ffd6;
+          }
 
-          .ingredient{
-            border: 1px solid #ccd;
-            background-color: rgba(255, 255, 255, 0.5);
+          .price-div{
+            text-align: center;
             font-size: 2em;
-            color: rgb(100,100,100);
-            border-radius: 15px;
-            width:33%;
-            height:3em;
-            text-align: center;
-            margin:auto auto 7px auto;
           }
 
-          .ingredient-wrapper{ /*Denna styr horisontell scroll*/
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            overflow-y:hidden;
-            border-radius: 15px;
-            /*display: grid;
-            grid-gap: 0px;
-            grid-template-columns: repeat(10,10%);
-            grid-template-areas: "title";
-            text-align: center;*/
+          #ordering {
+            margin:auto;
+            width: 90%;
           }
+          /*
+          .example-panel {
+          position: fixed;
+          left:0;
+          top:0;
+          z-index: -2;
+        }
+        */
 
-          #bestallning{ /* Beställningsrubriken */
-            text-align: center;
-          }
-          .avbryt{ /* Avbryt-knappen */
-            float: left;
-          }
-          #order-btn{
-            margin-bottom: 20px;
-            padding:20px 30px 20px 30px;
-            font-size: 2em;
-            background-color: rgb(0, 150, 0);
-          }
-          #order-btn:hover{
-            color:black;
-            background-color: rgb(0, 200, 0);
-            padding:25px 35px 25px 35px;
-          }
+        .ingredient{
+          border: 1px solid #ccd;
+          background-color: rgba(255, 255, 255, 0.5);
+          font-size: 2em;
+          color: rgb(100,100,100);
+          border-radius: 15px;
+          width:33%;
+          height:3em;
+          text-align: center;
+          margin:auto auto 7px auto;
+        }
 
-          button{
-            float:right;
-            background-color: #ddd;
-            border: none;
-            color: black;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 16px;
-          }
-          button:hover{
-            background-color: #000;
-            color: white;
-          }
-          </style>
+        .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y:hidden;
+          border-radius: 15px;
+          /*display: grid;
+          grid-gap: 0px;
+          grid-template-columns: repeat(10,10%);
+          grid-template-areas: "title";
+          text-align: center;*/
+        }
+
+        #bestallning{ /* Beställningsrubriken */
+          text-align: center;
+        }
+        .avbryt{ /* Avbryt-knappen */
+          float: left;
+        }
+        #order-btn{
+          margin-bottom: 20px;
+          padding:20px 30px 20px 30px;
+          font-size: 2em;
+          background-color: rgb(0, 150, 0);
+        }
+        #order-btn:hover{
+          color:black;
+          background-color: rgb(0, 200, 0);
+          padding:25px 35px 25px 35px;
+        }
+
+        button{
+          float:right;
+          background-color: #ddd;
+          border: none;
+          color: black;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 16px;
+        }
+        button:hover{
+          background-color: #000;
+          color: white;
+        }
+        </style>
