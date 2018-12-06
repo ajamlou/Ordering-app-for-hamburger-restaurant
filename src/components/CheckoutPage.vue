@@ -75,6 +75,9 @@ export default{
         this.$store.state.socket.emit('order', {order: menus});
         this.$emit('clear_all');
       }
+      else{
+        /*Lägg in en modal som varnar för att varukorgen är tom*/
+      }
     }
   },
   computed:{
