@@ -8,23 +8,25 @@
     </OrderingViewFrontPage>
   </div>
 
-
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
-    <FavoritesPage>
+    <FavoritesPage
+    :ingredients="ingredients"
+    :lang = "lang">
     </FavoritesPage>
   </div>
 
   <div v-if = "currentView === 'checkoutPage'">
     <CheckoutPage
     :uiLabels="uiLabels"
-    :orders="ordersArray"
+    :menus="menusArray"
     :lang="lang"
     @go_back="goBack"
-    @new_order="newOrder"
-    @modify_order="modifyOrder">
+    @new_menu="newMenu"
+    @modify_menu="modifyMenu"
+    @clear_all="clearAll">
   </CheckoutPage>
 </div>
 
@@ -37,26 +39,25 @@
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
   <h2>{{ uiLabels.myBurger }} </h2>
-  <modal ref="modal"
-  :category="this.modalCategory"
-  v-show="this.isModalVisible === true"
-  :ingredients="ingredients"
+  <IngredientsModal ref="modal"
+  v-show="this.isModalVisible"
+  :ingredients="ingredients.filter(item=>item.category===modalCategory)"
   :lang="lang"
-  @addOrder="addToOrder"
+  @add_ingredient="addToMenu"
   @ModalInfo="switchVisibility">
-</modal>
+</IngredientsModal>
 
 <div id="categories-wrapper">
   <CategoryRow v-for="category in burgerCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
-  :added_items="displayedIngredients"
+  :added_items="chosenIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr-1]"
-  @remove_ingredient="removeFromOrder"
-  @modal_info="switchVisibility">
+  @remove_ingredient="removeFromMenu"
+  @info_to_modal="switchVisibility">
 </CategoryRow>
 
 <h1>{{uiLabels.extras}}</h1>
@@ -64,13 +65,13 @@
 <CategoryRow v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
-:added_items="displayedIngredients"
+:added_items="chosenIngredients"
 :category_name="uiLabels[category.label]"
 :lang="lang"
 :threshold="category.threshold"
 :item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromOrder"
-@modal_info="switchVisibility">
+@remove_ingredient="removeFromMenu"
+@info_to_modal="switchVisibility">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
@@ -89,7 +90,7 @@ import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 //import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
-import Modal from '@/components/Modal.vue'
+import IngredientsModal from '@/components/IngredientsModal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
 import CheckoutPage from '@/components/CheckoutPage.vue'
@@ -104,7 +105,7 @@ export default {
     Ingredient,
     OrderItem,
     CategoryRow,
-    Modal,
+    IngredientsModal,
     OrderingViewFrontPage,
     FavoritesPage,
     CheckoutPage
@@ -114,17 +115,14 @@ export default {
   data: function() { //Not that data is a function!
     return {
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
-      /*chosenIngredients är de ingredienser som skickas till köket*/
       chosenIngredients: [],
-      /*displayedIngredients är de ingredienser som visas i Ordering*/
-      displayedIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       orderNumber: "",
-      ordersArray:[], /*Sparar enskilda orders i en array*/
-      units:1, /*Extra viktig främst när vi ändrar en order*/
-      modifyOrderIndex:0, /*Håller koll så att när en order ändras från checkout läggs ordern tillbaka på samma ställe igen*/
-      isModifying:false, /*Ändras till true när vi ändrar en order, har effekt på addToCheckout*/
+      menusArray:[], /*Sparar enskilda menyer i en array*/
+      units:1, /*Extra viktig främst när vi ändrar en meny*/
+      modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
+      isModifying:false, /*Ändras till true när vi ändrar en meny, har effekt på addToCheckout*/
       modalCategory:0,
       isModalVisible: false,
       currentView: "frontPage",
@@ -160,7 +158,7 @@ export default {
               methods: {
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 switchVisibility: function(category) {
-                  if (this.isModalVisible === true){
+                  if (this.isModalVisible){
                     this.isModalVisible = false;
                   }
                   else {
@@ -170,8 +168,14 @@ export default {
                 },
 
                 changeView: function(view){
-                  this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
-                  this.currentView = view;
+                  /*Gör så att vi inte kan byta vy med en tom order*/
+                  if(this.chosenIngredients.length <= 0){
+                    if(view==='checkoutPage'){
+                      return;
+                    }
+                  }
+                    this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
+                    this.currentView = view;
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -184,13 +188,10 @@ export default {
                     this.breadcrumbs.pop();
                   }
                 },
-                addToOrder: function (item) {
+                addToMenu: function (item) {
                   this.isModalVisible = false;
                   this.categoryItemCounter[item.category -1]+=1;
-                  this.displayedIngredients.push(item);
-                  if(item.category !== 5 && item.category !== 6){
-                    this.chosenIngredients.push(item);
-                  }
+                  this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
                 },
                 placeOrder: function () {
@@ -204,158 +205,152 @@ export default {
                     // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
                     this.$store.state.socket.emit('order', {order: order});
                     //set all counters to 0. Notice the use of $refs
-                    for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-                      this.$refs.modal.$refs.ingredient[i].resetCounter();
-                    }
-                    this.price = 0;
-                    this.chosenIngredients = [];
-                    this.displayedIngredients = [];
-                    for(i=0; i < this.categoryItemCounter.length; i++){
-                      this.categoryItemCounter[i] = 0;
-                    }
+                    /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
+                    this.$refs.modal.$refs.ingredient[i].resetCounter();
+                  }*/
+                  this.price = 0;
+                  this.chosenIngredients = [];
+                  for(i=0; i < this.categoryItemCounter.length; i++){
+                    this.categoryItemCounter[i] = 0;
                   }
-                },
-                removeFromOrder: function(item,index) {
-                  let i;
-                  if(item.category < 5){
-                    /*loopar över choseningredients och tar bort första id-matchen, här kvittar ordningen ändå*/
-                    for(i=0; i<this.chosenIngredients.length;i++){
-                      if(this.chosenIngredients[i].ingredient_id===item.ingredient_id){
-                        this.chosenIngredients.splice(i,1);
-                        break;
-                      }
-                    }
-                  }
-                  /*tar bort exakt den ingrediens som blivit klickad på*/
-                  this.displayedIngredients.splice(index,1);
-                  this.categoryItemCounter[item.category-1]-=1;
-                  this.price -= item.selling_price;
-                },
-                modifyOrder:function(ingredients,units,index){
-                  this.displayedIngredients=ingredients;
-                  this.units=units;
-                  this.modifyOrderIndex=index;
-                  this.isModifying = true;
-                  this.changeView('designPage');
+                }
+              },
+              removeFromMenu: function(item,index) {
+                this.chosenIngredients.splice(index,1);
+                this.categoryItemCounter[item.category-1]-=1;
+                this.price -= item.selling_price;
+              },
+              modifyMenu:function(ingredients,units,index){
+                this.chosenIngredients=ingredients;
+                this.units=units;
+                this.modifyMenuIndex=index;
+                this.isModifying = true;
+                this.changeView('designPage');
 
-                },
-                /*Tar displayed ingredients och price och wrappar till ett objekt.
-                Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
-                addToCheckout: function(){
-                  let order ={"ingredients": this.displayedIngredients,
+              },
+              /*Tar chosen ingredients och price och wrappar till ett objekt.
+              Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
+              addToCheckout: function(){
+                if(this.chosenIngredients.length>0){
+                  let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
                   "units":this.units};
 
                   if(this.isModifying){
                     /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i orderArray*/
-                    this.ordersArray.splice(this.modifyOrderIndex,0,order);
+                    this.menusArray.splice(this.modifyMenuIndex,0,order);
                     this.units=1;
                     this.isModifying=false;
                   }
                   else{
-                  this.ordersArray.push(order);
+                    this.menusArray.push(order);
+                  }
                 }
+                /*Lägg in en else-sats som skickar upp en modal
+                som varnar för att du försöker lägga en tom
+                beställning*/
               },
-              newOrder:function(){
-                let i;
-                for(i=0;i<this.categoryItemCounter.length;i++){
-                this.categoryItemCounter[i]=0;
-              }
+              newMenu:function(){
+                this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
                 this.chosenIngredients = [];
-                this.displayedIngredients = [];
                 this.price = 0;
                 this.changeView('designPage');
+              },
+              clearAll:function(){
+                this.chosenIngredients = [];
+                this.menusArray=[];
+                this.price = 0;
               }
 
-              }
             }
-            </script>
-            <style scoped>
-            /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
-            .masterDiv{
-              font-family: 'Montserrat', sans-serif;
-              height:100%;
-              margin-top:0px !important;
-              padding-top:0px !important;
-              background-color:#f8ffd6;
-            }
-
-            .price-div{
-              text-align: center;
-              font-size: 2em;
-            }
-
-            #ordering {
-              margin:auto;
-              width: 90%;
-            }
-            /*
-            .example-panel {
-            position: fixed;
-            left:0;
-            top:0;
-            z-index: -2;
           }
-          */
+          </script>
+          <style scoped>
+          /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
+          .masterDiv{
+            font-family: 'Montserrat', sans-serif;
+            height:100%;
+            margin-top:0px !important;
+            padding-top:0px !important;
+            background-color:#f8ffd6;
+          }
 
-          .ingredient{
-            border: 1px solid #ccd;
-            background-color: rgba(255, 255, 255, 0.5);
+          .price-div{
+            text-align: center;
             font-size: 2em;
-            color: rgb(100,100,100);
-            border-radius: 15px;
-            width:33%;
-            height:3em;
-            text-align: center;
-            margin:auto auto 7px auto;
           }
 
-          .ingredient-wrapper{ /*Denna styr horisontell scroll*/
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            overflow-y:hidden;
-            border-radius: 15px;
-            /*display: grid;
-            grid-gap: 0px;
-            grid-template-columns: repeat(10,10%);
-            grid-template-areas: "title";
-            text-align: center;*/
+          #ordering {
+            margin:auto;
+            width: 90%;
           }
+          /*
+          .example-panel {
+          position: fixed;
+          left:0;
+          top:0;
+          z-index: -2;
+        }
+        */
 
-          #bestallning{ /* Beställningsrubriken */
-            text-align: center;
-          }
-          .avbryt{ /* Avbryt-knappen */
-            float: left;
-          }
-          #order-btn{
-            margin-bottom: 20px;
-            padding:20px 30px 20px 30px;
-            font-size: 2em;
-            background-color: rgb(0, 150, 0);
-          }
-          #order-btn:hover{
-            color:black;
-            background-color: rgb(0, 200, 0);
-            padding:25px 35px 25px 35px;
-          }
+        .ingredient{
+          border: 1px solid #ccd;
+          background-color: rgba(255, 255, 255, 0.5);
+          font-size: 2em;
+          color: rgb(100,100,100);
+          border-radius: 15px;
+          width:33%;
+          height:3em;
+          text-align: center;
+          margin:auto auto 7px auto;
+        }
 
-          button{
-            float:right;
-            background-color: #ddd;
-            border: none;
-            color: black;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 16px;
-          }
-          button:hover{
-            background-color: #000;
-            color: white;
-          }
-          </style>
+        .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y:hidden;
+          border-radius: 15px;
+          /*display: grid;
+          grid-gap: 0px;
+          grid-template-columns: repeat(10,10%);
+          grid-template-areas: "title";
+          text-align: center;*/
+        }
+
+        #bestallning{ /* Beställningsrubriken */
+          text-align: center;
+        }
+        .avbryt{ /* Avbryt-knappen */
+          float: left;
+        }
+        #order-btn{
+          margin-bottom: 20px;
+          padding:20px 30px 20px 30px;
+          font-size: 2em;
+          background-color: rgb(0, 150, 0);
+        }
+        #order-btn:hover{
+          color:black;
+          background-color: rgb(0, 200, 0);
+          padding:25px 35px 25px 35px;
+        }
+
+        button{
+          float:right;
+          background-color: #ddd;
+          border: none;
+          color: black;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          margin: 4px 2px;
+          cursor: pointer;
+          border-radius: 16px;
+        }
+        button:hover{
+          background-color: #000;
+          color: white;
+        }
+        </style>
