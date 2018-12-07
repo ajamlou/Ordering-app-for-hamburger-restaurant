@@ -1,20 +1,36 @@
 <template>
   <div id="checkout-div">
+    <button @click="goBack">{{uiLabels.back}}</button>
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
     </div>
-    <div id="checkout-wrapper">
-    <OrderInCheckout
-    v-for = "(order, index) in orders"
-    :key ="index"
-    :id = "index"
-    :order = "order"
-    :uiLabels = "uiLabels"
-    :lang="lang">
-    </OrderInCheckout>
+    <div id="btn-order-wrap">
+    <div id="add-btn-div" @click="newMenu">
+      <div id="add-btn-top">
+        <h5>Klicka för att lägga till en burgare</h5>
       </div>
-
+      <p>+</p>
     </div>
+    <div id="checkout-wrapper">
+      <OrderInCheckout
+      class="flex-item"
+      v-for = "(menu, index) in menus"
+      :key ="index"
+      :id = "index"
+      :menu = "menu"
+      :uiLabels = "uiLabels"
+      :lang="lang"
+      @remove_menu="removeMenu"
+      @modify_menu="modifyMenu">
+    </OrderInCheckout>
+  </div>
+  </div>
+  <div id="checkout-foot">
+    <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+    <button id="order-btn2" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+  </div>
+
+</div>
 </template>
 
 <script>
@@ -29,7 +45,7 @@ export default{
   },
   props:{
     uiLabels:Object,
-    orders: Array,
+    menus: Array,
     lang: String
   },
   data: function(){
@@ -38,10 +54,80 @@ export default{
     }
   },
   methods:{
-
+    goBack:function(){
+      this.menus.pop();
+      this.$emit('go_back');
+    },
+    removeMenu:function(index){
+      this.menus.splice(index,1);
+    },
+    modifyMenu:function(ingredients,units,index){
+      this.$emit('modify_menu',ingredients,units,index);
+      this.menus.splice(index,1);
+    },
+    newMenu:function(){
+      this.$emit('new_menu');
+    },
+    placeOrder: function () {
+      if(this.menus.length>0){
+        let menus = {menus: this.menus};
+        // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+        this.$store.state.socket.emit('order', {order: menus});
+        this.$emit('clear_all');
+      }
+      else{
+        /*Lägg in en modal som varnar för att varukorgen är tom*/
+      }
+    }
+  },
+  computed:{
+    /*Räknar ut det totala priset av en beställning*/
+    totalPrice:function(){
+      /*reduce() tar in en valfri variabel (sum) som sätts till
+      ett värde (0) och itererar sedan över alla objekt i arrayen
+      (jämför m. v-for="menu in menus")*/
+      let totalPrice = this.menus.reduce((sum,menu) =>
+      sum + menu.price*menu.units,0);
+      return totalPrice;
+    },
   }
 }
 </script>
 
 <style scoped>
+#btn-order-wrap{
+  position:relative;
+  display:flex;
+  flex-wrap: nowrap;
+}
+#checkout-wrapper{
+  display:flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  overflow-x: auto;
+}
+.flex-item{
+  flex: 0 0 auto;
+}
+
+#add-btn-div{
+  display:flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  text-align: center;
+  max-width:15%;
+  align-items:stretch;
+  background-color:rgba(255, 255, 255, 0.9);
+  cursor:pointer;
+  flex: 0 0 auto;
+}
+#add-btn-div:hover{
+  background-color:rgba(100, 100, 100, 0.9);
+}
+#add-btn-div>p{
+  margin:auto;
+  font-size: 2em;
+}
+
+
 </style>

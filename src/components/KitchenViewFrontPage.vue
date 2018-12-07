@@ -5,10 +5,8 @@
   <button id = "grillButton" @click = "emitSwitchVisibility('grillPage')">GRILL</button>
   <button  id = "preppButton" @click = "emitSwitchVisibility('preppPage')">PREPP</button>
 
-  <div class = "statisticsButtonClass">
+  <div>
   <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
-  </div>
-  <div class = "storageButtonClass">
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
   </div>
 
@@ -27,7 +25,6 @@
 import KitchenModal from '@/components/KitchenModal.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
-import sharedVueStuff from '@/components/sharedVueStuff.js'
 
 
 export default {
@@ -37,7 +34,9 @@ export default {
     StaffViewStorage,
     StaffViewStatistics
   },
-  mixins: [sharedVueStuff],
+  props:{
+    ingredients:Array
+  },
   data: function(){
     return {
       ModalVisibility: false,
@@ -45,9 +44,11 @@ export default {
     }
   },
   methods: {
+    //avgör om gå till grill eller prepp
     emitSwitchVisibility: function(view) {
       this.$emit('Visibility',view)
     },
+    //om modalen ska visas eller inte
     toggleVisibility: function(){
       if (this.ModalVisibility === true){
         this.ModalVisibility = false;
@@ -56,6 +57,7 @@ export default {
         this.ModalVisibility = true;
       }
     },
+    //avgör om lager ellet statistik visas i modal
     decideContent: function(string){
       if (string === "l"){
         this.decidedContent = "storage";
@@ -69,14 +71,15 @@ export default {
 </script>
 
 <style scoped>
+/* Gemensam css för hela sidan */
 .masterDivKitchenFront{
   font-family: 'Montserrat', sans-serif;
   height:100vh;
   margin-top:0px !important;
   padding-top:0px !important;
-  background-color:#f8ffd6;
+  background-color: lightyellow;
 }
-
+/*css för grill- och preppknappar*/
 #grillButton, #preppButton{
   width: 25vw;
   height: 20vh;
@@ -90,15 +93,14 @@ export default {
 
   cursor: pointer;
 }
-
 #grillButton{
   background-color: firebrick;
 }
-
 #preppButton {
   background-color: royalblue;
 }
 
+/*css för statistik- och lagerknappar*/
 #statisticsButton, #storageButton{
 border: 2px solid white;
 color: white;
@@ -115,14 +117,6 @@ width: 12vw;
 height: 10vh;
 margin: 5vh;
 background-color: #00b386;
-}
-
-button{
-
-}
-
-button:hover{
-
 }
 
 </style>

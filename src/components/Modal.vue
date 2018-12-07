@@ -12,8 +12,7 @@
         <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
-        @ingredient_clicked="emitAddOrder(item)"
-        v-if="item.category == category"
+        @ingredient_clicked="emitAddIngredient(item)"
         :item="item"
         :lang="lang"
         :key="item.ingredient_id">
@@ -33,13 +32,12 @@ export default {
     Ingredient
   },
   props: {
-    category: Number,
     ingredients: Array,
     lang: String
   },
   methods:{
-    emitAddOrder:function(item){
-    this.$emit('addOrder',item);
+    emitAddIngredient:function(item){
+    this.$emit('add_ingredient',item);
   }
   }
       }
@@ -92,7 +90,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 

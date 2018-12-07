@@ -9,14 +9,14 @@
 
       <Ingredient
       v-for="(item, index) in added_items"
-      v-if="item.category == category"
+      v-if="item.category === category"
       :item="item"
       :lang="lang"
       :key="index"
       @ingredient_clicked="removeIngredient(item,index)">
     </Ingredient>
 
-    <button @click="emitModalInfo"
+    <button @click="emitInfoToModal"
     class="PlusButton"
     v-show="threshold > item_count">
       <slot>+</slot>
@@ -50,8 +50,8 @@ export default {
     removeIngredient:function(item,index){
       this.$emit('remove_ingredient',item,index);
     },
-    emitModalInfo:function(){
-      this.$emit('modal_info', this.category)
+    emitInfoToModal:function(){
+      this.$emit('info_to_modal', this.category)
     },
   }
 }
