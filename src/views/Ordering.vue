@@ -14,7 +14,8 @@
     @click= "goBack">
     {{ uiLabels.back }}</button>
     <FavoritesPage
-    :ingredients="ingredients">
+    :ingredients="ingredients"
+    :lang = "lang">
     </FavoritesPage>
   </div>
 

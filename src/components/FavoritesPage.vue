@@ -1,21 +1,18 @@
 <template>
   <div class = "wrapper">
-    <div v-for="item in ingredients">
-      {{item.ingredient_id}}
-    </div>
     <div class = "favorites" v-for = "item in favBurgers" :key = "item.id">
       <h1 class = "header">{{item.name}}</h1>
       <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-      <ul class = "ingredients">
-        <li>{{item.bun}}</li>
-        <li>{{item.protein}}</li>
-        <li>{{item.sauce}}</li>
-      </ul>
+      <Favorite
+        :ingredients = "ingredients"
+        :lang ="lang">
+      </Favorite>
     </div>
   </div>
 </template>
 
 <script>
+import Favorite from '@/components/Favorite.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -46,7 +43,11 @@ export default {
 }
 },
 props:{
-ingredients:Array
+ingredients:Array,
+lang: String
+},
+components:{
+Favorite
 },
 // computed:{
 //   favBurgers.bun: function(){
