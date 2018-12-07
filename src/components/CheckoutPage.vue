@@ -1,5 +1,18 @@
 <template>
   <div id="checkout-div">
+
+    <SlotModal
+    v-if="this.showSlotModal">
+    <div slot="header"><button
+          type="button"
+          class="btn-close"
+          @click="toggleSlotModal()">
+          x
+        </button></div>
+    <div slot="body">{{uiLabels.emptyCheckout}}</div>
+    <div slot="footer"></div>
+    </slotmodal>
+
     <button @click="goBack">{{uiLabels.back}}</button>
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
@@ -35,12 +48,14 @@
 
 <script>
 import OrderInCheckout from '@/components/OrderInCheckout.vue'
+import SlotModal from '@/components/SlotModal.vue'
 
 export default{
   name:'CheckoutPage',
 
   components:{
-    OrderInCheckout
+    OrderInCheckout,
+    SlotModal
 
   },
   props:{
@@ -50,10 +65,19 @@ export default{
   },
   data: function(){
     return{
+      showSlotModal:false,
 
     }
   },
   methods:{
+    toggleSlotModal:function(){
+      if(!this.showSlotModal){
+        this.showSlotModal=true;
+      }
+      else{
+        this.showSlotModal=false;
+      }
+    },
     goBack:function(){
       this.menus.pop();
       this.$emit('go_back');
@@ -76,7 +100,7 @@ export default{
         this.$emit('clear_all');
       }
       else{
-        /*Lägg in en modal som varnar för att varukorgen är tom*/
+        this.toggleSlotModal();
       }
     }
   },

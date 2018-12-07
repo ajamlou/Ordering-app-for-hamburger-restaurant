@@ -40,12 +40,24 @@
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
   <h2>{{ uiLabels.myBurger }} </h2>
   <IngredientsModal ref="modal"
-  v-show="this.isModalVisible"
+  v-show="this.showIngredientsModal"
   :ingredients="ingredients.filter(item=>item.category===modalCategory)"
   :lang="lang"
   @add_ingredient="addToMenu"
-  @ModalInfo="switchVisibility">
+  @modal_info="toggleShowIngredientsModal">
 </IngredientsModal>
+
+<SlotModal
+v-if="this.showSlotModal">
+<div slot="header"><button
+      type="button"
+      class="btn-close"
+      @click="toggleSlotModal()">
+      x
+    </button></div>
+<div slot="body">{{uiLabels.noIngredients}}</div>
+<div slot="footer"></div>
+</slotmodal>
 
 <div id="categories-wrapper">
   <CategoryRow v-for="category in burgerCategories"
@@ -57,7 +69,7 @@
   :threshold="category.threshold"
   :item_count="categoryItemCounter[category.categoryNr-1]"
   @remove_ingredient="removeFromMenu"
-  @info_to_modal="switchVisibility">
+  @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 
 <h1>{{uiLabels.extras}}</h1>
@@ -71,7 +83,7 @@
 :threshold="category.threshold"
 :item_count="categoryItemCounter[category.categoryNr -1]"
 @remove_ingredient="removeFromMenu"
-@info_to_modal="switchVisibility">
+@info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 <div class="price-div">
   {{uiLabels.sum}}: {{price}}:-
@@ -91,6 +103,7 @@ import OrderItem from '@/components/OrderItem.vue'
 //import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import IngredientsModal from '@/components/IngredientsModal.vue'
+import SlotModal from '@/components/SlotModal.vue'
 import OrderingViewFrontPage from '@/components/OrderingViewFrontPage.vue'
 import FavoritesPage from '@/components/FavoritesPage.vue'
 import CheckoutPage from '@/components/CheckoutPage.vue'
@@ -106,6 +119,7 @@ export default {
     OrderItem,
     CategoryRow,
     IngredientsModal,
+    SlotModal,
     OrderingViewFrontPage,
     FavoritesPage,
     CheckoutPage
@@ -124,7 +138,8 @@ export default {
       modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
       isModifying:false, /*Ändras till true när vi ändrar en meny, har effekt på addToCheckout*/
       modalCategory:0,
-      isModalVisible: false,
+      showIngredientsModal: false,
+      showSlotModal: false,
       currentView: "frontPage",
       burgerCategories:[
         {categoryNr: 4,
@@ -156,14 +171,24 @@ export default {
                 }.bind(this));
               },
               methods: {
+                toggleSlotModal:function(){
+                  this.showIngredientsModal = false;
+                  if(!this.showSlotModal){
+                    this.showSlotModal=true;
+                  }
+                  else{
+                    this.showSlotModal=false;
+                  }
+                },
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
-                switchVisibility: function(category) {
-                  if (this.isModalVisible){
-                    this.isModalVisible = false;
+                toggleShowIngredientsModal: function(category) {
+                  if (this.showIngredientsModal){
+                    this.showIngredientsModal = false;
                   }
                   else {
+                    this.showSlotModal = false;
                     this.modalCategory=category;
-                    this.isModalVisible = true;
+                    this.showIngredientsModal = true;
                   }
                 },
 
@@ -189,7 +214,7 @@ export default {
                   }
                 },
                 addToMenu: function (item) {
-                  this.isModalVisible = false;
+                  this.showIngredientsModal = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
@@ -246,9 +271,9 @@ export default {
                     this.menusArray.push(order);
                   }
                 }
-                /*Lägg in en else-sats som skickar upp en modal
-                som varnar för att du försöker lägga en tom
-                beställning*/
+                else{
+                  this.toggleSlotModal();
+                }
               },
               newMenu:function(){
                 this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/

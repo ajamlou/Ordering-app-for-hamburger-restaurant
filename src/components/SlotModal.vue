@@ -1,49 +1,25 @@
 <template>
   <transition name="modal-fade">
   <div class="modal-backdrop">
-    <div class="modal" id="ing-mod">
-        <button
-              type="button"
-              class="btn-close"
-              @click="$emit('modal_info')">
-              x
-            </button>
-      <div class="mod-bod">
-        <Ingredient
-        ref="ingredient"
-        v-for="item in ingredients"
-        @ingredient_clicked="emitAddIngredient(item)"
-        :item="item"
-        :lang="lang"
-        :key="item.ingredient_id">
-      </Ingredient>
-    </div>
+    <div class="modal">
+        <slot name="header"></slot>
+        <slot name="body"></slot>
+        <slot name="footer"></slot>
     </div>
   </div>
 </transition>
 </template>
-
 <script>
-import Ingredient from '@/components/Ingredient.vue'
-
 export default {
-  name: 'IngredientsModal',
+  name: 'SlotModal',
   components:{
-    Ingredient
   },
   props: {
-    ingredients: Array,
-    lang: String
   },
   methods:{
-    emitAddIngredient:function(item){
-    this.$emit('add_ingredient',item);
   }
   }
-      }
-
 </script>
-
 <style scoped>
 .modal-fade-enter,
   .modal-fade-leave-active {
@@ -82,30 +58,6 @@ export default {
     max-width:100%;
     max-height:70%;
     padding-bottom: 15px;
-  }
-
-  .mod-bod{
-    margin:auto;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width:100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-
-  .ingredient{
-    border: 1px solid #ccd;
-    background-color: rgba(255, 255, 255, 0.5);
-    font-size: 1.5em;
-    overflow-wrap: break-word;
-    color: rgb(100,100,100);
-    border-radius: 15px;
-    width:32%;
-    height:4em;
-    text-align: center;
-    margin:5px auto 3px auto;
-    cursor:pointer;
   }
 
   .btn-close {
