@@ -1,12 +1,11 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="welcome" v-if = "currentView === 'frontPage'">
-      <OrderingViewFrontPage
+
+    <OrderingViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
-  </div>
 
   <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
@@ -18,8 +17,8 @@
   </FavoritesPage>
 </div>
 
-<div v-if = "currentView === 'checkoutPage'">
   <CheckoutPage
+  v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
   :lang="lang"
@@ -28,7 +27,6 @@
   @modify_menu="modifyMenu"
   @clear_all="clearAll">
 </CheckoutPage>
-</div>
 
 <IngredientsModal ref="modal"
 v-show="this.showIngredientsModal"
@@ -55,9 +53,6 @@ v-if="this.showSlotModal">
   <button v-on:click="switchLang();checkLang()"
   id="lang-btn"
   :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
-  <button id = "bck-btn"
-  @click= "goBack">
-  {{ uiLabels.back }}</button>
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
 
@@ -92,7 +87,10 @@ v-if="this.showSlotModal">
 <div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">Nästa</button>
+<button id = "bck-btn"
+@click= "goBack">
+{{ uiLabels.back }}</button>
+<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
@@ -334,7 +332,6 @@ export default {
             width: 10em;
             border:1px solid #7a7a7a;
             margin: auto;
-            text-shadow: 1px 1px 2px black; 
           }
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -343,12 +340,40 @@ export default {
             background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
             background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
           }
+          .sv:hover{
+            background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+          }
+          .sv:active{
+            background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+          }
           .en{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+          }
+          .en:hover{
+            background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+          }
+          .en:active{
+            background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
           }
 
           #categories-wrapper{
@@ -450,6 +475,7 @@ export default {
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 16px;
+              text-shadow: 1px 1px 2px black;
           }
           button:hover{
             background-color: #000;
