@@ -15,82 +15,84 @@
     <FavoritesPage
     :ingredients="ingredients"
     :lang = "lang">
-    </FavoritesPage>
-  </div>
-
-  <div v-if = "currentView === 'checkoutPage'">
-    <CheckoutPage
-    :uiLabels="uiLabels"
-    :menus="menusArray"
-    :lang="lang"
-    @go_back="goBack"
-    @new_menu="newMenu"
-    @modify_menu="modifyMenu"
-    @clear_all="clearAll">
-  </CheckoutPage>
+  </FavoritesPage>
 </div>
 
-<div id="ordering" v-if = "currentView === 'designPage'">
-  <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-  <button class = "avbryt"
-  @click= "goBack">
-  {{ uiLabels.back }}</button>
-
-  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
-  <h2>{{ uiLabels.myBurger }} </h2>
-  <IngredientsModal ref="modal"
-  v-show="this.showIngredientsModal"
-  :ingredients="ingredients.filter(item=>item.category===modalCategory)"
+<div v-if = "currentView === 'checkoutPage'">
+  <CheckoutPage
+  :uiLabels="uiLabels"
+  :menus="menusArray"
   :lang="lang"
-  @add_ingredient="addToMenu"
-  @modal_info="toggleShowIngredientsModal">
+  @go_back="goBack"
+  @new_menu="newMenu"
+  @modify_menu="modifyMenu"
+  @clear_all="clearAll">
+</CheckoutPage>
+</div>
+
+<IngredientsModal ref="modal"
+v-show="this.showIngredientsModal"
+:ingredients="ingredients.filter(item=>item.category===modalCategory)"
+:lang="lang"
+@add_ingredient="addToMenu"
+@modal_info="toggleShowIngredientsModal">
 </IngredientsModal>
 
 <SlotModal
 v-if="this.showSlotModal">
 <div slot="header"><button
-      type="button"
-      class="btn-close"
-      @click="toggleSlotModal()">
-      x
-    </button></div>
+  type="button"
+  class="btn-close"
+  @click="toggleSlotModal()">
+  x
+</button></div>
 <div slot="body">{{uiLabels.noIngredients}}</div>
 <div slot="footer"></div>
 </slotmodal>
 
-<div id="categories-wrapper">
-  <CategoryRow v-for="category in burgerCategories"
+<div id="ordering" v-if = "currentView === 'designPage'">
+  <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+  <button v-on:click="switchLang()"
+  id="lang-btn">{{ uiLabels.language }}</button>
+  <button id = "bck-btn"
+  @click= "goBack">
+  {{ uiLabels.back }}</button>
+
+  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+
+  <div id="categories-wrapper">
+    <h2>{{ uiLabels.myBurger }} </h2>
+    <CategoryRow v-for="category in burgerCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :added_items="chosenIngredients"
+    :category_name="uiLabels[category.label]"
+    :lang="lang"
+    :threshold="category.threshold"
+    :item_count="categoryItemCounter[category.categoryNr-1]"
+    @remove_ingredient="removeFromMenu"
+    @info_to_modal="toggleShowIngredientsModal">
+  </CategoryRow>
+
+  <h2>{{uiLabels.extras}}</h2>
+
+  <CategoryRow v-for="category in extrasCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="chosenIngredients"
   :category_name="uiLabels[category.label]"
   :lang="lang"
   :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr-1]"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
   @remove_ingredient="removeFromMenu"
   @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
-
-<h1>{{uiLabels.extras}}</h1>
-
-<CategoryRow v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="chosenIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromMenu"
-@info_to_modal="toggleShowIngredientsModal">
-</CategoryRow>
-<div class="price-div">
+</div>
+<div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">Nästa</button>
 <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-</div>
 </div>
 </div>
 </template>
@@ -199,8 +201,8 @@ export default {
                       return;
                     }
                   }
-                    this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
-                    this.currentView = view;
+                  this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
+                  this.currentView = view;
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -300,82 +302,121 @@ export default {
             background-color:#f8ffd6;
           }
 
-          .price-div{
-            text-align: center;
-            font-size: 2em;
-          }
-
           #ordering {
+            display:grid;
+            grid-template-columns: repeat(6, 1fr);
             margin:auto;
             width: 90%;
           }
-          /*
-          .example-panel {
-          position: fixed;
-          left:0;
-          top:0;
-          z-index: -2;
-        }
-        */
+          #bestallning{
+            grid-column: 1 / 3;
+            grid-row: 1;
+            text-align: center;
+          }
+          #lang-btn{
+            grid-column:6/7;
+            grid-row:1;
+          }
+          #categories-wrapper{
+            grid-column: 1/7;
+            grid-row:2;
+          }
+          #bck-btn{
+            grid-column: 1/2;
+            grid-row: 3;
+            border: 1px solid #7a7a7a;
+            color:white;
+            background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+            background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+            background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+            background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+            background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+            background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
+          }
 
-        .ingredient{
-          border: 1px solid #ccd;
-          background-color: rgba(255, 255, 255, 0.5);
-          font-size: 2em;
-          color: rgb(100,100,100);
-          border-radius: 15px;
-          width:33%;
-          height:3em;
-          text-align: center;
-          margin:auto auto 7px auto;
-        }
+          #bck-btn:hover{
+            background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+            /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+            background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+            background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+            background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+            background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+          }
 
-        .ingredient-wrapper{ /*Denna styr horisontell scroll*/
-          display: flex;
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          overflow-y:hidden;
-          border-radius: 15px;
-          /*display: grid;
-          grid-gap: 0px;
-          grid-template-columns: repeat(10,10%);
-          grid-template-areas: "title";
-          text-align: center;*/
-        }
+          #price-div{
+            text-align: center;
+            font-size: 2em;
+            grid-column:3/5;
+            grid-row:3;
+          }
 
-        #bestallning{ /* Beställningsrubriken */
-          text-align: center;
-        }
-        .avbryt{ /* Avbryt-knappen */
-          float: left;
-        }
-        #order-btn{
-          margin-bottom: 20px;
-          padding:20px 30px 20px 30px;
-          font-size: 2em;
-          background-color: rgb(0, 150, 0);
-        }
-        #order-btn:hover{
-          color:black;
-          background-color: rgb(0, 200, 0);
-          padding:25px 35px 25px 35px;
-        }
+          #next-btn{
+            border:1px solid #7a7a7a;
+            grid-column: 6/7;
+            grid-row:3;
+            color:white;
+            background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
+            background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
+            background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+            background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+            background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
+            background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+          }
 
-        button{
-          float:right;
-          background-color: #ddd;
-          border: none;
-          color: black;
-          padding: 10px 20px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          margin: 4px 2px;
-          cursor: pointer;
-          border-radius: 16px;
-        }
-        button:hover{
-          background-color: #000;
-          color: white;
-        }
-        </style>
+          .ingredient{
+            border: 1px solid #ccd;
+            background-color: rgba(255, 255, 255, 0.5);
+            font-size: 2em;
+            color: rgb(100,100,100);
+            border-radius: 15px;
+            width:33%;
+            height:3em;
+            text-align: center;
+            margin:auto auto 7px auto;
+          }
+
+          .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y:hidden;
+            border-radius: 15px;
+            /*display: grid;
+            grid-gap: 0px;
+            grid-template-columns: repeat(10,10%);
+            grid-template-areas: "title";
+            text-align: center;*/
+          }
+          .avbryt{ /* Avbryt-knappen */
+            float: left;
+          }
+          #order-btn{
+            margin-bottom: 20px;
+            padding:20px 30px 20px 30px;
+            font-size: 2em;
+            background-color: rgb(0, 150, 0);
+          }
+          #order-btn:hover{
+            color:black;
+            background-color: rgb(0, 200, 0);
+          }
+
+          button{
+            background-color: #ddd;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 16px;
+          }
+          button:hover{
+            background-color: #000;
+            color: white;
+          }
+          </style>
