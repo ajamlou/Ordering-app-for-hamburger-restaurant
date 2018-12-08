@@ -52,8 +52,9 @@ v-if="this.showSlotModal">
 
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-  <button v-on:click="switchLang()"
-  id="lang-btn">{{ uiLabels.language }}</button>
+  <button v-on:click="switchLang();checkLang()"
+  id="lang-btn"
+  :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
   <button id = "bck-btn"
   @click= "goBack">
   {{ uiLabels.back }}</button>
@@ -130,6 +131,7 @@ export default {
   // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
+      isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
@@ -173,6 +175,14 @@ export default {
                 }.bind(this));
               },
               methods: {
+                checkLang:function(){
+                  if(this.lang==="sv"){
+                    this.isSv=true;
+                  }
+                  else {
+                    this.isSv=false;
+                  }
+                },
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -278,14 +288,16 @@ export default {
                 }
               },
               newMenu:function(){
-                this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
-                this.chosenIngredients = [];
-                this.price = 0;
+                this.resetBurger();
                 this.changeView('designPage');
               },
               clearAll:function(){
-                this.chosenIngredients = [];
+                this.resetBurger();
                 this.menusArray=[];
+              },
+              resetBurger:function(){
+                this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
+                this.chosenIngredients = [];
                 this.price = 0;
               }
 
@@ -298,7 +310,7 @@ export default {
             font-family: 'Montserrat', sans-serif;
             height:100%;
             margin-top:0px !important;
-            padding-top:0px !important;
+            padding-top:20px !important;
             background-color:#f8ffd6;
           }
 
@@ -316,7 +328,29 @@ export default {
           #lang-btn{
             grid-column:6/7;
             grid-row:1;
+            color:white;
+            font-weight: 700;
+            min-height: 4em;
+            width: 10em;
+            border:1px solid #7a7a7a;
+            margin: auto;
+            text-shadow: 1px 1px 2px black; 
           }
+          .sv{
+            background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+          }
+          .en{
+            background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+          }
+
           #categories-wrapper{
             grid-column: 1/7;
             grid-row:2;
@@ -394,6 +428,8 @@ export default {
             float: left;
           }
           #order-btn{
+            grid-column: 6/7;
+            grid-row:4;
             margin-bottom: 20px;
             padding:20px 30px 20px 30px;
             font-size: 2em;
