@@ -24,13 +24,13 @@ export default {
   methods: {
     ingredientClicked: function () {
       this.counter += 1;
-      // sending 'increment' message to parent component or view so that it
+      // sending 'ingredient-clicked' message to parent component or view so that it
       // can catch it with v-on:increment in the component declaration
       this.$emit('ingredient_clicked');
     },
-    resetCounter: function () {
+  /*  resetCounter: function () {
       this.counter = 0;
-    }
+    }*/
   }
 }
 </script>
