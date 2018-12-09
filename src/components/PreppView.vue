@@ -31,6 +31,7 @@
         <OrderItemFinished class="isFinished"
         v-for="(order, key) in orders"
         v-if="order.status === 'started'"
+        v-on:done="markDone(key)"
         :order-id="key"
         :order="order"
         :lang="lang"
@@ -56,14 +57,21 @@ export default {
     OrderItemIsCooking,
     OrderItemFinished,
   },
-  mixins: [sharedVueStuff]
-}
+  mixins: [sharedVueStuff],
 
-// methods: {
-//   markCooked: function (orderid) {
-//     this.$store.state.socket.emit("orderStarted", orderid);
-//   }
-// }
+data: function(){
+  return {
+    chosenIngredients: [],
+    price: 0,
+  }
+},
+
+methods: {
+  markCooked: function (orderid) {
+    this.$store.state.socket.emit("orderStarted", orderid);
+  },
+ }
+}
 </script>
 
 <style scoped>
