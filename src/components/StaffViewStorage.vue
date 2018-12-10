@@ -57,6 +57,7 @@ export default {
 
 <style scoped>
 .modal-header{
+  /* position: fixed; */
   display: grid;
   grid-template-columns: 30% 30% 30%;
   text-align: center;

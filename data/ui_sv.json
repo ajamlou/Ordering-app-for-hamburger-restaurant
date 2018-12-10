@@ -35,5 +35,7 @@
   "quantity" : "Antal",
   "unitprice" : "Styckpris",
   "remove" : "Ta bort",
-  "modify" : "Ändra"
+  "modify" : "Ändra",
+  "noIngredients" : "Din beställning innehåller inga ingredienser. Var god lägg till minst en ingrediens eller klicka på 'Gå tillbaka'-knappen",
+  "emptyCheckout" : "Din kundvagn är tom. Var vänlig lägg till en artikel i kundvagnen innan du beställer"
 }

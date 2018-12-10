@@ -1,18 +1,18 @@
 <template>
-  <div class = "favWrapper">
+  <div class = "wrapper">
     <div class = "favorites" v-for = "item in favBurgers" :key = "item.id">
       <h1 class = "header">{{item.name}}</h1>
       <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-      <ul class = "ingredients">
-        <li>{{item.bun}}</li>
-        <li>{{item.protein}}</li>
-        <li>{{item.sauce}}</li>
-      </ul>
+      <Favorite
+        :ingredients = "ingredients"
+        :lang ="lang">
+      </Favorite>
     </div>
   </div>
 </template>
 
 <script>
+import Favorite from '@/components/Favorite.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -21,9 +21,9 @@ export default {
         {name:'Beefinator',
         id: 1,
         pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-        bun: "Brioche",
-        protein: "Hummer",
-        sauce: "Grillsås"
+        bun: 50,
+        protein: 6,
+        sauce: 35
       },
       {name:'Vegginator',
       id: 2,
@@ -41,6 +41,21 @@ export default {
   }
 ]
 }
+},
+props:{
+ingredients:Array,
+lang: String
+},
+components:{
+Favorite
+},
+// computed:{
+//   favBurgers.bun: function(){
+//     return this.bun
+//   }
+// },
+methods:{
+
 }
 }
 </script>
@@ -56,7 +71,7 @@ export default {
   height: 320px;
 }
 
-.favWrapper{
+.wrapper{
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
