@@ -36,6 +36,8 @@
   "unitprice" : "Styckpris",
   "remove" : "Ta bort",
   "modify" : "Ändra",
-  "noIngredients" : "Din beställning innehåller inga ingredienser. Var god lägg till minst en ingrediens eller klicka på 'Gå tillbaka'-knappen",
-  "emptyCheckout" : "Din kundvagn är tom. Var vänlig lägg till en artikel i kundvagnen innan du beställer"
+  "addBurger": "Tryck för att lägga till en burgare och/eller tillbehör",
+  "noIngredients" : "Din beställning innehåller inga ingredienser. Var god lägg till minst en ingrediens eller klicka på 'Gå tillbaka'-knappen.",
+  "emptyCheckout" : "Din kundvagn är tom. Var vänlig lägg till en artikel i kundvagnen innan du beställer.",
+  "checkoutFinished": "Tack för din beställning! Ditt ordernummer är: "
 }

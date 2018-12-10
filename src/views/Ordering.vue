@@ -28,6 +28,7 @@
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
+  :orderNumber="orderNumber"
   :lang="lang"
   @go_back="goBack"
   @new_menu="newMenu"
@@ -138,7 +139,7 @@ export default {
       chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
-      orderNumber: "",
+      orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
       modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
@@ -421,6 +422,7 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
+            #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
             text-align: center;
@@ -442,6 +444,8 @@ export default {
             background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
           }
+
+          #next-btn:active{border: 2px solid #595959;}
 
           .ingredient{
             border: 1px solid #ccd;

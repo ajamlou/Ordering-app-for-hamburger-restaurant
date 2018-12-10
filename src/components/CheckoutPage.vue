@@ -22,7 +22,7 @@
 
 
       <div id="add-btn-top">
-        <h5>Klicka för att lägga till en burgare</h5>
+        <h5>{{uiLabels.addBurger}}</h5>
       </div>
       <p>+</p>
     </div>
@@ -62,7 +62,8 @@ export default{
   props:{
     uiLabels:Object,
     menus: Array,
-    lang: String
+    lang: String,
+    orderNumber: Number
   },
   data: function(){
     return{
@@ -95,7 +96,7 @@ export default{
     },
     decideSlotContent:function(){
       if (this.completedOrder){
-        this.slotContent="Ordern är klar.";
+        this.slotContent=this.uiLabels.checkoutFinished + (this.orderNumber + 1);
       }
       else if (!this.completedOrder){
         this.slotContent=this.uiLabels.emptyCheckout;
