@@ -3,6 +3,7 @@
 
  <!-- menusArray tas ut i computed, är en array med menyer som i sin tur är
 arrayer innehållande varje menys ingrediensarray -->
+
 	<!-- <div v-for="(menu,index) in menusArray"
 	:key="index"> -->
 
@@ -16,11 +17,12 @@ arrayer innehållande varje menys ingrediensarray -->
 			v-if="ingredient.category === 1">
 				{{ingredient.ingredient_sv}}
 			</div>
+			<p> -------- </p>																			<!-- Skiljelinje mellan olika burgare -->
 		</div>
 
 		<div v-else>
-			<!-- Lägga in rad mellan varje menu -->
 			{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
+			<p> -------- </p>																			<!-- Skiljelinje mellan olika burgare -->
 		</div>
 	</div>
 
