@@ -53,7 +53,7 @@ v-if="this.showSlotModal">
 </button></div>
 <div slot="body">{{uiLabels.noIngredients}}</div>
 <div slot="footer"></div>
-</slotmodal>
+</SlotModal>
 
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
