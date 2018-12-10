@@ -29,8 +29,9 @@
 
         <div slot ="footer"><button
           type="button"
-          class="backbutton"
+          class="backButton"
           @click="changeFavorites">
+          Bekräfta
         </button></div>
   </SlotModal>
 
@@ -98,10 +99,7 @@
 :ingredients = "ingredients"
 v-show = "ModalVisibility === true">
 </KitchenModal> -->
-
-
 </div>
-
 </div>
 
 </template>
@@ -155,6 +153,9 @@ export default {
     },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
+    },
+    changeFavorites: function(){
+
     },
     changeView: function(view){
       this.currentView = view;
