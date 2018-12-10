@@ -2,13 +2,15 @@
   <div class="ingredient"
   v-on:click="ingredientClicked">
     <div class="ingredient-name">
-      {{item["ingredient_"+ lang]}}, {{item.stock}}
+      {{item["ingredient_"+ lang]}}
     </div>
     <div class="ingredient-price">
        {{item.selling_price}}:-
      </div>
-     <img src="../assets/dairyfree.gif"
-     v-if="item.milk_free">
+     <img class="ico" src="../assets/dairyfree.gif"
+     v-if="item.milk_free"/>
+     <img class="ico" src="../assets/vegan.gif"
+     v-if="item.vegan"/>
   </div>
 </template>
 <script>
@@ -37,6 +39,10 @@ export default {
 }
 </script>
 <style scoped>
+.ico{
+  height:1em;
+  display:inline;
+}
 .ingredient{
   position:relative;
 }
