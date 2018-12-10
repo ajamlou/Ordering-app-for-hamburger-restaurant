@@ -4,7 +4,8 @@
 	<!-- Bara visa pattys i ordern: -->
 	<div
 	v-if="onlypatty === true">
-		<div v-for ="ingredient in order.ingredients"
+		<div v-for ="(ingredient,index) in order.ingredients"
+		:id="index"
 		v-if="ingredient.category === 1">
 			{{ingredient.ingredient_sv}}
 		</div>
