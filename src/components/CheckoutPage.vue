@@ -1,6 +1,5 @@
 <template>
   <div id="checkout-div">
-
     <SlotModal
     v-if="this.showSlotModal">
     <div slot="header"><button
@@ -9,7 +8,7 @@
           @click="toggleSlotModal()">
           x
         </button></div>
-    <div slot="body">{{uiLabels.emptyCheckout}}</div>
+    <div slot="body">{{slotContent}}</div>
     <div slot="footer"></div>
     </slotmodal>
 
@@ -40,7 +39,7 @@
   </div>
   <div id="checkout-foot">
     <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
-    <button id="order-btn2" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+    <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
   </div>
 
 </div>
@@ -56,7 +55,6 @@ export default{
   components:{
     OrderInCheckout,
     SlotModal
-
   },
   props:{
     uiLabels:Object,
@@ -66,7 +64,7 @@ export default{
   data: function(){
     return{
       showSlotModal:false,
-
+      slotContent:""
     }
   },
   methods:{
@@ -92,19 +90,33 @@ export default{
     newMenu:function(){
       this.$emit('new_menu');
     },
-    placeOrder: function () {
-      if(this.menus.length>0){
+    decideSlotContent:function(){
+      if (this.completedOrder){
+        this.slotContent="Ordern är klar.";
+      }
+      else if (!this.completedOrder){
+        this.slotContent=this.uiLabels.emptyCheckout;
+      }
+    },
+    placeOrder:function(){
+      this.toggleSlotModal();
+      if(this.completedOrder){
         let menus = {menus: this.menus};
         // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
         this.$store.state.socket.emit('order', {order: menus});
         this.$emit('clear_all');
       }
-      else{
-        this.toggleSlotModal();
-      }
     }
   },
   computed:{
+    completedOrder:function(){
+      if (this.menus.length>0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
     /*Räknar ut det totala priset av en beställning*/
     totalPrice:function(){
       /*reduce() tar in en valfri variabel (sum) som sätts till
