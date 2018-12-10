@@ -1,4 +1,19 @@
 <!-- kod som genererar favoritsidan -->
+<!--Filterkod
+data: function(){
+ingredient_ids:[1,2,3],
+chosenIngredients=[]
+}
+
+props:{
+ingredients: Array
+}
+
+
+chosenIngredients = this.ingredients.filter(ingredient=>ingredient.ingredient_id === id[0] || id[1] || id[2])
+
+Kommer inte fungera Out of the box, men you get the point -->
+
 
 <template>
   <div class = "wrapper">
