@@ -17,32 +17,20 @@ arrayer innehållande varje menys ingrediensarray -->
 			v-if="ingredient.category === 1">
 				{{ingredient.ingredient_sv}}
 			</div>
-			<p> -------- </p>																			<!-- Skiljelinje mellan olika burgare -->
+			<div class="betweenBurgers">
+				<!-- Skiljelinje mellan olika burgare -->
+		</div>
 		</div>
 
 		<div v-else>
 			{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
-			<p> -------- </p>																			<!-- Skiljelinje mellan olika burgare -->
+			<div class="betweenBurgers">
+				<!-- Skiljelinje mellan olika burgare -->
+			</div>
 		</div>
 	</div>
 
 	<!-- </div> -->
-
-
-	<!-- Bara visa pattys i ordern: -->
-	<!-- <div
-	v-if="onlypatty === true">
-		<div v-for ="(ingredient,index) in order.ingredients"
-		:id="index"
-		v-if="ingredient.category === 1">
-			{{ingredient.ingredient_sv}}
-		</div>
-	</div> -->
-
-	<!-- Visa alla delar av burgarna i ordern: -->
-	<!-- <div v-else>
-		{{orderId}} {{order.type}} {{ order.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
-	</div> -->
 
 </div>
 
@@ -69,5 +57,10 @@ export default {
 }
 </script>
 <style scoped>
+
+.betweenBurgers{
+	border: 1px solid white;
+	margin: 4px;
+}
 
 </style>
