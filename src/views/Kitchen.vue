@@ -26,6 +26,12 @@
           @click="currentView = 'kitchenFrontPage'">
           Stäng
         </button></div>
+
+        <div slot ="footer"><button
+          type="button"
+          class="backbutton"
+          @click="changeFavorites">
+        </button></div>
   </SlotModal>
 
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
@@ -127,8 +133,7 @@ export default {
     KitchenModal,
     KitchenViewFrontPage,
     PreppView,
-    SlotModal,
-    FavoritesPage
+    SlotModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
