@@ -1,30 +1,24 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <button v-on:click="switchLang()"
-    id="lang-btn"
-    :class="{'sv' : (lang==='sv'), 'en' : (lang==='en') }">{{ uiLabels.language }}</button>
 
     <OrderingViewFrontPage
-    id="frontPage"
       @Visibility="changeView"
       v-if = "currentView === 'frontPage'">
     </OrderingViewFrontPage>
 
-  <div
-  v-if = "currentView === 'favoritesPage'"
-  id="favouritesPage">
+  <div v-if = "currentView === 'favoritesPage'">
     <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
     <FavoritesPage
     :ingredients="ingredients"
-    :lang = "lang">
+    :lang = "lang"
+    :menu = "menusArray">
   </FavoritesPage>
 </div>
 
   <CheckoutPage
-  id="checkoutPage"
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
@@ -57,6 +51,10 @@ v-if="this.showSlotModal">
 
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+  <button v-on:click="switchLang();checkLang()"
+  id="lang-btn"
+  :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
+
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
 
   <div id="categories-wrapper">
@@ -132,6 +130,7 @@ export default {
   // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
+      isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
@@ -175,7 +174,14 @@ export default {
                 }.bind(this));
               },
               methods: {
-
+                checkLang:function(){
+                  if(this.lang==="sv"){
+                    this.isSv=true;
+                  }
+                  else {
+                    this.isSv=false;
+                  }
+                },
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -305,21 +311,9 @@ export default {
             margin-top:0px !important;
             padding-top:20px !important;
             background-color:#f8ffd6;
-            display:grid;
-            grid-template-columns: repeat(6, 1fr);
           }
 
-          #frontPage{
-            grid-column:1/7;
-          }
-          #favouritesPage{
-            grid-column: 1/7;
-          }
-          #checkoutPage{
-            grid-column: 1/7;
-          }
           #ordering {
-            grid-column: 1/7;
             display:grid;
             grid-template-columns: repeat(6, 1fr);
             margin:auto;

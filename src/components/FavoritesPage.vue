@@ -1,12 +1,10 @@
+<!-- kod som genererar favoritsidan -->
+
 <template>
   <div class = "wrapper">
-    <div class = "favorites" v-for = "item in favBurgers" :key = "item.id">
+    <div class = "favorites" v-for = "item in favBurgers" :key = "item.id" @click = "favToCheckout">
       <h1 class = "header">{{item.name}}</h1>
       <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-      <Favorite
-        :ingredients = "ingredients"
-        :lang ="lang">
-      </Favorite>
     </div>
   </div>
 </template>
@@ -44,18 +42,16 @@ export default {
 },
 props:{
 ingredients:Array,
-lang: String
+lang: String,
+menu: Array
 },
 components:{
 Favorite
 },
-// computed:{
-//   favBurgers.bun: function(){
-//     return this.bun
-//   }
-// },
 methods:{
-
+favToCheckout: function(){
+  this.emit$("favToCheckout");
+}
 }
 }
 </script>
