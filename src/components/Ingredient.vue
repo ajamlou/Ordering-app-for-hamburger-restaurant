@@ -7,6 +7,8 @@
     <div class="ingredient-price">
        {{item.selling_price}}:-
      </div>
+     <img src="../assets/dairyfree.gif"
+     v-if="item.milk_free">
   </div>
 </template>
 <script>

@@ -9,9 +9,9 @@ ut i computed, detta blir alltså en array av arrayer. Nedan finns nu 3 divs
 som (1) loopar över menyerna och sedan (2) loopar över ingredienserna
 för sagd array, annars (3) visar alla ingredienserna.
 Jag kommenterar bort allting (men låter det stå kvar) så ni inte behöver bry
- er om följande kod om ni inte vill.
+ er om följande kod om ni inte vill. -->
 
-	<div v-for="(menu,index) in menusArray"
+<!--	<div v-for="(menu,index) in menusArray"
 	:key="index"
 	v-if="onlypatty">
 		<p>Burgare</p>
@@ -22,8 +22,7 @@ Jag kommenterar bort allting (men låter det stå kvar) så ni inte behöver bry
 	</div>
 	<div v-else>
 		{{orderId}} {{order.type}} {{ menusArray[0].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
-	</div>
--->
+	</div>-->
 
 	<!-- Bara visa pattys i ordern: -->
 	<div

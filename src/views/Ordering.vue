@@ -267,7 +267,7 @@ export default {
                   "units":this.units};
 
                   if(this.isModifying){
-                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i orderArray*/
+                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i menusArray*/
                     this.menusArray.splice(this.modifyMenuIndex,0,order);
                     this.units=1;
                     this.isModifying=false;
