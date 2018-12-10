@@ -1,13 +1,18 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <button v-on:click="switchLang();checkLang()"
+    id="lang-btn"
+    :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
     <OrderingViewFrontPage
       @Visibility="changeView"
-      v-if = "currentView === 'frontPage'">
+      v-if = "currentView === 'frontPage'"
+      id="frontPage">
     </OrderingViewFrontPage>
 
-  <div v-if = "currentView === 'favoritesPage'">
+  <div v-if = "currentView === 'favoritesPage'"
+  id="favouritesPage">
     <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
@@ -19,6 +24,7 @@
 </div>
 
   <CheckoutPage
+  id="checkoutPage"
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
@@ -51,9 +57,6 @@ v-if="this.showSlotModal">
 
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-  <button v-on:click="switchLang();checkLang()"
-  id="lang-btn"
-  :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
 
@@ -311,13 +314,27 @@ export default {
             margin-top:0px !important;
             padding-top:20px !important;
             background-color:#f8ffd6;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
           }
-
+          #checkoutPage{
+            grid-row: 2;
+            grid-column: 1/7;
+          }
+          #frontPage{
+            grid-row: 2;
+            grid-column: 1/7;
+          }
+          #favouritesPage{
+          grid-row: 2;
+          grid-column: 1/7;}
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
             margin:auto;
             width: 90%;
+            grid-row: 2;
+            grid-column: 1/7;
           }
           #bestallning{
             grid-column: 1 / 3;
