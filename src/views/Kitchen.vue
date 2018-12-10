@@ -19,6 +19,21 @@
     </div>
   </div>
 
+  <SlotModal v-if ="currentView === 'f'">
+    <div slot="header"><button
+          type="button"
+          class="backButton"
+          @click="currentView = 'kitchenFrontPage'">
+          Stäng
+        </button></div>
+
+        <div slot ="footer"><button
+          type="button"
+          class="backbutton"
+          @click="changeFavorites">
+        </button></div>
+  </SlotModal>
+
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
 
     <!-- Här skapas beställningarna i "Inkomna". -->
@@ -102,6 +117,8 @@ import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
 import PreppView from '@/components/PreppView.vue'
+import SlotModal from '@/components/SlotModal.vue'
+import FavortiesPage from '@/components/FavoritesPage.vue'
 
 export default {
   name: 'Ordering',
@@ -115,7 +132,8 @@ export default {
     StaffViewStatistics,
     KitchenModal,
     KitchenViewFrontPage,
-    PreppView
+    PreppView,
+    SlotModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -226,7 +244,7 @@ h1 {
   position: relative;
 }
 
-#backButton{
+.backButton{
   border: 2px solid white;
   color: white;
   text-shadow: 2px 2px #696969;

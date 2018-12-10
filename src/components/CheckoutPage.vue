@@ -13,11 +13,14 @@
     </slotmodal>
 
     <button @click="goBack">{{uiLabels.back}}</button>
+
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
     </div>
     <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newMenu">
+
+
       <div id="add-btn-top">
         <h5>Klicka för att lägga till en burgare</h5>
       </div>
@@ -102,7 +105,6 @@ export default{
       this.toggleSlotModal();
       if(this.completedOrder){
         let menus = {menus: this.menus};
-        // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
         this.$store.state.socket.emit('order', {order: menus});
         this.$emit('clear_all');
       }
@@ -131,12 +133,19 @@ export default{
 </script>
 
 <style scoped>
+#checkout-div{
+  display:grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
 #btn-order-wrap{
   position:relative;
   display:flex;
   flex-wrap: nowrap;
 }
 #checkout-wrapper{
+  grid-column: 1/7;
+  grid-row: 1;
   display:flex;
   flex-wrap: nowrap;
   text-align: center;
