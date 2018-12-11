@@ -423,7 +423,8 @@ export default {
             #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
-            text-align: center;
+            justify-self: center;
+            text-align:center;
             font-size: 2em;
             grid-column:3/5;
             grid-row:3;
@@ -498,5 +499,10 @@ export default {
           button:hover{
             background-color: #000;
             color: white;
+          }
+          @media screen and (max-width:480px){
+            #next-btn, #bck-btn{
+              grid-row:4;
+            }
           }
           </style>

@@ -92,7 +92,7 @@ export default {
 .PlusButton{
   font-size: 1.5em;
   line-height:0;
-  margin:auto;
+  margin:auto auto 3px 0;
   height:4em;
 }
 

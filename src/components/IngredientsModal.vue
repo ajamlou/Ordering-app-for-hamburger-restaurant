@@ -6,7 +6,7 @@
               type="button"
               class="btn-close"
               @click="$emit('modal_info')">
-              x
+              <center>x</center>
             </button>
       <div class="mod-bod">
         <Ingredient
@@ -66,9 +66,9 @@ export default {
 
   .modal {
     text-align:center;
-    display: flex; /*added*/
-    flex-direction: column; /*added*/
-    margin-top:20px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-content: start;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -76,48 +76,60 @@ export default {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: hidden;
-    overflow: visible;
     border-radius: 15px;
     width:45em;
-    max-width:100%;
+    max-width:95%;
+    min-height:11em;
     max-height:70%;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
   }
 
   .mod-bod{
+    grid-column: 1/4;
+    height:100%;
     margin:auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
+    padding:3px;
   }
 
   .ingredient{
     border: 1px solid #ccd;
-    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: 3px;
+    align-self:start;
+    /*background-color: rgba(255, 255, 255, 0.5);
     font-size: 1.3em;
-    color: rgb(100,100,100);
+    color: rgb(100,100,100);*/
     border-radius: 15px;
-    width:32%;
+    width:33%;
     height:6em;
     text-align: center;
     cursor:pointer;
   }
 
   .btn-close {
-    /*border: none;*/
-    position:element(#ing-mod);
-    transform: translate(1000%,-40%);
+    grid-column:3/4;
+    justify-self:end;
+    border-radius: 15px;
     font-size: 23px;
-    padding: 20px;
-    height:3em;
-    width:3em;
-    border-radius:3em;
+    height:2em;
+    width:2em;
     cursor: pointer;
     font-weight: bold;
     color: white;
     background: red;
+  }
+  @media screen and (max-width:375px){
+    .modal{
+      max-height:90%;
+    }
+    .ingredient{
+      width:49%;
+      margin-top:2%;
+    }
   }
 </style>

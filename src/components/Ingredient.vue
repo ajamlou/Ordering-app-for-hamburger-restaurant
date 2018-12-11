@@ -1,12 +1,11 @@
 <template>
   <div class="ingredient"
   v-on:click="ingredientClicked">
-    <div class="ingredient-name">
-      {{item["ingredient_"+ lang]}}
-    </div>
-    <div class="ingredient-price">
+    <p class="ingredient-name">
+      {{item["ingredient_"+ lang]}}</p>
+    <p class="ingredient-price">
        {{item.selling_price}}:-
-     </div>
+     </p>
      <div class="ico-div">
      <img class="ico" src="../assets/dairyfree.png"
      v-if="item.milk_free"/>
@@ -42,8 +41,11 @@ export default {
 </script>
 <style scoped>
 .ingredient-name{
+  display:inline-block;
+  word-wrap: break-word;
   grid-column:1/4;
   grid-row:1;
+  margin-bottom: 0;
 }
 .ingredient-price{
   grid-column:1/4;
@@ -51,7 +53,7 @@ export default {
 }
 .ico{
   height:1em;
-  margin-left:2px;
+  margin-right:2px;
   display:inline-block;
 }
 .ico-div{
@@ -64,6 +66,7 @@ export default {
   align-content: center;
   grid-template-columns: repeat(3,1fr);
   word-wrap: break-word;
+  height:6em;
 }
 /*.ingredient{
   position:relative;
