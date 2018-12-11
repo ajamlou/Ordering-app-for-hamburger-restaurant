@@ -5,11 +5,12 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
-    <OrderingViewFrontPage
-      @Visibility="changeView"
-      v-if = "currentView === 'frontPage'"
-      id="frontPage">
-    </OrderingViewFrontPage>
+  <OrderingViewFrontPage
+    @Visibility="changeView"
+    v-if = "currentView === 'frontPage'"
+    :uiLabels="uiLabels"
+    id="frontPage">
+  </OrderingViewFrontPage>
 
   <div v-if = "currentView === 'favoritesPage'"
   id="favouritesPage">
@@ -28,7 +29,9 @@
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
+  :orderNumber="orderNumber"
   :lang="lang"
+  @go_to_front="changeView"
   @go_back="goBack"
   @new_menu="newMenu"
   @modify_menu="modifyMenu"
@@ -134,7 +137,7 @@ export default {
       chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
-      orderNumber: "",
+      orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
       modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
@@ -417,6 +420,7 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
+            #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
             text-align: center;
@@ -438,6 +442,8 @@ export default {
             background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
           }
+
+          #next-btn:active{border: 2px solid #595959;}
 
           .ingredient{
             border: 1px solid #ccd;
@@ -464,7 +470,7 @@ export default {
           .avbryt{ /* Avbryt-knappen */
             float: left;
           }
-          #order-btn{
+          /* #order-btn{
             grid-column: 6/7;
             grid-row:4;
             margin-bottom: 20px;
@@ -475,7 +481,7 @@ export default {
           #order-btn:hover{
             color:black;
             background-color: rgb(0, 200, 0);
-          }
+          } */
 
           button{
             background-color: #ddd;
