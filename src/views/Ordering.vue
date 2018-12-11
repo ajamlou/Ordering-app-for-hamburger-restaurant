@@ -456,7 +456,6 @@ export default {
           .ingredient{
             border: 1px solid #ccd;
             background-color: rgba(255, 255, 255, 0.5);
-            font-size: 2em;
             color: rgb(100,100,100);
             border-radius: 15px;
             text-align: center;

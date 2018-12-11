@@ -42,5 +42,8 @@
   "checkoutFinished": "Tack för din beställning! Ditt ordernummer är: ",
   "createYourBurger": "Skapa din egen burgare",
   "chooseAFavorite": "Välj från en av våra favoriter",
-  "welcomeText": "Välkommen till MaxDonald's"
+  "welcomeText": "Välkommen till MaxDonald's",
+  "glutenFree" : "Glutenfri",
+  "dairyFree" : "Laktosfri",
+  "vegan" : "Vegansk"
 }

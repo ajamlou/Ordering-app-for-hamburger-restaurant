@@ -123,7 +123,7 @@ export default {
     color: white;
     background: red;
   }
-  @media screen and (max-width:375px){
+  @media screen and (max-width:500px){
     .modal{
       max-height:90%;
     }

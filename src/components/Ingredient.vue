@@ -11,6 +11,8 @@
      v-if="item.milk_free"/>
      <img class="ico" src="../assets/vegan.png"
      v-if="item.vegan"/>
+     <img class="ico" src="../assets/glutenfree.png"
+     v-if="item.gluten_free"/>
    </div>
   </div>
 </template>
@@ -43,45 +45,39 @@ export default {
 .ingredient-name{
   display:inline-block;
   word-wrap: break-word;
-  grid-column:1/4;
+  grid-column:2/5;
   grid-row:1;
   margin-bottom: 0;
 }
 .ingredient-price{
-  grid-column:1/4;
+  grid-column:2/5;
   grid-row:2;
 }
 .ico{
-  height:1em;
-  margin-right:2px;
+  height:1.3em;
+  padding-bottom:3px;
   display:inline-block;
 }
 .ico-div{
-  grid-column: 1/4;
-  grid-row:3;
+  grid-column: 5/6;
+  grid-row:1/3;
+  display:grid;
+  justify-content:end;
+  align-content: center;
+  padding-right:4px;
 }
 
 .ingredient{
+  font-size: 1.2em;
   display:grid;
   align-content: center;
-  grid-template-columns: repeat(3,1fr);
-  word-wrap: break-word;
-  height:6em;
+  /*Baserat på 2 marginaler utefter margin + height av .ico*/
+  grid-template-columns: calc(1px + 1.1em) repeat(3,1fr) calc(1px + 1.4em);
+  max-height:6em;
+  -ms-word-break: break-all;
+     word-break: break-all;
+     word-break: break-word;
 }
-/*.ingredient{
-  position:relative;
-  text-align:center;
-  overflow-wrap: break-word;
-  border: 1px solid #ccd;
-  background-color: rgba(255, 255, 255, 0.5);
-  font-size: 1em;
-  color: rgb(100,100,100);
-  border-radius: 15px;
-  width:8em;
-  height:4em;
-  margin:3px 3px 3px;
-  cursor:pointer;
-}*/
 
 .ingredient:hover{
   background-color: rgba(100, 100, 100, 0.5);
