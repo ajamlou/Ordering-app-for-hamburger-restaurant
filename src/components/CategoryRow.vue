@@ -92,8 +92,10 @@ export default {
 .PlusButton{
   font-size: 1.5em;
   line-height:0;
-  margin:auto auto 3px 0;
+  margin:auto;
   height:4em;
+  padding:0;
+  margin:3px 3px 3px 0;
 }
 
 .ingredient{
@@ -113,7 +115,7 @@ export default {
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
 }
-@media screen and (max-width:1113px){
+@media screen and (max-width:1130px){
   .category{
     flex-wrap: wrap;
     justify-content: center;
@@ -126,6 +128,9 @@ export default {
 
   .box-wrapper{
     justify-content: space-around;
+  }
+  .ingredient{
+    height:5em;
   }
 }
 </style>
