@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Montserrat" rel="stylesheet">
     <div id="welcome">
       {{uiLabels.welcomeText}}
     </div>
@@ -39,11 +40,11 @@ export default {
 }
 
 #favoritesButton{
-  background-color: #ff7733;
+  background-color: #ff884d;
 }
 #favoritesButton:hover {
-  background-color: #cc4400;
-  border-color: #cc4400;
+  background-color: #e64d00;
+  border-color: #e64d00;
 }
 #favoritesButton:active {
   border: 3.5px solid #802b00;
@@ -52,14 +53,15 @@ export default {
   background-color: #00e699;
 }
 #createBurgerButton:hover {
-  background-color: #008055;
-  border-color: #008055;
+  background-color: #009966;
+  border-color: #009966;
 }
 #createBurgerButton:active {
   border: 3.5px solid #004d26;
 }
 
 #welcome{
+  font-family: 'Allerta Stencil', sans-serif;
   text-transform: uppercase;
   text-align: center;
   font-size: 4em;
