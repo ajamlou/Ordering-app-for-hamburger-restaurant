@@ -36,18 +36,18 @@ export default {
 }
 
 #favoritesButton{
-  background-color: firebrick;
+  background-color: #ffa64d;
 }
 #favoritesButton:hover {
-  background-color: orange;
-  border-color: orange;
+  background-color: #e67300;
+  border-color: #e67300;
 }
 
 #createBurgerButton {
-  background-color: royalblue;
+  background-color: #00e699;
 }
 #createBurgerButton:hover {
-  background-color: lightblue;
-  border-color: lightblue;
+  background-color: #008055;
+  border-color: #008055;
 }
 </style>
