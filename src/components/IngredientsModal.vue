@@ -97,14 +97,12 @@ export default {
   .ingredient{
     border: 1px solid #ccd;
     background-color: rgba(255, 255, 255, 0.5);
-    font-size: 1.5em;
-    overflow-wrap: break-word;
+    font-size: 1.3em;
     color: rgb(100,100,100);
     border-radius: 15px;
     width:32%;
-    height:4em;
+    height:6em;
     text-align: center;
-    margin:5px auto 3px auto;
     cursor:pointer;
   }
 
