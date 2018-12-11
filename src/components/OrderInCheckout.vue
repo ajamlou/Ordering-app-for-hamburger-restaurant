@@ -38,7 +38,6 @@
 export default{
   name:"OrderInCheckout",
   components:{
-
   },
   props:{
     id: Number,

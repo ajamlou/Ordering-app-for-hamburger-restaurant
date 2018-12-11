@@ -1,13 +1,18 @@
 <template>
   <div>
-      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA DIN BURGARE</button>
-      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ BLAND VÅRA FAVORITER</button>
+    <!-- <p>{{uiLabels.createYourBurger}}</p>
+    <p>{{uiLabels.chooseAFavorite}}</p> -->
+      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA EN EGEN BURGARE</button>
+      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ FRÅN VÅRA FAVORITER</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'OrderingViewFrontPage',
+  props:{
+    uiLabels: Object
+  },
   methods: {
     emitSwitchVisibility: function(view) {
       this.$emit('Visibility',view)

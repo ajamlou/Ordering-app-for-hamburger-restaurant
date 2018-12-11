@@ -5,11 +5,11 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
-    <OrderingViewFrontPage
-      @Visibility="changeView"
-      v-if = "currentView === 'frontPage'"
-      id="frontPage">
-    </OrderingViewFrontPage>
+  <OrderingViewFrontPage
+    @Visibility="changeView"
+    v-if = "currentView === 'frontPage'"
+    id="frontPage">
+  </OrderingViewFrontPage>
 
   <div v-if = "currentView === 'favoritesPage'"
   id="favouritesPage">
@@ -30,6 +30,7 @@
   :menus="menusArray"
   :orderNumber="orderNumber"
   :lang="lang"
+  @go_to_front="changeView"
   @go_back="goBack"
   @new_menu="newMenu"
   @modify_menu="modifyMenu"

@@ -5,8 +5,8 @@
     <div slot="header"><button
           type="button"
           class="btn-close"
-          @click="toggleSlotModal()">
-          x
+          @click="orderFinished()">
+          X
         </button></div>
     <div slot="body">{{slotContent}}</div>
     <div slot="footer"></div>
@@ -72,6 +72,13 @@ export default{
     }
   },
   methods:{
+    orderFinished: function(){
+      if(this.menus.length>0){
+        this.$emit('go_to_front','frontPage');
+        this.$emit('clear_all');
+      }
+      else this.showSlotModal=false;
+    },
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
@@ -107,7 +114,7 @@ export default{
       if(this.completedOrder){
         let menus = {menus: this.menus};
         this.$store.state.socket.emit('order', {order: menus});
-        this.$emit('clear_all');
+        // this.$emit('clear_all');
       }
     }
   },
