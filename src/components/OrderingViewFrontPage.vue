@@ -1,9 +1,7 @@
 <template>
   <div>
-    <!-- <p>{{uiLabels.createYourBurger}}</p>
-    <p>{{uiLabels.chooseAFavorite}}</p> -->
-      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA EN EGEN BURGARE</button>
-      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ FRÅN VÅRA FAVORITER</button>
+      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
+      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
   </div>
 </template>
 

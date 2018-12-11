@@ -8,6 +8,7 @@
   <OrderingViewFrontPage
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
+    :uiLabels="uiLabels"
     id="frontPage">
   </OrderingViewFrontPage>
 
