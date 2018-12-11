@@ -131,6 +131,7 @@ export default {
   }
   .ingredient{
     height:5em;
+    width:160px;
   }
 }
 </style>
