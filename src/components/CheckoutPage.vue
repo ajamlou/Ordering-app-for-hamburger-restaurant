@@ -1,16 +1,18 @@
 <template>
   <div id="checkout-div">
+    <div id="orderFinishedModal">
     <SlotModal
     v-if="this.showSlotModal">
-    <div slot="header"><button
+    <div slot="header"></div>
+    <div slot="body">{{slotContent}}</div>
+    <div slot="footer"><button
           type="button"
           class="btn-close"
           @click="orderFinished()">
-          X
+          OK
         </button></div>
-    <div slot="body">{{slotContent}}</div>
-    <div slot="footer"></div>
-    </slotmodal>
+  </Slotmodal>
+</div>
 
     <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
 
@@ -219,5 +221,20 @@ export default{
   background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
 }
+
+#orderFinishedModal{
+  font-size: 3em;
+  text-align: center;
+  line-height: 150%;
+}
+
+.btn-close{
+  background-color: #33cc33;
+  border-radius: 10px;
+  margin-top: 14vh;
+  position: relative;
+}
+
+.btn-close:active{background-color: #1f7a1f}
 
 </style>

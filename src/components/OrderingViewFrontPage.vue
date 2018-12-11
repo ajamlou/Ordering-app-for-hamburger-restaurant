@@ -27,12 +27,12 @@ export default {
 #favoritesButton, #createBurgerButton {
   text-transform: uppercase;
   color: white;
-  padding: 10vh;
+  padding: 5vh;
   display: grid;
   font-size: 4vh;
   border-radius: 3vh;
   border-color: black;
-  margin: 10vh auto;
+  margin: 6vh auto;
   align-items: center;
   cursor: pointer;
   width: 30vw;

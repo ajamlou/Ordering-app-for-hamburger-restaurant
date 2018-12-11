@@ -72,6 +72,8 @@ export default {
     cursor: pointer;
     font-weight: bold;
     color: white;
-    background: red;
+    background-color: #33cc33;
+    border-radius: 10px;
+    margin-top: 20vh;
   }
 </style>
