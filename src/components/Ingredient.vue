@@ -77,6 +77,7 @@ export default {
   -ms-word-break: break-all;
      word-break: break-all;
      word-break: break-word;
+     text-transform: capitalize;
 }
 
 .ingredient:hover{
