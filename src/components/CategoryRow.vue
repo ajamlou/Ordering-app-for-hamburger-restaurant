@@ -79,6 +79,7 @@ export default {
   border-radius: 15px;
   margin: 0 0.5em 1em;
   height:calc(6em + 6px);
+  width:100%;
   overflow:hidden;
 }
 .PlusButton, .ingredient{
@@ -86,7 +87,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.5);
   color: rgb(100,100,100);
   border-radius: 15px;
-  width:160px;
+  width:180px;
   cursor:pointer;
 }
 .PlusButton{
@@ -115,7 +116,7 @@ export default {
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
 }
-@media screen and (max-width:1130px){
+@media screen and (max-width:1206px){
   .category{
     flex-wrap: wrap;
     justify-content: center;
@@ -131,6 +132,9 @@ export default {
   }
   .ingredient{
     height:5em;
+    width:160px;
+  }
+  .PlusButton{
     width:160px;
   }
 }
