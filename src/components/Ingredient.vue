@@ -7,9 +7,9 @@
     <div class="ingredient-price">
        {{item.selling_price}}:-
      </div>
-     <img class="ico" src="../assets/dairyfree.gif"
+     <img class="ico" src="../assets/dairyfree.png"
      v-if="item.milk_free"/>
-     <img class="ico" src="../assets/vegan.gif"
+     <img class="ico" src="../assets/vegan.png"
      v-if="item.vegan"/>
   </div>
 </template>
@@ -41,20 +41,32 @@ export default {
 <style scoped>
 .ico{
   height:1em;
+  margin-left:2px;
   display:inline;
 }
-.ingredient{
+/*.ingredient{
   position:relative;
-}
+  text-align:center;
+  overflow-wrap: break-word;
+  border: 1px solid #ccd;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 1em;
+  color: rgb(100,100,100);
+  border-radius: 15px;
+  width:8em;
+  height:4em;
+  margin:3px 3px 3px;
+  cursor:pointer;
+}*/
 
 .ingredient:hover{
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
 }
-.ingredient-price{
+/*.ingredient-price{
   position:absolute;
   bottom:0;
   width:100%;
-}
+}*/
 
 </style>

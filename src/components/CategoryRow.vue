@@ -78,22 +78,28 @@ export default {
   background-color: rgba(0,165,0,0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
+  height:calc(6em + 6px);
   overflow:hidden;
 }
 .PlusButton, .ingredient{
   border: 1px solid #ccd;
   background-color: rgba(255, 255, 255, 0.5);
-  font-size: 1.5em;
   color: rgb(100,100,100);
   border-radius: 15px;
   width:8em;
-  height:4em;
-  margin:3px 3px 3px;
+  height:6em;
   cursor:pointer;
 }
+.PlusButton{
+  font-size: 1em;
+  line-height:0;
+  margin:auto;
+}
+
 .ingredient{
   text-align:center;
   overflow-wrap: break-word;
+  margin:3px 3px 3px;
 }
 .extras{
   background-color: rgba(255,165,0,0.5);

@@ -103,8 +103,6 @@ v-if="this.showSlotModal">
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
-import Ingredient from '@/components/Ingredient.vue'
-import OrderItem from '@/components/OrderItem.vue'
 //import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import IngredientsModal from '@/components/IngredientsModal.vue'
@@ -120,8 +118,6 @@ necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
   components: {
-    Ingredient,
-    OrderItem,
     CategoryRow,
     IngredientsModal,
     SlotModal,
@@ -449,8 +445,6 @@ export default {
             font-size: 2em;
             color: rgb(100,100,100);
             border-radius: 15px;
-            width:33%;
-            height:3em;
             text-align: center;
             margin:auto auto 7px auto;
           }
