@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div id="welcome">
+      {{uiLabels.welcomeText}}
+    </div>
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
       <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
   </div>
@@ -36,18 +39,31 @@ export default {
 }
 
 #favoritesButton{
-  background-color: #ffa64d;
+  background-color: #ff7733;
 }
 #favoritesButton:hover {
-  background-color: #e67300;
-  border-color: #e67300;
+  background-color: #cc4400;
+  border-color: #cc4400;
 }
-
+#favoritesButton:active {
+  border: 3.5px solid #802b00;
+}
 #createBurgerButton {
   background-color: #00e699;
 }
 #createBurgerButton:hover {
   background-color: #008055;
   border-color: #008055;
+}
+#createBurgerButton:active {
+  border: 3.5px solid #004d26;
+}
+
+#welcome{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 4em;
+  color: #66d9ff;
+  text-shadow: 2px 2px #0086b3;
 }
 </style>

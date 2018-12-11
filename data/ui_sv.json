@@ -41,5 +41,6 @@
   "emptyCheckout" : "Din kundvagn är tom. Var vänlig lägg till en artikel i kundvagnen innan du beställer.",
   "checkoutFinished": "Tack för din beställning! Ditt ordernummer är: ",
   "createYourBurger": "Skapa din egen burgare",
-  "chooseAFavorite": "Välj från en av våra favoriter"
+  "chooseAFavorite": "Välj från en av våra favoriter",
+  "welcomeText": "Välkommen till MaxDonald's"
 }

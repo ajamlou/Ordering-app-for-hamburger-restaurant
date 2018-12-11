@@ -38,5 +38,6 @@
   "emptyCheckout" : "Your checkout cart is empty. Please add something to your cart before ordering.",
   "checkoutFinished": "Thank you for your order! Your order number is: ",
   "createYourBurger": "Create your own burger",
-  "chooseAFavorite": "Choose from our favorites"
+  "chooseAFavorite": "Choose from our favorites",
+  "welcomeText": "Welcome to MaxDonald's"
 }
