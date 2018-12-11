@@ -1,25 +1,25 @@
 <template>
   <div id="checkout-div">
     <div id="orderFinishedModal">
-    <SlotModal
-    v-if="this.showSlotModal">
-    <div slot="header"></div>
-    <div slot="body">{{slotContent}}</div>
-    <div slot="footer"><button
-          type="button"
-          class="btn-close"
-          @click="orderFinished()">
-          OK
-        </button></div>
-  </Slotmodal>
-</div>
+      <SlotModal
+      v-if="this.showSlotModal">
+      <div slot="header"></div>
+      <div slot="body" class="slotBody">{{slotContent}}</div>
+      <div slot="footer"><button
+        type="button"
+        class="btn-close"
+        @click="orderFinished()">
+        OK
+      </button></div>
+    </Slotmodal>
+  </div>
 
-    <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
+  <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
 
-    <div id="checkout-title">
-      {{uiLabels.yourOrder}}
-    </div>
-    <div id="btn-order-wrap">
+  <div id="checkout-title">
+    {{uiLabels.yourOrder}}
+  </div>
+  <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newMenu">
 
 
@@ -41,11 +41,11 @@
       @modify_menu="modifyMenu">
     </OrderInCheckout>
   </div>
-  </div>
-  <div id="checkout-foot">
-    <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
-    <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
-  </div>
+</div>
+<div id="checkout-foot">
+  <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+</div>
 
 </div>
 </template>
@@ -223,15 +223,19 @@ export default{
 }
 
 #orderFinishedModal{
-  font-size: 3em;
+  /* font-size: 3em;
   text-align: center;
-  line-height: 150%;
+  line-height: 150%; */
+}
+
+.slotBody{
+  margin-top: 5vh;
 }
 
 .btn-close{
   background-color: #33cc33;
   border-radius: 10px;
-  margin-top: 14vh;
+  margin-top: 10vh;
   position: relative;
 }
 

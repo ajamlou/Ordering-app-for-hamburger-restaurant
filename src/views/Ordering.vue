@@ -48,14 +48,14 @@ v-show="this.showIngredientsModal"
 
 <SlotModal
 v-if="this.showSlotModal">
-<div slot="header"><button
+<div slot="header"></div>
+<div slot="body">{{uiLabels.noIngredients}}</div>
+<div slot="footer"><button
   type="button"
   class="btn-close"
   @click="toggleSlotModal()">
-  x
+  OK
 </button></div>
-<div slot="body">{{uiLabels.noIngredients}}</div>
-<div slot="footer"></div>
 </SlotModal>
 
 <div id="ordering" v-if = "currentView === 'designPage'">
@@ -444,6 +444,13 @@ export default {
           }
 
           #next-btn:active{border: 2px solid #595959;}
+
+          .btn-close{
+            background-color: #33cc33;
+            border-radius: 10px;
+            margin-top: 10vh;
+            position: relative;
+          }
 
           .ingredient{
             border: 1px solid #ccd;

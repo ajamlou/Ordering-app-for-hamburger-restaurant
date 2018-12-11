@@ -58,6 +58,9 @@ export default {
     max-width:100%;
     max-height:70%;
     padding-bottom: 15px;
+    font-size: 2.5em;
+    text-align: center;
+    line-height: 150%;
   }
 
   .btn-close {
