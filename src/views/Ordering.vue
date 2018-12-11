@@ -476,7 +476,7 @@ export default {
           .avbryt{ /* Avbryt-knappen */
             float: left;
           }
-          #order-btn{
+          /* #order-btn{
             grid-column: 6/7;
             grid-row:4;
             margin-bottom: 20px;
@@ -487,7 +487,7 @@ export default {
           #order-btn:hover{
             color:black;
             background-color: rgb(0, 200, 0);
-          }
+          } */
 
           button{
             background-color: #ddd;

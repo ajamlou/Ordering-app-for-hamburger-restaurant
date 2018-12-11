@@ -12,7 +12,7 @@
     <div slot="footer"></div>
     </slotmodal>
 
-    <button @click="goBack">{{uiLabels.back}}</button>
+    <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
 
     <div id="checkout-title">
       {{uiLabels.yourOrder}}
@@ -182,5 +182,42 @@ export default{
   font-size: 2em;
 }
 
+#order-btn2{
+  border:1px solid #7a7a7a;
+  grid-column: 6/7;
+  grid-row:3;
+  color:white;
+  background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
+  background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
+  background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+  background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+  background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
+  background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+}
+#order-btn2:active{border: 2px solid #595959;}
+
+#back-btn{
+  grid-column: 1/2;
+  grid-row: 3;
+  border: 1px solid #7a7a7a;
+  color:white;
+  background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+  background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+  background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+  background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+  background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+  background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
+}
+#back-btn:hover{
+  background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+  /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+  background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+  background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+  background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+  background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+}
 
 </style>
