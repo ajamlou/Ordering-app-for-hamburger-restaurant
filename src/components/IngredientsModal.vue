@@ -78,7 +78,7 @@ export default {
     overflow-x: hidden;
     border-radius: 15px;
     width:45em;
-    max-width:95%;
+    max-width:85%;
     min-height:11em;
     max-height:70%;
     padding-bottom: 10px;

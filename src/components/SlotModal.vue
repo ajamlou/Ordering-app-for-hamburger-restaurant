@@ -55,7 +55,7 @@ export default {
     overflow: visible;
     border-radius: 15px;
     width:45em;
-    max-width:100%;
+    max-width:70%;
     max-height:70%;
     padding-bottom: 15px;
     font-size: 2.5em;
