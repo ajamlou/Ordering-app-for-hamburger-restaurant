@@ -1,23 +1,25 @@
 <template>
   <div id="checkout-div">
-    <SlotModal
-    v-if="this.showSlotModal">
-    <div slot="header"><button
-          type="button"
-          class="btn-close"
-          @click="orderFinished()">
-          X
-        </button></div>
-    <div slot="body">{{slotContent}}</div>
-    <div slot="footer"></div>
-    </slotmodal>
+    <div id="orderFinishedModal">
+      <SlotModal
+      v-if="this.showSlotModal">
+      <div slot="header"></div>
+      <div slot="body" class="slotBody">{{slotContent}}</div>
+      <div slot="footer"><button
+        type="button"
+        class="btn-close"
+        @click="orderFinished()">
+        OK
+      </button></div>
+    </Slotmodal>
+  </div>
 
-    <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
+  <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
 
-    <div id="checkout-title">
-      {{uiLabels.yourOrder}}
-    </div>
-    <div id="btn-order-wrap">
+  <div id="checkout-title">
+    {{uiLabels.yourOrder}}
+  </div>
+  <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newMenu">
 
 
@@ -39,11 +41,11 @@
       @modify_menu="modifyMenu">
     </OrderInCheckout>
   </div>
-  </div>
-  <div id="checkout-foot">
-    <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
-    <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
-  </div>
+</div>
+<div id="checkout-foot">
+  <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+</div>
 
 </div>
 </template>
@@ -219,5 +221,24 @@ export default{
   background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
 }
+
+#orderFinishedModal{
+  /* font-size: 3em;
+  text-align: center;
+  line-height: 150%; */
+}
+
+.slotBody{
+  margin-top: 5vh;
+}
+
+.btn-close{
+  background-color: #33cc33;
+  border-radius: 10px;
+  margin-top: 10vh;
+  position: relative;
+}
+
+.btn-close:active{background-color: #1f7a1f}
 
 </style>
