@@ -16,10 +16,13 @@ Kommer inte fungera Out of the box, men you get the point -->
 
 
 <template>
-  <div class = "wrapper">
-    <div class = "favorites" v-for = "item in favBurgers" :key = "item.id" @click = "favToCheckout">
-      <h1 class = "header">{{item.name}}</h1>
-      <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
+  <div  class = "wrapper">
+    <div id = "favorites">
+      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id" @click = "favToCheckout">
+        <h1 class = "header">{{item.name}}</h1>
+        <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
+
+      </div>
     </div>
   </div>
 </template>
@@ -56,17 +59,17 @@ export default {
 }
 },
 props:{
-ingredients:Array,
-lang: String,
-menu: Array
+  ingredients:Array,
+  lang: String,
+  menu: Array
 },
 components:{
-Favorite
+  Favorite
 },
 methods:{
-favToCheckout: function(){
-  this.menu.push();
-}
+  favToCheckout: function(){
+    this.menu.push();
+  }
 }
 }
 </script>
@@ -75,19 +78,31 @@ favToCheckout: function(){
 
 
 
-.favorites{
+
+
+/* .wrapper{
+height: 100vh;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+align-items: center;
+} */
+
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+#favorites{
+  grid-column: 1/7;
+  grid-row: 2/3;
+  margin:auto;
+}
+.burgers{
   background-color: white;
   border:5px solid rgb(255, 0, 0);
   width: 320px;
   height: 320px;
-}
-
-.wrapper{
-  height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .header{
