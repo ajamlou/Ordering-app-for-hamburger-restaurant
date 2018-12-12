@@ -9,7 +9,7 @@
         type="button"
         class="btn-close"
         @click="orderFinished()">
-        OK
+        {{uiLabels.OKlabel}}
       </button></div>
     </Slotmodal>
   </div>
@@ -237,6 +237,10 @@ export default{
   border-radius: 10px;
   margin-top: 10vh;
   position: relative;
+  width: 6vw;
+  height: 8vh;
+  font-size: 3vw;
+  color: white;
 }
 
 .btn-close:active{background-color: #1f7a1f}

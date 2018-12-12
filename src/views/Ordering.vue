@@ -54,7 +54,7 @@ v-if="this.showSlotModal">
   type="button"
   class="btn-close"
   @click="toggleSlotModal()">
-  OK
+  {{uiLabels.OKlabel}}
 </button></div>
 </SlotModal>
 
@@ -422,7 +422,7 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
-            #next-btn:active{border: 2px solid #595959;}
+          #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
             justify-self: center;

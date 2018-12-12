@@ -45,5 +45,6 @@
   "welcomeText": "Välkommen till MaxDonald's",
   "glutenFree" : "Glutenfri",
   "dairyFree" : "Laktosfri",
-  "vegan" : "Vegansk"
+  "vegan" : "Vegansk",
+  "OKlabel": "OK"
 }
