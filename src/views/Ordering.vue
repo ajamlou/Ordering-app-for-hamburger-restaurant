@@ -317,8 +317,8 @@ export default {
             grid-row:1;
             color:white;
             font-weight: 700;
-            min-height: 4em;
-            width: 10em;
+            width:120px;
+            height:80px;
             border:1px solid #7a7a7a;
             margin: auto;
           }
@@ -364,6 +364,9 @@ export default {
             height:3em;
             padding:0 3px 3px 0;
           }
+
+          /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
+          Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
             background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -416,6 +419,10 @@ export default {
             grid-row: 1;
             border: 1px solid #7a7a7a;
             color:white;
+            width:120px;
+            height:80px;
+            margin:auto;
+            justify-self:center;
             background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
             background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
             background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
@@ -445,6 +452,9 @@ export default {
           }
 
           #next-btn{
+            width:120px;
+            height:80px;
+            justify-self:end;
             border:1px solid #7a7a7a;
             grid-column: 6/7;
             grid-row:3;
@@ -540,13 +550,19 @@ export default {
           }
           }
             @media screen and (max-width:650px){
+              #header-title{
+                grid-column:2/6;
+              }
+              #header-title h1{
+                font-size:2em;
+              }
               .icon{
                 display:block;
                 margin:auto;
               }
             }
           @media screen and (max-width:480px){
-            #next-btn, #bck-btn{
+            #next-btn{
               grid-row:4;
             }
           }
