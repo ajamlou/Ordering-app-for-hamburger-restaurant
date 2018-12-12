@@ -367,7 +367,7 @@ export default {
             grid-column: 1/7;
           }
           #bestallning{
-            grid-column: 1 / 3;
+            grid-column: 1 / 4;
             grid-row: 1;
             text-align: center;
           }
