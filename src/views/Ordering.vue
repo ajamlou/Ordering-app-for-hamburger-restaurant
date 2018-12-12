@@ -12,17 +12,17 @@
     id="frontPage">
   </OrderingViewFrontPage>
 
-  <div v-if = "currentView === 'favoritesPage'"
-  id="favouritesPage">
-    <button class = "avbryt"
+    <button
+    id = "bck-btn"
+    v-if = "this.breadcrumbs.length != 0"
     @click= "goBack">
     {{ uiLabels.back }}</button>
-    <FavoritesPage
+    <FavoritesPage v-if = "currentView === 'favoritesPage'"
+    id="favouritesPage"
     :ingredients="ingredients"
     :lang = "lang"
     :menu = "menusArray">
   </FavoritesPage>
-</div>
 
   <CheckoutPage
   id="checkoutPage"
@@ -94,9 +94,6 @@ v-if="this.showSlotModal">
 <div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id = "bck-btn"
-@click= "goBack">
-{{ uiLabels.back }}</button>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 <!-- <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button> -->
 </div>
@@ -352,6 +349,10 @@ export default {
             border:1px solid #7a7a7a;
             margin: auto;
           }
+          #fav-back-btn{
+            grid-column: 1/2;
+            grid-row: 1;
+          }
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
             background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -401,7 +402,7 @@ export default {
           }
           #bck-btn{
             grid-column: 1/2;
-            grid-row: 3;
+            grid-row: 1;
             border: 1px solid #7a7a7a;
             color:white;
             background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
@@ -475,9 +476,6 @@ export default {
             grid-template-columns: repeat(10,10%);
             grid-template-areas: "title";
             text-align: center;*/
-          }
-          .avbryt{ /* Avbryt-knappen */
-            float: left;
           }
           /* #order-btn{
             grid-column: 6/7;
