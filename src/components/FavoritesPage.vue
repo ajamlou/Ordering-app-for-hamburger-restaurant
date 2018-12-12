@@ -18,10 +18,14 @@ Kommer inte fungera Out of the box, men you get the point -->
 <template>
   <div  class = "wrapper">
     <div id = "favorites">
-      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id" @click = "favToCheckout">
+      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "chooseIngredients">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-
+        <ul>
+          <li v-for = "item in chosenIngredients" :key = "item.ingredient_id">
+            {{item["ingredient_"+ lang]}}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -38,24 +42,15 @@ export default {
       favBurgers:[
         {name:'Beefinator',
         id: 1,
-        pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-        bun: "Brioche",
-        protein: "Hummer",
-        sauce: "Grillsås"
+        pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
       },
       {name:'Vegginator',
       id: 2,
-      pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-      bun: "Brioche",
-      protein: "Hummer",
-      sauce: "Grillsås"
+      pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
     },
     {name:'Veganinator',
     id:3,
-    pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-    bun: "Brioche",
-    protein: "Hummer",
-    sauce: "Grillsås"
+    pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
   }
 ]
 }
@@ -73,7 +68,9 @@ methods:{
     this.menu.push();
   },
   chooseIngredients: function(){
-    this.chosenIngredients = this.ingredients.filter(ingredient=>ingredient.ingredient_id === id[0] || id[1] || id[2])
+    for (var i = 0; i< this.ingredient_ids.length; i++){
+      this.chosenIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]))
+    }
   }
 }
 }
