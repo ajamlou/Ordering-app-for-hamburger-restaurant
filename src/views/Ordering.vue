@@ -36,7 +36,7 @@
   @new_menu="newMenu"
   @modify_menu="modifyMenu"
   @clear_all="clearAll">
-</CheckoutPage>
+  </CheckoutPage>
 
 <IngredientsModal ref="modal"
 v-show="this.showIngredientsModal"

@@ -40,8 +40,8 @@
   "createYourBurger" : "Create your own burger",
   "chooseAFavorite" : "Choose from our favorites",
   "welcomeText" : "Welcome to MaxDonald's",
-  "OKlabel": "OK",
-  "gluten" : "Contains Gluten",
-  "dairy" : "Contains Dairy",
-  "vegan" : "Vegan"
+  "glutenFree" : "Gluten Free",
+  "dairyFree" : "Dairy Free",
+  "vegan" : "Vegan",
+  "OKlabel": "OK"
 }
