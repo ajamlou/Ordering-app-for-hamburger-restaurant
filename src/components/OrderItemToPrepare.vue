@@ -1,18 +1,15 @@
 <template>
-  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
+  <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
   <div>
       <h4>#{{orderId}}</h4>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
-    </div>
-    <!-- <button id="cancelButton" v-on:click="cancelOrder">
-      {{uiLabels.cancel}}
-    </button> -->
     <button id="sendToPreparing" v-on:click="orderDone">
       {{uiLabels.ready}}
     </button>
+  </div>
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
@@ -21,6 +18,9 @@
         :lang="lang"
         :order="order">
       </OrderItem>
+      <button id="cancelButton" v-on:click="cancelOrder">
+        {{uiLabels.cancel}}
+      </button>
     </b-collapse>
   </div>
 </div>
