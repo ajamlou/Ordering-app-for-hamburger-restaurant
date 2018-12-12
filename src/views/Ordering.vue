@@ -67,7 +67,7 @@ v-if="this.showSlotModal">
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
-  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+  <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
   <div id="r2-div"> <!--Div för row 2 i ordering grid -->
   <div id="gluten-exp">
     <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
@@ -247,27 +247,6 @@ export default {
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
                 },
-              //   placeOrder: function () {
-              //     if(this.chosenIngredients.length>0){
-              //       var i,
-              //       //Wrap the order in an object
-              //       order = {
-              //         ingredients: this.chosenIngredients,
-              //         price: this.price
-              //       };
-              //       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-              //       this.$store.state.socket.emit('order', {order: order});
-              //       //set all counters to 0. Notice the use of $refs
-              //       /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-              //       this.$refs.modal.$refs.ingredient[i].resetCounter();
-              //     }*/
-              //     this.price = 0;
-              //     this.chosenIngredients = [];
-              //     for(i=0; i < this.categoryItemCounter.length; i++){
-              //       this.categoryItemCounter[i] = 0;
-              //     }
-              //   }
-              // },
               removeFromMenu: function(item,index) {
                 this.chosenIngredients.splice(index,1);
                 this.categoryItemCounter[item.category-1]-=1;
@@ -363,15 +342,15 @@ export default {
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
-            margin:auto;
+            margin:50px auto auto auto;
             width: 90%;
             grid-row: 2;
             grid-column: 1/7;
           }
           #bestallning{
-            grid-column: 1 / 3;
+            grid-column: 1 / 4;
             grid-row: 1;
-            text-align: center;
+            text-align: left;
           }
           #r2-div{
             grid-row:1/2;
@@ -538,8 +517,27 @@ export default {
             background-color: #000;
             color: white;
           }
+          @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+            #bestallning{
+              grid-column: 1/7;
+              grid-row:1/2;
+              text-align:center;
+            }
+          #r2-div{
+            grid-column:1/7;
+            grid-row:2/3;
+            justify-items: center;
+            align-items: center;
+          }
+          #categories-wrapper{
+          grid-row:3/4;
+          }
+          #price-div, #next-btn{
+            grid-row:4/5;
+          }
+          }
           @media screen and (max-width:480px){
-            #next-btn{
+            #next-btn, #bck-btn{
               grid-row:4;
             }
           }
