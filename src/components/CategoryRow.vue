@@ -77,7 +77,7 @@ export default {
   flex-wrap: wrap;
   background-color: rgba(0,165,0,0.5);
   border-radius: 15px;
-  margin: 0 0.5em 1em;
+  margin: 0 0.5em 1em 0;
   height:calc(6em + 6px);
   width:100%;
   overflow:hidden;

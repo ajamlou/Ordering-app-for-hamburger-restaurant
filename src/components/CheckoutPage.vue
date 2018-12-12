@@ -24,9 +24,11 @@
 
 
       <div id="add-btn-top">
-        <h5>{{uiLabels.addBurger}}</h5>
+        <div id="addButtonText">
+          <h5>{{uiLabels.addBurger}}</h5>
+        </div>
       </div>
-      <p>+</p>
+      <!-- <p>+</p> -->
     </div>
     <div id="checkout-wrapper">
       <OrderInCheckout
@@ -160,6 +162,10 @@ export default{
   flex-wrap: nowrap;
   text-align: center;
   overflow-x: auto;
+  background-color: red;
+  border-radius: 10px;
+  border: 3px solid black;
+  margin-top: 3vh;
 }
 .flex-item{
   flex: 0 0 auto;
@@ -172,9 +178,15 @@ export default{
   text-align: center;
   max-width:15%;
   align-items:stretch;
-  background-color:rgba(255, 255, 255, 0.9);
+  background-color:#3385ff;
   cursor:pointer;
   flex: 0 0 auto;
+  border-radius: 10px;
+  color: white;
+  margin-right: 5vw;
+  margin-left: 3vw;
+  margin-top: 10vh;
+  height: 30vh;
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
@@ -184,11 +196,24 @@ export default{
   font-size: 2em;
 }
 
+#addButtonText{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 #order-btn2{
+  grid-column: 6/7;
   border:1px solid #7a7a7a;
+  width: 7vw;
+  height: 6vh;
+  font-size: 1.5em;
+  border-radius: 10px;
   grid-column: 6/7;
   grid-row:3;
   color:white;
+  text-align: center;
   background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
   background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
   background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
@@ -196,6 +221,7 @@ export default{
   background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
   background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+  margin-left: 3px;
 }
 #order-btn2:active{border: 2px solid #595959;}
 
@@ -244,5 +270,10 @@ export default{
 }
 
 .btn-close:active{background-color: #1f7a1f}
+
+center{
+  font-size: 2em;
+}
+
 
 </style>
