@@ -240,10 +240,13 @@ export default {
                   if(this.isModifying){
                     this.addToCheckout();
                   }
+                  /*Om vi backar från checkout, ta bort senaste ordern*/
+                  if(this.currentView==='checkoutPage'){
+                    this.menusArray.pop();
+                  }
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
-                    this.menusArray.pop();
                   }
                 },
                 addToMenu: function (item) {
