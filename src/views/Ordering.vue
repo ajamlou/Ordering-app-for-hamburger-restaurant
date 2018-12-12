@@ -245,27 +245,6 @@ export default {
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
                 },
-              //   placeOrder: function () {
-              //     if(this.chosenIngredients.length>0){
-              //       var i,
-              //       //Wrap the order in an object
-              //       order = {
-              //         ingredients: this.chosenIngredients,
-              //         price: this.price
-              //       };
-              //       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-              //       this.$store.state.socket.emit('order', {order: order});
-              //       //set all counters to 0. Notice the use of $refs
-              //       /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-              //       this.$refs.modal.$refs.ingredient[i].resetCounter();
-              //     }*/
-              //     this.price = 0;
-              //     this.chosenIngredients = [];
-              //     for(i=0; i < this.categoryItemCounter.length; i++){
-              //       this.categoryItemCounter[i] = 0;
-              //     }
-              //   }
-              // },
               removeFromMenu: function(item,index) {
                 this.chosenIngredients.splice(index,1);
                 this.categoryItemCounter[item.category-1]-=1;
@@ -536,7 +515,7 @@ export default {
             background-color: #000;
             color: white;
           }
-          @media screen and (max-width:1206px){
+          @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
             #bestallning{
               grid-column: 1/7;
               grid-row:1/2;
