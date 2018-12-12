@@ -537,7 +537,7 @@ export default {
             color: white;
           }
           @media screen and (max-width:480px){
-            #next-btn, #bck-btn{
+            #next-btn{
               grid-row:4;
             }
           }
