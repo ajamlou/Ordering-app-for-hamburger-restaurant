@@ -4,6 +4,11 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
+    <div id="header-title">
+      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
+    </div>
 
   <OrderingViewFrontPage
     @Visibility="changeView"
@@ -54,7 +59,7 @@ v-if="this.showSlotModal">
   type="button"
   class="btn-close"
   @click="toggleSlotModal()">
-  OK
+  {{uiLabels.OKlabel}}
 </button></div>
 </SlotModal>
 
@@ -62,21 +67,20 @@ v-if="this.showSlotModal">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
-  <div id="allergen-div">
+  <div id="r2-div"> <!--Div för row 2 i ordering grid -->
   <div id="gluten-exp">
-    <img src="../assets/gluten.png" class="icon"><span>Contains gluten</span>
+    <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
   </div>
   <div id="dairy-exp">
-  <img src="../assets/dairy.png" class="icon">
+  <img src="../assets/dairy.png" class="icon"><span>{{uiLabels.dairy}}</span>
   </div>
   <div id="vegan-exp">
-    <img src="../assets/vegan.png" class="icon">
+    <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
   </div>
 </div>
 
 
   <div id="categories-wrapper">
-    <h2>{{ uiLabels.myBurger }} </h2>
     <CategoryRow v-for="category in burgerCategories"
     :key="category.categoryNr"
     :category="category.categoryNr"
@@ -327,6 +331,21 @@ export default {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
           }
+          #lang-btn{
+            grid-column:6/7;
+            grid-row:1;
+            color:white;
+            font-weight: 700;
+            min-height: 4em;
+            width: 10em;
+            border:1px solid #7a7a7a;
+            margin: auto;
+          }
+          #header-title{
+            grid-column:3/5;
+            grid-row:1;
+            text-align: center;
+          }
           #checkoutPage{
             grid-row: 2;
             grid-column: 1/7;
@@ -352,26 +371,17 @@ export default {
             grid-row: 1;
             text-align: center;
           }
-          #lang-btn{
-            grid-column:6/7;
-            grid-row:1;
-            color:white;
-            font-weight: 700;
-            min-height: 4em;
-            width: 10em;
-            border:1px solid #7a7a7a;
-            margin: auto;
-          }
-          #allergen-div{
-            grid-row:2;
+          #r2-div{
+            grid-row:1/2;
             grid-column: 4/7;
             display:grid;
             grid-template-columns: repeat(3,1fr);
             grid-template-rows: auto;
+            font-size:1em;
           }
           .icon{
             height:3em;
-            padding-bottom:3px;
+            padding:0 3px 3px 0;
           }
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -443,7 +453,7 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
-            #next-btn:active{border: 2px solid #595959;}
+          #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
             justify-self: center;

@@ -45,5 +45,6 @@
   "welcomeText": "Välkommen till MaxDonald's",
   "gluten" : "Innehåller Gluten",
   "dairy" : "Innehåller Laktos",
-  "vegan" : "Vegansk"
+  "vegan" : "Vegansk",
+  "OKlabel": "OK"
 }
