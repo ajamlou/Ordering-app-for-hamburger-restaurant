@@ -7,9 +7,9 @@
         +
       </b-btn>
     </div>
-    <button id="cancelButton" v-on:click="cancelOrder">
+    <!-- <button id="cancelButton" v-on:click="cancelOrder">
       {{uiLabels.cancel}}
-    </button>
+    </button> -->
     <button id="sendToPreparing" v-on:click="orderDone">
       {{uiLabels.ready}}
     </button>
