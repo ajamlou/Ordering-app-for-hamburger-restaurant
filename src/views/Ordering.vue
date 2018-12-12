@@ -247,6 +247,11 @@ export default {
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
+
+                    /*Om vi kommer till favoriter igen, nollställ burgaren*/
+                    if(this.currentView==="favoritesPage"){
+                      this.resetBurger();
+                    }
                   }
                 },
                 addToMenu: function (item) {
