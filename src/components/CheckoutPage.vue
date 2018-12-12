@@ -165,6 +165,7 @@ export default{
   background-color: red;
   border-radius: 10px;
   border: 3px solid black;
+  margin-top: 3vh;
 }
 .flex-item{
   flex: 0 0 auto;
@@ -185,6 +186,7 @@ export default{
   margin-right: 5vw;
   margin-left: 3vw;
   margin-top: 10vh;
+  height: 30vh;
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
