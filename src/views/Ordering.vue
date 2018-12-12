@@ -369,7 +369,7 @@ export default {
           #bestallning{
             grid-column: 1 / 4;
             grid-row: 1;
-            text-align: center;
+            text-align: left;
           }
           #r2-div{
             grid-row:1/2;
@@ -536,8 +536,27 @@ export default {
             background-color: #000;
             color: white;
           }
+          @media screen and (max-width:1206px){
+            #bestallning{
+              grid-column: 1/7;
+              grid-row:1/2;
+              text-align:center;
+            }
+          #r2-div{
+            grid-column:1/7;
+            grid-row:2/3;
+            justify-items: center;
+            align-items: center;
+          }
+          #categories-wrapper{
+          grid-row:3/4;
+          }
+          #price-div, #next-btn{
+            grid-row:4/5;
+          }
+          }
           @media screen and (max-width:480px){
-            #next-btn{
+            #next-btn, #bck-btn{
               grid-row:4;
             }
           }
