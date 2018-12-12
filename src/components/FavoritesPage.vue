@@ -18,7 +18,7 @@ Kommer inte fungera Out of the box, men you get the point -->
 <template>
   <div  class = "wrapper">
     <div id = "favorites">
-      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "chooseIngredients">
+      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul>
@@ -26,6 +26,7 @@ Kommer inte fungera Out of the box, men you get the point -->
             {{item["ingredient_"+ lang]}}
           </li>
         </ul>
+        <p>{{uiLabels.sum}}</p>
       </div>
     </div>
   </div>
@@ -39,6 +40,9 @@ export default {
     return{
       ingredient_ids:[1,2,3],
       chosenIngredients: [],
+      price: 0,
+      units: 1,
+      categoryItemCounter: 1,
       favBurgers:[
         {name:'Beefinator',
         id: 1,
@@ -58,19 +62,28 @@ export default {
 props:{
   ingredients:Array,
   lang: String,
-  menu: Array
+  menu: Array,
+  uiLabels: Object
 },
 components:{
   Favorite
 },
 methods:{
+  // chooseIngredients: function(){
+  //   let order ={"ingredients": this.chosenIngredients,
+  //   "price":this.price,
+  //   "units":this.units,
+  //   "itemCount":this.categoryItemCounter};
+  //   console.log(order);
+  //   this.$emit("fav-checkout",order);
+  // },
   favToCheckout: function(){
-    this.menu.push();
-  },
-  chooseIngredients: function(){
+    this.$emit("clearburger");
     for (var i = 0; i< this.ingredient_ids.length; i++){
-      this.chosenIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]))
+      this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
     }
+    this.$emit("fav-checkout");
+    console.log(this.menu)
   }
 }
 }

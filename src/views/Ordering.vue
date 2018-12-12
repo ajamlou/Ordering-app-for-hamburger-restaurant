@@ -23,11 +23,16 @@
     @click= "goBack">
     {{ uiLabels.back }}</button>
 
-    <FavoritesPage v-if = "currentView === 'favoritesPage'"
+    <FavoritesPage
+    v-if = "currentView === 'favoritesPage'"
     id="favouritesPage"
+    @clearburger = "resetBurger"
+    @fav-ingredient = "addToMenu"
+    @fav-checkout = "addToCheckout();changeView('checkoutPage');"
     :ingredients="ingredients"
     :lang = "lang"
-    :menu = "menusArray">
+    :menu = "menusArray"
+    :uiLabels = "uiLabels">
   </FavoritesPage>
 
   <CheckoutPage
@@ -246,6 +251,7 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
+                  console.log(item);
                 },
               removeFromMenu: function(item,index) {
                 this.chosenIngredients.splice(index,1);
