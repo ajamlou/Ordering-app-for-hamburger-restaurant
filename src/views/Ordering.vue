@@ -258,8 +258,9 @@ export default {
                 this.categoryItemCounter[item.category-1]-=1;
                 this.price -= item.selling_price;
               },
-              modifyMenu:function(ingredients,units,index){
+              modifyMenu:function(ingredients,units,index,itemCounter){
                 this.chosenIngredients=ingredients;
+                this.categoryItemCounter=itemCounter;
                 this.units=units;
                 this.modifyMenuIndex=index;
                 this.isModifying = true;
@@ -272,7 +273,8 @@ export default {
                 if(this.chosenIngredients.length>0){
                   let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
-                  "units":this.units};
+                  "units":this.units,
+                  "itemCount":this.categoryItemCounter};
 
                   if(this.isModifying){
                     /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i menusArray*/

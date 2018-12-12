@@ -96,8 +96,8 @@ export default{
     removeMenu:function(index){
       this.menus.splice(index,1);
     },
-    modifyMenu:function(ingredients,units,index){
-      this.$emit('modify_menu',ingredients,units,index);
+    modifyMenu:function(ingredients,units,index,itemCounter){
+      this.$emit('modify_menu',ingredients,units,index,itemCounter);
       this.menus.splice(index,1);
     },
     newMenu:function(){
