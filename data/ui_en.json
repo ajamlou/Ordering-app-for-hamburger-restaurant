@@ -43,5 +43,6 @@
   "gluten" : "Contains Gluten",
   "dairy" : "Contains Dairy",
   "vegan" : "Vegan",
-  "OKlabel": "OK"
+  "OKlabel": "OK",
+  "checkout" : "Checkout"
 }

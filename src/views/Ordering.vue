@@ -6,7 +6,7 @@
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
       <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
-      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
