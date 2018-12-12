@@ -1,36 +1,36 @@
 <template>
-<div class = "masterOrderitem">
+	<div class = "masterOrderitem">
 
- <!-- menusArray tas ut i computed, är en array med menyer som i sin tur är
-arrayer innehållande varje menys ingrediensarray -->
+		<!-- menusArray tas ut i computed, är en array med menyer som i sin tur är
+		arrayer innehållande varje menys ingrediensarray -->
 
-	<!-- <div v-for="(menu,index) in menusArray"
-	:key="index"> -->
+		<!-- <div v-for="(menu,index) in menusArray"
+		:key="index"> -->
 
-	<div v-for="(menu, menuindex) in menusArray"
-	:key="menuindex">
+		<div v-for="(menu, menuindex) in menusArray"
+		:key="menuindex">
 
 		<div
 		v-if="onlypatty === true">
-			<div v-for="(ingredient,index) in menu.ingredients"
-			:key="index"
-			v-if="ingredient.category === 1">
-				{{ingredient.ingredient_sv}}
-			</div>
-			<div class="betweenBurgers">
-				<!-- Skiljelinje mellan olika burgare -->
-		</div>
-		</div>
-
-		<div v-else>
-			{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
-			<div class="betweenBurgers">
-				<!-- Skiljelinje mellan olika burgare -->
-			</div>
-		</div>
+		<div v-for="(ingredient,index) in menu.ingredients"
+		:key="index"
+		v-if="ingredient.category === 1">
+		{{ingredient.ingredient_sv}}
 	</div>
+	<div class="betweenBurgers">
+		<!-- Skiljelinje mellan olika burgare -->
+	</div>
+</div>
 
-	<!-- </div> -->
+<div v-else>
+	{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
+	<div class="betweenBurgers">
+		<!-- Skiljelinje mellan olika burgare -->
+	</div>
+</div>
+</div>
+
+<!-- </div> -->
 
 </div>
 
@@ -39,15 +39,15 @@ arrayer innehållande varje menys ingrediensarray -->
 
 <script>
 export default {
-  name: 'OrderItem',
-  props: {
-    uiLabels: Object,
-    order: Object,
-    orderId: String,
-    lang: String,
+	name: 'OrderItem',
+	props: {
+		uiLabels: Object,
+		order: Object,
+		orderId: String,
+		lang: String,
 		onlypatty: Boolean, /*Avgör om det bara är pattys som ska visas*/
 		category: Number		/*För att veta vad som hör till patty-kategorin*/
-  },
+	},
 	computed:{
 		menusArray:function(){
 			let menuArray = this.order.menus;
