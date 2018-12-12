@@ -8,6 +8,7 @@
   <div>
   <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
+  <button  id = "favoritesButton" @click="emitSwitchVisibility('f')">FAVORITER</button>
   </div>
 
   <!-- Om modalen för statisitk- och lagerknappen ska visas eller ej-->
@@ -101,7 +102,7 @@ export default {
 }
 
 /*css för statistik- och lagerknappar*/
-#statisticsButton, #storageButton{
+#statisticsButton, #storageButton, #favoritesButton{
 border: 2px solid white;
 color: white;
 text-shadow: 2px 2px #696969;

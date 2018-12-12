@@ -19,6 +19,22 @@
     </div>
   </div>
 
+  <SlotModal v-if ="currentView === 'f'">
+    <div slot="header"><button
+          type="button"
+          class="backButton"
+          @click="currentView = 'kitchenFrontPage'">
+          Stäng
+        </button></div>
+
+        <div slot ="footer"><button
+          type="button"
+          class="backButton"
+          @click="changeFavorites">
+          Bekräfta
+        </button></div>
+  </SlotModal>
+
   <div id="kitchen-grid" v-show="currentView === 'grillPage'">
 
     <!-- Här skapas beställningarna i "Inkomna". -->
@@ -83,10 +99,7 @@
 :ingredients = "ingredients"
 v-show = "ModalVisibility === true">
 </KitchenModal> -->
-
-
 </div>
-
 </div>
 
 </template>
@@ -102,6 +115,8 @@ import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
 import PreppView from '@/components/PreppView.vue'
+import SlotModal from '@/components/SlotModal.vue'
+import FavortiesPage from '@/components/FavoritesPage.vue'
 
 export default {
   name: 'Ordering',
@@ -115,7 +130,8 @@ export default {
     StaffViewStatistics,
     KitchenModal,
     KitchenViewFrontPage,
-    PreppView
+    PreppView,
+    SlotModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
@@ -137,6 +153,9 @@ export default {
     },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
+    },
+    changeFavorites: function(){
+
     },
     changeView: function(view){
       this.currentView = view;
@@ -226,7 +245,7 @@ h1 {
   position: relative;
 }
 
-#backButton{
+.backButton{
   border: 2px solid white;
   color: white;
   text-shadow: 2px 2px #696969;

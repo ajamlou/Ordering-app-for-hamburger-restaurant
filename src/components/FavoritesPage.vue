@@ -1,12 +1,25 @@
+<!-- kod som genererar favoritsidan -->
+<!--Filterkod
+data: function(){
+ingredient_ids:[1,2,3],
+chosenIngredients=[]
+}
+
+props:{
+ingredients: Array
+}
+
+
+chosenIngredients = this.ingredients.filter(ingredient=>ingredient.ingredient_id === id[0] || id[1] || id[2])
+
+Kommer inte fungera Out of the box, men you get the point -->
+
+
 <template>
   <div class = "wrapper">
-    <div class = "favorites" v-for = "item in favBurgers" :key = "item.id">
+    <div class = "favorites" v-for = "item in favBurgers" :key = "item.id" @click = "favToCheckout">
       <h1 class = "header">{{item.name}}</h1>
       <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-      <Favorite
-        :ingredients = "ingredients"
-        :lang ="lang">
-      </Favorite>
     </div>
   </div>
 </template>
@@ -21,9 +34,9 @@ export default {
         {name:'Beefinator',
         id: 1,
         pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png",
-        bun: 50,
-        protein: 6,
-        sauce: 35
+        bun: "Brioche",
+        protein: "Hummer",
+        sauce: "Grillsås"
       },
       {name:'Vegginator',
       id: 2,
@@ -44,18 +57,16 @@ export default {
 },
 props:{
 ingredients:Array,
-lang: String
+lang: String,
+menu: Array
 },
 components:{
 Favorite
 },
-// computed:{
-//   favBurgers.bun: function(){
-//     return this.bun
-//   }
-// },
 methods:{
-
+favToCheckout: function(){
+  this.menu.push();
+}
 }
 }
 </script>

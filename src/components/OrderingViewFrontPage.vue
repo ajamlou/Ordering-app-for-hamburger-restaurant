@@ -1,13 +1,20 @@
 <template>
   <div>
-      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">SKAPA DIN BURGARE</button>
-      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">VÄLJ BLAND VÅRA FAVORITER</button>
+<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
+    <div id="welcome">
+      {{uiLabels.welcomeText}}
+    </div>
+      <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
+      <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'OrderingViewFrontPage',
+  props:{
+    uiLabels: Object
+  },
   methods: {
     emitSwitchVisibility: function(view) {
       this.$emit('Visibility',view)
@@ -18,30 +25,47 @@ export default {
 
 <style scoped>
 #favoritesButton, #createBurgerButton {
-  color: black;
-  padding: 10vh;
+  text-transform: uppercase;
+  color: white;
+  padding: 5vh;
   display: grid;
-  font-size: 3vh;
+  font-size: 4vh;
   border-radius: 3vh;
   border-color: black;
-  margin: 10vh auto;
+  margin: 6vh auto;
   align-items: center;
   cursor: pointer;
+  width: 30vw;
+  height: 28vh;
 }
 
 #favoritesButton{
-  background-color: firebrick;
+  background-color: #ff884d;
 }
 #favoritesButton:hover {
-  background-color: orange;
-  border-color: orange;
+  background-color: #e64d00;
+  border-color: #e64d00;
 }
-
+#favoritesButton:active {
+  border: 3.5px solid #802b00;
+}
 #createBurgerButton {
-  background-color: royalblue;
+  background-color: #00e699;
 }
 #createBurgerButton:hover {
-  background-color: lightblue;
-  border-color: lightblue;
+  background-color: #009966;
+  border-color: #009966;
+}
+#createBurgerButton:active {
+  border: 3.5px solid #004d26;
+}
+
+#welcome{
+  font-family: 'Luckiest Guy', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 4em;
+  color: #66d9ff;
+  text-shadow: 2px 2px #0086b3;
 }
 </style>

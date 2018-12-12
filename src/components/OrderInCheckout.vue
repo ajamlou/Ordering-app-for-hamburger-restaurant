@@ -38,7 +38,6 @@
 export default{
   name:"OrderInCheckout",
   components:{
-
   },
   props:{
     id: Number,
@@ -51,7 +50,7 @@ export default{
       this.$emit('remove_menu',this.id);
     },
     modifyMenu:function(){
-      this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id);
+      this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id,this.menu.itemCount);
       this.$emit('change_view','designPage');
     },
   },

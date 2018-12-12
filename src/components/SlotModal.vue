@@ -55,9 +55,12 @@ export default {
     overflow: visible;
     border-radius: 15px;
     width:45em;
-    max-width:100%;
+    max-width:70%;
     max-height:70%;
     padding-bottom: 15px;
+    font-size: 2.5em;
+    text-align: center;
+    line-height: 150%;
   }
 
   .btn-close {
@@ -72,6 +75,8 @@ export default {
     cursor: pointer;
     font-weight: bold;
     color: white;
-    background: red;
+    background-color: #33cc33;
+    border-radius: 10px;
+    margin-top: 20vh;
   }
 </style>

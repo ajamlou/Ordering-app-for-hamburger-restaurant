@@ -1,12 +1,19 @@
 <template>
   <div class="ingredient"
   v-on:click="ingredientClicked">
-    <div class="ingredient-name">
-      {{item["ingredient_"+ lang]}}, {{item.stock}}
-    </div>
-    <div class="ingredient-price">
+    <p class="ingredient-name">
+      {{item["ingredient_"+ lang]}}</p>
+    <p class="ingredient-price">
        {{item.selling_price}}:-
-     </div>
+     </p>
+     <div class="ico-div">
+     <img class="ico" src="../assets/dairyfree.png"
+     v-if="item.milk_free"/>
+     <img class="ico" src="../assets/vegan.png"
+     v-if="item.vegan"/>
+     <img class="ico" src="../assets/glutenfree.png"
+     v-if="item.gluten_free"/>
+   </div>
   </div>
 </template>
 <script>
@@ -35,8 +42,42 @@ export default {
 }
 </script>
 <style scoped>
+.ingredient-name{
+  display:inline-block;
+  word-wrap: break-word;
+  grid-column:2/5;
+  grid-row:1;
+  margin-bottom: 0;
+}
+.ingredient-price{
+  grid-column:2/5;
+  grid-row:2;
+}
+.ico{
+  height:1.3em;
+  padding-bottom:3px;
+  display:inline-block;
+}
+.ico-div{
+  grid-column: 5/6;
+  grid-row:1/3;
+  display:grid;
+  justify-content:end;
+  align-content: center;
+  padding-right:4px;
+}
+
 .ingredient{
-  position:relative;
+  font-size: 1.2em;
+  display:grid;
+  align-content: center;
+  /*Baserat på 2 marginaler utefter margin + height av .ico*/
+  grid-template-columns: calc(1px + 1.1em) repeat(3,1fr) calc(1px + 1.4em);
+  max-height:6em;
+  -ms-word-break: break-all;
+     word-break: break-all;
+     word-break: break-word;
+     text-transform: capitalize;
 }
 
 .ingredient:hover{
@@ -44,9 +85,7 @@ export default {
   color: rgb(80,80,80);
 }
 .ingredient-price{
-  position:absolute;
-  bottom:0;
-  width:100%;
+  margin:auto;
 }
 
 </style>

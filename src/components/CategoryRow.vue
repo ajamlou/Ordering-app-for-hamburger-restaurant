@@ -19,7 +19,7 @@
     <button @click="emitInfoToModal"
     class="PlusButton"
     v-show="threshold > item_count">
-      <slot>+</slot>
+    +
     </button>
 
 
@@ -78,22 +78,31 @@ export default {
   background-color: rgba(0,165,0,0.5);
   border-radius: 15px;
   margin: 0 0.5em 1em;
+  height:calc(6em + 6px);
+  width:100%;
   overflow:hidden;
 }
 .PlusButton, .ingredient{
   border: 1px solid #ccd;
   background-color: rgba(255, 255, 255, 0.5);
-  font-size: 1.5em;
   color: rgb(100,100,100);
   border-radius: 15px;
-  width:8em;
-  height:4em;
-  margin:3px 3px 3px;
+  width:180px;
   cursor:pointer;
 }
+.PlusButton{
+  font-size: 1.5em;
+  line-height:0;
+  margin:auto;
+  height:4em;
+  padding:0;
+  margin:3px 3px 3px 0;
+}
+
 .ingredient{
   text-align:center;
   overflow-wrap: break-word;
+  margin:3px 3px 3px 0;
 }
 .extras{
   background-color: rgba(255,165,0,0.5);
@@ -107,10 +116,11 @@ export default {
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
 }
-@media screen and (max-width:835px){
+@media screen and (max-width:1206px){
   .category{
     flex-wrap: wrap;
     justify-content: center;
+    height:auto;
   }
 
   .cat-title{
@@ -119,6 +129,13 @@ export default {
 
   .box-wrapper{
     justify-content: space-around;
+  }
+  .ingredient{
+    height:5em;
+    width:160px;
+  }
+  .PlusButton{
+    width:160px;
   }
 }
 </style>

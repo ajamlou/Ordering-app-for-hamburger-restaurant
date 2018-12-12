@@ -1,27 +1,37 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <button v-on:click="switchLang();checkLang()"
+    id="lang-btn"
+    :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
-    <OrderingViewFrontPage
-      @Visibility="changeView"
-      v-if = "currentView === 'frontPage'">
-    </OrderingViewFrontPage>
+  <OrderingViewFrontPage
+    @Visibility="changeView"
+    v-if = "currentView === 'frontPage'"
+    :uiLabels="uiLabels"
+    id="frontPage">
+  </OrderingViewFrontPage>
 
-  <div v-if = "currentView === 'favoritesPage'">
+  <div v-if = "currentView === 'favoritesPage'"
+  id="favouritesPage">
     <button class = "avbryt"
     @click= "goBack">
     {{ uiLabels.back }}</button>
     <FavoritesPage
     :ingredients="ingredients"
-    :lang = "lang">
+    :lang = "lang"
+    :menu = "menusArray">
   </FavoritesPage>
 </div>
 
   <CheckoutPage
+  id="checkoutPage"
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
+  :orderNumber="orderNumber"
   :lang="lang"
+  @go_to_front="changeView"
   @go_back="goBack"
   @new_menu="newMenu"
   @modify_menu="modifyMenu"
@@ -38,21 +48,18 @@ v-show="this.showIngredientsModal"
 
 <SlotModal
 v-if="this.showSlotModal">
-<div slot="header"><button
+<div slot="header"></div>
+<div slot="body">{{uiLabels.noIngredients}}</div>
+<div slot="footer"><button
   type="button"
   class="btn-close"
   @click="toggleSlotModal()">
-  x
+  OK
 </button></div>
-<div slot="body">{{uiLabels.noIngredients}}</div>
-<div slot="footer"></div>
-</slotmodal>
+</SlotModal>
 
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-  <button v-on:click="switchLang();checkLang()"
-  id="lang-btn"
-  :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
 
@@ -91,7 +98,7 @@ v-if="this.showSlotModal">
 @click= "goBack">
 {{ uiLabels.back }}</button>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-<button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+<!-- <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button> -->
 </div>
 </div>
 </template>
@@ -99,8 +106,6 @@ v-if="this.showSlotModal">
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
-import Ingredient from '@/components/Ingredient.vue'
-import OrderItem from '@/components/OrderItem.vue'
 //import PlusButton from '@/components/PlusButton.vue'
 import CategoryRow from '@/components/CategoryRow.vue'
 import IngredientsModal from '@/components/IngredientsModal.vue'
@@ -116,8 +121,6 @@ necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: 'Ordering',
   components: {
-    Ingredient,
-    OrderItem,
     CategoryRow,
     IngredientsModal,
     SlotModal,
@@ -134,7 +137,7 @@ export default {
       chosenIngredients: [],
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
-      orderNumber: "",
+      orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
       modifyMenuIndex:0, /*Håller koll så att när en meny ändras från checkout läggs burgaren tillbaka på samma ställe igen*/
@@ -229,34 +232,35 @@ export default {
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
                 },
-                placeOrder: function () {
-                  if(this.chosenIngredients.length>0){
-                    var i,
-                    //Wrap the order in an object
-                    order = {
-                      ingredients: this.chosenIngredients,
-                      price: this.price
-                    };
-                    // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-                    this.$store.state.socket.emit('order', {order: order});
-                    //set all counters to 0. Notice the use of $refs
-                    /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-                    this.$refs.modal.$refs.ingredient[i].resetCounter();
-                  }*/
-                  this.price = 0;
-                  this.chosenIngredients = [];
-                  for(i=0; i < this.categoryItemCounter.length; i++){
-                    this.categoryItemCounter[i] = 0;
-                  }
-                }
-              },
+              //   placeOrder: function () {
+              //     if(this.chosenIngredients.length>0){
+              //       var i,
+              //       //Wrap the order in an object
+              //       order = {
+              //         ingredients: this.chosenIngredients,
+              //         price: this.price
+              //       };
+              //       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+              //       this.$store.state.socket.emit('order', {order: order});
+              //       //set all counters to 0. Notice the use of $refs
+              //       /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
+              //       this.$refs.modal.$refs.ingredient[i].resetCounter();
+              //     }*/
+              //     this.price = 0;
+              //     this.chosenIngredients = [];
+              //     for(i=0; i < this.categoryItemCounter.length; i++){
+              //       this.categoryItemCounter[i] = 0;
+              //     }
+              //   }
+              // },
               removeFromMenu: function(item,index) {
                 this.chosenIngredients.splice(index,1);
                 this.categoryItemCounter[item.category-1]-=1;
                 this.price -= item.selling_price;
               },
-              modifyMenu:function(ingredients,units,index){
+              modifyMenu:function(ingredients,units,index,itemCounter){
                 this.chosenIngredients=ingredients;
+                this.categoryItemCounter=itemCounter;
                 this.units=units;
                 this.modifyMenuIndex=index;
                 this.isModifying = true;
@@ -269,10 +273,11 @@ export default {
                 if(this.chosenIngredients.length>0){
                   let order ={"ingredients": this.chosenIngredients,
                   "price":this.price,
-                  "units":this.units};
+                  "units":this.units,
+                  "itemCount":this.categoryItemCounter};
 
                   if(this.isModifying){
-                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i orderArray*/
+                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i menusArray*/
                     this.menusArray.splice(this.modifyMenuIndex,0,order);
                     this.units=1;
                     this.isModifying=false;
@@ -310,13 +315,27 @@ export default {
             margin-top:0px !important;
             padding-top:20px !important;
             background-color:#f8ffd6;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
           }
-
+          #checkoutPage{
+            grid-row: 2;
+            grid-column: 1/7;
+          }
+          #frontPage{
+            grid-row: 2;
+            grid-column: 1/7;
+          }
+          #favouritesPage{
+          grid-row: 2;
+          grid-column: 1/7;}
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
             margin:auto;
             width: 90%;
+            grid-row: 2;
+            grid-column: 1/7;
           }
           #bestallning{
             grid-column: 1 / 3;
@@ -403,9 +422,11 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
+            #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
-            text-align: center;
+            justify-self: center;
+            text-align:center;
             font-size: 2em;
             grid-column:3/5;
             grid-row:3;
@@ -425,14 +446,20 @@ export default {
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
           }
 
+          #next-btn:active{border: 2px solid #595959;}
+
+          .btn-close{
+            background-color: #33cc33;
+            border-radius: 10px;
+            margin-top: 10vh;
+            position: relative;
+          }
+
           .ingredient{
             border: 1px solid #ccd;
             background-color: rgba(255, 255, 255, 0.5);
-            font-size: 2em;
             color: rgb(100,100,100);
             border-radius: 15px;
-            width:33%;
-            height:3em;
             text-align: center;
             margin:auto auto 7px auto;
           }
@@ -452,7 +479,7 @@ export default {
           .avbryt{ /* Avbryt-knappen */
             float: left;
           }
-          #order-btn{
+          /* #order-btn{
             grid-column: 6/7;
             grid-row:4;
             margin-bottom: 20px;
@@ -463,7 +490,7 @@ export default {
           #order-btn:hover{
             color:black;
             background-color: rgb(0, 200, 0);
-          }
+          } */
 
           button{
             background-color: #ddd;
@@ -480,5 +507,10 @@ export default {
           button:hover{
             background-color: #000;
             color: white;
+          }
+          @media screen and (max-width:480px){
+            #next-btn, #bck-btn{
+              grid-row:4;
+            }
           }
           </style>
