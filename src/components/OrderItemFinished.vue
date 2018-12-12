@@ -2,13 +2,16 @@
 <!-- Egen komponent för att kunna hantera det som sker i "Färdiga" enklare -->
   <div>
       <h4>#{{orderId}}</h4>
+      <button id="cancelButton" v-on:click="cancelOrder">
+        {{uiLabels.remove}}
+      </button>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
     </div>
     <div>
-      <b-collapse class="mt-2"  :id = "orderId">
+      <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
         :ui-labels="uiLabels"
         :lang="lang"
@@ -43,13 +46,24 @@ export default {
 }
 </script>
 <style scoped>
+#cancelButton {
+  border: 1px solid white;
+  border-radius: 3em;
+  color: white;
+  margin: 0.5vh;
+}
 
+#cancelButton {
+  background-color: #ff3333;
+}
 #collapsibleButton {
   background-color: #3366ff;
   border-radius: 3em;
 }
-
+#cancelButton:active {border: 2px solid #d9d9d9;}
 #collapsibleButton:active {border: 2px solid #d9d9d9;}
+
+#cancelButton:hover {background-color: #b30000}
 #collapsibleButton:hover {background-color: #0040ff}
 
 </style>
