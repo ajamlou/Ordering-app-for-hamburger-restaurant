@@ -43,8 +43,8 @@
   "createYourBurger": "Skapa din egen burgare",
   "chooseAFavorite": "Välj från en av våra favoriter",
   "welcomeText": "Välkommen till MaxDonald's",
-  "glutenFree" : "Glutenfri",
-  "dairyFree" : "Laktosfri",
+  "gluten" : "Innehåller Gluten",
+  "dairy" : "Innehåller Laktos",
   "vegan" : "Vegansk",
   "OKlabel": "OK"
 }
