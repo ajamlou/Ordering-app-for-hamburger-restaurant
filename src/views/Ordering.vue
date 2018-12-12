@@ -66,7 +66,7 @@ v-if="this.showSlotModal">
 <div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
-  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+  <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
   <div id="r2-div"> <!--Div för row 2 i ordering grid -->
   <div id="gluten-exp">
     <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
@@ -361,7 +361,7 @@ export default {
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
-            margin:auto;
+            margin:50px auto auto auto;
             width: 90%;
             grid-row: 2;
             grid-column: 1/7;
