@@ -62,6 +62,18 @@ v-if="this.showSlotModal">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
   <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+  <div id="allergen-div">
+  <div id="gluten-exp">
+    <img src="../assets/gluten.png" class="icon"><span>Contains gluten</span>
+  </div>
+  <div id="dairy-exp">
+  <img src="../assets/dairy.png" class="icon">
+  </div>
+  <div id="vegan-exp">
+    <img src="../assets/vegan.png" class="icon">
+  </div>
+</div>
+
 
   <div id="categories-wrapper">
     <h2>{{ uiLabels.myBurger }} </h2>
@@ -328,7 +340,8 @@ export default {
           }
           #favouritesPage{
           grid-row: 2;
-          grid-column: 1/7;}
+          grid-column: 1/7;
+        }
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
@@ -351,6 +364,17 @@ export default {
             width: 10em;
             border:1px solid #7a7a7a;
             margin: auto;
+          }
+          #allergen-div{
+            grid-row:2;
+            grid-column: 4/7;
+            display:grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: auto;
+          }
+          .icon{
+            height:3em;
+            padding-bottom:3px;
           }
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;

@@ -50,7 +50,7 @@ ingredient_id,ingredient_sv,ingredient_en,category,milk_free,gluten_free,vegan,s
 49,tzatziki,tzatziki,3,0,1,0,5
 50,brioche,brioche,4,0,0,0,10
 51,glutenfritt bröd,gluten free bread,4,1,1,1,10
-52,veganskt bröd,vegan bun,4,0,0,1,10
+52,veganskt bröd,vegan bun,4,1,0,1,10
 53,fullkornsbrioche,whole wheat brioche,4,0,0,0,10
 54,nachochips,nachos,5,1,0,1,20
 55,potatisstrips,potato fries,5,1,1,1,20
