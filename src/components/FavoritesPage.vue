@@ -33,6 +33,8 @@ export default {
   name: 'FavortiesPage',
   data: function(){
     return{
+      ingredient_ids:[1,2,3],
+      chosenIngredients: [],
       favBurgers:[
         {name:'Beefinator',
         id: 1,
@@ -69,6 +71,9 @@ components:{
 methods:{
   favToCheckout: function(){
     this.menu.push();
+  },
+  chooseIngredients: function(){
+    this.chosenIngredients = this.ingredients.filter(ingredient=>ingredient.ingredient_id === id[0] || id[1] || id[2])
   }
 }
 }
@@ -89,16 +94,18 @@ align-items: center;
 } */
 
 .wrapper{
+  height: 100vh;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
 
 #favorites{
   grid-column: 1/7;
-  grid-row: 2/3;
+  grid-row: 1/3;
   margin:auto;
 }
 .burgers{
+  float:left;
   background-color: white;
   border:5px solid rgb(255, 0, 0);
   width: 320px;
