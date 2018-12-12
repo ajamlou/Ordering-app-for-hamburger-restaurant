@@ -1,6 +1,6 @@
 <template>
   <div>
-    <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
     <div id="welcome">
       {{uiLabels.welcomeText}}
     </div>
@@ -61,7 +61,7 @@ export default {
 }
 
 #welcome{
-  font-family: 'Allerta Stencil', sans-serif;
+  font-family: 'Luckiest Guy', sans-serif;
   text-transform: uppercase;
   text-align: center;
   font-size: 4em;
