@@ -22,6 +22,7 @@
     v-if = "this.breadcrumbs.length != 0"
     @click= "goBack">
     {{ uiLabels.back }}</button>
+
     <FavoritesPage v-if = "currentView === 'favoritesPage'"
     id="favouritesPage"
     :ingredients="ingredients"
@@ -41,7 +42,7 @@
   @new_menu="newMenu"
   @modify_menu="modifyMenu"
   @clear_all="clearAll">
-</CheckoutPage>
+  </CheckoutPage>
 
 <IngredientsModal ref="modal"
 v-show="this.showIngredientsModal"
@@ -237,6 +238,7 @@ export default {
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
+                    this.menusArray.pop();
                   }
                 },
                 addToMenu: function (item) {
