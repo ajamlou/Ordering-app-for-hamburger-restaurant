@@ -3,13 +3,12 @@
   <div>
     <h4>#{{orderId}}</h4>
     <div>
-    <button id="orderCookedButton" v-on:click="orderCooked">
-      {{uiLabels.ready}}
-    </button>
-    <div id="plus">
-      <button @click="show = !show">+</button>
-      <transition name="fade">
-        <p v-if="show">
+      <button id="plus" @click="show = !show">+</button>
+      <button id="orderCookedButton" v-on:click="orderCooked">
+        {{uiLabels.ready}}
+      </button>
+      <transition name="slide">
+        <p id="expanding" v-if="show">
           <OrderItem
           :ui-labels="uiLabels"
           :lang="lang"
@@ -22,9 +21,8 @@
     </transition>
   </div>
 </div>
-
-</div>
 </template>
+
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 
@@ -50,16 +48,18 @@ export default {
     }
   }
 }
-
 </script>
+
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+#expanding {
+  transform-origin: top;
+  transition: .4s ease-in-out;
+  overflow: hidden;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+.slide-enter, .slide-leave-to {
+  transform: scaleY(0);
 }
-#orderCookedButton, #cancelButton {
+#orderCookedButton, #cancelButton, #plus {
   border: 1px solid white;
   border-radius: 3em;
   color: white;
@@ -71,9 +71,16 @@ export default {
 #cancelButton {
   background-color: red;
 }
+#plus {
+  background-color: blue;
+}
 
-#orderCookedButton:active {border: 2px solid #d9d9d9;}
+#orderCookedButton:active {border: 2px solid lightgreen;}
+#cancelButton:active {border: 2px solid orange;}
+#plus:active {border: 1px solid lightblue;}
 
-#orderCookedButton:hover {background-color: #008040}
+#orderCookedButton:hover {background-color: darkgreen;}
+#cancelButton:hover {background-color: darkred;}
+#plus:hover {background-color: darkblue}
 
 </style>
