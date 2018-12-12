@@ -24,9 +24,11 @@
 
 
       <div id="add-btn-top">
-        <h5>{{uiLabels.addBurger}}</h5>
+        <div id="addButtonText">
+          <h5>{{uiLabels.addBurger}}</h5>
+        </div>
       </div>
-      <p>+</p>
+      <!-- <p>+</p> -->
     </div>
     <div id="checkout-wrapper">
       <OrderInCheckout
@@ -172,9 +174,14 @@ export default{
   text-align: center;
   max-width:15%;
   align-items:stretch;
-  background-color:rgba(255, 255, 255, 0.9);
+  background-color:#3385ff;
   cursor:pointer;
   flex: 0 0 auto;
+  border-radius: 7px;
+  color: white;
+  margin-right: 5vw;
+  margin-left: 3vw;
+  margin-top: 10vh;
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
@@ -182,6 +189,13 @@ export default{
 #add-btn-div>p{
   margin:auto;
   font-size: 2em;
+}
+
+#addButtonText{
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #order-btn2{
