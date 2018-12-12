@@ -4,6 +4,11 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
+    <div id="header-title">
+      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
+    </div>
 
   <OrderingViewFrontPage
     @Visibility="changeView"
@@ -17,6 +22,7 @@
     v-if = "this.breadcrumbs.length != 0"
     @click= "goBack">
     {{ uiLabels.back }}</button>
+
     <FavoritesPage v-if = "currentView === 'favoritesPage'"
     id="favouritesPage"
     :ingredients="ingredients"
@@ -232,6 +238,7 @@ export default {
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
+                    this.menusArray.pop();
                   }
                 },
                 addToMenu: function (item) {
@@ -326,6 +333,21 @@ export default {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
           }
+          #lang-btn{
+            grid-column:6/7;
+            grid-row:1;
+            color:white;
+            font-weight: 700;
+            min-height: 4em;
+            width: 10em;
+            border:1px solid #7a7a7a;
+            margin: auto;
+          }
+          #header-title{
+            grid-column:3/5;
+            grid-row:1;
+            text-align: center;
+          }
           #checkoutPage{
             grid-row: 2;
             grid-column: 1/7;
@@ -351,18 +373,8 @@ export default {
             grid-row: 1;
             text-align: center;
           }
-          #lang-btn{
-            grid-column:6/7;
-            grid-row:1;
-            color:white;
-            font-weight: 700;
-            min-height: 4em;
-            width: 10em;
-            border:1px solid #7a7a7a;
-            margin: auto;
-          }
           #r2-div{
-            grid-row:2;
+            grid-row:1/2;
             grid-column: 4/7;
             display:grid;
             grid-template-columns: repeat(3,1fr);
@@ -527,7 +539,7 @@ export default {
             color: white;
           }
           @media screen and (max-width:480px){
-            #next-btn, #bck-btn{
+            #next-btn{
               grid-row:4;
             }
           }

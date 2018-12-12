@@ -14,11 +14,11 @@
     </Slotmodal>
   </div>
 
-  <button id="back-btn" @click="goBack">{{uiLabels.back}}</button>
+  <!-- <button id="back-btn" @click="goBack">{{uiLabels.back}}</button> -->
 
-  <div id="checkout-title">
+  <!-- <div id="checkout-title">
     {{uiLabels.yourOrder}}
-  </div>
+  </div> -->
   <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newMenu">
 
@@ -89,10 +89,10 @@ export default{
         this.showSlotModal=false;
       }
     },
-    goBack:function(){
-      this.menus.pop();
-      this.$emit('go_back');
-    },
+    // goBack:function(){
+    //   this.menus.pop();
+    //   this.$emit('go_back');
+    // },
     removeMenu:function(index){
       this.menus.splice(index,1);
     },
@@ -105,7 +105,7 @@ export default{
     },
     decideSlotContent:function(){
       if (this.completedOrder){
-        this.slotContent=this.uiLabels.checkoutFinished + (this.orderNumber + 1);
+        this.slotContent=this.uiLabels.checkoutFinished + "#" + (this.orderNumber + 1);
       }
       else if (!this.completedOrder){
         this.slotContent=this.uiLabels.emptyCheckout;
@@ -199,7 +199,7 @@ export default{
 }
 #order-btn2:active{border: 2px solid #595959;}
 
-#back-btn{
+/* #back-btn{
   grid-column: 1/2;
   grid-row: 3;
   border: 1px solid #7a7a7a;
@@ -215,12 +215,12 @@ export default{
 #back-btn:hover{
   background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
   /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-  background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+  /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
   background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
   background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
   background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
-}
+} */
 
 #orderFinishedModal{
   /* font-size: 3em;
