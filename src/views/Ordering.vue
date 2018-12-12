@@ -524,8 +524,11 @@ export default {
           #r2-div{
             grid-column:1/7;
             grid-row:2/3;
+            text-align:center;
             justify-items: center;
             align-items: center;
+            justify-content: center;
+            align-content: center;
           }
           #categories-wrapper{
           grid-row:3/4;
@@ -534,6 +537,12 @@ export default {
             grid-row:4/5;
           }
           }
+            @media screen and (max-width:650px){
+              .icon{
+                display:block;
+                margin:auto;
+              }
+            }
           @media screen and (max-width:480px){
             #next-btn, #bck-btn{
               grid-row:4;
