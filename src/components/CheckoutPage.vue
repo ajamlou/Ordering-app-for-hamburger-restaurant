@@ -156,13 +156,14 @@ export default{
   flex-wrap: nowrap;
 }
 #checkout-wrapper{
+  text-transform: capitalize;
   grid-column: 1/7;
   grid-row: 1;
   display:flex;
   flex-wrap: nowrap;
   text-align: center;
   overflow-x: auto;
-  background-color: red;
+  background-color: #006622;
   border-radius: 10px;
   border: 3px solid black;
   margin-top: 3vh;
@@ -186,7 +187,7 @@ export default{
   margin-right: 5vw;
   margin-left: 3vw;
   margin-top: 10vh;
-  height: 30vh;
+  height: 25vh;
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
@@ -273,6 +274,7 @@ export default{
 
 center{
   font-size: 2em;
+  margin-top: 5vh;
 }
 
 
