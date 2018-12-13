@@ -10,44 +10,46 @@
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
-  <OrderingViewFrontPage
+    <OrderingViewFrontPage
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
-    class="viewContent">
+    id="frontPage">
   </OrderingViewFrontPage>
 
-    <button
-    id = "bck-btn"
-    v-if = "this.breadcrumbs.length != 0"
-    @click= "goBack">
-    {{ uiLabels.back }}</button>
+  <button
+  id = "bck-btn"
+  v-if = "this.breadcrumbs.length != 0"
+  @click= "goBack">
+  {{ uiLabels.back }}</button>
 
-    <FavoritesPage
-    v-if = "currentView === 'favoritesPage'"
-    class="viewContent"
-    @clearburger = "resetBurger"
-    @fav-ingredient = "addToMenu"
-    @fav-checkout = "addToCheckout();changeView('checkoutPage');"
-    :ingredients="ingredients"
-    :lang = "lang"
-    :menu = "menusArray"
-    :uiLabels = "uiLabels">
-  </FavoritesPage>
+  <FavoritesPage
+  v-if = "currentView === 'favoritesPage'"
+  id="favouritesPage"
+  @clearburger = "resetBurger"
+  @fav-ingredient = "addToMenu"
+  @fav-checkout = "addToCheckout();changeView('checkoutPage');"
+  :ingredients="ingredients"
+  :lang = "lang"
+  :menu = "menusArray"
+  :uiLabels = "uiLabels"
+  :favoriteIngredients = "favoriteIngredients"
+  :ingredient_ids = "ingredient_ids">
+</FavoritesPage>
 
-  <CheckoutPage
-  class="viewContent"
-  v-if = "currentView === 'checkoutPage'"
-  :uiLabels="uiLabels"
-  :menus="menusArray"
-  :orderNumber="orderNumber"
-  :lang="lang"
-  @go_to_front="changeView"
-  @go_back="goBack"
-  @new_menu="newMenu"
-  @modify_menu="modifyMenu"
-  @clear_all="clearAll">
-  </CheckoutPage>
+<CheckoutPage
+id="checkoutPage"
+v-if = "currentView === 'checkoutPage'"
+:uiLabels="uiLabels"
+:menus="menusArray"
+:orderNumber="orderNumber"
+:lang="lang"
+@go_to_front="changeView"
+@go_back="goBack"
+@new_menu="newMenu"
+@modify_menu="modifyMenu"
+@clear_all="clearAll">
+</CheckoutPage>
 
 <IngredientsModal ref="modal"
 v-show="this.showIngredientsModal"
@@ -69,23 +71,21 @@ v-if="this.showSlotModal">
 </button></div>
 </SlotModal>
 
-<div id="ordering"
-class="viewContent"
- v-if = "currentView === 'designPage'">
+<div id="ordering" v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
   <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
   <div id="r2-div"> <!--Div för row 2 i ordering grid -->
-  <div id="gluten-exp">
-    <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
+    <div id="gluten-exp">
+      <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
+    </div>
+    <div id="dairy-exp">
+      <img src="../assets/dairy.png" class="icon"><span>{{uiLabels.dairy}}</span>
+    </div>
+    <div id="vegan-exp">
+      <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
+    </div>
   </div>
-  <div id="dairy-exp">
-  <img src="../assets/dairy.png" class="icon"><span>{{uiLabels.dairy}}</span>
-  </div>
-  <div id="vegan-exp">
-    <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
-  </div>
-</div>
 
 
   <div id="categories-wrapper">
@@ -156,8 +156,10 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
+      ingredient_ids:[1,2,3,4], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
+      favoriteIngredients: [],
       orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
@@ -233,8 +235,17 @@ export default {
                       return;
                     }
                   }
+                  if(view === 'favoritesPage'){
+                    this.changeFavorites();
+                  }
                   this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
                   this.currentView = view;
+                },
+                changeFavorites: function(){
+                  for (var i = 0; i< this.ingredient_ids.length; i++){
+                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
+                  }
+                  console.log(this.favoriteIngredients);
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -263,199 +274,209 @@ export default {
                   this.price += +item.selling_price;
                   console.log(item);
                 },
-              removeFromMenu: function(item,index) {
-                this.chosenIngredients.splice(index,1);
-                this.categoryItemCounter[item.category-1]-=1;
-                this.price -= item.selling_price;
-              },
-              modifyMenu:function(ingredients,units,index,itemCounter){
-                this.chosenIngredients=ingredients;
-                this.categoryItemCounter=itemCounter;
-                this.units=units;
-                this.modifyMenuIndex=index;
-                this.isModifying = true;
-                this.changeView('designPage');
+                removeFromMenu: function(item,index) {
+                  this.chosenIngredients.splice(index,1);
+                  this.categoryItemCounter[item.category-1]-=1;
+                  this.price -= item.selling_price;
+                },
+                modifyMenu:function(ingredients,units,index,itemCounter){
+                  this.chosenIngredients=ingredients;
+                  this.categoryItemCounter=itemCounter;
+                  this.units=units;
+                  this.modifyMenuIndex=index;
+                  this.isModifying = true;
+                  this.changeView('designPage');
 
-              },
-              /*Tar chosen ingredients och price och wrappar till ett objekt.
-              Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
-              addToCheckout: function(){
-                if(this.chosenIngredients.length>0){
-                  let order ={"ingredients": this.chosenIngredients,
-                  "price":this.price,
-                  "units":this.units,
-                  "itemCount":this.categoryItemCounter};
+                },
+                /*Tar chosen ingredients och price och wrappar till ett objekt.
+                Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
+                addToCheckout: function(){
+                  if(this.chosenIngredients.length>0){
+                    let order ={"ingredients": this.chosenIngredients,
+                    "price":this.price,
+                    "units":this.units,
+                    "itemCount":this.categoryItemCounter};
 
-                  if(this.isModifying){
-                    /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i menusArray*/
-                    this.menusArray.splice(this.modifyMenuIndex,0,order);
-                    this.units=1;
-                    this.isModifying=false;
+                    if(this.isModifying){
+                      /*Om vi ändrar i en order, lägg tillbaka ordern på samma index i menusArray*/
+                      this.menusArray.splice(this.modifyMenuIndex,0,order);
+                      this.units=1;
+                      this.isModifying=false;
+                    }
+                    else{
+                      this.menusArray.push(order);
+                    }
                   }
                   else{
-                    this.menusArray.push(order);
+                    this.toggleSlotModal();
                   }
+                },
+                newMenu:function(){
+                  this.resetBurger();
+                  this.changeView('designPage');
+                },
+                clearAll:function(){
+                  this.resetBurger();
+                  this.menusArray=[];
+                },
+                resetBurger:function(){
+                  this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
+                  this.chosenIngredients = [];
+                  this.price = 0;
                 }
-                else{
-                  this.toggleSlotModal();
-                }
-              },
-              newMenu:function(){
-                this.resetBurger();
-                this.changeView('designPage');
-              },
-              clearAll:function(){
-                this.resetBurger();
-                this.menusArray=[];
-              },
-              resetBurger:function(){
-                this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
-                this.chosenIngredients = [];
-                this.price = 0;
+
               }
-
             }
-          }
-          </script>
-          <style scoped>
-          /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
-          .masterDiv{
-            font-family: 'Montserrat', sans-serif;
-            height:100%;
-            margin-top:0px !important;
-            padding-top:20px !important;
-            background-color:#f8ffd6;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-          }
-          #lang-btn{
-            grid-column:6/7;
-            grid-row:1;
-            color:white;
-            font-weight: 700;
-            width:120px;
-            height:80px;
-            border:1px solid #7a7a7a;
-            margin: auto;
-          }
-          #header-title{
-            grid-column:3/5;
-            grid-row:1;
-            text-align: center;
-          }
-          .viewContent{
-            grid-row: 2;
-            grid-column: 1/7;
-          }
-          #ordering {
-            display:grid;
-            grid-template-columns: repeat(6, 1fr);
-            margin:50px auto auto auto;
-            width: 90%;
-          }
-          #bestallning{
-            grid-column: 1 / 4;
-            grid-row: 1;
-            text-align: left;
-          }
-          #r2-div{
-            grid-row:1/2;
-            grid-column: 4/7;
-            display:grid;
-            grid-template-columns: repeat(3,1fr);
-            grid-template-rows: auto;
-            font-size:1em;
-          }
-          .icon{
-            height:3em;
-            padding:0 3px 3px 0;
-          }
+            </script>
+            <style scoped>
+            /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
+            .masterDiv{
+              font-family: 'Montserrat', sans-serif;
+              height:100%;
+              margin-top:0px !important;
+              padding-top:20px !important;
+              background-color:#f8ffd6;
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+            }
+            #lang-btn{
+              grid-column:6/7;
+              grid-row:1;
+              color:white;
+              font-weight: 700;
+              width:120px;
+              height:80px;
+              border:1px solid #7a7a7a;
+              margin: auto;
+            }
+            #header-title{
+              grid-column:3/5;
+              grid-row:1;
+              text-align: center;
+            }
+            #checkoutPage{
+              grid-row: 2;
+              grid-column: 1/7;
+            }
+            #frontPage{
+              grid-row: 2;
+              grid-column: 1/7;
+            }
+            #favouritesPage{
+              grid-row: 2;
+              grid-column: 1/7;
+            }
+            #ordering {
+              display:grid;
+              grid-template-columns: repeat(6, 1fr);
+              margin:50px auto auto auto;
+              width: 90%;
+              grid-row: 2;
+              grid-column: 1/7;
+            }
+            #bestallning{
+              grid-column: 1 / 4;
+              grid-row: 1;
+              text-align: left;
+            }
+            #r2-div{
+              grid-row:1/2;
+              grid-column: 4/7;
+              display:grid;
+              grid-template-columns: repeat(3,1fr);
+              grid-template-rows: auto;
+              font-size:1em;
+            }
+            .icon{
+              height:3em;
+              padding:0 3px 3px 0;
+            }
 
-          /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
-          Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-          .sv{
-            background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-          }
-          .sv:hover{
-            background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-          }
-          .sv:active{
-            background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-          }
-          .en{
-            background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-          }
-          .en:hover{
-            background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-          }
-          .en:active{
-            background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-          }
+            /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
+            Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
+            .sv{
+              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .sv:hover{
+              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .sv:active{
+              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .en{
+              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            }
+            .en:hover{
+              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            }
+            .en:active{
+              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            }
 
-          #categories-wrapper{
-            grid-column: 1/7;
-            grid-row:2;
-          }
-          #bck-btn{
-            grid-column: 1/2;
-            grid-row: 1;
-            border: 1px solid #7a7a7a;
-            color:white;
-            width:120px;
-            height:80px;
-            margin:auto;
-            justify-self:center;
-            background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-            background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-            background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-            background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-            background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-            background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
-          }
+            #categories-wrapper{
+              grid-column: 1/7;
+              grid-row:2;
+            }
+            #bck-btn{
+              grid-column: 1/2;
+              grid-row: 1;
+              border: 1px solid #7a7a7a;
+              color:white;
+              width:120px;
+              height:80px;
+              margin:auto;
+              justify-self:center;
+              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
+            }
 
-          #bck-btn:hover{
-            background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
-            /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-            background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-            background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-            background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-            background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
-          }
-          #next-btn:active{border: 2px solid #595959;}
+            #bck-btn:hover{
+              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+            }
+            #next-btn:active{border: 2px solid #595959;}
 
-          #price-div{
-            justify-self: center;
-            text-align:center;
-            font-size: 2em;
-            grid-column:3/5;
-            grid-row:3;
-          }
+            #price-div{
+              justify-self: center;
+              text-align:center;
+              font-size: 2em;
+              grid-column:3/5;
+              grid-row:3;
+            }
 
           #next-btn{
             width:120px;
@@ -485,35 +506,35 @@ export default {
           }
 
 
-          .btn-close{
-            background-color: #33cc33;
-            border-radius: 10px;
-            margin-top: 10vh;
-            position: relative;
-          }
+            .btn-close{
+              background-color: #33cc33;
+              border-radius: 10px;
+              margin-top: 10vh;
+              position: relative;
+            }
 
-          .ingredient{
-            border: 1px solid #ccd;
-            background-color: rgba(255, 255, 255, 0.5);
-            color: rgb(100,100,100);
-            border-radius: 15px;
-            text-align: center;
-            margin:auto auto 7px auto;
-          }
+            .ingredient{
+              border: 1px solid #ccd;
+              background-color: rgba(255, 255, 255, 0.5);
+              color: rgb(100,100,100);
+              border-radius: 15px;
+              text-align: center;
+              margin:auto auto 7px auto;
+            }
 
-          .ingredient-wrapper{ /*Denna styr horisontell scroll*/
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            overflow-y:hidden;
-            border-radius: 15px;
-            /*display: grid;
-            grid-gap: 0px;
-            grid-template-columns: repeat(10,10%);
-            grid-template-areas: "title";
-            text-align: center;*/
-          }
-          /* #order-btn{
+            .ingredient-wrapper{ /*Denna styr horisontell scroll*/
+              display: flex;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              overflow-y:hidden;
+              border-radius: 15px;
+              /*display: grid;
+              grid-gap: 0px;
+              grid-template-columns: repeat(10,10%);
+              grid-template-areas: "title";
+              text-align: center;*/
+            }
+            /* #order-btn{
             grid-column: 6/7;
             grid-row:4;
             margin-bottom: 20px;
@@ -522,8 +543,8 @@ export default {
             background-color: rgb(0, 150, 0);
           }
           #order-btn:hover{
-            color:black;
-            background-color: rgb(0, 200, 0);
+          color:black;
+          background-color: rgb(0, 200, 0);
           } */
 
           button{
@@ -536,7 +557,7 @@ export default {
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 16px;
-              text-shadow: 1px 1px 2px black;
+            text-shadow: 1px 1px 2px black;
           }
           button:hover{
             background-color: #000;
@@ -548,34 +569,34 @@ export default {
               grid-row:1/2;
               text-align:center;
             }
-          #r2-div{
-            grid-column:1/7;
-            grid-row:2/3;
-            text-align:center;
-            justify-items: center;
-            align-items: center;
-            justify-content: center;
-            align-content: center;
-          }
-          #categories-wrapper{
-          grid-row:3/4;
-          }
-          #price-div, #next-btn{
-            grid-row:4/5;
-          }
-          }
-            @media screen and (max-width:650px){
-              #header-title{
-                grid-column:2/6;
-              }
-              #header-title h1{
-                font-size:2em;
-              }
-              .icon{
-                display:block;
-                margin:auto;
-              }
+            #r2-div{
+              grid-column:1/7;
+              grid-row:2/3;
+              text-align:center;
+              justify-items: center;
+              align-items: center;
+              justify-content: center;
+              align-content: center;
             }
+            #categories-wrapper{
+              grid-row:3/4;
+            }
+            #price-div, #next-btn{
+              grid-row:4/5;
+            }
+          }
+          @media screen and (max-width:650px){
+            #header-title{
+              grid-column:2/6;
+            }
+            #header-title h1{
+              font-size:2em;
+            }
+            .icon{
+              display:block;
+              margin:auto;
+            }
+          }
           @media screen and (max-width:480px){
             #next-btn{
               grid-row:4;
