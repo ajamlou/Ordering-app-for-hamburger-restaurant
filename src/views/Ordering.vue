@@ -156,7 +156,7 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
-      ingredient_ids:[1,2,3,4], /*Denna har ingredient-id för alla favoritingredienser*/
+      ingredient_ids:[1,2,3,4,5,6,7,8,9], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       favoriteIngredients: [],

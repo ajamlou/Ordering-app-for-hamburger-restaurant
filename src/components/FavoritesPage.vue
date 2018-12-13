@@ -6,7 +6,7 @@
       <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-        <ul>
+        <ul v-if = "item.id === 1">
           <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
