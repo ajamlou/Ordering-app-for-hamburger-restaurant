@@ -43,10 +43,10 @@
     </OrderInCheckout>
   </div>
 </div>
-<div id="checkout-foot">
-  <center>  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+<!-- <div id="checkout-foot"> -->
+  <center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
   <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
-</div>
+<!-- </div> -->
 
 </div>
 </template>
@@ -173,6 +173,7 @@ export default{
 }
 
 #add-btn-div{
+  grid-column: 7/9;
   display:flex;
   flex-direction: column;
   word-wrap: break-word;
@@ -204,17 +205,28 @@ export default{
   padding-right: 10px;
 }
 
+/* #checkout-foot{
+  grid-column: 1/9;
+  grid-row: 3;
+  margin-top: 5vh;
+} */
+
+#sumOfOrder{
+  grid-column: 4/6;
+  grid-row: 3;
+  font-size: 2em;
+}
 #order-btn2{
-  grid-column: 6/7;
+  grid-column: 8/9;
+  grid-row: 4;
+  width:120px;
+  height:80px;
+  margin-right: 5vw;
+  margin-bottom: 1.5em;
+  justify-self:end;
   border:1px solid #7a7a7a;
-  width: 7vw;
-  height: 6vh;
-  font-size: 1.5em;
-  border-radius: 10px;
-  grid-column: 6/7;
-  grid-row:3;
+  border-radius: 16px;
   color:white;
-  text-align: center;
   background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
   background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
   background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
@@ -222,38 +234,8 @@ export default{
   background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
   background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
-  margin-left: 3px;
 }
 #order-btn2:active{border: 2px solid #595959;}
-
-/* #back-btn{
-  grid-column: 1/2;
-  grid-row: 3;
-  border: 1px solid #7a7a7a;
-  color:white;
-  background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-  background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-  background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-  background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-  background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-  background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
-}
-#back-btn:hover{
-  background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
-  /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-  /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-  background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-  background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-  background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
-} */
-
-#orderFinishedModal{
-  /* font-size: 3em;
-  text-align: center;
-  line-height: 150%; */
-}
 
 .slotBody{
   margin-top: 5vh;
@@ -271,11 +253,6 @@ export default{
 }
 
 .btn-close:active{background-color: #1f7a1f}
-
-center{
-  font-size: 2em;
-  margin-top: 5vh;
-}
 
 
 </style>
