@@ -236,6 +236,15 @@ export default{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
 }
 #order-btn2:active{border: 2px solid #595959;}
+#order-btn2:hover{
+  background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
+  /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+  background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+  background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+  background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
+  background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
+}
 
 .slotBody{
   margin-top: 5vh;
