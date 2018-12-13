@@ -19,6 +19,23 @@
   v-show = "ModalVisibility === true">
   </KitchenModal>
 
+  <!-- Om modalen för ändra favoriter ska visas eller ej
+  <SlotModal v-if ="currentView === 'f'">
+    <div slot="header"><button
+          type="button"
+          class="backButton"
+          @click="currentView = 'kitchenFrontPage'">
+          Stäng
+        </button></div>
+
+        <div slot ="footer"><button
+          type="button"
+          class="backButton"
+          @click="changeFavorites">
+          Bekräfta
+        </button></div>
+  </SlotModal>-->
+
 </div>
 </template>
 
@@ -26,6 +43,7 @@
 import KitchenModal from '@/components/KitchenModal.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
+import SlotModal from'@/components/SlotModal.vue'
 
 
 export default {
@@ -33,10 +51,12 @@ export default {
   components:{
     KitchenModal,
     StaffViewStorage,
-    StaffViewStatistics
+    StaffViewStatistics,
+    SlotModal
   },
   props:{
-    ingredients:Array
+    ingredients: Array,
+    uiLabels: Object
   },
   data: function(){
     return {

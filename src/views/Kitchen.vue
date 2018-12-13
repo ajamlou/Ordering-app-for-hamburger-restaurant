@@ -1,44 +1,54 @@
 
 <template>
-  <div>
+  <div id="masterDivKitchen">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <div id="kitchenFront" v-if = "currentView === 'kitchenFrontPage'">
+
+      <button
+      id="backButton"
+      @click="currentView = 'kitchenFrontPage'"
+      v-if = "currentView != 'kitchenFrontPage'">
+        {{ uiLabels.back2 }}
+      </button>
+
+  <div id="kitchenFrontDiv" v-if = "currentView === 'kitchenFrontPage'">
       <KitchenViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'kitchenFrontPage'"
-      :ingredients="ingredients">
+      :ingredients="ingredients"
+      :uiLabels="uiLabels">
     </KitchenViewFrontPage>
   </div>
-  <div id="prepp" v-show="currentView === 'preppPage'">
-    <PreppView>
-    </PreppView>
-    <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
-      <button id = "backButton">
-        {{ uiLabels.back2 }}
-      </button>
+
+<!-- GrillView -->
+<!-- Använder class = grillPage i denna div för att sen kunna "skriva över"
+med ett id i GrillView.vue -->
+    <div class="grillPage"
+    v-show="currentView === 'grillPage'">
+      <GrillView
+      :ingredients="ingredients"
+      :uiLabels="uiLabels"
+      :orders="orders"
+      :lang="lang">
+      </GrillView>
     </div>
+
+<!-- PreppView -->
+<!-- Använder class = preppPage i denna div för att sen kunna "skriva över"
+med ett id i PreppView.vue -->
+    <PreppView
+    class="preppPage"
+    v-show="currentView === 'preppPage'"
+    :ingredients="ingredients"
+    :uiLabels="uiLabels"
+    :orders="orders"
+    :lang="lang">
+    </PreppView>
   </div>
 
-  <SlotModal v-if ="currentView === 'f'">
-    <div slot="header"><button
-          type="button"
-          class="backButton"
-          @click="currentView = 'kitchenFrontPage'">
-          Stäng
-        </button></div>
-
-        <div slot ="footer"><button
-          type="button"
-          class="backButton"
-          @click="changeFavorites">
-          Bekräfta
-        </button></div>
-  </SlotModal>
-
-  <div id="kitchen-grid" v-show="currentView === 'grillPage'">
+  <!-- <div id="kitchen-grid" v-show="currentView === 'grillPage'"> -->
 
     <!-- Här skapas beställningarna i "Inkomna". -->
-    <div id="orders">
+    <!-- <div id="orders">
       <div id="header1">
         <h1>{{ uiLabels.ordersInQueue }}</h1>
       </div>
@@ -55,10 +65,10 @@
         :key="key">
       </OrderItemToPrepare>
     </div>
-  </div>
+  </div> -->
 
   <!-- Här skapas beställningarna i "Tillagas". -->
-  <div id="preparing">
+  <!-- <div id="preparing">
     <div id="header2">
       <h1>{{ uiLabels.ordersPreparing }}</h1>
     </div>
@@ -74,12 +84,12 @@
       :key="key">
     </OrderItemIsCooking>
   </div>
-</div>
+</div> -->
 
-<div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
+<!-- <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
   <button id = "backButton">
     {{ uiLabels.back2 }}</button>
-</div>
+</div> -->
 
 
 <!-- <div class = "statisticsButtonClass">
@@ -99,8 +109,6 @@
 :ingredients = "ingredients"
 v-show = "ModalVisibility === true">
 </KitchenModal> -->
-</div>
-</div>
 
 </template>
 <script>
@@ -115,8 +123,8 @@ import OrderItemFinished from '@/components/OrderItemFinished.vue'
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 import KitchenViewFrontPage from '@/components/KitchenViewFrontPage.vue'
 import PreppView from '@/components/PreppView.vue'
+import GrillView from '@/components/GrillView.vue'
 import SlotModal from '@/components/SlotModal.vue'
-import FavortiesPage from '@/components/FavoritesPage.vue'
 
 export default {
   name: 'Ordering',
@@ -131,6 +139,7 @@ export default {
     KitchenModal,
     KitchenViewFrontPage,
     PreppView,
+    GrillView,
     SlotModal
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
@@ -145,17 +154,16 @@ export default {
     }
   },
   methods: {
-    markDone: function (orderid) {
-      this.$store.state.socket.emit("orderDone", orderid);
-    },
-    markCooked: function (orderid) {
-      this.$store.state.socket.emit("orderStarted", orderid);
-    },
-    markCanceled: function (orderid) {
-      this.$store.state.socket.emit("orderCanceled", orderid);
-    },
+    // markDone: function (orderid) {
+    //   this.$store.state.socket.emit("orderDone", orderid);
+    // },
+    // markCooked: function (orderid) {
+    //   this.$store.state.socket.emit("orderStarted", orderid);
+    // },
+    // markCanceled: function (orderid) {
+    //   this.$store.state.socket.emit("orderCanceled", orderid);
+    // },
     changeFavorites: function(){
-
     },
     changeView: function(view){
       this.currentView = view;
@@ -165,18 +173,55 @@ export default {
 </script>
 <style scoped>
 
-#kitchen-grid {
-  display: grid;
-  position: fixed;
-  grid-template-columns: 50% 50%;
-  color: white;
-  text-align: center;
+#masterDivKitchen{
   font-family: 'Montserrat', sans-serif;
-  height: 90vh;
-  text-transform: uppercase;
+  height:100%;
+  margin-top:0px !important;
+  padding-top:20px !important;
+  background-color:#f8ffd6;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
 }
 
-.allOrders {
+#kitchenFrontDiv{
+  grid-row: 2;
+  grid-column: 1/7;
+}
+.grillPage{
+  grid-row: 2;
+  grid-column: 1/7;
+}
+.preppPage{
+  grid-row: 2;
+  grid-column: 1/7;
+}
+#backButton {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+/* .backButton{
+  border: 2px solid white;
+  color: white;
+  text-shadow: 2px 2px #696969;
+  background-color: #00b386;
+  cursor: pointer;
+  padding: 5px;
+  text-decoration: none;
+  font-size: 4vh;
+  border-radius: 18px;
+  font-size: 1.9vh;
+  font-size: 1.9vw;
+  width: 12vw;
+  height: 10vh;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+} */
+#backButton:hover {background-color: #008060}
+#backButton:active {border: 2px solid grey;}
+
+/* .allOrders {
   margin-top: 10vh;
 }
 
@@ -231,40 +276,14 @@ export default {
 
 .isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
   overflow: auto
-}
+} */
 
-h1 {
+/* h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   text-color: white;
-}
+} */
 
 /* ccskod för knappar under denna kommentar */
-
-.backButtonClass {
-  position: relative;
-}
-
-.backButton{
-  border: 2px solid white;
-  color: white;
-  text-shadow: 2px 2px #696969;
-  background-color: #00b386;
-  cursor: pointer;
-  padding: 5px;
-  text-decoration: none;
-  font-size: 4vh;
-  border-radius: 18px;
-  font-size: 1.9vh;
-  font-size: 1.9vw;
-  width: 12vw;
-  height: 10vh;
-  margin-top: 1vh;
-  margin-left: 1vw;
-  margin-bottom: 1vh;
-  float: left;
-}
-#backButton:hover {background-color: #008060}
-#backButton:active {border: 2px solid grey;}
 
 </style>
