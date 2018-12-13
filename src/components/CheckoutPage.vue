@@ -153,11 +153,11 @@ export default{
   position:relative;
   display:flex;
   flex-wrap: nowrap;
-  grid-column:1/7;
+  grid-column:1/8;
 }
 #checkout-wrapper{
   text-transform: capitalize;
-  grid-column: 1/7;
+  grid-column: 1/8;
   grid-row: 1;
   display:flex;
   flex-wrap: nowrap;
@@ -199,10 +199,10 @@ export default{
 }
 
 #addButtonText{
-  padding-top: 60px;
-  padding-bottom: 60px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /* #checkout-foot{
