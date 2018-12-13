@@ -2,6 +2,14 @@
 <template>
   <div id="masterDivKitchen">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+      <button
+      id="backButton"
+      @click="currentView = 'kitchenFrontPage'"
+      v-if = "currentView != 'kitchenFrontPage'">
+        {{ uiLabels.back2 }}
+      </button>
+
   <div id="kitchenFrontDiv" v-if = "currentView === 'kitchenFrontPage'">
       <KitchenViewFrontPage
       @Visibility="changeView"
@@ -11,7 +19,9 @@
     </KitchenViewFrontPage>
   </div>
 
-  <!-- Påbörjat försök till att göra GrillView.vue-->
+<!-- GrillView -->
+<!-- Använder class = grillPage i denna div för att sen kunna "skriva över"
+med ett id i GrillView.vue -->
     <div class="grillPage"
     v-show="currentView === 'grillPage'">
       <GrillView
@@ -20,16 +30,11 @@
       :orders="orders"
       :lang="lang">
       </GrillView>
-      <div @click="currentView = 'kitchenFrontPage'">
-        <button class = "backButton">
-          {{ uiLabels.back2 }}
-        </button>
-      </div>
     </div>
 
-<!-- PreppView
-  <div id="preppDiv"
-  v-show="currentView === 'preppPage'">-->
+<!-- PreppView -->
+<!-- Använder class = preppPage i denna div för att sen kunna "skriva över"
+med ett id i PreppView.vue -->
     <PreppView
     class="preppPage"
     v-show="currentView === 'preppPage'"
@@ -38,11 +43,6 @@
     :orders="orders"
     :lang="lang">
     </PreppView>
-    <div @click="currentView = 'kitchenFrontPage'">
-      <button class = "backButton">
-        {{ uiLabels.back2 }}
-      </button>
-    </div>
   </div>
 
   <!-- <div id="kitchen-grid" v-show="currentView === 'grillPage'"> -->
@@ -195,7 +195,7 @@ export default {
   grid-row: 2;
   grid-column: 1/7;
 }
-.backButton {
+#backButton {
   grid-row: 3;
   grid-column: 1;
 }
