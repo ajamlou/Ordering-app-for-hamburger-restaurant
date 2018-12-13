@@ -217,7 +217,7 @@ export default{
   font-size: 2em;
 }
 #order-btn2{
-  grid-column: 8/9;
+  grid-column: 7/9;
   grid-row: 4;
   width:120px;
   height:80px;
