@@ -1,7 +1,7 @@
 <template>
   <div id="checkout-div">
-    <div id="orderFinishedModal">
       <SlotModal
+      id="orderFinishedModal"
       v-if="this.showSlotModal">
       <div slot="header"></div>
       <div slot="body" class="slotBody">{{slotContent}}</div>
@@ -12,7 +12,6 @@
         {{uiLabels.OKlabel}}
       </button></div>
     </Slotmodal>
-  </div>
 
   <!-- <button id="back-btn" @click="goBack">{{uiLabels.back}}</button> -->
 
@@ -154,6 +153,7 @@ export default{
   position:relative;
   display:flex;
   flex-wrap: nowrap;
+  grid-column:1/7;
 }
 #checkout-wrapper{
   text-transform: capitalize;

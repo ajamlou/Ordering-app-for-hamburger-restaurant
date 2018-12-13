@@ -14,7 +14,7 @@
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
-    id="frontPage">
+    class="viewContent">
   </OrderingViewFrontPage>
 
     <button
@@ -25,7 +25,7 @@
 
     <FavoritesPage
     v-if = "currentView === 'favoritesPage'"
-    id="favouritesPage"
+    class="viewContent"
     @clearburger = "resetBurger"
     @fav-ingredient = "addToMenu"
     @fav-checkout = "addToCheckout();changeView('checkoutPage');"
@@ -36,7 +36,7 @@
   </FavoritesPage>
 
   <CheckoutPage
-  id="checkoutPage"
+  class="viewContent"
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
@@ -69,7 +69,9 @@ v-if="this.showSlotModal">
 </button></div>
 </SlotModal>
 
-<div id="ordering" v-if = "currentView === 'designPage'">
+<div id="ordering"
+class="viewContent"
+ v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
   <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
@@ -341,25 +343,15 @@ export default {
             grid-row:1;
             text-align: center;
           }
-          #checkoutPage{
+          .viewContent{
             grid-row: 2;
             grid-column: 1/7;
           }
-          #frontPage{
-            grid-row: 2;
-            grid-column: 1/7;
-          }
-          #favouritesPage{
-          grid-row: 2;
-          grid-column: 1/7;
-        }
           #ordering {
             display:grid;
             grid-template-columns: repeat(6, 1fr);
             margin:50px auto auto auto;
             width: 90%;
-            grid-row: 2;
-            grid-column: 1/7;
           }
           #bestallning{
             grid-column: 1 / 4;
