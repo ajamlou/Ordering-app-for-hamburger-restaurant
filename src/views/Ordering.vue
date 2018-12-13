@@ -358,6 +358,7 @@ export default {
             grid-column:3/5;
             grid-row:1;
             text-align: center;
+            align-self: center;
           }
           .viewContent{
             grid-row: 2;
