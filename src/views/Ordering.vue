@@ -4,28 +4,39 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
+    <div id="header-title">
+      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
+      <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
+    </div>
 
   <OrderingViewFrontPage
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
-    id="frontPage">
+    class="viewContent">
   </OrderingViewFrontPage>
 
-  <div v-if = "currentView === 'favoritesPage'"
-  id="favouritesPage">
-    <button class = "avbryt"
+    <button
+    id = "bck-btn"
+    v-if = "this.breadcrumbs.length != 0"
     @click= "goBack">
     {{ uiLabels.back }}</button>
+
     <FavoritesPage
+    v-if = "currentView === 'favoritesPage'"
+    class="viewContent"
+    @clearburger = "resetBurger"
+    @fav-ingredient = "addToMenu"
+    @fav-checkout = "addToCheckout();changeView('checkoutPage');"
     :ingredients="ingredients"
     :lang = "lang"
-    :menu = "menusArray">
+    :menu = "menusArray"
+    :uiLabels = "uiLabels">
   </FavoritesPage>
-</div>
 
   <CheckoutPage
-  id="checkoutPage"
+  class="viewContent"
   v-if = "currentView === 'checkoutPage'"
   :uiLabels="uiLabels"
   :menus="menusArray"
@@ -36,7 +47,7 @@
   @new_menu="newMenu"
   @modify_menu="modifyMenu"
   @clear_all="clearAll">
-</CheckoutPage>
+  </CheckoutPage>
 
 <IngredientsModal ref="modal"
 v-show="this.showIngredientsModal"
@@ -54,17 +65,30 @@ v-if="this.showSlotModal">
   type="button"
   class="btn-close"
   @click="toggleSlotModal()">
-  OK
+  {{uiLabels.OKlabel}}
 </button></div>
 </SlotModal>
 
-<div id="ordering" v-if = "currentView === 'designPage'">
+<div id="ordering"
+class="viewContent"
+ v-if = "currentView === 'designPage'">
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
-  <div id= "bestallning"><h1>{{ uiLabels.myOrder }}</h1></div>
+  <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
+  <div id="r2-div"> <!--Div för row 2 i ordering grid -->
+  <div id="gluten-exp">
+    <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
+  </div>
+  <div id="dairy-exp">
+  <img src="../assets/dairy.png" class="icon"><span>{{uiLabels.dairy}}</span>
+  </div>
+  <div id="vegan-exp">
+    <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
+  </div>
+</div>
+
 
   <div id="categories-wrapper">
-    <h2>{{ uiLabels.myBurger }} </h2>
     <CategoryRow v-for="category in burgerCategories"
     :key="category.categoryNr"
     :category="category.categoryNr"
@@ -94,9 +118,6 @@ v-if="this.showSlotModal">
 <div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id = "bck-btn"
-@click= "goBack">
-{{ uiLabels.back }}</button>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 <!-- <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button> -->
 </div>
@@ -221,9 +242,18 @@ export default {
                   if(this.isModifying){
                     this.addToCheckout();
                   }
+                  /*Om vi backar från checkout, ta bort senaste ordern*/
+                  if(this.currentView==='checkoutPage'){
+                    this.menusArray.pop();
+                  }
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
+
+                    /*Om vi kommer till favoriter igen, nollställ burgaren*/
+                    if(this.currentView==="favoritesPage"){
+                      this.resetBurger();
+                    }
                   }
                 },
                 addToMenu: function (item) {
@@ -231,28 +261,8 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
+                  console.log(item);
                 },
-              //   placeOrder: function () {
-              //     if(this.chosenIngredients.length>0){
-              //       var i,
-              //       //Wrap the order in an object
-              //       order = {
-              //         ingredients: this.chosenIngredients,
-              //         price: this.price
-              //       };
-              //       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-              //       this.$store.state.socket.emit('order', {order: order});
-              //       //set all counters to 0. Notice the use of $refs
-              //       /*for (i = 0; i < this.$refs.modal.$refs.ingredient.length; i++) {
-              //       this.$refs.modal.$refs.ingredient[i].resetCounter();
-              //     }*/
-              //     this.price = 0;
-              //     this.chosenIngredients = [];
-              //     for(i=0; i < this.categoryItemCounter.length; i++){
-              //       this.categoryItemCounter[i] = 0;
-              //     }
-              //   }
-              // },
               removeFromMenu: function(item,index) {
                 this.chosenIngredients.splice(index,1);
                 this.categoryItemCounter[item.category-1]-=1;
@@ -318,40 +328,51 @@ export default {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
           }
-          #checkoutPage{
-            grid-row: 2;
-            grid-column: 1/7;
-          }
-          #frontPage{
-            grid-row: 2;
-            grid-column: 1/7;
-          }
-          #favouritesPage{
-          grid-row: 2;
-          grid-column: 1/7;}
-          #ordering {
-            display:grid;
-            grid-template-columns: repeat(6, 1fr);
-            margin:auto;
-            width: 90%;
-            grid-row: 2;
-            grid-column: 1/7;
-          }
-          #bestallning{
-            grid-column: 1 / 3;
-            grid-row: 1;
-            text-align: center;
-          }
           #lang-btn{
             grid-column:6/7;
             grid-row:1;
             color:white;
             font-weight: 700;
-            min-height: 4em;
-            width: 10em;
+            width:120px;
+            height:80px;
             border:1px solid #7a7a7a;
             margin: auto;
           }
+          #header-title{
+            grid-column:3/5;
+            grid-row:1;
+            text-align: center;
+          }
+          .viewContent{
+            grid-row: 2;
+            grid-column: 1/7;
+          }
+          #ordering {
+            display:grid;
+            grid-template-columns: repeat(6, 1fr);
+            margin:50px auto auto auto;
+            width: 90%;
+          }
+          #bestallning{
+            grid-column: 1 / 4;
+            grid-row: 1;
+            text-align: left;
+          }
+          #r2-div{
+            grid-row:1/2;
+            grid-column: 4/7;
+            display:grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: auto;
+            font-size:1em;
+          }
+          .icon{
+            height:3em;
+            padding:0 3px 3px 0;
+          }
+
+          /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
+          Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
           .sv{
             background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
             background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -401,9 +422,13 @@ export default {
           }
           #bck-btn{
             grid-column: 1/2;
-            grid-row: 3;
+            grid-row: 1;
             border: 1px solid #7a7a7a;
             color:white;
+            width:120px;
+            height:80px;
+            margin:auto;
+            justify-self:center;
             background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
             background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
             background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
@@ -422,7 +447,7 @@ export default {
             background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
           }
-            #next-btn:active{border: 2px solid #595959;}
+          #next-btn:active{border: 2px solid #595959;}
 
           #price-div{
             justify-self: center;
@@ -433,6 +458,9 @@ export default {
           }
 
           #next-btn{
+            width:120px;
+            height:80px;
+            justify-self:end;
             border:1px solid #7a7a7a;
             grid-column: 6/7;
             grid-row:3;
@@ -476,9 +504,6 @@ export default {
             grid-template-areas: "title";
             text-align: center;*/
           }
-          .avbryt{ /* Avbryt-knappen */
-            float: left;
-          }
           /* #order-btn{
             grid-column: 6/7;
             grid-row:4;
@@ -508,8 +533,42 @@ export default {
             background-color: #000;
             color: white;
           }
+          @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+            #bestallning{
+              grid-column: 1/7;
+              grid-row:1/2;
+              text-align:center;
+            }
+          #r2-div{
+            grid-column:1/7;
+            grid-row:2/3;
+            text-align:center;
+            justify-items: center;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+          }
+          #categories-wrapper{
+          grid-row:3/4;
+          }
+          #price-div, #next-btn{
+            grid-row:4/5;
+          }
+          }
+            @media screen and (max-width:650px){
+              #header-title{
+                grid-column:2/6;
+              }
+              #header-title h1{
+                font-size:2em;
+              }
+              .icon{
+                display:block;
+                margin:auto;
+              }
+            }
           @media screen and (max-width:480px){
-            #next-btn, #bck-btn{
+            #next-btn{
               grid-row:4;
             }
           }

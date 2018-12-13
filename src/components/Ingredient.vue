@@ -7,12 +7,12 @@
        {{item.selling_price}}:-
      </p>
      <div class="ico-div">
-     <img class="ico" src="../assets/dairyfree.png"
-     v-if="item.milk_free"/>
+     <img class="ico" src="../assets/dairy.png"
+     v-if="!item.milk_free"/>
      <img class="ico" src="../assets/vegan.png"
      v-if="item.vegan"/>
-     <img class="ico" src="../assets/glutenfree.png"
-     v-if="item.gluten_free"/>
+     <img class="ico" src="../assets/gluten.png"
+     v-if="!item.gluten_free"/>
    </div>
   </div>
 </template>

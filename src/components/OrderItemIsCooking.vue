@@ -1,26 +1,28 @@
 <template>
-  <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
+  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
     <h4>#{{orderId}}</h4>
-  <div>
-    <button id="orderCookedButton" v-on:click="orderCooked">
-      {{uiLabels.ready}}
-    </button>
-    <b-btn v-b-toggle='orderId' id= "collapsibleButton">
-      +
-    </b-btn>
-  </div>
     <div>
-    <b-collapse class="collapsibleBtn" visible :id="orderId">
-      <OrderItem
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :order="order">
-    </OrderItem>
-  </b-collapse>
-</div>
+      <button id="plus" @click="show = !show">+</button>
+      <button id="orderCookedButton" v-on:click="orderCooked">
+        {{uiLabels.ready}}
+      </button>
+      <transition name="slide">
+        <p id="expanding" v-if="show">
+          <OrderItem
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :order="order">
+        </OrderItem>
+        <button id="cancelButton" v-on:click="cancelOrder">
+          {{uiLabels.cancel}}
+        </button>
+      </p>
+    </transition>
+  </div>
 </div>
 </template>
+
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 
@@ -33,6 +35,11 @@ export default {
     orderId: String,
     lang: String
   },
+  data: function () {
+    return {
+      show: true
+    }
+  },
   methods: {
     orderCooked: function () {
       // sending 'cooked' message to parent component or view so that it
@@ -42,23 +49,38 @@ export default {
   }
 }
 </script>
+
 <style scoped>
-#orderCookedButton {
-  background-color: #00cc66;
+#expanding {
+  transform-origin: top;
+  transition: .4s ease-in-out;
+  overflow: hidden;
+}
+.slide-enter, .slide-leave-to {
+  transform: scaleY(0);
+}
+#orderCookedButton, #cancelButton, #plus {
   border: 1px solid white;
   border-radius: 3em;
   color: white;
+  margin: 1.5vh;
 }
-#orderCookedButton:active {border: 2px solid #d9d9d9;}
-#collapsibleButton:active {border: 2px solid #d9d9d9;}
-
-#orderCookedButton:hover {background-color: #008040}
-#collapsibleButton:hover {background-color: #0040ff}
-
-#collapsibleButton {
-  background-color: #3366ff;
-  border-radius: 3em;
-  margin: 1vh;
+#orderCookedButton {
+  background-color: green;
 }
+#cancelButton {
+  background-color: red;
+}
+#plus {
+  background-color: blue;
+}
+
+#orderCookedButton:active {border: 2px solid lightgreen;}
+#cancelButton:active {border: 2px solid orange;}
+#plus:active {border: 1px solid lightblue;}
+
+#orderCookedButton:hover {background-color: darkgreen;}
+#cancelButton:hover {background-color: darkred;}
+#plus:hover {background-color: darkblue}
 
 </style>
