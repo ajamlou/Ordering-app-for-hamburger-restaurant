@@ -1,42 +1,43 @@
 <template>
-  <div id="masterDivPrepp">
-  <!--  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
+  <div id="masterDivGrill">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-<!-- Hit skickas beställningarna som ska tillagas. -->
-      <div id="preparing">
+      <!-- Här skapas beställningarna i "Inkomna". -->
+      <div id="orders">
         <div id="header1">
-          <h1>{{ uiLabels.ordersPreparing }}</h1>
+          <h1>{{ uiLabels.ordersInQueue }}</h1>
         </div>
         <div class="allOrders">
-          <OrderItemIsCooking class="isCooking"
+          <OrderItemToPrepare class="toPrepare"
           v-for="(order, key) in orders"
-          v-if="order.status === 'done'"
-          v-on:cooked="markCooked(key)"
+          v-if="order.status === 'not-started'"
+          v-on:cancel = "markCanceled(key)"
+          v-on:done="markDone(key)"
           :order-id="key"
           :order="order"
           :ui-labels="uiLabels"
           :lang="lang"
           :key="key">
-        </OrderItemIsCooking>
+        </OrderItemToPrepare>
       </div>
     </div>
 
-    <!-- Här hamnar beställningarna som är färdiga. -->
-    <div id="finished">
+    <!-- Här skapas beställningarna i "Tillagas". -->
+    <div id="preparing">
       <div id="header2">
-        <h1>{{ uiLabels.ordersFinished }}</h1>
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div class="allOrders">
-        <OrderItemFinished class="isFinished"
+        <OrderItemIsCooking class="isPreparing"
         v-for="(order, key) in orders"
-        v-if="order.status === 'started'"
-        v-on:done="markDone(key)"
+        v-if="order.status === 'done'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
-        :lang="lang"
         :ui-labels="uiLabels"
+        :lang="lang"
         :key="key">
-      </OrderItemFinished>
+      </OrderItemIsCooking>
     </div>
   </div>
 </div>
@@ -44,16 +45,15 @@
 
 <script>
 // import sharedVueStuff from '@/components/sharedVueStuff.js'
+import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
-import OrderItemFinished from '@/components/OrderItemFinished.vue'
-// import OrderItem from '@/components/OrderItem.vue'
 
 export default {
   name: 'Ordering',
   components: {
     //   OrderItem,
-    OrderItemIsCooking,
-    OrderItemFinished,
+    OrderItemToPrepare,
+    OrderItemIsCooking
   },
   props: {
     ingredients: Array,
@@ -71,15 +71,18 @@ data: function(){
 },
 
 methods: {
-  markCooked: function (orderid) {
-    this.$store.state.socket.emit("orderStarted", orderid);
+  markDone: function (orderid) {
+    this.$store.state.socket.emit("orderDone", orderid);
+  },
+  markCanceled: function (orderid) {
+    this.$store.state.socket.emit("orderCanceled", orderid);
+  }
   },
  }
-}
 </script>
 
 <style scoped>
-#masterDivPrepp {
+#masterDivGrill {
   display: grid;
   grid-template-columns: repeat(2,1fr);
 }
@@ -89,46 +92,44 @@ methods: {
 }
 
 #header1, #header2 {
-  height: 2.5em;
-  text-align: center;
+  height: 10vh;
   width: 50vw;
+  /*position: fixed;*/
   font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
   text-shadow: 2px 2px #737373;
+  margin: auto;
 }
 
 #header1 {
-  background: #FFA500;
+  background: #DC143C;
   border-right: 2px solid white;
 }
-
 #header2 {
-  background: #00FF7F;
-  border-left: 2px solid white;
+  background: #FFA500;
+  border-left: 3px solid white;
   border-right: 3px solid white;
 }
 
-#preparing, #finished {
+#orders, #preparing {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
   width: 50vw;
 }
 
-/* .isCooking {
-  width: 60%;
+/* .toPrepare {
+  width: 42%;
 }
-
-.isFinished {
-  width: 40%;
+.isPreparing {
+  width: 30%;
 } */
 
 /*----- css för de svarta beställningsboxarna ----*/
-.isCooking, .isFinished {
+.toPrepare, .isPreparing {
   border: 2px solid white;
   font-size: 1.8vh;
-  float: left;
   min-height: 10vh;
   width: 10vw;
   margin: 8px;
@@ -141,7 +142,13 @@ methods: {
 }
 /*-------------------------------------------------*/
 
-.isCooking, .isFinished, #header1, #header2, #preparing, #finished{
+.isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
   overflow: auto
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 1.4em;
+  text-color: white;
 }
 </style>
