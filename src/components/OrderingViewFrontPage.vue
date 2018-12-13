@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div
+  id="frontPage">
 <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
     <div id="welcome">
       {{uiLabels.welcomeText}}
     </div>
+    <div id="buttons">
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
       <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
+    </div>
   </div>
 </template>
 
@@ -24,6 +27,16 @@ export default {
 </script>
 
 <style scoped>
+#frontPage{
+  display:grid;
+  height:100%;
+}
+#welcome{
+  grid-row:1/2;
+}
+#buttons{
+  grid-row:2/4;
+}
 #favoritesButton, #createBurgerButton {
   text-transform: uppercase;
   color: white;
@@ -32,11 +45,11 @@ export default {
   font-size: 4vh;
   border-radius: 3vh;
   border-color: black;
-  margin: 6vh auto;
+  margin: 6vh auto auto auto;
   align-items: center;
   cursor: pointer;
   width: 30vw;
-  height: 28vh;
+  height:inherit;
 }
 
 #favoritesButton{
