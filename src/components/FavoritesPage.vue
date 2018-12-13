@@ -1,18 +1,3 @@
-<!-- kod som genererar favoritsidan -->
-<!--Filterkod
-data: function(){
-ingredient_ids:[1,2,3],
-chosenIngredients=[]
-}
-
-props:{
-ingredients: Array
-}
-
-
-chosenIngredients = this.ingredients.filter(ingredient=>ingredient.ingredient_id === id[0] || id[1] || id[2])
-
-Kommer inte fungera Out of the box, men you get the point -->
 
 
 <template>
@@ -22,8 +7,8 @@ Kommer inte fungera Out of the box, men you get the point -->
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul>
-          <li v-for = "item in chosenIngredients" :key = "item.ingredient_id">
-            {{item["ingredient_"+ lang]}}
+          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+            {{thing["ingredient_"+ lang]}}
           </li>
         </ul>
         <p>{{uiLabels.sum}}</p>
@@ -33,13 +18,10 @@ Kommer inte fungera Out of the box, men you get the point -->
 </template>
 
 <script>
-import Favorite from '@/components/Favorite.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
     return{
-      ingredient_ids:[1,2,3],
-      chosenIngredients: [],
       price: 0,
       units: 1,
       categoryItemCounter: 1,
@@ -63,27 +45,20 @@ props:{
   ingredients:Array,
   lang: String,
   menu: Array,
-  uiLabels: Object
+  uiLabels: Object,
+  favoriteIngredients: Array,
+  ingredient_ids: Array
 },
 components:{
-  Favorite
 },
 methods:{
-  // chooseIngredients: function(){
-  //   let order ={"ingredients": this.chosenIngredients,
-  //   "price":this.price,
-  //   "units":this.units,
-  //   "itemCount":this.categoryItemCounter};
-  //   console.log(order);
-  //   this.$emit("fav-checkout",order);
-  // },
+  // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(){
     this.$emit("clearburger");
     for (var i = 0; i< this.ingredient_ids.length; i++){
       this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
     }
     this.$emit("fav-checkout");
-    console.log(this.menu)
   }
 }
 }
