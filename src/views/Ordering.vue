@@ -321,12 +321,14 @@ export default {
           /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
           .masterDiv{
             font-family: 'Montserrat', sans-serif;
-            height:100%;
-            margin-top:0px !important;
-            padding-top:20px !important;
+            min-height:100vh;
+            margin-top:0 !important;
+            padding-top:0 !important;
             background-color:#f8ffd6;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: 100px;
+            grid-auto-rows: auto;
           }
           #lang-btn{
             grid-column:6/7;
