@@ -98,4 +98,12 @@ export default {
     font-size: 1.5em;
   }
 }
+@media screen and (max-height:445px){
+  #welcome{
+    grid-column:1/3;
+  }
+  #favoritesButton, #createBurgerButton{
+    grid-row:2/3;
+  }
+}
 </style>
