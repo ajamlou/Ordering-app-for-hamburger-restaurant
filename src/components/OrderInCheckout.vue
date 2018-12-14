@@ -1,7 +1,7 @@
 <template>
   <div class="ord-check-div">
     <h5>{{uiLabels.burger}} {{id +1}} </h5>
-    <h6>Din burgare:</h6>
+    <div class="ord-check-bod">
     <div
     v-for="(ingredient,index) in menu.ingredients"
     v-if="ingredient.category < 5 "
@@ -17,8 +17,9 @@
   :key="index">
   {{ingredient["ingredient_"+ lang]}}
 </div>
+</div>
 <div class="ord-check-foot">
-  {{uiLabels.unitprice}}: {{menu.price}}:-
+<p>  {{uiLabels.unitprice}}: {{menu.price}}:-</p>
   <br>
   <div class="ord-quant">
     <label>{{uiLabels.quantity}}:</label><input
@@ -26,10 +27,10 @@
     v-model="menu.units"
     min="1"
     max="99">
-    <div class="btns">
-      <button @click="removeMenu">{{uiLabels.remove}}</button>
-      <button @click="modifyMenu">{{uiLabels.modify}}</button>
-    </div>
+  </div>
+  <div class="btns">
+    <button @click="removeMenu">{{uiLabels.remove}}</button>
+    <button @click="modifyMenu">{{uiLabels.modify}}</button>
   </div>
 </div>
 </div>
@@ -72,14 +73,41 @@ export default{
 }
 </script>
 <style scoped>
+.ord-check-bod{
+  grid-row:2;
+  height:10em;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .ord-check-div{
+  display:grid;
   background-color:rgba(255,255,255,0.9);
   border: 1px solid rgb(100,100,100);
 }
 
+.ord-check-foot{
+  grid-row:3;
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.ord-check-foot p{
+  grid-column:1/3;
+  grid-row:1;
+  text-align: center;
+}
+.ord-quant{
+  grid-column:1/3;
+  grid-row:2;
+}
 .ord-quant input{
   width:40px;
+}
+.btns{
+  grid-column:1/3;
+  grid-row:3;
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
 }
 
 button{
