@@ -107,7 +107,8 @@ v-if = "currentView === 'designPage'">
 
 <h2>{{uiLabels.extras}}</h2>
 
-<CategoryRow v-for="category in extrasCategories"
+<CategoryRow
+v-for="category in extrasCategories"
 :key="category.categoryNr"
 :category="category.categoryNr"
 :added_items="chosenIngredients"
