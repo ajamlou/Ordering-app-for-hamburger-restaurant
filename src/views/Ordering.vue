@@ -92,7 +92,8 @@ v-if = "currentView === 'designPage'">
 
 
 <div id="categories-wrapper">
-  <CategoryRow v-for="category in burgerCategories"
+  <CategoryRow
+  v-for="category in burgerCategories"
   :key="category.categoryNr"
   :category="category.categoryNr"
   :added_items="chosenIngredients"
