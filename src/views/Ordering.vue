@@ -398,7 +398,6 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               text-transform: uppercase;/*
               font-family: 'Luckiest Guy', sans-serif;
               color: #66d9ff;
-              text-transform: uppercase;
               text-shadow: 2px 2px #0086b3;*/
             }
             #extras{

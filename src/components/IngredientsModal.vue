@@ -35,9 +35,20 @@ export default {
     ingredients: Array,
     lang: String
   },
+  data:function(){
+    return{
+    hasClicked:false /*Hindrar användaren från att dubbelklicka och välja tex 2 bröd*/
+  }
+  },
   methods:{
     emitAddIngredient:function(item){
+      if(this.hasClicked){
+        return;
+      }
+      this.hasClicked=true;
     this.$emit('add_ingredient',item);
+    /*Sätt hasClicked till false efter 1 sekund*/
+    setTimeout(()=>{this.hasClicked=false},1000);
   }
   }
       }
