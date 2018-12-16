@@ -72,7 +72,7 @@ v-if="this.showSlotModal">
 </SlotModal>
 
 <div
-id="backdrop"
+id="designPage-backdrop"
 class="viewContent"
 v-if = "currentView === 'designPage'">
 <div
@@ -375,12 +375,13 @@ export default {
               grid-row: 2;
               grid-column: 1/7;
             }
-            #backdrop{
+            #designPage-backdrop{
               background-color: rgba(255,255,255,0.7);
               border-radius:15px;
               width:95%;
               justify-self:center;
               margin-bottom:2em;
+              padding-bottom:1em;
               margin-top:2em;
               -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
 -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
@@ -502,6 +503,7 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
 
             #price-div{
               justify-self: center;
+              margin:auto;
               text-align:center;
               font-size: 2em;
               grid-column:3/5;
