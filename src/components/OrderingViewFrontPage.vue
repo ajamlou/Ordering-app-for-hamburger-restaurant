@@ -1,7 +1,6 @@
 <template>
   <div
   id="frontPage">
-<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
     <div id="welcome">
       {{uiLabels.welcomeText}}
     </div>

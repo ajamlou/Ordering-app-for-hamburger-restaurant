@@ -1,6 +1,6 @@
 <template>
   <div class="masterDiv">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
@@ -72,9 +72,11 @@ v-if="this.showSlotModal">
 </SlotModal>
 
 <div
+id="backdrop"
 class="viewContent"
-id="ordering"
 v-if = "currentView === 'designPage'">
+<div
+id="ordering">
 <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 
 <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
@@ -105,6 +107,7 @@ v-if = "currentView === 'designPage'">
   @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 
+<div id="extras">
 <h2>{{uiLabels.extras}}</h2>
 
 <CategoryRow
@@ -120,11 +123,12 @@ v-for="category in extrasCategories"
 @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 </div>
+</div>
 <div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-<!-- <button id="order-btn" @click="placeOrder()">{{ uiLabels.placeOrder }}</button> -->
+</div>
 </div>
 </div>
 </template>
@@ -341,6 +345,7 @@ export default {
               margin-top:0 !important;
               padding-top:0 !important;
               background-color:#f8ffd6;
+              background:url('../assets/bg3.png');
               display: grid;
               grid-template-columns: repeat(6, 1fr);
               grid-template-rows: 100px;
@@ -361,10 +366,25 @@ export default {
               grid-row:1;
               text-align: center;
               align-self: center;
+              font-family: 'Luckiest Guy', sans-serif;
+              color: #66d9ff;
+              text-transform: uppercase;
+              text-shadow: 2px 2px #0086b3;
             }
             .viewContent{
               grid-row: 2;
               grid-column: 1/7;
+            }
+            #backdrop{
+              background-color: rgba(255,255,255,0.7);
+              border-radius:15px;
+              width:95%;
+              justify-self:center;
+              margin-bottom:2em;
+              margin-top:2em;
+              -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+-moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             }
             #ordering {
               display:grid;
@@ -372,6 +392,18 @@ export default {
               margin:50px auto auto auto;
               width: 90%;
             }
+            #ordering h2{
+              font-weight: bolder;
+              text-transform: uppercase;/*
+              font-family: 'Luckiest Guy', sans-serif;
+              color: #66d9ff;
+              text-transform: uppercase;
+              text-shadow: 2px 2px #0086b3;*/
+            }
+            #extras{
+              margin-top:2em;
+            }
+
             #bestallning{
               grid-column: 1 / 4;
               grid-row: 1;

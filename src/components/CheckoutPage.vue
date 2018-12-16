@@ -173,7 +173,6 @@ export default{
 }
 
 #add-btn-div{
-  grid-column: 7/9;
   display:flex;
   flex-direction: column;
   word-wrap: break-word;
@@ -185,10 +184,11 @@ export default{
   flex: 0 0 auto;
   border-radius: 10px;
   color: white;
-  margin-right: 5vw;
+  margin:auto 5px auto 5px;
+  /*margin-right: 5vw;
   margin-left: 3vw;
   margin-top: 10vh;
-  height: 25vh;
+  height: 25vh;*/
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
