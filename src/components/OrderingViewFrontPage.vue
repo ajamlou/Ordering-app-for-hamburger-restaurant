@@ -80,14 +80,14 @@ export default {
 }
 @media screen and (max-width:905px){
   #frontPage{
-    grid-template-rows: 30% 30% 30%;
+    grid-template-rows: auto auto auto auto;
     grid-auto-rows: auto;
     justify-content: center;
     align-items: center;
   }
 }
 
-@media screen and (max-width:515px){
+@media screen and (max-width:650px){
   #welcome{
     font-size:3em;
   }
@@ -95,14 +95,6 @@ export default {
   #favoritesButton, #createBurgerButton{
     width:4em;
     font-size: 1.5em;
-  }
-}
-@media screen and (max-height:445px){
-  #welcome{
-    grid-column:1/3;
-  }
-  #favoritesButton, #createBurgerButton{
-    grid-row:2/3;
   }
 }
 </style>

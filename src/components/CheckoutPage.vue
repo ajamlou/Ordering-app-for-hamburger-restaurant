@@ -153,11 +153,11 @@ export default{
   position:relative;
   display:flex;
   flex-wrap: nowrap;
-  grid-column:1/8;
+  grid-column:1/9;
 }
 #checkout-wrapper{
   text-transform: capitalize;
-  grid-column: 1/8;
+  grid-column: 1/9;
   grid-row: 1;
   display:flex;
   flex-wrap: nowrap;
@@ -177,7 +177,8 @@ export default{
   flex-direction: column;
   word-wrap: break-word;
   text-align: center;
-  max-width:15%;
+  width:15%;
+  min-width:200px;
   align-items:stretch;
   background-color:#3385ff;
   cursor:pointer;
@@ -185,10 +186,6 @@ export default{
   border-radius: 10px;
   color: white;
   margin:auto 5px auto 5px;
-  /*margin-right: 5vw;
-  margin-left: 3vw;
-  margin-top: 10vh;
-  height: 25vh;*/
 }
 #add-btn-div:hover{
   background-color:rgba(100, 100, 100, 0.9);
@@ -262,6 +259,13 @@ export default{
 }
 
 .btn-close:active{background-color: #1f7a1f}
+
+@media screen and (max-width:650px){
+  #btn-order-wrap{
+    flex-direction: column;
+    align-items: center;
+  }
+}
 
 
 </style>
