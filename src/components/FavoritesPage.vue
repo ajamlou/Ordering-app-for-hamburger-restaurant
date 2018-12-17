@@ -6,7 +6,17 @@
       <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-        <ul>
+        <ul v-if = "item.id === 1">
+          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+            {{thing["ingredient_"+ lang]}}
+          </li>
+        </ul>
+        <ul v-if = "item.id === 2">
+          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+            {{thing["ingredient_"+ lang]}}
+          </li>
+        </ul>
+        <ul v-if = "item.id === 3">
           <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
@@ -46,7 +56,7 @@ props:{
   lang: String,
   menu: Array,
   uiLabels: Object,
-  favoriteIngredients: Array,
+  favoriteBurgers: Array,
   ingredient_ids: Array
 },
 components:{
@@ -65,18 +75,6 @@ methods:{
 </script>
 <style scoped>
 
-
-
-
-
-
-/* .wrapper{
-height: 100vh;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
-align-items: center;
-} */
 
 .wrapper{
   height: 100vh;

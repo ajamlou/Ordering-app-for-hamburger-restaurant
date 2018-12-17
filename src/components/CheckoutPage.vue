@@ -216,7 +216,7 @@ export default{
   font-size: 2em;
 }
 #order-btn2{
-  grid-column: 8/9;
+  grid-column: 7/9;
   grid-row: 4;
   width:120px;
   height:80px;
@@ -258,9 +258,9 @@ export default{
   border-radius: 10px;
   margin-top: 10vh;
   position: relative;
-  width: 6vw;
-  height: 8vh;
-  font-size: 3vw;
+  width: 2em;
+  height: 2em;
+  font-size: 2em;;
   color: white;
 }
 
