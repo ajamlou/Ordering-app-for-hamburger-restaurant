@@ -63,8 +63,8 @@ export default {
 .storage-wrapper {
   position: fixed;
   text-align:center;
-  display: flex; /*added*/
-  flex-direction: column; /*added*/
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -74,12 +74,14 @@ export default {
   overflow: visible;
   border-radius: 15px;
   padding-bottom: 15px;
+  width:75%;
 }
 
 .storage-body {
+  grid-column: 1/4;
   display: table-cell;
   vertical-align: middle;
-  width: 50vw;
+  width: 100%;
   height: 50vh;
   padding: 20px 30px;
   background-color: #fff;

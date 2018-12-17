@@ -30,7 +30,6 @@
 
   <div class="modal-footer">
     <slot name="footer">
-      Footer
     </slot>
   </div>
 </div>
@@ -57,18 +56,20 @@ export default {
 .modal-header{
   /* position: fixed; */
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
   text-align: center;
   overflow: hidden;
   height:2em;
+  padding:0;
 }
 .ing-container{
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
   text-align: center;
   height:100%;
   overflow-x: hidden;
   overflow-y:auto;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 </style>
