@@ -3,7 +3,7 @@
 <template>
   <div  class = "wrapper">
     <div id = "favorites">
-      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id-1)">
+      <div class = "burgers" :id="{ selecburg : change }" v-for = "item in favBurgers" :key = "item.id"  @click = "burgerSelected">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul v-if = "item.id === 1">
@@ -24,7 +24,6 @@
           </li>
           <p>{{uiLabels.sum}}: {{favoriteBurger3.price}} :-</p>
         </ul>
-
       </div>
     </div>
   </div>
@@ -38,6 +37,7 @@ export default {
       price: 0,
       units: 1,
       categoryItemCounter: 1,
+      change: false,
       favBurgers:[
         {name:'Beefinator',
         id: 1,
@@ -70,10 +70,13 @@ methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(id){
     this.$emit("clearburger");
-    for (var i = 0; i< ('favoriteBurger'+id).ingredients.length; i++){
+    for (var i = 0; i< ["favoriteBurger"+id].ingredients.length; i++){
       this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
     }
     this.$emit("fav-checkout");
+  },
+  burgerSelected: function(){
+    this.change = !this.change;
   }
 }
 }
@@ -92,6 +95,16 @@ methods:{
   grid-row: 1/3;
   margin:auto;
 }
+
+#selecburg{
+  float:left;
+  background-color: green;
+  border:5px solid rgb(255, 0, 0);
+  width: 320px;
+  height: 320px;
+}
+
+
 .burgers{
   float:left;
   background-color: white;
@@ -99,6 +112,8 @@ methods:{
   width: 320px;
   height: 320px;
 }
+
+
 
 .header{
   text-align: center;
