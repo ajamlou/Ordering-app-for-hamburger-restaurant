@@ -3,7 +3,7 @@
 <template>
   <div  class = "wrapper">
     <div id = "favorites">
-      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout">
+      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id-1)">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul v-if = "item.id === 1">
@@ -68,9 +68,9 @@ components:{
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
-  favToCheckout: function(){
+  favToCheckout: function(id){
     this.$emit("clearburger");
-    for (var i = 0; i< this.ingredient_ids.length; i++){
+    for (var i = 0; i< ('favoriteBurger'+id).ingredients.length; i++){
       this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
     }
     this.$emit("fav-checkout");
