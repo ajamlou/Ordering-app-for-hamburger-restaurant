@@ -1,6 +1,6 @@
 <template>
   <div class="ingredient"
-  v-on:click="ingredientClicked">
+  @click="ingredientClicked">
     <p class="ingredient-name">
       {{item["ingredient_"+ lang]}}</p>
     <p class="ingredient-price">
@@ -25,14 +25,10 @@ export default {
   },
     data: function () {
     return {
-      counter: 0
     };
   },
   methods: {
     ingredientClicked: function () {
-      this.counter += 1;
-      // sending 'ingredient-clicked' message to parent component or view so that it
-      // can catch it with v-on:increment in the component declaration
       this.$emit('ingredient_clicked');
     },
   /*  resetCounter: function () {
