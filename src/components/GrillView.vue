@@ -1,11 +1,11 @@
 <template>
-  <div id="masterDivGrill">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <div id="GrillGrid">
 
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
       <div id="header1">
         <h1>{{ uiLabels.ordersInQueue }}</h1>
+        <img class="icon" src="../assets/w-spatula.png"/>
       </div>
       <div class = "allOrders">
         <OrderItemToPrepare class = "toPrepare"
@@ -26,6 +26,7 @@
   <div id="preparing">
     <div id="header2">
       <h1>{{ uiLabels.ordersPreparing }}</h1>
+      <img class="icon" src="../assets/w-spatula.png"/>
     </div>
     <div class = "allOrders">
       <OrderItemIsCooking class = "isPreparing"
@@ -62,7 +63,6 @@ export default {
     orders: Object,
     lang: String
   },
-  // mixins: [sharedVueStuff],
 
   data: function(){
     return {
@@ -86,24 +86,33 @@ export default {
 </script>
 
 <style scoped>
-#masterDivGrill {
+#GrillGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
+  height:100%;
 }
 
 .allOrders {
-  margin-top: 10vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height:100%;
 }
 
 #header1, #header2 {
-  height: 10vh;
-  width: 50vw;
-  /*position: fixed;*/
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  align-items:center;
+  height: 2.5em;
+  text-align: center;
+  width: 100%;
   font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
+  color:white;
   text-shadow: 2px 2px #737373;
-  margin: auto;
+}
+#header1 >h1, #header2 > h1{
+  grid-column: 2/3;
 }
 
 #header1 {
@@ -120,22 +129,23 @@ export default {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
-  width: 50vw;
+  overflow:hidden;
+  height:90vh;
 }
-
-/* .toPrepare {
-width: 42%;
+.icon{
+  height:2em;
+  justify-self:end;
+  grid-column:3/4;
+  padding-right:5px;
 }
-.isPreparing {
-width: 30%;
-} */
 
 /*----- css för de svarta beställningsboxarna ----*/
 .toPrepare, .isPreparing {
   border: 2px solid white;
   font-size: 1.8vh;
-  min-height: 10vh;
-  width: 10vw;
+  float: left;
+  min-height: 5em;
+  width: 30%;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;
@@ -145,14 +155,4 @@ width: 30%;
   color: white;
 }
 /*-------------------------------------------------*/
-
-.isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
-  overflow: auto
-}
-
-h1 {
-  text-transform: uppercase;
-  font-size: 1.4em;
-  text-color: white;
-}
 </style>

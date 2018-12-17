@@ -191,94 +191,11 @@ export default {
   grid-column: 1/7;
 }
 #backButton {
-  grid-row: 3;
+  grid-row: 2;
   grid-column: 1;
 }
-
-/* .backButton{
-  border: 2px solid white;
-  color: white;
-  text-shadow: 2px 2px #696969;
-  background-color: #00b386;
-  cursor: pointer;
-  padding: 5px;
-  text-decoration: none;
-  font-size: 4vh;
-  border-radius: 18px;
-  font-size: 1.9vh;
-  font-size: 1.9vw;
-  width: 12vw;
-  height: 10vh;
-  margin-top: 1vh;
-  margin-left: 1vw;
-  margin-bottom: 1vh;
-} */
 #backButton:hover {background-color: #008060}
 #backButton:active {border: 2px solid grey;}
 
-/* .allOrders {
-  margin-top: 10vh;
-}
-
-#header1, #header2 {
-  height: 10vh;
-  width: 50vw;
-  position: fixed;
-  font-size: 5vh;
-  border-radius: 4px;
-  border-bottom: 3px solid white;
-  text-shadow: 2px 2px #737373;
-  margin: auto;
-}
-
-#header1 {
-  background: #DC143C;
-}
-#header2 {
-  background: #FFA500;
-  border-left: 3px solid white;
-  border-right: 3px solid white;
-}
-
-#orders, #preparing {
-  font-size: 1em;
-  border: 3px solid white;
-  border-radius: 6px;
-  width: 50vw;
-}
-
-
-.toPrepare {
-  width: 42%;
-}
-.isPreparing {
-  width: 30%;
-}
-
-.toPrepare, .isPreparing {
-  border: 2px solid white;
-  font-size: 1.8vh;
-  float: left;
-  min-height: 10vh;
-  width: 10vw;
-  margin: 8px;
-  padding: 5px;
-  box-sizing: border-box;
-  border-radius: 20px;
-  border: 3px solid white;
-  background-color: black;
-}
-
-.isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
-  overflow: auto
-} */
-
-/* h1 {
-  text-transform: uppercase;
-  font-size: 1.4em;
-  text-color: white;
-} */
-
-/* ccskod för knappar under denna kommentar */
 
 </style>
