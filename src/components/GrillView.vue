@@ -2,44 +2,44 @@
   <div id="masterDivGrill">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-      <!-- Här skapas beställningarna i "Inkomna". -->
-      <div id="orders">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersInQueue }}</h1>
-        </div>
-        <div class="allOrders">
-          <OrderItemToPrepare class="toPrepare"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'not-started'"
-          v-on:cancel = "markCanceled(key)"
-          v-on:done="markCooking(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemToPrepare>
+    <!-- Här skapas beställningarna i "Inkomna". -->
+    <div id="orders">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersInQueue }}</h1>
       </div>
-    </div>
-
-    <!-- Här skapas beställningarna i "Tillagas". -->
-    <div id="preparing">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
-      </div>
-      <div class="allOrders">
-        <OrderItemIsCooking class="isPreparing"
-        v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
-        :order-id="key"
-        :order="order"
-        :ui-labels="uiLabels"
-        :lang="lang"
-        :key="key">
-      </OrderItemIsCooking>
+      <div class = "allOrders">
+        <OrderItemToPrepare class = "toPrepare"
+        v-for = "(order, key) in orders"
+        v-if = "order.status === 'not-started'"
+        v-on:cancel = "markCanceled(key)"
+        v-on:done = "markCooking(key)"
+        :order-id = "key"
+        :order = "order"
+        :ui-labels = "uiLabels"
+        :lang = "lang"
+        :key = "key">
+      </OrderItemToPrepare>
     </div>
   </div>
+
+  <!-- Här skapas beställningarna i "Tillagas". -->
+  <div id="preparing">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
+    </div>
+    <div class = "allOrders">
+      <OrderItemIsCooking class = "isPreparing"
+      v-for = "(order, key) in orders"
+      v-if = "order.status === 'done'"
+      v-on:done = "markHide(key)"
+      :order-id = "key"
+      :order = "order"
+      :ui-labels = "uiLabels"
+      :lang = "lang"
+      :key = "key">
+    </OrderItemIsCooking>
+  </div>
+</div>
 </div>
 </template>
 
@@ -63,25 +63,25 @@ export default {
   },
   // mixins: [sharedVueStuff],
 
-data: function(){
-  return {
-    chosenIngredients: [],
-    price: 0,
-  }
-},
+  data: function(){
+    return {
+      chosenIngredients: [],
+      price: 0,
+    }
+  },
 
-methods: {
-  markDone: function (orderid) {
-    this.$store.state.socket.emit("orderDone", orderid);
-  },
-  markCanceled: function (orderid) {
-    this.$store.state.socket.emit("orderCanceled", orderid);
-  },
-  markCooked: function (orderid) {
-    this.$store.state.socket.emit("orderCooked", orderid);
+  methods: {
+    markHide: function (orderid) {
+      this.$store.state.socket.emit("orderHidden", orderid);
+    },
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("orderCanceled", orderid);
+    },
+    markCooking: function (orderid) {
+      this.$store.state.socket.emit("orderCooking", orderid);
+    }
   }
-  },
- }
+}
 </script>
 
 <style scoped>
@@ -123,10 +123,10 @@ methods: {
 }
 
 /* .toPrepare {
-  width: 42%;
+width: 42%;
 }
 .isPreparing {
-  width: 30%;
+width: 30%;
 } */
 
 /*----- css för de svarta beställningsboxarna ----*/

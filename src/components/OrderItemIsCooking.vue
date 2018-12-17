@@ -43,7 +43,7 @@ export default {
   methods: {
     orderCooked: function () { //skickar 'cooked' till parent som kan kalla med v-on:cooked
       this.$emit('cooked');
-    }
+    },
     orderCanceled: function () { //skickar 'canceled' till parent som kan kalla med v-on:canceled
       this.$emit('canceled');
     }
