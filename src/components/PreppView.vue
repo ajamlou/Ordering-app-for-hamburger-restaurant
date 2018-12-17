@@ -42,6 +42,7 @@
       </OrderItemFinished>
     </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -78,7 +79,6 @@ data: function(){
     }
   }
  }
-}
 </script>
 
 <style scoped>
