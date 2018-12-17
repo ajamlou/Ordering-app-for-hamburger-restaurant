@@ -6,6 +6,7 @@
       <div id="preparing">
         <div id="header1">
           <h1>{{ uiLabels.ordersPreparing }}</h1>
+          <img class="icon" src="../assets/w-spatula.png"/>
         </div>
         <div class="allOrders">
           <OrderItemIsCooking class="isCooking"
@@ -25,11 +26,12 @@
     <div id="finished">
       <div id="header2">
         <h1>{{ uiLabels.ordersFinished }}</h1>
+        <img class="icon" src="../assets/w-burger.png"/>
       </div>
       <div class="allOrders">
         <OrderItemFinished class="isFinished"
         v-for="(order, key) in orders"
-        v-if="order.status === 'started'"
+        v-if="order.status === 'cooked'"
         v-on:done="markDone(key)"
         :order-id="key"
         :order="order"
@@ -72,8 +74,8 @@ data: function(){
 
 methods: {
   markCooked: function (orderid) {
-    this.$store.state.socket.emit("orderStarted", orderid);
-  },
+    this.$store.state.socket.emit("orderCooked", orderid);
+  }
  }
 }
 </script>
@@ -93,6 +95,7 @@ methods: {
 
 #header1, #header2 {
   display:grid;
+  grid-template-columns: repeat(3,1fr);
   align-items:center;
   height: 2.5em;
   text-align: center;
@@ -101,6 +104,16 @@ methods: {
   border-radius: 4px;
   border-bottom: 3px solid white;
   text-shadow: 2px 2px #737373;
+}
+#header1 >h1, #header2 > h1{
+  grid-column: 2/3;
+}
+
+.icon{
+  height:2em;
+  justify-self:end;
+  grid-column:3/4;
+  padding-right:5px;
 }
 
 #header1 {
@@ -127,8 +140,8 @@ methods: {
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  min-height: 10vh;
-  width: 10vw;
+  min-height: 5em;
+  width: 30%;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;

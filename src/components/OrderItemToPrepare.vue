@@ -6,7 +6,7 @@
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
-    <button id="sendToPreparing" v-on:click="orderDone">
+    <button id="sendToPreparing" v-on:click="orderCooking">
       {{uiLabels.ready}}
     </button>
   </div>
@@ -18,7 +18,7 @@
         :lang="lang"
         :order="order">
       </OrderItem>
-      <button id="cancelButton" v-on:click="cancelOrder">
+      <button id="cancelButton" v-on:click="orderCanceled">
         {{uiLabels.cancel}}
       </button>
     </b-collapse>
@@ -38,13 +38,11 @@ export default {
     lang: String
   },
   methods: {
-    orderDone: function () {
-      // sending 'done' message to parent component or view so that it
-      // can catch it with v-on:done in the component declaration
-      this.$emit('done');
+    orderCooking: function () { //skickar 'cooking' till parent som kan fånga med v-on:cooking
+      this.$emit('cooking');
     },
-    cancelOrder: function () {
-      this.$emit('cancel');
+    orderCanceled: function () { //skickar 'canceled' till parent som kan fånga med v-on:canceled
+      this.$emit('canceled');
     }
   }
 }

@@ -583,7 +583,6 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             padding:20px 30px 20px 30px;
             font-size: 2em;
             background-color: rgb(0, 150, 0);
-          }
           #order-btn:hover{
           color:black;
           background-color: rgb(0, 200, 0);

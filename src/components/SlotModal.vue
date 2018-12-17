@@ -78,18 +78,12 @@ export default {
     overflow-x: hidden;
     padding:3px;
   }
-
+  
   .mod-foot {
     grid-column:3/4;
     grid-row: 2/3;
     color: white;
     margin-top: none;
     margin-bottom: 1em;
-  }
-  /* @media screen and (max-width:500px){
-    .modal{
-      max-height:90%;
-    } */
-
   }
 </style>

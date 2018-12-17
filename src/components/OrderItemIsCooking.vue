@@ -14,7 +14,7 @@
           :lang="lang"
           :order="order">
         </OrderItem>
-        <button id="cancelButton" v-on:click="cancelOrder">
+        <button id="cancelButton" v-on:click="orderCanceled">
           {{uiLabels.cancel}}
         </button>
       </p>
@@ -41,10 +41,11 @@ export default {
     }
   },
   methods: {
-    orderCooked: function () {
-      // sending 'cooked' message to parent component or view so that it
-      // can catch it with v-on:cooked in the component declaration
+    orderCooked: function () { //skickar 'cooked' till parent som kan kalla med v-on:cooked
       this.$emit('cooked');
+    },
+    orderCanceled: function () { //skickar 'canceled' till parent som kan kalla med v-on:canceled
+      this.$emit('canceled');
     }
   }
 }
