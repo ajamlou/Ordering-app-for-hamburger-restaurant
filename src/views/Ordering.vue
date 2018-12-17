@@ -536,12 +536,15 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
             }
 
-
             .btn-close{
               background-color: #33cc33;
               border-radius: 10px;
               margin-top: 10vh;
-              position: relative;
+              /* position: relative; */
+              width: 2em;
+              height: 2em;
+              font-size: 2em;;
+              color: white;
             }
 
             .ingredient{

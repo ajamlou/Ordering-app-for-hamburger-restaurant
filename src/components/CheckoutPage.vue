@@ -258,9 +258,9 @@ export default{
   border-radius: 10px;
   margin-top: 10vh;
   position: relative;
-  width: 6vw;
-  height: 8vh;
-  font-size: 3vw;
+  width: 2em;
+  height: 2em;
+  font-size: 2em;;
   color: white;
 }
 

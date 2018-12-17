@@ -75,7 +75,7 @@ export default {
     z-index: 9998;
   }
 
-  .modal {
+  .modal{
     text-align:center;
     display: grid;
     grid-template-columns: repeat(3,1fr);
