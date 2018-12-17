@@ -29,7 +29,7 @@
       <div class="allOrders">
         <OrderItemFinished class="isFinished"
         v-for="(order, key) in orders"
-        v-if="order.status === 'started'"
+        v-if="order.status === 'cooked'"
         v-on:done="markDone(key)"
         :order-id="key"
         :order="order"
@@ -72,8 +72,8 @@ data: function(){
 
 methods: {
   markCooked: function (orderid) {
-    this.$store.state.socket.emit("orderStarted", orderid);
-  },
+    this.$store.state.socket.emit("orderCooked", orderid);
+  }
  }
 }
 </script>
