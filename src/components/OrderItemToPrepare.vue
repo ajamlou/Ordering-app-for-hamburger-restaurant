@@ -16,7 +16,8 @@
         :onlypatty="true"
         :ui-labels="uiLabels"
         :lang="lang"
-        :order="order">
+        :order="order"
+        :ingredients="ingredients">
       </OrderItem>
       <button id="cancelButton" v-on:click="orderCanceled">
         {{uiLabels.cancel}}
@@ -32,6 +33,7 @@ export default {
   name: 'OrderItemToPrepare',
   components: { OrderItem },
   props: {
+    ingredients:Array,
     uiLabels: Object,
     order: Object,
     orderId: String,

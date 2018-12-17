@@ -6,22 +6,16 @@
 
 		<!-- <div v-for="(menu,index) in menusArray"
 		:key="index"> -->
-
 		<div v-for="(menu, menuindex) in menusArray"
 		:key="menuindex">
 		<div
 		v-if="onlypatty === true">
-		<div v-for="(occurrences,index,ingredient_id) in calculateOccurrences(menuindex)">
+		<div v-for="(occurrences,ingredient_sv,OccIndex) in calculateOccurrences(menuindex)">
+			{{ingredient_sv}} × {{occurrences}}
+		</div>
 
-		{{calculateOccurrences(menuindex)}}
-	</div>
-	 <div v-for="(ingredient,index) in menu.ingredients"
-		:key="index"
-		v-if="ingredient.category === 1">
-		{{ingredient.ingredient_sv}}
-	</div>
 	<div class="betweenBurgers">
-	<!--Skiljelinje mellan olika burgare-->
+		<!--Skiljelinje mellan olika burgare-->
 	</div>
 </div>
 
@@ -63,11 +57,12 @@ export default {
 			let ingredients = this.menusArray[index].ingredients;
 			/*Occurences är först en tom array som sparar antalet gånger ett ingredient ID förekommer*/
 			let occurences = ingredients.reduce(function(occ,ingredient){
-				occ[ingredient.ingredient_id] = (occ[ingredient.ingredient_id] || 0) + 1;
+				if (ingredient.category == 1){
+				occ[ingredient.ingredient_sv] = (occ[ingredient.ingredient_sv] || 0) + 1};
 				return occ;
 			},{})
 			return occurences;
-			}
+		}
 	}
 }
 </script>
