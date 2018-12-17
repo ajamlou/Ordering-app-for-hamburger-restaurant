@@ -33,7 +33,7 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteIngredients = "favoriteIngredients"
+  :favoriteBurgers = "favoriteBurgers"
   :ingredient_ids = "ingredient_ids">
 </FavoritesPage>
 
@@ -165,10 +165,12 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
-      ingredient_ids:[1,2,3,4], /*Denna har ingredient-id för alla favoritingredienser*/
+      ingredient_ids:[1,2,3,4,5,6,7,8,9], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       favoriteIngredients: [],
+      favoriteBurgers: [],
+      favoritePrice:0,
       orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
@@ -252,9 +254,16 @@ export default {
                 },
                 changeFavorites: function(){
                   for (var i = 0; i< this.ingredient_ids.length; i++){
-                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
+                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
+                    this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
+                    if(this.favoriteIngredients.length === 3){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
+                      this.favoriteIngredients.push(this.favoritePrice)
+                      this.favoriteBurgers.push(this.favoriteIngredients);
+                      this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
+                      this.favoritePrice = 0;
+                    }
                   }
-                  console.log(this.favoriteIngredients);
+                  console.log(this.favoriteBurgers);
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
