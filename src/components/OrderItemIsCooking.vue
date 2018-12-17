@@ -4,7 +4,7 @@
     <h4>#{{orderId}}</h4>
     <div>
       <button id="plus" @click="show = !show">+</button>
-      <button id="orderCookedButton" v-on:click="orderCooked">
+      <button id="orderCookedButton" v-on:click="orderDone" v-if="isPrepp">
         {{uiLabels.ready}}
       </button>
       <transition name="slide">
@@ -33,7 +33,8 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
   data: function () {
     return {
@@ -41,11 +42,11 @@ export default {
     }
   },
   methods: {
-    orderCooked: function () { //skickar 'cooked' till parent som kan kalla med v-on:cooked
-      this.$emit('cooked');
-    }
+    orderDone: function () { //skickar 'cooked' till parent som kan kalla med v-on:cooked
+      this.$emit('done');
+    },
     orderCanceled: function () { //skickar 'canceled' till parent som kan kalla med v-on:canceled
-      this.$emit('canceled');
+      this.$emit('cancel');
     }
   }
 }

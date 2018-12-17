@@ -10,8 +10,9 @@
       <div class="allOrders">
         <OrderItemIsCooking class="isCooking"
         v-for="(order, key) in orders"
-        v-if="order.status === 'cooking'"
-        v-on:cooked="markCooked(key)"
+        v-if="order.status === 'started'"
+        v-on:cooked="markDone(key)"
+        :isPrepp="true"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"
@@ -29,7 +30,7 @@
     <div class="allOrders">
       <OrderItemFinished class="isFinished"
       v-for="(order, key) in orders"
-      v-if="order.status === 'cooked'"
+      v-if="order.status === 'done'"
       v-on:done="markDone(key)"
       :order-id="key"
       :order="order"
@@ -71,9 +72,6 @@ export default {
   },
 
   methods: {
-    markCooked: function (orderid) {
-      this.$store.state.socket.emit("orderCooked", orderid);
-    },
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
     }

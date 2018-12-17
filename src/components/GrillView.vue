@@ -12,7 +12,7 @@
         v-for = "(order, key) in orders"
         v-if = "order.status === 'not-started'"
         v-on:cancel = "markCanceled(key)"
-        v-on:done = "markCooking(key)"
+        v-on:cooked = "markCooked(key)"
         :order-id = "key"
         :order = "order"
         :ui-labels = "uiLabels"
@@ -30,8 +30,9 @@
     <div class = "allOrders">
       <OrderItemIsCooking class = "isPreparing"
       v-for = "(order, key) in orders"
-      v-if = "order.status === 'done'"
-      v-on:done = "markHide(key)"
+      v-if = "order.status === 'started'"
+      v-on:done = "markDone(key)"
+      :isPrepp= "false"
       :order-id = "key"
       :order = "order"
       :ui-labels = "uiLabels"
@@ -71,14 +72,14 @@ export default {
   },
 
   methods: {
-    markHide: function (orderid) {
-      this.$store.state.socket.emit("orderHidden", orderid);
-    },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
-    markCooking: function (orderid) {
-      this.$store.state.socket.emit("orderCooking", orderid);
+    markDone: function (orderid) {
+      this.$store.state.socket.emit("orderDone", orderid);
+    },
+    markCooked: function (orderid) {
+      this.$store.state.socket.emit("orderStarted", orderid);
     }
   }
 }
