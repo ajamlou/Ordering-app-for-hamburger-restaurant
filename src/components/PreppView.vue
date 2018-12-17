@@ -1,6 +1,5 @@
 <template>
   <div id="PreppGrid">
-  <!--  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
 
 <!-- Hit skickas beställningarna som ska tillagas. -->
       <div id="preparing">
