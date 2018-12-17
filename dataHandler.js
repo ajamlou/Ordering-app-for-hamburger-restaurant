@@ -138,7 +138,7 @@ Data.prototype.markOrderCanceled = function (orderId) {
 };
 
 Data.prototype.markOrderNotStarted = function (orderId) {
-  this.orders[orderId].status = "lol-started";
+  this.orders[orderId].status = "not-started";
 };
 
 

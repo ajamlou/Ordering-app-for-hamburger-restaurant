@@ -104,18 +104,20 @@ export default {
   height: 20vh;
   border-radius: 1vh;
   margin:auto;
-
   color: black; /*textcolor*/
   font-size: 5vh;
-
+  text-shadow: 2px 2px #000000;
+  background:rgba(255,255,255,0.2);
   cursor: pointer;
 }
 #grillButton{
-  background-color: firebrick;
+  color: #e52c1a;
+  border:10px double #e52c1a;
   grid-row:2;
 }
 #preppButton {
-  background-color: royalblue;
+  color:#237aae;
+  border:10px double #237aae;
   grid-row:3;
 }
 

@@ -30,7 +30,7 @@
     <div class = "allOrders">
       <OrderItemIsCooking class = "isPreparing"
       v-for = "(order, key) in orders"
-      v-if = "order.status === 'done'"
+      v-if = "order.status === 'started'"
       v-on:done = "markHide(key)"
       :order-id = "key"
       :order = "order"

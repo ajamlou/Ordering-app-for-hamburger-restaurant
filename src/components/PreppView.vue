@@ -11,7 +11,7 @@
         <div class="allOrders">
           <OrderItemIsCooking class="isCooking"
           v-for="(order, key) in orders"
-          v-if="order.status === 'done'"
+          v-if="order.status === 'started'"
           v-on:cooked="markCooked(key)"
           :order-id="key"
           :order="order"
@@ -31,7 +31,7 @@
       <div class="allOrders">
         <OrderItemFinished class="isFinished"
         v-for="(order, key) in orders"
-        v-if="order.status === 'cooked'"
+        v-if="order.status === 'done'"
         v-on:done="markDone(key)"
         :order-id="key"
         :order="order"
@@ -103,6 +103,7 @@ methods: {
   font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
+  color:white;
   text-shadow: 2px 2px #737373;
 }
 #header1 >h1, #header2 > h1{
