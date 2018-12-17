@@ -256,11 +256,9 @@ export default{
 .btn-close{
   background-color: #33cc33;
   border-radius: 10px;
-  margin-top: 10vh;
-  position: relative;
   width: 2em;
   height: 2em;
-  font-size: 2em;;
+  font-size: 2em;
   color: white;
 }
 

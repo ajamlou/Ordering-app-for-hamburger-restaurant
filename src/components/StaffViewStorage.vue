@@ -1,7 +1,6 @@
 <template>
   <div>
   <div class="modal-header">
-    <slot name="header">
       <div>
         Vara
       </div>
@@ -11,7 +10,6 @@
       <div>
         Säljpris
       </div>
-    </slot>
   </div>
 
   <div class="modal-body">
@@ -61,12 +59,16 @@ export default {
   display: grid;
   grid-template-columns: 30% 30% 30%;
   text-align: center;
+  overflow: hidden;
+  height:2em;
 }
 .ing-container{
   display: grid;
   grid-template-columns: 30% 30% 30%;
   text-align: center;
-  overflow: auto;
+  height:100%;
+  overflow-x: hidden;
+  overflow-y:auto;
 }
 
 </style>

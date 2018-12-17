@@ -181,6 +181,7 @@ export default {
   margin-top:0 !important;
   padding-top:0 !important;
   background-color: #7a7a7a;
+  background:url('../assets/seamless-chalk.jpg');
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }

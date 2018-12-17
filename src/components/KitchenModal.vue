@@ -89,14 +89,12 @@ export default {
 }
 
 .close-button {
-  /*border: none;*/
-  position:element(#ing-mod);
-  transform: translate(1000%,-40%);
+  grid-column:3/4;
+  justify-self:end;
+  border-radius: 15px;
   font-size: 23px;
-  padding: 20px;
-  height:3em;
-  width:3em;
-  border-radius:3em;
+  height:2em;
+  width:2em;
   cursor: pointer;
   font-weight: bold;
   color: white;
