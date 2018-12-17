@@ -12,7 +12,7 @@
           v-for="(order, key) in orders"
           v-if="order.status === 'not-started'"
           v-on:cancel = "markCanceled(key)"
-          v-on:done="markDone(key)"
+          v-on:done="markCooking(key)"
           :order-id="key"
           :order="order"
           :ui-labels="uiLabels"
@@ -76,6 +76,9 @@ methods: {
   },
   markCanceled: function (orderid) {
     this.$store.state.socket.emit("orderCanceled", orderid);
+  },
+  markCooked: function (orderid) {
+    this.$store.state.socket.emit("orderCooked", orderid);
   }
   },
  }
