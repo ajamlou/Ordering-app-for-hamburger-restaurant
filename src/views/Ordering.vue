@@ -165,7 +165,7 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
-      ingredient_ids:[1,2,3,4,5,6,7,8,9], /*Denna har ingredient-id för alla favoritingredienser*/
+      ingredient_ids:[50,6,8,11,12,48  ,  50,1,9,26,32,36  ,  52,1,7,34,15,40], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       favoriteIngredients: [],
@@ -583,6 +583,7 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             padding:20px 30px 20px 30px;
             font-size: 2em;
             background-color: rgb(0, 150, 0);
+          }
           #order-btn:hover{
           color:black;
           background-color: rgb(0, 200, 0);

@@ -3,7 +3,7 @@
 <template>
   <div  class = "wrapper">
     <div id = "favorites">
-      <div class = "burgers" :id="{ selecburg : change }" v-for = "item in favBurgers" :key = "item.id"  @click = "burgerSelected">
+      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id)">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul v-if = "item.id === 1">
@@ -25,8 +25,8 @@
           <p>{{uiLabels.sum}}: {{favoriteBurger3.price}} :-</p>
         </ul>
       </div>
-    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -48,7 +48,7 @@ export default {
       pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
     },
     {name:'Veganinator',
-    id:3,
+    id: 3,
     pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
   }
 ]
@@ -69,9 +69,22 @@ components:{
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(id){
+    console.log(this.favoriteBurger1.ing_count)
     this.$emit("clearburger");
-    for (var i = 0; i< ["favoriteBurger"+id].ingredients.length; i++){
-      this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
+    if(id === 1){
+      for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
+        this.$emit("fav-ingredient", this.favoriteBurger1.ingredients[i]);
+      }
+    }
+    else if(id === 2){
+      for (var i = 0; i< this.favoriteBurger2.ing_count; i++){
+        this.$emit("fav-ingredient", this.favoriteBurger2.ingredients[i]);
+      }
+    }
+    else{
+      for (var i = 0; i< this.favoriteBurger3.ing_count; i++){
+        this.$emit("fav-ingredient", this.favoriteBurger3.ingredients[i]);
+      }
     }
     this.$emit("fav-checkout");
   },
@@ -96,13 +109,6 @@ methods:{
   margin:auto;
 }
 
-#selecburg{
-  float:left;
-  background-color: green;
-  border:5px solid rgb(255, 0, 0);
-  width: 320px;
-  height: 320px;
-}
 
 
 .burgers{
