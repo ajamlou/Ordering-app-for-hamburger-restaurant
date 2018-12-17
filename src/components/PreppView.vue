@@ -1,5 +1,5 @@
 <template>
-  <div id="masterDivPrepp">
+  <div id="PreppGrid">
   <!--  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
 
 <!-- Hit skickas beställningarna som ska tillagas. -->
@@ -79,19 +79,24 @@ methods: {
 </script>
 
 <style scoped>
-#masterDivPrepp {
+#PreppGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
+  height:100%;
 }
 
 .allOrders {
-  margin-top: 10vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height:100%;
 }
 
 #header1, #header2 {
+  display:grid;
+  align-items:center;
   height: 2.5em;
   text-align: center;
-  width: 50vw;
+  width: 100%;
   font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
@@ -113,16 +118,9 @@ methods: {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
-  width: 50vw;
+  overflow:hidden;
+  height:90vh;
 }
-
-/* .isCooking {
-  width: 60%;
-}
-
-.isFinished {
-  width: 40%;
-} */
 
 /*----- css för de svarta beställningsboxarna ----*/
 .isCooking, .isFinished {
@@ -140,8 +138,4 @@ methods: {
   color: white;
 }
 /*-------------------------------------------------*/
-
-.isCooking, .isFinished, #header1, #header2, #preparing, #finished{
-  overflow: auto
-}
 </style>
