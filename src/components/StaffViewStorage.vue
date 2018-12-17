@@ -60,11 +60,13 @@ export default {
   grid-template-columns: 30% 30% 30%;
   text-align: center;
   overflow: hidden;
+  height:2em;
 }
 .ing-container{
   display: grid;
   grid-template-columns: 30% 30% 30%;
   text-align: center;
+  height:100%;
   overflow-x: hidden;
   overflow-y:auto;
 }
