@@ -7,21 +7,24 @@
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
         <ul v-if = "item.id === 1">
-          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favoriteBurger1.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
+          <p>{{uiLabels.sum}}: {{favoriteBurger1.price}} :-</p>
         </ul>
         <ul v-if = "item.id === 2">
-          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favoriteBurger2.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
+          <p>{{uiLabels.sum}}: {{favoriteBurger2.price}} :-</p>
         </ul>
         <ul v-if = "item.id === 3">
-          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favoriteBurger3.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
+          <p>{{uiLabels.sum}}: {{favoriteBurger3.price}} :-</p>
         </ul>
-        <p>{{uiLabels.sum}}</p>
+
       </div>
     </div>
   </div>
@@ -56,7 +59,9 @@ props:{
   lang: String,
   menu: Array,
   uiLabels: Object,
-  favoriteBurgers: Array,
+  favoriteBurger1: Object,
+  favoriteBurger2: Object,
+  favoriteBurger3: Object,
   ingredient_ids: Array
 },
 components:{
@@ -108,7 +113,14 @@ methods:{
 .ingredients{
   text-align: center;
   list-style-type: none;
+}
 
+h1{
+  font-size: 1.5em;
+}
+
+li{
+  list-style-type:none;
 }
 
 
