@@ -17,7 +17,8 @@
         :order = "order"
         :ui-labels = "uiLabels"
         :lang = "lang"
-        :key = "key">
+        :key = "key"
+        :ingredients="ingredients">
       </OrderItemToPrepare>
     </div>
   </div>
