@@ -11,6 +11,16 @@
             {{thing["ingredient_"+ lang]}}
           </li>
         </ul>
+        <ul v-if = "item.id === 2">
+          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+            {{thing["ingredient_"+ lang]}}
+          </li>
+        </ul>
+        <ul v-if = "item.id === 3">
+          <li  v-for = "thing in favoriteIngredients" :key = "thing.ingredient_id">
+            {{thing["ingredient_"+ lang]}}
+          </li>
+        </ul>
         <p>{{uiLabels.sum}}</p>
       </div>
     </div>
@@ -46,7 +56,7 @@ props:{
   lang: String,
   menu: Array,
   uiLabels: Object,
-  favoriteIngredients: Array,
+  favoriteBurgers: Array,
   ingredient_ids: Array
 },
 components:{
@@ -65,18 +75,6 @@ methods:{
 </script>
 <style scoped>
 
-
-
-
-
-
-/* .wrapper{
-height: 100vh;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
-align-items: center;
-} */
 
 .wrapper{
   height: 100vh;
