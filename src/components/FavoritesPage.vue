@@ -6,19 +6,19 @@
       <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id)">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
-        <ul v-if = "item.id === '1'">
+        <ul v-if = "item.id === 1">
           <li  v-for = "thing in favoriteBurger1.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
           <p>{{uiLabels.sum}}: {{favoriteBurger1.price}} :-</p>
         </ul>
-        <ul v-if = "item.id === '2'">
+        <ul v-if = "item.id === 2">
           <li  v-for = "thing in favoriteBurger2.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
           <p>{{uiLabels.sum}}: {{favoriteBurger2.price}} :-</p>
         </ul>
-        <ul v-if = "item.id === '3'">
+        <ul v-if = "item.id === 3">
           <li  v-for = "thing in favoriteBurger3.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
@@ -40,15 +40,15 @@ export default {
       change: false,
       favBurgers:[
         {name:'Beefinator',
-        id: '1',
+        id: 1,
         pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
       },
       {name:'Vegginator',
-      id: '2',
+      id: 2,
       pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
     },
     {name:'Veganinator',
-    id: '3',
+    id: 3,
     pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
   }
 ]
@@ -71,12 +71,12 @@ methods:{
   favToCheckout: function(id){
     console.log(this.favoriteBurger1.ing_count)
     this.$emit("clearburger");
-    if(id === '1'){
+    if(id === 1){
       for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger1.ingredients[i]);
       }
     }
-    else if(id === '2'){
+    else if(id === 2){
       for (var i = 0; i< this.favoriteBurger2.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger2.ingredients[i]);
       }
@@ -109,13 +109,6 @@ methods:{
   margin:auto;
 }
 
-#one, #two, #three{
-  float:left;
-  background-color: green;
-  border:5px solid rgb(255, 0, 0);
-  width: 320px;
-  height: 320px;
-}
 
 
 .burgers{
