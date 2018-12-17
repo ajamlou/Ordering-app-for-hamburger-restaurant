@@ -1,11 +1,11 @@
 <template>
-<div class="masterDivKitchenFront">
+<div id="frontPageGrid">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
   <button id = "grillButton" @click = "emitSwitchVisibility('grillPage')">GRILL</button>
   <button  id = "preppButton" @click = "emitSwitchVisibility('preppPage')">PREPP</button>
 
-  <div>
+  <div id="modal-div">
   <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
   <button  id = "favoritesButton" @click="emitSwitchVisibility('f')">FAVORITER</button>
@@ -92,22 +92,18 @@ export default {
 </script>
 
 <style scoped>
-/* Gemensam css för hela sidan */
-.masterDivKitchenFront{
-  font-family: 'Montserrat', sans-serif;
-  height:100vh;
-  margin-top:0px !important;
-  padding-top:0px !important;
-  background-color: lightyellow;
+#frontPageGrid{
+  display:grid;
+  grid-template-rows: 15vh auto auto auto auto;
+  justify-items:center;
+  grid-gap:10px;
 }
 /*css för grill- och preppknappar*/
 #grillButton, #preppButton{
   width: 25vw;
   height: 20vh;
   border-radius: 1vh;
-
-  display: grid;
-  grid-row-gap: 20vh;
+  margin:auto;
 
   color: black; /*textcolor*/
   font-size: 5vh;
@@ -116,13 +112,18 @@ export default {
 }
 #grillButton{
   background-color: firebrick;
+  grid-row:2;
 }
 #preppButton {
   background-color: royalblue;
+  grid-row:3;
 }
 
 /*css för statistik- och lagerknappar*/
-#statisticsButton, #storageButton, #favoritesButton{
+#modal-div{
+  grid-row:4;
+}
+#modal-div > *{
 border: 2px solid white;
 color: white;
 text-shadow: 2px 2px #696969;
