@@ -68,13 +68,13 @@ components:{
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
-  favToCheckout: function(id){
-    this.$emit("clearburger");
-    for (var i = 0; i< ["favoriteBurger"+id].ingredients.length; i++){
-      this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
-    }
-    this.$emit("fav-checkout");
-  },
+  // favToCheckout: function(id){
+  //   this.$emit("clearburger");
+  //   for (var i = 0; i< ["favoriteBurger"+id].ingredients.length; i++){
+  //     this.$emit("fav-ingredient", this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
+  //   }
+  //   this.$emit("fav-checkout");
+  // },
   burgerSelected: function(){
     this.change = !this.change;
   }

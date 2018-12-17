@@ -33,7 +33,9 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteBurgers = "favoriteBurgers"
+  :favoriteBurger1 = "favoriteBurgers[0]"
+  :favoriteBurger2 = "favoriteBurgers[1]"
+  :favoriteBurger3 = "favoriteBurgers[2]"
   :ingredient_ids = "ingredient_ids">
 </FavoritesPage>
 
@@ -256,11 +258,17 @@ export default {
                   for (var i = 0; i< this.ingredient_ids.length; i++){
                     this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
                     this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
-                    if(this.favoriteIngredients.length === 3){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
-                      this.favoriteIngredients.push(this.favoritePrice)
-                      this.favoriteBurgers.push(this.favoriteIngredients);
+                    if(this.favoriteIngredients.length === Math.trunc(this.ingredient_ids.length/3)){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
+                      let count = 1;
+                      let burger = {
+                        "ingredients": this.favoriteIngredients,
+                        "price": this.favoritePrice,
+                        "id": count
+                      }
+                      this.favoriteBurgers.push(burger);
                       this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
                       this.favoritePrice = 0;
+                      count++;
                     }
                   }
                   console.log(this.favoriteBurgers);
