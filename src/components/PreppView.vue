@@ -140,8 +140,8 @@ methods: {
   border: 2px solid white;
   font-size: 1.8vh;
   float: left;
-  min-height: 10vh;
-  width: 10vw;
+  min-height: 5em;
+  width: 30%;
   margin: 8px;
   padding: 5px;
   box-sizing: border-box;
