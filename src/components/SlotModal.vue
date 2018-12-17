@@ -6,8 +6,7 @@
       <div class = "mod-bod">
         <slot name="body"></slot>
       </div>
-        <slot name="footer"
-        class="mod-foot"></slot>
+        <slot name="footer" class ="mod-foot"></slot>
     </div>
   </div>
 </transition>
@@ -61,7 +60,7 @@ export default {
     width:45em;
     height: 15em;
     max-width:80%;
-    max-height:80%;
+    max-height:150%;
     padding-bottom: 10px;
   }
 
@@ -78,7 +77,7 @@ export default {
     overflow-x: hidden;
     padding:3px;
   }
-  
+
   .mod-foot {
     grid-column:3/4;
     grid-row: 2/3;

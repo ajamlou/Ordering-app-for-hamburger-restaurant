@@ -33,9 +33,7 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteBurger1 = "favoriteBurgers[0]"
-  :favoriteBurger2 = "favoriteBurgers[1]"
-  :favoriteBurger3 = "favoriteBurgers[2]"
+  :favoriteBurgers = "favoriteBurgers"
   :ingredient_ids = "ingredient_ids">
 </FavoritesPage>
 
@@ -255,21 +253,14 @@ export default {
                   this.currentView = view;
                 },
                 changeFavorites: function(){
-                    let count = 0;
                   for (var i = 0; i< this.ingredient_ids.length; i++){
                     this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
                     this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
-                    count++;
-                    if(this.favoriteIngredients.length === Math.trunc(this.ingredient_ids.length/3)){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
-                      let burger = {
-                        "ingredients": this.favoriteIngredients,
-                        "price": this.favoritePrice,
-                        "ing_count": count
-                      }
-                      this.favoriteBurgers.push(burger);
+                    if(this.favoriteIngredients.length === 3){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
+                      this.favoriteIngredients.push(this.favoritePrice)
+                      this.favoriteBurgers.push(this.favoriteIngredients);
                       this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
                       this.favoritePrice = 0;
-                      count = 0;
                     }
                   }
                   console.log(this.favoriteBurgers);
@@ -592,6 +583,7 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             padding:20px 30px 20px 30px;
             font-size: 2em;
             background-color: rgb(0, 150, 0);
+          }
           #order-btn:hover{
           color:black;
           background-color: rgb(0, 200, 0);
