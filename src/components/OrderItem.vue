@@ -10,8 +10,9 @@
 		:key="menuindex">
 		<div
 		v-if="onlypatty === true">
-		<div v-for="(occurrences,ingredient_sv,OccIndex) in calculateOccurrences(menuindex)">
-			{{ingredient_sv}} × {{occurrences}}
+		<div v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex,1)">
+			<!--Hitta första ingrediensen i ingredients med samma id som i calculateOccurences och displaya dess namn tillsammans med occurrences -->
+			{{ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 		</div>
 
 	<div class="betweenBurgers">
@@ -26,9 +27,6 @@
 	</div>
 </div>
 </div>
-
-<!-- </div> -->
-
 </div>
 
 
@@ -53,15 +51,20 @@ export default {
 		},
 	},
 	methods:{
-		calculateOccurrences:function(index){
+		calculateOccurrences:function(index,category){
 			let ingredients = this.menusArray[index].ingredients;
+			if(category != undefined){
+				/*Filtrerar ut så enbart den aktuella kategorin räknas på*/
+				ingredients=ingredients.filter((ingredient) => ingredient.category==category);
+			}
 			/*Occurences är först en tom array som sparar antalet gånger ett ingredient ID förekommer*/
-			let occurences = ingredients.reduce(function(occ,ingredient){
-				if (ingredient.category == 1){
-				occ[ingredient.ingredient_sv] = (occ[ingredient.ingredient_sv] || 0) + 1};
+			let occurrences = ingredients.reduce(function(occ,ingredient){
+				occ[ingredient.ingredient_id] = (occ[ingredient.ingredient_id] || 0) + 1;
 				return occ;
 			},{})
-			return occurences;
+
+			console.log(occurrences);
+			return occurrences;
 		}
 	}
 }
