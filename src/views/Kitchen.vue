@@ -10,7 +10,9 @@
         {{ uiLabels.back2 }}
       </button>
 
-  <div id="kitchenFrontDiv" v-if = "currentView === 'kitchenFrontPage'">
+  <div
+  class="contentPage"
+  v-if = "currentView === 'kitchenFrontPage'">
       <KitchenViewFrontPage
       @Visibility="changeView"
       v-if = "currentView === 'kitchenFrontPage'"
@@ -22,7 +24,7 @@
 <!-- GrillView -->
 <!-- Använder class = grillPage i denna div för att sen kunna "skriva över"
 med ett id i GrillView.vue -->
-    <div class="grillPage"
+    <div class="contentPage"
     v-show="currentView === 'grillPage'">
       <GrillView
       :ingredients="ingredients"
@@ -36,7 +38,7 @@ med ett id i GrillView.vue -->
 <!-- Använder class = preppPage i denna div för att sen kunna "skriva över"
 med ett id i PreppView.vue -->
     <PreppView
-    class="preppPage"
+    class="contentPage"
     v-show="currentView === 'preppPage'"
     :ingredients="ingredients"
     :uiLabels="uiLabels"
@@ -175,24 +177,16 @@ export default {
 
 #masterDivKitchen{
   font-family: 'Montserrat', sans-serif;
-  height:100%;
-  margin-top:0px !important;
-  padding-top:20px !important;
-  background-color:#f8ffd6;
+  min-height:100vh;
+  margin-top:0 !important;
+  padding-top:0 !important;
+  background-color: #7a7a7a;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
 
-#kitchenFrontDiv{
-  grid-row: 2;
-  grid-column: 1/7;
-}
-.grillPage{
-  grid-row: 2;
-  grid-column: 1/7;
-}
-.preppPage{
-  grid-row: 2;
+.contentPage{
+  grid-row: 1;
   grid-column: 1/7;
 }
 #backButton {
