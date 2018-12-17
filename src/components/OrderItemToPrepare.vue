@@ -6,7 +6,7 @@
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
-    <button id="sendToPreparing" v-on:click="orderDone">
+    <button id="sendToPreparing" v-on:click="orderCooking">
       {{uiLabels.ready}}
     </button>
   </div>
@@ -38,8 +38,8 @@ export default {
     lang: String
   },
   methods: {
-    orderDone: function () { //skickar 'done' till parent som kan fånga med v-on:done
-      this.$emit('done');
+    orderCooking: function () { //skickar 'cooking' till parent som kan fånga med v-on:cooking
+      this.$emit('cooking');
     },
     orderCanceled: function () { //skickar 'canceled' till parent som kan fånga med v-on:canceled
       this.$emit('canceled');

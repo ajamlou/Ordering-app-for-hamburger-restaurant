@@ -1,44 +1,44 @@
 <template>
   <div id="PreppGrid">
-  <!--  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
+    <!--  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">-->
 
-<!-- Hit skickas beställningarna som ska tillagas. -->
-      <div id="preparing">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersPreparing }}</h1>
-        </div>
-        <div class="allOrders">
-          <OrderItemIsCooking class="isCooking"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'done'"
-          v-on:cooked="markCooked(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemIsCooking>
-      </div>
-    </div>
-
-    <!-- Här hamnar beställningarna som är färdiga. -->
-    <div id="finished">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersFinished }}</h1>
+    <!-- Hit skickas beställningarna som ska tillagas. -->
+    <div id="preparing">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
       </div>
       <div class="allOrders">
-        <OrderItemFinished class="isFinished"
+        <OrderItemIsCooking class="isCooking"
         v-for="(order, key) in orders"
-        v-if="order.status === 'cooked'"
-        v-on:done="markDone(key)"
+        v-if="order.status === 'cooking'"
+        v-on:cooked="markCooked(key)"
         :order-id="key"
         :order="order"
-        :lang="lang"
         :ui-labels="uiLabels"
+        :lang="lang"
         :key="key">
-      </OrderItemFinished>
+      </OrderItemIsCooking>
     </div>
   </div>
+
+  <!-- Här hamnar beställningarna som är färdiga. -->
+  <div id="finished">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+    </div>
+    <div class="allOrders">
+      <OrderItemFinished class="isFinished"
+      v-for="(order, key) in orders"
+      v-if="order.status === 'cooked'"
+      v-on:done="markDone(key)"
+      :order-id="key"
+      :order="order"
+      :lang="lang"
+      :ui-labels="uiLabels"
+      :key="key">
+    </OrderItemFinished>
+  </div>
+</div>
 </div>
 </template>
 
@@ -63,18 +63,21 @@ export default {
   },
   // mixins: [sharedVueStuff],
 
-data: function(){
-  return {
-    chosenIngredients: [],
-    price: 0,
-  }
-},
+  data: function(){
+    return {
+      chosenIngredients: [],
+      price: 0,
+    }
+  },
 
-methods: {
-  markCooked: function (orderid) {
-    this.$store.state.socket.emit("orderCooked", orderid);
+  methods: {
+    markCooked: function (orderid) {
+      this.$store.state.socket.emit("orderCooked", orderid);
+    },
+    markDone: function (orderid) {
+      this.$store.state.socket.emit("orderDone", orderid);
+    }
   }
- }
 }
 </script>
 
