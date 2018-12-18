@@ -90,13 +90,13 @@ export default {
 #GrillGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  height:100%;
+  height:90vh;
 }
 
 .allOrders {
   overflow-y: auto;
   overflow-x: hidden;
-  height:100%;
+  height:86%;
 }
 
 #header1, #header2 {
@@ -131,7 +131,7 @@ export default {
   border: 3px solid white;
   border-radius: 6px;
   overflow:hidden;
-  height:90vh;
+  height:inherit;
 }
 .icon{
   height:2em;
@@ -143,13 +143,12 @@ export default {
 /*----- css för de svarta beställningsboxarna ----*/
 .toPrepare, .isPreparing {
   border: 2px solid white;
-  font-size: 1.8vh;
+  font-size: 0.85em;
   float: left;
   min-height: 5em;
-  width: 30%;
-  margin: 8px;
+  width: 31%;
+  margin: 3px;
   padding: 5px;
-  box-sizing: border-box;
   border-radius: 20px;
   border: 3px solid white;
   background-color: black;

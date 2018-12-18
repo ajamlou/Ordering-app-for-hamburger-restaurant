@@ -14,9 +14,6 @@
 			<!--Hitta första ingrediensen i ingredients med samma id som i calculateOccurences och displaya dess namn tillsammans med occurrences -->
 			{{ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 		</div>
-	<div class="betweenBurgers">
-		<!--Skiljelinje mellan olika burgare-->
-	</div>
 </div>
 
 <div v-else
