@@ -14,17 +14,19 @@
 			<!--Hitta första ingrediensen i ingredients med samma id som i calculateOccurences och displaya dess namn tillsammans med occurrences -->
 			{{ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 		</div>
-
 	<div class="betweenBurgers">
 		<!--Skiljelinje mellan olika burgare-->
 	</div>
 </div>
 
-<div v-else>
-	{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
-	<div class="betweenBurgers">
-		<!-- Skiljelinje mellan olika burgare -->
-	</div>
+<div v-else
+v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex)">
+<!--Tar ut ingredienserna från menusArray, hittar de som matchar id:t i calculateOccurrences och skriver ut det på valt språk-->
+{{menusArray[menuindex].ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
+	<!--{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}-->
+</div>
+<div class="betweenBurgers">
+	<!-- Skiljelinje mellan olika burgare -->
 </div>
 </div>
 </div>
@@ -70,6 +72,9 @@ export default {
 }
 </script>
 <style scoped>
+.masterOrderitem{
+	text-transform: capitalize;
+}
 
 .betweenBurgers{
 	border: 1px solid white;
