@@ -3,11 +3,10 @@
 
 		<!-- menusArray tas ut i computed, är en array med menyer som i sin tur är
 		arrayer innehållande varje menys ingrediensarray -->
-
-		<!-- <div v-for="(menu,index) in menusArray"
-		:key="index"> -->
 		<div v-for="(menu, menuindex) in menusArray"
-		:key="menuindex">
+		:key="menuindex"
+		class="border-bottom">
+		<div class="quant">{{uiLabels.quantity}}: {{menu.units}}</div>
 		<div
 		v-if="onlypatty === true">
 		<div v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex,1)"
@@ -23,9 +22,6 @@
 	<!--Tar ut ingredienserna från menusArray, hittar de som matchar id:t i calculateOccurrences och skriver ut det på valt språk-->
 	{{menusArray[menuindex].ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 	<!--{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}-->
-</div>
-<div class="betweenBurgers">
-	<!-- Skiljelinje mellan olika burgare -->
 </div>
 </div>
 </div>
@@ -79,9 +75,12 @@ export default {
 			text-transform: capitalize;
 		}
 
-		.betweenBurgers{
-			border: 1px solid white;
+		.border-bottom{
+			border-bottom: 1px solid white;
 			margin: 4px;
+		}
+		.quant{
+			text-decoration: underline;
 		}
 
 		</style>
