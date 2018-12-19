@@ -37,8 +37,8 @@ export default {
     orderDone: function () { //skickar 'done' till parent som kan fånga med v-on:done
       this.$emit('done');
     },
-    orderCanceled: function () { //skickar 'canceled' till parent som kan fånga med v-on:canceled
-      this.$emit('canceled');
+    orderCanceled: function () { //skickar 'cancel' till parent som kan fånga med v-on:cancel
+      this.$emit('cancel');
     }
   }
 }

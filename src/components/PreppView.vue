@@ -1,45 +1,46 @@
 <template>
   <div id="PreppGrid">
 
-<!-- Hit skickas beställningarna som ska tillagas. -->
-      <div id="preparing">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersPreparing }}</h1>
-          <img class="icon" src="../assets/w-spatula.png"/>
-        </div>
-        <div class="allOrders">
-          <OrderItemIsCooking class="isCooking"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'started'"
-          v-on:cooked="markCooked(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemIsCooking>
-      </div>
-    </div>
-
-    <!-- Här hamnar beställningarna som är färdiga. -->
-    <div id="finished">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersFinished }}</h1>
-        <img class="icon" src="../assets/w-burger.png"/>
+    <!-- Hit skickas beställningarna som ska tillagas. -->
+    <div id="preparing">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
+        <img class="icon" src="../assets/w-spatula.png"/>
       </div>
       <div class="allOrders">
-        <OrderItemFinished class="isFinished"
-        v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:done="markDone(key)"
-        :isPrepp= "true"
-        :order-id="key"
-        :order="order"
-        :lang="lang"
-        :ui-labels="uiLabels"
-        :key="key">
-      </OrderItemFinished>
+        <OrderItemIsCooking class="isCooking"
+        v-for = "(order, key) in orders"
+        v-if="order.status === 'started'"
+        v-on:done = "markDone(key)"
+        v-on:cancel = "markCanceled(key)"
+        :isPrepp = "true"
+        :order-id = "key"
+        :order = "order"
+        :ui-labels = "uiLabels"
+        :lang = "lang"
+        :key = "key">
+      </OrderItemIsCooking>
     </div>
+  </div>
+
+  <!-- Här hamnar beställningarna som är färdiga. -->
+  <div id="finished">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+      <img class="icon" src="../assets/w-burger.png"/>
+    </div>
+    <div class="allOrders">
+      <OrderItemFinished class="isFinished"
+      v-for="(order, key) in orders"
+      v-if="order.status === 'done'"
+      v-on:done="markDone(key)"
+      :order-id="key"
+      :order="order"
+      :lang="lang"
+      :ui-labels="uiLabels"
+      :key="key">
+    </OrderItemFinished>
+  </div>
 </div>
 </div>
 </template>
@@ -61,23 +62,26 @@ export default {
     ingredients: Array,
     uiLabels: Object,
     orders: Object,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
   // mixins: [sharedVueStuff],
 
-data: function(){
-  return {
-    chosenIngredients: [],
-    price: 0,
-  }
-},
+  data: function(){
+    return {
+      chosenIngredients: [],
+      price: 0,
+    }
+  },
 
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
     }
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("orderCanceled", orderid);
   }
- }
+}
 </script>
 
 <style scoped>

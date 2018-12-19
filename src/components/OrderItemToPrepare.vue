@@ -1,15 +1,15 @@
 <template>
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
   <div>
-      <h4>#{{orderId}}</h4>
+    <h4>#{{orderId}}</h4>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
-    <button id="sendToPreparing" v-on:click="orderCooked">
-      {{uiLabels.ready}}
-    </button>
-  </div>
+      <button id="sendToPreparing" v-on:click="orderCooked">
+        {{uiLabels.ready}}
+      </button>
+    </div>
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
@@ -26,6 +26,7 @@
   </div>
 </div>
 </template>
+
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 
@@ -40,18 +41,17 @@ export default {
     lang: String
   },
   methods: {
-    orderCooked: function () { //skickar 'cooking' till parent som kan fånga med v-on:cooking
-      this.$emit('cooked');
-    },
-    orderCanceled: function () { //skickar 'canceled' till parent som kan fånga med v-on:canceled
-      this.$emit('cancel');
-    }
-  }
+    orderCooked: function () { //skickar 'cooked' till parent som kan fånga med v-on:cooked
+    this.$emit('cooked');
+  },
+  orderCanceled: function () { //skickar 'cancel' till parent som kan fånga med v-on:cancel
+  this.$emit('cancel');
+}
+}
 }
 </script>
+
 <style scoped>
-
-
 #cancelButton, #sendToPreparing {
   border: 1px solid white;
   border-radius: 3em;

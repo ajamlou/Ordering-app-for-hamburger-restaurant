@@ -42,13 +42,13 @@ export default {
     }
   },
   methods: {
-    orderDone: function () { //skickar 'cooked' till parent som kan kalla med v-on:cooked
-      this.$emit('done');
-    },
-    orderCanceled: function () { //skickar 'canceled' till parent som kan kalla med v-on:canceled
-      this.$emit('cancel');
-    }
-  }
+    orderDone: function () { //skickar 'done' till parent som kan kalla med v-on:done
+    this.$emit('done');
+  },
+  orderCanceled: function () { //skickar 'cancel' till parent som kan kalla med v-on:cancel
+  this.$emit('cancel');
+}
+}
 }
 </script>
 

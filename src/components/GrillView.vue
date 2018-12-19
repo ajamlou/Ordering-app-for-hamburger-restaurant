@@ -33,8 +33,8 @@
       <OrderItemIsCooking class = "isPreparing"
       v-for = "(order, key) in orders"
       v-if = "order.status === 'started'"
-      v-on:done = "markDone(key)"
-      :isPrepp= "false"
+      v-on:cancel = "markCanceled(key)"
+      :isPrepp = "false"
       :order-id = "key"
       :order = "order"
       :ui-labels = "uiLabels"
@@ -62,7 +62,8 @@ export default {
     ingredients: Array,
     uiLabels: Object,
     orders: Object,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
 
   data: function(){
@@ -75,9 +76,6 @@ export default {
   methods: {
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
-    },
-    markDone: function (orderid) {
-      this.$store.state.socket.emit("orderDone", orderid);
     },
     markCooked: function (orderid) {
       this.$store.state.socket.emit("orderStarted", orderid);
