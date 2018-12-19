@@ -54,7 +54,6 @@ import OrderItemFinished from '@/components/OrderItemFinished.vue'
 export default {
   name: 'Ordering',
   components: {
-    //   OrderItem,
     OrderItemIsCooking,
     OrderItemFinished,
   },
@@ -65,7 +64,6 @@ export default {
     lang: String,
     isPrepp: Boolean
   },
-  // mixins: [sharedVueStuff],
 
   data: function(){
     return {
@@ -77,10 +75,11 @@ export default {
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
-    }
+    },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
   }
+}
 }
 </script>
 
