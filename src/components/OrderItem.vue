@@ -5,7 +5,7 @@
 		arrayer innehållande varje menys ingrediensarray -->
 		<div v-for="(menu, menuindex) in menusArray"
 		:key="menuindex"
-		class="border-bottom">
+		:class="{'border-bottom':menuindex < (menusArray.length -1)}">
 		<div class="quant">{{uiLabels.quantity}}: {{menu.units}}</div>
 		<div
 		v-if="onlypatty === true">
