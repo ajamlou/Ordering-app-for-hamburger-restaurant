@@ -10,14 +10,16 @@
 		:key="menuindex">
 		<div
 		v-if="onlypatty === true">
-		<div v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex,1)">
+		<div v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex,1)"
+		:key="OccIndex">
 			<!--Hitta första ingrediensen i ingredients med samma id som i calculateOccurences och displaya dess namn tillsammans med occurrences -->
 			{{ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 		</div>
 	</div>
 
 	<div v-else
-	v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex)">
+	v-for="(occurrences,id,OccIndex) in calculateOccurrences(menuindex)"
+	:key="OccIndex">
 	<!--Tar ut ingredienserna från menusArray, hittar de som matchar id:t i calculateOccurrences och skriver ut det på valt språk-->
 	{{menusArray[menuindex].ingredients.find(item => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 	<!--{{orderId}} {{order.type}} {{ menusArray[menuindex].ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}-->

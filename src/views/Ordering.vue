@@ -263,7 +263,7 @@ export default {
                       this.favoritePrice = 0;
                     }
                   }
-                  console.log(this.favoriteBurgers);
+                  /*console.log(this.favoriteBurgers);*/
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -290,7 +290,7 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  console.log(item);
+                  /*console.log(item);*/
                 },
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
@@ -338,7 +338,7 @@ export default {
                   this.menusArray=[];
                 },
                 resetBurger:function(){
-                  this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
+                  this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = [];
                   this.price = 0;
                 }
