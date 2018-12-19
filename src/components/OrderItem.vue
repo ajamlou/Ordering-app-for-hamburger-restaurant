@@ -49,7 +49,7 @@ export default {
 	},
 	methods:{
 		calculateOccurrences:function(index,category){
-			let ingredients = this.menusArray[index].ingredients;
+			let ingredients = this.menusArray[index].ingredients.slice();
 			if(category != undefined){
 				/*Filtrerar ut så enbart den aktuella kategorin räknas på*/
 				ingredients=ingredients.filter((ingredient) => ingredient.category==category);
