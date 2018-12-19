@@ -78,8 +78,8 @@ export default {
     },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
+    }
   }
-}
 }
 </script>
 
