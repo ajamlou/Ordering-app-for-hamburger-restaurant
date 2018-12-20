@@ -8,8 +8,8 @@ let defaultLanguage = "sv";
 let fs1 = require('fs');
 
 fs1.watch("./data/", (event_type, file_name) => {
-    console.log("Deleting Require cache for " + file_name);
-    delete require.cache[ require.resolve("./data/" + file_name)];
+  console.log("Deleting Require cache for " + file_name);
+  delete require.cache[ require.resolve("./data/" + file_name)];
 });
 
 // Store data in an object to keep the global namespace clean
@@ -25,9 +25,9 @@ Data.prototype.getUILabels = function (lang) {
 };
 
 /*
-  Returns a JSON object array of ingredients with the fields from
-  the CSV file, plus a calculated amount in stock, based on
-  transactions.
+Returns a JSON object array of ingredients with the fields from
+the CSV file, plus a calculated amount in stock, based on
+transactions.
 */
 Data.prototype.getIngredients = function () {
   var d = this.data;
@@ -44,15 +44,15 @@ Data.prototype.getIngredients = function () {
 };
 
 /*
-  Function to load initial data from CSV files into the object
+Function to load initial data from CSV files into the object
 */
 Data.prototype.initializeTable = function (table) {
   csv({checkType: true})
-    .fromFile("./data/" + table + ".csv")
-    .then((jsonObj) => {
-      //console.log("JSON object", jsonObj, "done");
-      this.data[table] = jsonObj;
-    });
+  .fromFile("./data/" + table + ".csv")
+  .then((jsonObj) => {
+    //console.log("JSON object", jsonObj, "done");
+    this.data[table] = jsonObj;
+  });
 };
 
 Data.prototype.initializeData = function() {
@@ -63,9 +63,9 @@ Data.prototype.initializeData = function() {
   this.initializeTable(transactionsDataName);
 }
 /*
-  Adds an order to to the queue and makes an withdrawal from the
-  stock. If you have time, you should think a bit about whether
-  this is the right moment to do this.
+Adds an order to to the queue and makes an withdrawal from the
+stock. If you have time, you should think a bit about whether
+this is the right moment to do this.
 */
 
 Data.prototype.getOrderNumber = function () {
@@ -79,24 +79,12 @@ Data.prototype.addOrder = function (order) {
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
   var transactions = this.data[transactionsDataName],
-    //find out the currently highest transaction id
-    transId =  transactions[transactions.length - 1].transaction_id,
-    i = order.order.ingredients,
-    j,
-    k;
-    /*Nedanstående kod körs bara om man beställer direkt från designPage*/
-    if(order.order.ingredients != undefined){
-  for (k = 0; k < i.length; k += 1) {
-    transId += 1;
-    transactions.push({transaction_id: transId,
-                       ingredient_id: i[k].ingredient_id,
-                       change: - 1});
-  }
-}
+  //find out the currently highest transaction id
+  transId =  transactions[transactions.length - 1].transaction_id,
+  i = order.order.menus,
+  j,
+  k;
 
-/*Detta körs när man beställer från checkoutPage*/
-else{
-  i = order.order.menus;
   console.log(i);
   /*Här tar vi ut alla menyer ur en order*/
   for(j=0;j < i.length;j++){
@@ -104,43 +92,45 @@ else{
     for(k=0;k<i[j].ingredients.length;k++){
       transId += 1;
       transactions.push({transaction_id: transId,
-                         ingredient_id: i[j].ingredients[k].ingredient_id,
-                         change: - 1*i[j].units});
+        ingredient_id: i[j].ingredients[k].ingredient_id,
+        /*Vi måste ta hänsyn till antalet hamburgare också*/
+        change: - 1*i[j].units});
+      }
     }
-  }
-}
+
     return orderId;
-};
+  };
 
-Data.prototype.changeStock = function (item, saldo) {
-  var transactions = this.data[transactionsDataName]
-  var transId = transactions[transactions.length - 1].transaction_id
-  transactions.push({transaction_id: transId,
-                     ingredient_id: item.ingredient.ingredient_id,
-                     change: saldo - item.ingredient.stock});
-};
+  /*Var används denna??? */
+  Data.prototype.changeStock = function (item, saldo) {
+    var transactions = this.data[transactionsDataName]
+    var transId = transactions[transactions.length - 1].transaction_id
+    transactions.push({transaction_id: transId,
+      ingredient_id: item.ingredient.ingredient_id,
+      change: saldo - item.ingredient.stock});
+    };
 
-Data.prototype.getAllOrders = function () {
-  return this.orders;
-};
+    Data.prototype.getAllOrders = function () {
+      return this.orders;
+    };
 
-Data.prototype.markOrderDone = function (orderId) {
-  this.orders[orderId].status = "done";
-};
+    Data.prototype.markOrderDone = function (orderId) {
+      this.orders[orderId].status = "done";
+    };
 
-Data.prototype.markOrderStarted = function (orderId) {
-  this.orders[orderId].status = "started";
-};
+    Data.prototype.markOrderStarted = function (orderId) {
+      this.orders[orderId].status = "started";
+    };
 
-Data.prototype.markOrderCanceled = function (orderId) {
-  this.orders[orderId].status = 'cancel';
-  this.currentOrderNumber -= 1;
-};
+    Data.prototype.markOrderCanceled = function (orderId) {
+      this.orders[orderId].status = 'cancel';
+      this.currentOrderNumber -= 1;
+    };
 
-Data.prototype.markOrderNotStarted = function (orderId) {
-  this.orders[orderId].status = "not-started";
-};
+    Data.prototype.markOrderNotStarted = function (orderId) {
+      this.orders[orderId].status = "not-started";
+    };
 
 
 
-module.exports = Data;
+    module.exports = Data;

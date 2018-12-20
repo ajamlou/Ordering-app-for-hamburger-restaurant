@@ -92,10 +92,6 @@ export default{
         this.showSlotModal=false;
       }
     },
-    // goBack:function(){
-    //   this.menus.pop();
-    //   this.$emit('go_back');
-    // },
     removeMenu:function(index){
       this.menus.splice(index,1);
     },
