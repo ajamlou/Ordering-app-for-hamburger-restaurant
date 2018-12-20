@@ -41,6 +41,20 @@ export default {
 		category: Number,		/*För att veta vad som hör till patty-kategorin*/
 		ingredients: Array
 	},
+	beforeMount:function(){
+		/*Denna metod tar ut alla värden (dvs förekomster) av
+		ingredienserna i calculateOccurrences (filtrerad på kött)
+		och adderar dessa, denna siffra skickas emittas sedan*/
+		let i,
+		sum=0;
+
+		for(i=0; i<this.menusArray.length; i++){
+			sum = sum + Object.values(this.calculateOccurrences(i,1)).reduce(
+				(sum,curr)=>sum+curr,0) * this.menusArray[i].units;
+		}
+		this.$emit('total_pattys',sum);
+
+	},
 	computed:{
 		menusArray:function(){
 			let menuArray = this.order.menus;
