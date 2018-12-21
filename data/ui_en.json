@@ -44,5 +44,6 @@
   "dairy" : "Contains Dairy",
   "vegan" : "Vegan",
   "OKlabel": "OK",
-  "checkout" : "Checkout"
+  "checkout" : "Checkout",
+  "anotherBurger": "Choose how you would like to create the new burger"
 }

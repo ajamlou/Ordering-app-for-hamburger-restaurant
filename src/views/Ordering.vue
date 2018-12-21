@@ -44,6 +44,7 @@ v-if = "currentView === 'checkoutPage'"
 :menus="menusArray"
 :orderNumber="orderNumber"
 :lang="lang"
+@remove_backButton="removeBackButton"
 @change_view="changeView"
 @new_burger="newBurger"
 @modify_menu="modifyMenu"
@@ -303,7 +304,9 @@ export default {
                   this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');
-
+                },
+                removeBackButton:function(){
+                  this.breadcrumbs.length=0;
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/

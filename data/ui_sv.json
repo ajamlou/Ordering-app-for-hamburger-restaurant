@@ -47,5 +47,6 @@
   "dairy" : "Innehåller Laktos",
   "vegan" : "Vegansk",
   "OKlabel": "OK",
-  "checkout" : "Varukorg"
+  "checkout" : "Varukorg",
+  "anotherBurger": "Välj hur du vill skapa din nya burgare"
 }

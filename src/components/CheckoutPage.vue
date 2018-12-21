@@ -80,6 +80,7 @@ export default{
       if(this.menus.length>0){
         this.$emit('change_view','frontPage');
         this.$emit('clear_all');
+        this.$emit('remove_backButton');
       }
       else this.showSlotModal=false;
     },
