@@ -5,6 +5,8 @@
       v-if="this.showSlotModal">
       <div slot="header"></div>
       <div slot="body" class="slotBody">{{slotContent}}</div>
+      <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
+       är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
       <div slot="footer"><button
         type="button"
         class="btn-close"
@@ -13,11 +15,6 @@
       </button></div>
     </Slotmodal>
 
-  <!-- <button id="back-btn" @click="goBack">{{uiLabels.back}}</button> -->
-
-  <!-- <div id="checkout-title">
-    {{uiLabels.yourOrder}}
-  </div> -->
   <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newMenu">
 
@@ -77,9 +74,11 @@ export default{
     }
   },
   methods:{
+    // Om beställningen inte är tom skickas den iväg till köket och en kommer
+    // tillbaka till framsidan.
     orderFinished: function(){
       if(this.menus.length>0){
-        this.$emit('go_to_front','frontPage');
+        this.$emit('change_view','frontPage');
         this.$emit('clear_all');
       }
       else this.showSlotModal=false;
@@ -100,8 +99,10 @@ export default{
       this.menus.splice(index,1);
     },
     newMenu:function(){
-      this.$emit('new_menu');
+      this.$emit('change_view','frontPage');
     },
+    // Bestämmer vad som ska visas i modalen. Om en order finns kommer ordernr och
+    // bekräftelse upp, annars ett felmeddelande
     decideSlotContent:function(){
       if (this.menusInOrder){
         this.slotContent=this.uiLabels.checkoutFinished + "#" + (this.orderNumber + 1);

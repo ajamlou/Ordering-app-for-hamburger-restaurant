@@ -68,11 +68,11 @@ export default {
     grid-column: 1/6;
     grid-row: 1/2;
     height:100%;
+    width:90%;
     font-size: 1.5em;
     margin:auto;
     justify-content: space-between;
     flex-wrap: wrap;
-    width:90%;
     overflow-y: auto;
     overflow-x: hidden;
     padding:3px;
@@ -84,5 +84,6 @@ export default {
     color: white;
     margin-top: none;
     margin-bottom: 1em;
+    height: 20%;
   }
 </style>
