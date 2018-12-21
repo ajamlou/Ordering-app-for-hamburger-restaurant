@@ -45,7 +45,7 @@ v-if = "currentView === 'checkoutPage'"
 :orderNumber="orderNumber"
 :lang="lang"
 @change_view="changeView"
-@new_menu="newMenu"
+@new_burger="newBurger"
 @modify_menu="modifyMenu"
 @clear_all="clearAll">
 </CheckoutPage>
@@ -331,6 +331,10 @@ export default {
                 newMenu:function(){
                   this.resetBurger();
                   this.changeView('designPage');
+                },
+                newBurger:function(){
+                  this.resetBurger();
+                  this.changeView('frontPage');
                 },
                 clearAll:function(){
                   this.resetBurger();

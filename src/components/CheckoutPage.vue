@@ -16,7 +16,7 @@
     </Slotmodal>
 
   <div id="btn-order-wrap">
-    <div id="add-btn-div" @click="newMenu">
+    <div id="add-btn-div" @click="newBurger">
 
 
       <div id="add-btn-top">
@@ -98,8 +98,9 @@ export default{
       this.$emit('modify_menu',ingredients,units,index,itemCounter);
       this.menus.splice(index,1);
     },
-    newMenu:function(){
+    newBurger:function(){
       this.$emit('change_view','frontPage');
+      this.$emit('new_burger');
     },
     // Bestämmer vad som ska visas i modalen. Om en order finns kommer ordernr och
     // bekräftelse upp, annars ett felmeddelande
