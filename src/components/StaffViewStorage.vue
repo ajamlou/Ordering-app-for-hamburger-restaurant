@@ -20,10 +20,10 @@
         {{ingredient.ingredient_sv}}
       </div>
       <div>
-        {{ingredient.selling_price}}
+        {{ingredient.stock}}
       </div>
       <div>
-        {{ingredient.stock}}
+      {{ingredient.selling_price}}
       </div>
   </div>
 </div>

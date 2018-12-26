@@ -46,9 +46,9 @@ v-if = "currentView === 'checkoutPage'"
 :menus="menusArray"
 :orderNumber="orderNumber"
 :lang="lang"
-@go_to_front="changeView"
-@go_back="goBack"
-@new_menu="newMenu"
+@remove_backButton="removeBackButton"
+@change_view="changeView"
+@new_burger="newBurger"
 @modify_menu="modifyMenu"
 @clear_all="clearAll">
 </CheckoutPage>
@@ -272,7 +272,7 @@ export default {
                       count = 0;
                     }
                   }
-                  console.log(this.favoriteBurgers);
+                  /*console.log(this.favoriteBurgers);*/
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -299,7 +299,7 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  console.log(item);
+                  /*console.log(item);*/
                 },
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
@@ -313,7 +313,9 @@ export default {
                   this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');
-
+                },
+                removeBackButton:function(){
+                  this.breadcrumbs.length=0;
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
@@ -342,12 +344,16 @@ export default {
                   this.resetBurger();
                   this.changeView('designPage');
                 },
+                newBurger:function(){
+                  this.resetBurger();
+                  this.changeView('frontPage');
+                },
                 clearAll:function(){
                   this.resetBurger();
                   this.menusArray=[];
                 },
                 resetBurger:function(){
-                  this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
+                  this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = [];
                   this.price = 0;
                 }

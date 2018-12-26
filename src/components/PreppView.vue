@@ -1,45 +1,46 @@
 <template>
   <div id="PreppGrid">
 
-<!-- Hit skickas beställningarna som ska tillagas. -->
-      <div id="preparing">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersPreparing }}</h1>
-          <img class="icon" src="../assets/w-spatula.png"/>
-        </div>
-        <div class="allOrders">
-          <OrderItemIsCooking class="isCooking"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'started'"
-          v-on:cooked="markCooked(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemIsCooking>
-      </div>
-    </div>
-
-    <!-- Här hamnar beställningarna som är färdiga. -->
-    <div id="finished">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersFinished }}</h1>
-        <img class="icon" src="../assets/w-burger.png"/>
+    <!-- Hit skickas beställningarna som ska tillagas. -->
+    <div id="preparing">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersPreparing }}</h1>
+        <img class="icon" src="../assets/w-spatula.png"/>
       </div>
       <div class="allOrders">
-        <OrderItemFinished class="isFinished"
-        v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:done="markDone(key)"
-        :isPrepp= "true"
-        :order-id="key"
-        :order="order"
-        :lang="lang"
-        :ui-labels="uiLabels"
-        :key="key">
-      </OrderItemFinished>
+        <OrderItemIsCooking class="isCooking"
+        v-for = "(order, key) in orders"
+        v-if="order.status === 'started'"
+        v-on:done = "markDone(key)"
+        v-on:cancel = "markCanceled(key)"
+        :isPrepp = "true"
+        :order-id = "key"
+        :order = "order"
+        :ui-labels = "uiLabels"
+        :lang = "lang"
+        :key = "key">
+      </OrderItemIsCooking>
     </div>
+  </div>
+
+  <!-- Här hamnar beställningarna som är färdiga. -->
+  <div id="finished">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersFinished }}</h1>
+      <img class="icon" src="../assets/w-burger.png"/>
+    </div>
+    <div class="allOrders">
+      <OrderItemFinished class="isFinished"
+      v-for="(order, key) in orders"
+      v-if="order.status === 'done'"
+      v-on:done="markDone(key)"
+      :order-id="key"
+      :order="order"
+      :lang="lang"
+      :ui-labels="uiLabels"
+      :key="key">
+    </OrderItemFinished>
+  </div>
 </div>
 </div>
 </template>
@@ -53,7 +54,6 @@ import OrderItemFinished from '@/components/OrderItemFinished.vue'
 export default {
   name: 'Ordering',
   components: {
-    //   OrderItem,
     OrderItemIsCooking,
     OrderItemFinished,
   },
@@ -61,36 +61,39 @@ export default {
     ingredients: Array,
     uiLabels: Object,
     orders: Object,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
-  // mixins: [sharedVueStuff],
 
-data: function(){
-  return {
-    chosenIngredients: [],
-    price: 0,
-  }
-},
+  data: function(){
+    return {
+      chosenIngredients: [],
+      price: 0,
+    }
+  },
 
   methods: {
     markDone: function (orderid) {
       this.$store.state.socket.emit("orderDone", orderid);
+    },
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("orderCanceled", orderid);
     }
   }
- }
+}
 </script>
 
 <style scoped>
 #PreppGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  height:100%;
+  height:90vh;
 }
 
 .allOrders {
   overflow-y: auto;
   overflow-x: hidden;
-  height:100%;
+  height:86%;
 }
 
 #header1, #header2 {
@@ -132,20 +135,19 @@ data: function(){
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
+  height:inherit;
   overflow:hidden;
-  height:90vh;
 }
 
 /*----- css för de svarta beställningsboxarna ----*/
 .isCooking, .isFinished {
+  font-size: 0.85em;
   border: 2px solid white;
-  font-size: 1.8vh;
   float: left;
   min-height: 5em;
-  width: 30%;
-  margin: 8px;
+  width: 31%;
+  margin: 3px;
   padding: 5px;
-  box-sizing: border-box;
   border-radius: 20px;
   border: 3px solid white;
   background-color: black;

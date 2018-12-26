@@ -10,6 +10,7 @@
             </button>
       <div class="mod-bod">
         <Ingredient
+        class="ing-in-mod"
         ref="ingredient"
         v-for="item in ingredients"
         @ingredient_clicked="emitAddIngredient(item)"

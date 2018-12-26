@@ -177,7 +177,7 @@ export default {
 
 #masterDivKitchen{
   font-family: 'Montserrat', sans-serif;
-  height:100vh;
+  min-height:100vh;
   margin-top:0 !important;
   padding-top:0 !important;
   background-color: #7a7a7a;
