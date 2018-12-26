@@ -33,7 +33,9 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteBurgers = "favoriteBurgers"
+  :favoriteBurger1 = "favoriteBurgers[0]"
+  :favoriteBurger2 = "favoriteBurgers[1]"
+  :favoriteBurger3 = "favoriteBurgers[2]"
   :ingredient_ids = "ingredient_ids">
 </FavoritesPage>
 
@@ -108,19 +110,19 @@ id="ordering">
 </CategoryRow>
 
 <div id="extras">
-<h2>{{uiLabels.extras}}</h2>
+  <h2>{{uiLabels.extras}}</h2>
 
-<CategoryRow
-v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="chosenIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromMenu"
-@info_to_modal="toggleShowIngredientsModal">
+  <CategoryRow
+  v-for="category in extrasCategories"
+  :key="category.categoryNr"
+  :category="category.categoryNr"
+  :added_items="chosenIngredients"
+  :category_name="uiLabels[category.label]"
+  :lang="lang"
+  :threshold="category.threshold"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
+  @remove_ingredient="removeFromMenu"
+  @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 </div>
 </div>
@@ -253,14 +255,21 @@ export default {
                   this.currentView = view;
                 },
                 changeFavorites: function(){
+                  let count = 0;
                   for (var i = 0; i< this.ingredient_ids.length; i++){
                     this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
                     this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
-                    if(this.favoriteIngredients.length === 3){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
-                      this.favoriteIngredients.push(this.favoritePrice)
-                      this.favoriteBurgers.push(this.favoriteIngredients);
+                    count++;
+                    if(this.favoriteIngredients.length === Math.trunc(this.ingredient_ids.length/3)){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
+                      let burger = {
+                        "ingredients": this.favoriteIngredients,
+                        "price": this.favoritePrice,
+                        "ing_count": count
+                      }
+                      this.favoriteBurgers.push(burger);
                       this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
                       this.favoritePrice = 0;
+                      count = 0;
                     }
                   }
                   console.log(this.favoriteBurgers);
@@ -393,8 +402,8 @@ export default {
               padding-bottom:1em;
               margin-top:2em;
               -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
--moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             }
             #ordering {
               display:grid;
@@ -583,81 +592,80 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             padding:20px 30px 20px 30px;
             font-size: 2em;
             background-color: rgb(0, 150, 0);
-          }
-          #order-btn:hover{
-          color:black;
-          background-color: rgb(0, 200, 0);
-          } */
+            #order-btn:hover{
+            color:black;
+            background-color: rgb(0, 200, 0);
+            } */
 
-          button{
-            background-color: #ddd;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 16px;
-            text-shadow: 1px 1px 2px black;
-          }
-          button:hover{
-            background-color: #000;
-            color: white;
-          }
-          @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
-            #bestallning{
-              grid-column: 1/7;
-              grid-row:1/2;
-              text-align:center;
+            button{
+              background-color: #ddd;
+              border: none;
+              padding: 10px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 16px;
+              text-shadow: 1px 1px 2px black;
             }
-            #r2-div{
-              grid-column:1/7;
-              grid-row:2/3;
-              text-align:center;
-              justify-items: center;
-              align-items: center;
-              justify-content: center;
-              align-content: center;
+            button:hover{
+              background-color: #000;
+              color: white;
             }
-            #categories-wrapper{
-              grid-row:3/4;
+            @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+              #bestallning{
+                grid-column: 1/7;
+                grid-row:1/2;
+                text-align:center;
+              }
+              #r2-div{
+                grid-column:1/7;
+                grid-row:2/3;
+                text-align:center;
+                justify-items: center;
+                align-items: center;
+                justify-content: center;
+                align-content: center;
+              }
+              #categories-wrapper{
+                grid-row:3/4;
+              }
+              #price-div, #next-btn{
+                grid-row:4/5;
+              }
             }
-            #price-div, #next-btn{
-              grid-row:4/5;
-            }
-          }
-          @media screen and (max-width:1206px){
+            @media screen and (max-width:1206px){
 
-            #ordering{
-              margin:10px auto auto auto;
-            }
+              #ordering{
+                margin:10px auto auto auto;
+              }
 
-          }
-          @media screen and (max-width:650px){
-            #header-title{
-              grid-column:2/6;
             }
-            #header-title h1{
-              font-size:2.3em;
+            @media screen and (max-width:650px){
+              #header-title{
+                grid-column:2/6;
+              }
+              #header-title h1{
+                font-size:2.3em;
+              }
+              .icon{
+                display:block;
+                margin:auto;
+              }
+              #bck-btn,#lang-btn{
+                width:90px;
+                height:50px;
+                padding:0;
+              }
+              h2{
+                font-size:1.8em;
+              }
             }
-            .icon{
-              display:block;
-              margin:auto;
-            }
-            #bck-btn,#lang-btn{
-              width:90px;
-              height:50px;
-              padding:0;
-            }
-            h2{
-              font-size:1.8em;
-            }
-          }
-          @media screen and (max-width:480px){
-            #next-btn{
-              grid-row:4;
-            }
+            @media screen and (max-width:480px){
+              #next-btn{
+                grid-row:4;
+              }
 
-          }
-          </style>
+            }
+            </style>
