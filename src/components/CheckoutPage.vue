@@ -74,7 +74,7 @@ export default{
     }
   },
   methods:{
-    // Om beställningen inte är tom skickas den iväg till köket och en kommer
+    // Om beställningen inte är tom skickas den iväg till köket och man kommer
     // tillbaka till framsidan.
     orderFinished: function(){
       if(this.menus.length>0){

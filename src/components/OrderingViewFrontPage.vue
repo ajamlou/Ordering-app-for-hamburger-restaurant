@@ -1,8 +1,15 @@
 <template>
   <div
   id="frontPage">
-    <div id="welcome">
+    <div
+    class="welcome"
+    v-if = "this.breadcrumbs.length === 0">
       {{uiLabels.welcomeText}}
+    </div>
+    <div
+    class="welcome"
+    v-if = "this.breadcrumbs.length != 0">
+      {{uiLabels.anotherBurger}}
     </div>
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
       <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
@@ -13,7 +20,8 @@
 export default {
   name: 'OrderingViewFrontPage',
   props:{
-    uiLabels: Object
+    uiLabels: Object,
+    breadcrumbs: Array
   },
   methods: {
     emitSwitchVisibility: function(view) {
@@ -69,7 +77,7 @@ export default {
   border: 3.5px solid #004d26;
 }
 
-#welcome{
+.welcome{
   font-family: 'Luckiest Guy', sans-serif;
   text-transform: uppercase;
   text-align: center;

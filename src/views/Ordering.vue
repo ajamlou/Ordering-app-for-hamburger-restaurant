@@ -14,6 +14,7 @@
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
+    :breadcrumbs="breadcrumbs"
     class="viewContent">
   </OrderingViewFrontPage>
 
