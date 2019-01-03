@@ -27,6 +27,7 @@
   {{ uiLabels.back }}</button>
 
   <FavoritesPage
+  id = "favorites"
   v-if = "currentView === 'favoritesPage'"
   class="viewContent"
   @clearburger = "resetBurger"
@@ -39,10 +40,30 @@
   :favoriteBurger1 = "favoriteBurgers[0]"
   :favoriteBurger2 = "favoriteBurgers[1]"
   :favoriteBurger3 = "favoriteBurgers[2]"
-  :ingredient_ids = "ingredient_ids"
-  :extrasCategories = "extrasCategories"
-  :categoryItemCounter="categoryItemCounter">
+  :ingredient_ids = "ingredient_ids">
+  <!-- @info_to_modal="toggleShowIngredientsModal" -->
+  <!-- :extrasCategories = "extrasCategories"
+  :categoryItemCounter="categoryItemCounter" -->
 </FavoritesPage>
+
+<div id="extras-favorites"
+v-if = "currentView === 'favoritesPage'">
+  <h2>{{uiLabels.extras}}</h2>
+
+  <CategoryRow
+  v-for="category in extrasCategories"
+  :key="category.categoryNr"
+  :category="category.categoryNr"
+  :added_items="chosenIngredients"
+  :category_name="uiLabels[category.label]"
+  :lang="lang"
+  :threshold="category.threshold"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
+  @remove_ingredient="removeFromMenu"
+  @info_to_modal="toggleShowIngredientsModal">
+</CategoryRow>
+</div>
+
 
 <CheckoutPage
 class="viewContent"
@@ -444,7 +465,7 @@ export default {
               color: #66d9ff;
               text-shadow: 2px 2px #0086b3;*/
             }
-            #extras{
+            #extras, #extras-favorites{
               margin-top:2em;
             }
 
@@ -514,6 +535,14 @@ export default {
             #categories-wrapper{
               grid-column: 1/7;
               grid-row:2;
+            }
+            #favorites{
+              grid-column: 1/7;
+              grid-row:2;
+            }
+            #extras-favorites{
+              grid-column: 1/7;
+              grid-row:3;
             }
             #bck-btn{
               grid-column: 1/2;
