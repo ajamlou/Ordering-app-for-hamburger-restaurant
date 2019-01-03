@@ -3,16 +3,16 @@
 id="orderingFrontPage-backdrop">
   <div
   id="frontPage">
+  <div class="welcome">
     <div
-    class="welcome"
     v-if = "this.breadcrumbs.length === 0">
       {{uiLabels.welcomeText}}
     </div>
     <div
-    class="welcome"
     v-if = "this.breadcrumbs.length != 0">
       {{uiLabels.anotherBurger}}
     </div>
+  </div>
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
       <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
   </div>
