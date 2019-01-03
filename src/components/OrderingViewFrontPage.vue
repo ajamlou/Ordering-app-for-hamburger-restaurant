@@ -36,26 +36,27 @@ export default {
 
 <style scoped>
 
+#frontPage{
+  display:grid;
+  grid-template-rows: 25% 30% 30%;
+  grid-row-gap: 1em;
+  height:100%;
+  justify-items: center;
+}
+
 #orderingFrontPage-backdrop{
+  /* grid-row: 2/5; */
   background-color: rgba(255, 250, 224,0.99);
   /* rgba(255, 255, 240,0.98); */
   border-radius:15px;
   width:95%;
   justify-self:center;
-  margin-bottom:3em;
-  padding-bottom:1em;
+  margin-bottom: 3em;
+  padding-bottom: 1em;
   /* margin-top:3em; */
   /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
   -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
   box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
-}
-
-#frontPage{
-  display:grid;
-  grid-template-rows: 6em 30% 30%;
-  grid-row-gap: 1em;
-  height:100%;
-  justify-items: center;
 }
 
 #favoritesButton, #createBurgerButton {
@@ -105,27 +106,28 @@ export default {
   /* font-family: 'Luckiest Guy', sans-serif; */
   /* text-transform: uppercase; */
   text-align: center;
-  font-size: 5em;
-  color: #ed6381; /*rosa*/
+  font-size: 13vmin;
+  color: #ed6381; /*mörkrosa*/
   /* #DF532F; - orange*/
   /* #66d9ff; - ljusblå*/
   text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
   /* #9c3a20; mörkorange */
-  grid-row:1/2;
+  grid-row: 1/2;
 }
-@media screen and (max-width:905px){
+
+/* @media screen and (max-width:905px){
   #frontPage{
     grid-template-rows: auto auto auto auto;
     grid-auto-rows: auto;
     justify-content: center;
     align-items: center;
   }
-}
+} */
 
 @media screen and (max-width:650px){
-  #welcome{
+  /* #welcome{
     font-size:3em;
-  }
+  } */
 
   #favoritesButton, #createBurgerButton{
     width:4em;
