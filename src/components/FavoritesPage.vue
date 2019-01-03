@@ -26,7 +26,7 @@
         </ul>
       </div>
   </div>
-  <div id = "extras">
+  <!-- <div id = "extras">
     <h2>{{uiLabels.extras}}</h2>
     <CategoryRow
     v-for="category in extrasCategories"
@@ -36,15 +36,17 @@
     :category_name="uiLabels[category.label]"
     :lang="lang"
     :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr -1]">
+    :item_count="categoryItemCounter[category.categoryNr -1]"
+    @remove_ingredient="removeFromMenu"
+    @info_to_modal="toggleShowIngredientsModal">
   </CategoryRow>
-  </div>
+  </div> -->
 
 </div>
 </template>
 
 <script>
-import CategoryRow from '@/components/CategoryRow.vue'
+// import CategoryRow from '@/components/CategoryRow.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -78,11 +80,11 @@ props:{
   favoriteBurger2: Object,
   favoriteBurger3: Object,
   ingredient_ids: Array,
-  extrasCategories: Array,
-  categoryItemCounter: Array
+  extrasCategories: Array
+  // categoryItemCounter: Array
 },
 components:{
-  CategoryRow
+  // CategoryRow
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
@@ -107,7 +109,11 @@ methods:{
   },
   burgerSelected: function(){
     this.change = !this.change;
-  }
+  },
+  toggleShowIngredientsModal:function(){
+    console.log("hey")
+    this.$emit('info_to_modal', this.category)
+  },
 }
 }
 </script>
