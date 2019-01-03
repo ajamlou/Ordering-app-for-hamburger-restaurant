@@ -26,10 +26,27 @@
         </ul>
       </div>
   </div>
+  <div id = "extras">
+    <h2>{{uiLabels.extras}}</h2>
+    <CategoryRow
+    v-for="category in extrasCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :added_items="chosenIngredients"
+    :category_name="uiLabels[category.label]"
+    :lang="lang"
+    :threshold="category.threshold"
+    :item_count="categoryItemCounter[category.categoryNr -1]"
+    @remove_ingredient="removeFromMenu"
+    @info_to_modal="toggleShowIngredientsModal">
+  </CategoryRow>
+  </div>
+
 </div>
 </template>
 
 <script>
+import CategoryRow from '@/components/CategoryRow.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -62,14 +79,16 @@ props:{
   favoriteBurger1: Object,
   favoriteBurger2: Object,
   favoriteBurger3: Object,
-  ingredient_ids: Array
+  ingredient_ids: Array,
+  extrasCategories: Array,
+  categoryItemCounter: Array
 },
 components:{
+  CategoryRow
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(id){
-    console.log(this.favoriteBurger1.ing_count)
     this.$emit("clearburger");
     if(id === 1){
       for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
@@ -77,19 +96,16 @@ methods:{
       }
     }
     else if(id === 2){
-      for (var i = 0; i< this.favoriteBurger2.ing_count; i++){
+      for (i = 0; i< this.favoriteBurger2.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger2.ingredients[i]);
       }
     }
     else{
-      for (var i = 0; i< this.favoriteBurger3.ing_count; i++){
+      for (i = 0; i< this.favoriteBurger3.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger3.ingredients[i]);
       }
     }
     this.$emit("fav-checkout");
-  },
-  burgerSelected: function(){
-    this.change = !this.change;
   }
 }
 }
@@ -109,6 +125,9 @@ methods:{
   margin:auto;
 }
 
+#extras{
+  margin-top:2em;
+}
 
 
 .burgers{

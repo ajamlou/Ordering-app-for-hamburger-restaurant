@@ -37,7 +37,9 @@
   :favoriteBurger1 = "favoriteBurgers[0]"
   :favoriteBurger2 = "favoriteBurgers[1]"
   :favoriteBurger3 = "favoriteBurgers[2]"
-  :ingredient_ids = "ingredient_ids">
+  :ingredient_ids = "ingredient_ids"
+  :extrasCategories = "extrasCategories"
+  :categoryItemCounter="categoryItemCounter">
 </FavoritesPage>
 
 <CheckoutPage
