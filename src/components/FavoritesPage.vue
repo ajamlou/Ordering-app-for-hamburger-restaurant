@@ -36,9 +36,7 @@
     :category_name="uiLabels[category.label]"
     :lang="lang"
     :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr -1]"
-    @remove_ingredient="removeFromMenu"
-    @info_to_modal="toggleShowIngredientsModal">
+    :item_count="categoryItemCounter[category.categoryNr -1]">
   </CategoryRow>
   </div>
 
@@ -106,6 +104,9 @@ methods:{
       }
     }
     this.$emit("fav-checkout");
+  },
+  burgerSelected: function(){
+    this.change = !this.change;
   }
 }
 }
@@ -121,11 +122,13 @@ methods:{
 
 #favorites{
   grid-column: 1/7;
-  grid-row: 1/3;
+  grid-row: 1/2;
   margin:auto;
 }
 
 #extras{
+  grid-column: 1/7;
+  grid-row:2;
   margin-top:2em;
 }
 
