@@ -131,6 +131,10 @@ Data.prototype.addOrder = function (order) {
       this.orders[orderId].status = "not-started";
     };
 
+    Data.prototype.getTransactions = function(){
+      return this.data[transactionsDataName];
+    };
+
 
 
     module.exports = Data;

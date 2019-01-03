@@ -7,6 +7,7 @@ var sharedVueStuff = {
       orders: {},
       uiLabels: {},
       ingredients: [],
+      transactions:[],
       lang: "sv"
     }
   },
@@ -24,10 +25,14 @@ var sharedVueStuff = {
 
     this.$store.state.socket.on('currentQueue', function (data) {
       this.orders = data.orders;
+      if (typeof data.transactions !== 'undefined') {
+      this.transactions = data.transactions;
+    }
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }
     }.bind(this));
+
   },
   methods: {
     switchLang: function () {

@@ -4,6 +4,7 @@
 		<!-- menusArray tas ut i computed, är en array med menyer som i sin tur är
 		arrayer innehållande varje menys ingrediensarray -->
 		<div v-for="(menu, menuindex) in menusArray"
+		class="mg4"
 		:key="menuindex"
 		:class="{'border-bottom':menuindex < (menusArray.length -1)}">
 		<div class="quant">{{uiLabels.quantity}}: {{menu.units}}</div>
@@ -91,10 +92,14 @@ export default {
 
 		.border-bottom{
 			border-bottom: 1px solid white;
-			margin: 4px;
 		}
+
 		.quant{
 			text-decoration: underline;
+		}
+
+		.mg4{
+			margin: 4px;
 		}
 
 		</style>

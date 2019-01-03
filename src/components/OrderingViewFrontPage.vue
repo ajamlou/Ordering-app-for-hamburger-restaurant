@@ -1,4 +1,6 @@
 <template>
+<div
+id="orderingFrontPage-backdrop">
   <div
   id="frontPage">
     <div
@@ -14,6 +16,7 @@
       <button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
       <button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
   </div>
+</div>
 </template>
 
 <script>
@@ -32,18 +35,34 @@ export default {
 </script>
 
 <style scoped>
+
+#orderingFrontPage-backdrop{
+  background-color: rgba(255, 255, 240,0.98);
+  border-radius:15px;
+  width:95%;
+  justify-self:center;
+  margin-bottom:3em;
+  padding-bottom:1em;
+  /* margin-top:3em; */
+  /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+  -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+  box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
+}
+
 #frontPage{
   display:grid;
   grid-template-rows: 6em 30% 30%;
   grid-row-gap: 1em;
   height:100%;
   justify-items:center;
+
+
 }
 #favoritesButton, #createBurgerButton {
   text-transform: uppercase;
   color: white;
   display: grid;
-  font-size: 4vh;
+  font-size: 2em;
   border-radius: 3vh;
   border-color: black;
   align-items: center;
@@ -55,26 +74,31 @@ export default {
 }
 
 #favoritesButton{
-  background-color: #ff884d;
+  background-color: #DC143C;
   grid-row:3/4;
 }
 #favoritesButton:hover {
-  background-color: #e64d00;
-  border-color: #e64d00;
+  background-color: #800000;
+  border-color: #000000;
 }
 #favoritesButton:active {
   border: 3.5px solid #802b00;
 }
 #createBurgerButton {
-  background-color: #00e699;
+  background-color: #DC143C;
   grid-row:2/3;
 }
 #createBurgerButton:hover {
-  background-color: #009966;
-  border-color: #009966;
+  background-color: #800000;
+  border-color: #000000;
 }
 #createBurgerButton:active {
   border: 3.5px solid #004d26;
+}
+
+#welcome {
+  font-family: 'Lobster', sans-serif;
+  /* text-transform: uppercase; */
 }
 
 .welcome{

@@ -104,6 +104,9 @@ methods:{
       }
     }
     this.$emit("fav-checkout");
+  },
+  burgerSelected: function(){
+    this.change = !this.change;
   }
 }
 }
