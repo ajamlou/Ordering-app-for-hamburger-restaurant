@@ -5,7 +5,7 @@
     <div id="orders">
       <div id="header1">
         <h1>{{ uiLabels.ordersInQueue }}</h1>
-        <img class="icon" src="../assets/w-spatula.png"/>
+        <img class="icon" src="../assets/w-exclamation.png"/>
       </div>
       <div class = "allOrders">
         <OrderItemToPrepare class = "toPrepare"

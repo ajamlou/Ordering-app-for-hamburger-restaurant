@@ -169,6 +169,7 @@ export default {
     },
     changeView: function(view){
       this.currentView = view;
+      console.log(this.transactions);
     },
   }
 }
