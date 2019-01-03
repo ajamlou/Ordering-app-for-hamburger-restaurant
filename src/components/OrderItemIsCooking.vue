@@ -4,7 +4,7 @@
     <h4>#{{orderId}}</h4>
     <div>
       <button id="plus" @click="show = !show">+</button>
-      <button id="orderCookedButton" v-on:click="orderCooked">
+      <button id="orderCookedButton" v-on:click="orderDone" v-if="isPrepp">
         {{uiLabels.ready}}
       </button>
       <transition name="slide">
@@ -14,7 +14,7 @@
           :lang="lang"
           :order="order">
         </OrderItem>
-        <button id="cancelButton" v-on:click="cancelOrder">
+        <button id="cancelButton" v-on:click="orderCanceled">
           {{uiLabels.cancel}}
         </button>
       </p>
@@ -33,7 +33,8 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
   data: function () {
     return {
@@ -41,12 +42,13 @@ export default {
     }
   },
   methods: {
-    orderCooked: function () {
-      // sending 'cooked' message to parent component or view so that it
-      // can catch it with v-on:cooked in the component declaration
-      this.$emit('cooked');
-    }
-  }
+    orderDone: function () { //skickar 'done' till parent som kan kalla med v-on:done
+    this.$emit('done');
+  },
+  orderCanceled: function () { //skickar 'cancel' till parent som kan kalla med v-on:cancel
+  this.$emit('cancel');
+}
+}
 }
 </script>
 

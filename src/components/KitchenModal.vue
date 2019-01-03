@@ -63,8 +63,8 @@ export default {
 .storage-wrapper {
   position: fixed;
   text-align:center;
-  display: flex; /*added*/
-  flex-direction: column; /*added*/
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -74,12 +74,14 @@ export default {
   overflow: visible;
   border-radius: 15px;
   padding-bottom: 15px;
+  width:75%;
 }
 
 .storage-body {
+  grid-column: 1/4;
   display: table-cell;
   vertical-align: middle;
-  width: 50vw;
+  width: 100%;
   height: 50vh;
   padding: 20px 30px;
   background-color: #fff;
@@ -89,14 +91,12 @@ export default {
 }
 
 .close-button {
-  /*border: none;*/
-  position:element(#ing-mod);
-  transform: translate(1000%,-40%);
+  grid-column:3/4;
+  justify-self:end;
+  border-radius: 15px;
   font-size: 23px;
-  padding: 20px;
-  height:3em;
-  width:3em;
-  border-radius:3em;
+  height:2em;
+  width:2em;
   cursor: pointer;
   font-weight: bold;
   color: white;

@@ -10,6 +10,7 @@
             </button>
       <div class="mod-bod">
         <Ingredient
+        class="ing-in-mod"
         ref="ingredient"
         v-for="item in ingredients"
         @ingredient_clicked="emitAddIngredient(item)"
@@ -75,7 +76,7 @@ export default {
     z-index: 9998;
   }
 
-  .modal {
+  .modal{
     text-align:center;
     display: grid;
     grid-template-columns: repeat(3,1fr);

@@ -3,8 +3,10 @@
   <div class="modal-backdrop">
     <div class="modal">
         <slot name="header"></slot>
+      <div class = "mod-bod">
         <slot name="body"></slot>
-        <slot name="footer"></slot>
+      </div>
+        <slot name="footer" class ="mod-foot"></slot>
     </div>
   </div>
 </transition>
@@ -40,11 +42,13 @@ export default {
     z-index: 9998;
   }
 
+
   .modal {
     text-align:center;
-    display: flex; /*added*/
-    flex-direction: column; /*added*/
-    margin-top:20px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: repeat(2,1fr);
+    align-content: start;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -52,31 +56,34 @@ export default {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: hidden;
-    overflow: visible;
     border-radius: 15px;
     width:45em;
-    max-width:70%;
-    max-height:70%;
-    padding-bottom: 15px;
-    font-size: 2.5em;
-    text-align: center;
-    line-height: 150%;
+    height: 15em;
+    max-width:80%;
+    max-height:150%;
+    padding-bottom: 10px;
   }
 
-  .btn-close {
-    /*border: none;*/
-    position:element(#ing-mod);
-    transform: translate(1000%,-40%);
-    font-size: 23px;
-    padding: 20px;
-    height:3em;
-    width:3em;
-    border-radius:3em;
-    cursor: pointer;
-    font-weight: bold;
+  .mod-bod{
+    grid-column: 1/6;
+    grid-row: 1/2;
+    height:100%;
+    width:90%;
+    font-size: 1.5em;
+    margin:auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:3px;
+  }
+
+  .mod-foot {
+    grid-column:3/4;
+    grid-row: 2/3;
     color: white;
-    background-color: #33cc33;
-    border-radius: 10px;
-    margin-top: 20vh;
+    margin-top: none;
+    margin-bottom: 1em;
+    height: 20%;
   }
 </style>

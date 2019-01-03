@@ -1,30 +1,36 @@
 <template>
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
   <div>
-      <h4>#{{orderId}}</h4>
+    <div class="prep-head">
+    <h4>#{{orderId}}</h4>
+    <p>Antal Pattys: {{nrOfPattys}}</p>
+  </div>
     <div>
       <b-btn v-b-toggle='orderId' id="collapsibleButton">
         +
       </b-btn>
-    <button id="sendToPreparing" v-on:click="orderDone">
-      {{uiLabels.ready}}
-    </button>
-  </div>
+      <button id="sendToPreparing" v-on:click="orderCooked">
+        {{uiLabels.ready}}
+      </button>
+    </div>
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
         :onlypatty="true"
         :ui-labels="uiLabels"
         :lang="lang"
-        :order="order">
+        :order="order"
+        :ingredients="ingredients"
+        @total_pattys="setNrOfPattys">
       </OrderItem>
-      <button id="cancelButton" v-on:click="cancelOrder">
+      <button id="cancelButton" v-on:click="orderCanceled">
         {{uiLabels.cancel}}
       </button>
     </b-collapse>
   </div>
 </div>
 </template>
+
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 
@@ -32,25 +38,39 @@ export default {
   name: 'OrderItemToPrepare',
   components: { OrderItem },
   props: {
+    ingredients:Array,
     uiLabels: Object,
     order: Object,
     orderId: String,
     lang: String
   },
-  methods: {
-    orderDone: function () {
-      // sending 'done' message to parent component or view so that it
-      // can catch it with v-on:done in the component declaration
-      this.$emit('done');
-    },
-    cancelOrder: function () {
-      this.$emit('cancel');
+  data:function(){
+    return{
+      nrOfPattys:0
     }
-  }
+  },
+  methods: {
+    orderCooked: function () { //skickar 'cooked' till parent som kan fånga med v-on:cooked
+    this.$emit('cooked');
+  },
+  setNrOfPattys: function(quantity){
+    this.nrOfPattys=quantity;
+  },
+  orderCanceled: function () { //skickar 'cancel' till parent som kan fånga med v-on:cancel
+  this.$emit('cancel');
+}
+}
 }
 </script>
-<style scoped>
 
+<style scoped>
+.prep-head{
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.prep-head > p{
+  text-align: center;
+}
 
 #cancelButton, #sendToPreparing {
   border: 1px solid white;

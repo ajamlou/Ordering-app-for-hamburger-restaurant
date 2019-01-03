@@ -1,45 +1,48 @@
 <template>
-  <div id="masterDivGrill">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <div id="GrillGrid">
 
-      <!-- Här skapas beställningarna i "Inkomna". -->
-      <div id="orders">
-        <div id="header1">
-          <h1>{{ uiLabels.ordersInQueue }}</h1>
-        </div>
-        <div class="allOrders">
-          <OrderItemToPrepare class="toPrepare"
-          v-for="(order, key) in orders"
-          v-if="order.status === 'not-started'"
-          v-on:cancel = "markCanceled(key)"
-          v-on:done="markDone(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-        </OrderItemToPrepare>
+    <!-- Här skapas beställningarna i "Inkomna". -->
+    <div id="orders">
+      <div id="header1">
+        <h1>{{ uiLabels.ordersInQueue }}</h1>
+        <img class="icon" src="../assets/w-exclamation.png"/>
       </div>
-    </div>
-
-    <!-- Här skapas beställningarna i "Tillagas". -->
-    <div id="preparing">
-      <div id="header2">
-        <h1>{{ uiLabels.ordersPreparing }}</h1>
-      </div>
-      <div class="allOrders">
-        <OrderItemIsCooking class="isPreparing"
-        v-for="(order, key) in orders"
-        v-if="order.status === 'done'"
-        v-on:cooked="markCooked(key)"
-        :order-id="key"
-        :order="order"
-        :ui-labels="uiLabels"
-        :lang="lang"
-        :key="key">
-      </OrderItemIsCooking>
+      <div class = "allOrders">
+        <OrderItemToPrepare class = "toPrepare"
+        v-for = "(order, key) in orders"
+        v-if = "order.status === 'not-started'"
+        v-on:cancel = "markCanceled(key)"
+        v-on:cooked = "markCooked(key)"
+        :order-id = "key"
+        :order = "order"
+        :ui-labels = "uiLabels"
+        :lang = "lang"
+        :key = "key"
+        :ingredients="ingredients">
+      </OrderItemToPrepare>
     </div>
   </div>
+
+  <!-- Här skapas beställningarna i "Tillagas". -->
+  <div id="preparing">
+    <div id="header2">
+      <h1>{{ uiLabels.ordersPreparing }}</h1>
+      <img class="icon" src="../assets/w-spatula.png"/>
+    </div>
+    <div class = "allOrders">
+      <OrderItemIsCooking class = "isPreparing"
+      v-for = "(order, key) in orders"
+      v-if = "order.status === 'started'"
+      v-on:cancel = "markCanceled(key)"
+      :isPrepp = "false"
+      :order-id = "key"
+      :order = "order"
+      :ui-labels = "uiLabels"
+      :lang = "lang"
+      :key = "key">
+    </OrderItemIsCooking>
+  </div>
+</div>
 </div>
 </template>
 
@@ -59,47 +62,56 @@ export default {
     ingredients: Array,
     uiLabels: Object,
     orders: Object,
-    lang: String
+    lang: String,
+    isPrepp: Boolean
   },
-  // mixins: [sharedVueStuff],
 
-data: function(){
-  return {
-    chosenIngredients: [],
-    price: 0,
-  }
-},
+  data: function(){
+    return {
+      chosenIngredients: [],
+      price: 0,
+    }
+  },
 
-methods: {
-  markDone: function (orderid) {
-    this.$store.state.socket.emit("orderDone", orderid);
-  },
-  markCanceled: function (orderid) {
-    this.$store.state.socket.emit("orderCanceled", orderid);
+  methods: {
+    markCanceled: function (orderid) {
+      this.$store.state.socket.emit("orderCanceled", orderid);
+    },
+    markCooked: function (orderid) {
+      this.$store.state.socket.emit("orderStarted", orderid);
+    }
   }
-  },
- }
+}
 </script>
 
 <style scoped>
-#masterDivGrill {
+#GrillGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
+  height:90vh;
 }
 
 .allOrders {
-  margin-top: 10vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height:86%;
 }
 
 #header1, #header2 {
-  height: 10vh;
-  width: 50vw;
-  /*position: fixed;*/
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  align-items:center;
+  height: 2.5em;
+  text-align: center;
+  width: 100%;
   font-size: 5vh;
   border-radius: 4px;
   border-bottom: 3px solid white;
+  color:white;
   text-shadow: 2px 2px #737373;
-  margin: auto;
+}
+#header1 >h1, #header2 > h1{
+  grid-column: 2/3;
 }
 
 #header1 {
@@ -116,39 +128,29 @@ methods: {
   font-size: 1em;
   border: 3px solid white;
   border-radius: 6px;
-  width: 50vw;
+  overflow:hidden;
+  height:inherit;
 }
-
-/* .toPrepare {
-  width: 42%;
+.icon{
+  height:2em;
+  justify-self:end;
+  grid-column:3/4;
+  padding-right:5px;
 }
-.isPreparing {
-  width: 30%;
-} */
 
 /*----- css för de svarta beställningsboxarna ----*/
 .toPrepare, .isPreparing {
   border: 2px solid white;
-  font-size: 1.8vh;
-  min-height: 10vh;
-  width: 10vw;
-  margin: 8px;
+  font-size: 0.85em;
+  float: left;
+  min-height: 5em;
+  width: 31%;
+  margin: 3px;
   padding: 5px;
-  box-sizing: border-box;
   border-radius: 20px;
   border: 3px solid white;
   background-color: black;
   color: white;
 }
 /*-------------------------------------------------*/
-
-.isPreparing, .toPrepare,#orders, #header1, #preparing, #header2{
-  overflow: auto
-}
-
-h1 {
-  text-transform: uppercase;
-  font-size: 1.4em;
-  text-color: white;
-}
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
@@ -14,6 +16,7 @@
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
+    :breadcrumbs="breadcrumbs"
     class="viewContent">
   </OrderingViewFrontPage>
 
@@ -33,8 +36,12 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteIngredients = "favoriteIngredients"
-  :ingredient_ids = "ingredient_ids">
+  :favoriteBurger1 = "favoriteBurgers[0]"
+  :favoriteBurger2 = "favoriteBurgers[1]"
+  :favoriteBurger3 = "favoriteBurgers[2]"
+  :ingredient_ids = "ingredient_ids"
+  :extrasCategories = "extrasCategories"
+  :categoryItemCounter="categoryItemCounter">
 </FavoritesPage>
 
 <CheckoutPage
@@ -44,9 +51,9 @@ v-if = "currentView === 'checkoutPage'"
 :menus="menusArray"
 :orderNumber="orderNumber"
 :lang="lang"
-@go_to_front="changeView"
-@go_back="goBack"
-@new_menu="newMenu"
+@remove_backButton="removeBackButton"
+@change_view="changeView"
+@new_burger="newBurger"
 @modify_menu="modifyMenu"
 @clear_all="clearAll">
 </CheckoutPage>
@@ -108,19 +115,19 @@ id="ordering">
 </CategoryRow>
 
 <div id="extras">
-<h2>{{uiLabels.extras}}</h2>
+  <h2>{{uiLabels.extras}}</h2>
 
-<CategoryRow
-v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="chosenIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromMenu"
-@info_to_modal="toggleShowIngredientsModal">
+  <CategoryRow
+  v-for="category in extrasCategories"
+  :key="category.categoryNr"
+  :category="category.categoryNr"
+  :added_items="chosenIngredients"
+  :category_name="uiLabels[category.label]"
+  :lang="lang"
+  :threshold="category.threshold"
+  :item_count="categoryItemCounter[category.categoryNr -1]"
+  @remove_ingredient="removeFromMenu"
+  @info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 </div>
 </div>
@@ -165,10 +172,12 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
-      ingredient_ids:[1,2,3,4], /*Denna har ingredient-id för alla favoritingredienser*/
+      ingredient_ids:[50,6,8,11,12,48  ,  50,1,9,26,32,36  ,  52,1,7,34,15,40], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
       favoriteIngredients: [],
+      favoriteBurgers: [],
+      favoritePrice:0,
       orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
@@ -251,10 +260,24 @@ export default {
                   this.currentView = view;
                 },
                 changeFavorites: function(){
+                  let count = 0;
                   for (var i = 0; i< this.ingredient_ids.length; i++){
-                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i]));
+                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
+                    this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
+                    count++;
+                    if(this.favoriteIngredients.length === Math.trunc(this.ingredient_ids.length/3)){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
+                      let burger = {
+                        "ingredients": this.favoriteIngredients,
+                        "price": this.favoritePrice,
+                        "ing_count": count
+                      }
+                      this.favoriteBurgers.push(burger);
+                      this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
+                      this.favoritePrice = 0;
+                      count = 0;
+                    }
                   }
-                  console.log(this.favoriteIngredients);
+                  /*console.log(this.favoriteBurgers);*/
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -281,7 +304,7 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  console.log(item);
+                  /*console.log(item);*/
                 },
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
@@ -295,7 +318,9 @@ export default {
                   this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');
-
+                },
+                removeBackButton:function(){
+                  this.breadcrumbs.length=0;
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
@@ -324,12 +349,16 @@ export default {
                   this.resetBurger();
                   this.changeView('designPage');
                 },
+                newBurger:function(){
+                  this.resetBurger();
+                  this.changeView('frontPage');
+                },
                 clearAll:function(){
                   this.resetBurger();
                   this.menusArray=[];
                 },
                 resetBurger:function(){
-                  this.categoryItemCounter=this.categoryItemCounter.map((index)=>0);/*Nollställer arrayen*/
+                  this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = [];
                   this.price = 0;
                 }
@@ -340,24 +369,39 @@ export default {
             <style scoped>
             /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
             .masterDiv{
-              font-family: 'Montserrat', sans-serif;
+              font-family: 'Poiret One', sans-serif;
               min-height:100vh;
               margin-top:0 !important;
               padding-top:0 !important;
               background-color:#f8ffd6;
-              background:url('../assets/bg3.png');
+              /* background:url('../assets/chessboard.jpg'); */
               display: grid;
               grid-template-columns: repeat(6, 1fr);
               grid-template-rows: 100px;
               grid-auto-rows: auto;
+
+              /* Här nedan görs bakgrunds schackrutorna: */
+              background-color: rgb(255, 255, 240);
+              background-image:
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              background-size: 60px 60px;
+              background-position: 0 0, 30px 30px;
+
+              /* background-color: #eee;
+              background-image:
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+              linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              background-size: 60px 60px;
+              background-position: 0 0, 30px 30px; */
             }
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
               color:white;
               font-weight: 700;
-              width:120px;
-              height:80px;
+              width:80px;
+              height:50px;
               border:1px solid #7a7a7a;
               margin: auto;
             }
@@ -384,8 +428,8 @@ export default {
               padding-bottom:1em;
               margin-top:2em;
               -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
--moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             }
             #ordering {
               display:grid;
@@ -536,12 +580,14 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
             }
 
-
             .btn-close{
               background-color: #33cc33;
               border-radius: 10px;
-              margin-top: 10vh;
-              position: relative;
+              /* position: relative; */
+              width: 2em;
+              height: 2em;
+              font-size: 2em;
+              color: white;
             }
 
             .ingredient{
@@ -572,81 +618,80 @@ box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
             padding:20px 30px 20px 30px;
             font-size: 2em;
             background-color: rgb(0, 150, 0);
-          }
-          #order-btn:hover{
-          color:black;
-          background-color: rgb(0, 200, 0);
-          } */
+            #order-btn:hover{
+            color:black;
+            background-color: rgb(0, 200, 0);
+            } */
 
-          button{
-            background-color: #ddd;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 16px;
-            text-shadow: 1px 1px 2px black;
-          }
-          button:hover{
-            background-color: #000;
-            color: white;
-          }
-          @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
-            #bestallning{
-              grid-column: 1/7;
-              grid-row:1/2;
-              text-align:center;
+            button{
+              background-color: #ddd;
+              border: none;
+              padding: 10px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              margin: 4px 2px;
+              cursor: pointer;
+              border-radius: 16px;
+              text-shadow: 1px 1px 2px black;
             }
-            #r2-div{
-              grid-column:1/7;
-              grid-row:2/3;
-              text-align:center;
-              justify-items: center;
-              align-items: center;
-              justify-content: center;
-              align-content: center;
+            button:hover{
+              background-color: #000;
+              color: white;
             }
-            #categories-wrapper{
-              grid-row:3/4;
+            @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+              #bestallning{
+                grid-column: 1/7;
+                grid-row:1/2;
+                text-align:center;
+              }
+              #r2-div{
+                grid-column:1/7;
+                grid-row:2/3;
+                text-align:center;
+                justify-items: center;
+                align-items: center;
+                justify-content: center;
+                align-content: center;
+              }
+              #categories-wrapper{
+                grid-row:3/4;
+              }
+              #price-div, #next-btn{
+                grid-row:4/5;
+              }
             }
-            #price-div, #next-btn{
-              grid-row:4/5;
-            }
-          }
-          @media screen and (max-width:1206px){
+            @media screen and (max-width:1206px){
 
-            #ordering{
-              margin:10px auto auto auto;
-            }
+              #ordering{
+                margin:10px auto auto auto;
+              }
 
-          }
-          @media screen and (max-width:650px){
-            #header-title{
-              grid-column:2/6;
             }
-            #header-title h1{
-              font-size:2.3em;
+            @media screen and (max-width:650px){
+              #header-title{
+                grid-column:2/6;
+              }
+              #header-title h1{
+                font-size:2.3em;
+              }
+              .icon{
+                display:block;
+                margin:auto;
+              }
+              #bck-btn,#lang-btn{
+                width:90px;
+                height:50px;
+                padding:0;
+              }
+              h2{
+                font-size:1.8em;
+              }
             }
-            .icon{
-              display:block;
-              margin:auto;
-            }
-            #bck-btn,#lang-btn{
-              width:90px;
-              height:50px;
-              padding:0;
-            }
-            h2{
-              font-size:1.8em;
-            }
-          }
-          @media screen and (max-width:480px){
-            #next-btn{
-              grid-row:4;
-            }
+            @media screen and (max-width:480px){
+              #next-btn{
+                grid-row:4;
+              }
 
-          }
-          </style>
+            }
+            </style>

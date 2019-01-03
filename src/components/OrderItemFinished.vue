@@ -2,7 +2,7 @@
 <!-- Egen komponent för att kunna hantera det som sker i "Färdiga" enklare -->
   <div>
       <h4>#{{orderId}}</h4>
-      <button id="cancelButton" v-on:click="cancelOrder">
+      <button id="cancelButton" v-on:click="orderCanceled">
         {{uiLabels.remove}}
       </button>
     <div>
@@ -34,12 +34,10 @@ export default {
     lang: String
   },
   methods: {
-    orderDone: function () {
-      // sending 'done' message to parent component or view so that it
-      // can catch it with v-on:done in the component declaration
+    orderDone: function () { //skickar 'done' till parent som kan fånga med v-on:done
       this.$emit('done');
     },
-    cancelOrder: function () {
+    orderCanceled: function () { //skickar 'cancel' till parent som kan fånga med v-on:cancel
       this.$emit('cancel');
     }
   }

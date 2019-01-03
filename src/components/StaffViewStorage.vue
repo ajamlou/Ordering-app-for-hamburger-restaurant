@@ -1,7 +1,6 @@
 <template>
   <div>
   <div class="modal-header">
-    <slot name="header">
       <div>
         Vara
       </div>
@@ -11,7 +10,6 @@
       <div>
         Säljpris
       </div>
-    </slot>
   </div>
 
   <div class="modal-body">
@@ -22,17 +20,16 @@
         {{ingredient.ingredient_sv}}
       </div>
       <div>
-        {{ingredient.selling_price}}
+        {{ingredient.stock}}
       </div>
       <div>
-        {{ingredient.stock}}
+      {{ingredient.selling_price}}
       </div>
   </div>
 </div>
 
   <div class="modal-footer">
     <slot name="footer">
-      Footer
     </slot>
   </div>
 </div>
@@ -59,14 +56,20 @@ export default {
 .modal-header{
   /* position: fixed; */
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
   text-align: center;
+  overflow: hidden;
+  height:2em;
+  padding:0;
 }
 .ing-container{
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
   text-align: center;
-  overflow: auto;
+  height:100%;
+  overflow-x: hidden;
+  overflow-y:auto;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 </style>
