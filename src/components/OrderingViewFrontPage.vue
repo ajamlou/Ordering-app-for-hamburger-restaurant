@@ -96,7 +96,7 @@ export default {
   border: 3.5px solid #004d26;
 }
 
-#welcome{
+#welcome {
   font-family: 'Lobster', sans-serif;
   /* text-transform: uppercase; */
 }
