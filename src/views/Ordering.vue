@@ -1,6 +1,8 @@
 <template>
   <div class="masterDiv">
     <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Luckiest+Guy|Montserrat|Syncopate:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
@@ -367,24 +369,39 @@ export default {
             <style scoped>
             /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
             .masterDiv{
-              font-family: 'Montserrat', sans-serif;
+              font-family: 'Poiret One', sans-serif;
               min-height:100vh;
               margin-top:0 !important;
               padding-top:0 !important;
               background-color:#f8ffd6;
-              background:url('../assets/bg3.png');
+              /* background:url('../assets/chessboard.jpg'); */
               display: grid;
               grid-template-columns: repeat(6, 1fr);
               grid-template-rows: 100px;
               grid-auto-rows: auto;
+
+              /* Här nedan görs bakgrunds schackrutorna: */
+              background-color: rgb(255, 255, 240);
+              background-image:
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              background-size: 60px 60px;
+              background-position: 0 0, 30px 30px;
+
+              /* background-color: #eee;
+              background-image:
+              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
+              linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              background-size: 60px 60px;
+              background-position: 0 0, 30px 30px; */
             }
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
               color:white;
               font-weight: 700;
-              width:120px;
-              height:80px;
+              width:80px;
+              height:50px;
               border:1px solid #7a7a7a;
               margin: auto;
             }
