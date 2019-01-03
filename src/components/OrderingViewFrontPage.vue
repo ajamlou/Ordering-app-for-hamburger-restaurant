@@ -105,9 +105,10 @@ export default {
   /* font-family: 'Luckiest Guy', sans-serif; */
   /* text-transform: uppercase; */
   text-align: center;
-  font-size: 4em;
-  color: #DF532F;
-  /* #66d9ff; */
+  font-size: 5em;
+  color: #ed6381; /*rosa*/
+  /* #DF532F; - orange*/
+  /* #66d9ff; - ljusblå*/
   text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
   /* #9c3a20; mörkorange */
   grid-row:1/2;

@@ -433,9 +433,9 @@ export default {
               align-self: center;
               font-family: 'Lobster', sans-serif;
               /* font-family: 'Luckiest Guy', sans-serif; */
-              color: #66d9ff;
+              color: #ed6381; /*rosa*/
               /* text-transform: uppercase; */
-              text-shadow: 2px 2px #0086b3;
+              text-shadow: 2px 2px #444444;
             }
             .viewContent{
               grid-row: 2;
