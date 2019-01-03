@@ -381,20 +381,19 @@ export default {
               grid-auto-rows: auto;
 
               /* Här nedan görs bakgrunds schackrutorna: */
-              background-color: rgb(255, 255, 240);
+              background-color: rgb(255, 250, 224); /*beigegul*/
+              /*#9E283A; mörkrosa*/
+
+              /*#282826 mörgrå*/
+              /*#B5DAC9 turkostisch*/
+
               background-image:
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
+              linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
               background-size: 60px 60px;
               background-position: 0 0, 30px 30px;
-
-              /* background-color: #eee;
-              background-image:
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-              linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
-              background-size: 60px 60px;
-              background-position: 0 0, 30px 30px; */
             }
+
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
@@ -405,14 +404,16 @@ export default {
               border:1px solid #7a7a7a;
               margin: auto;
             }
+
             #header-title{
               grid-column:3/5;
               grid-row:1;
               text-align: center;
               align-self: center;
-              font-family: 'Luckiest Guy', sans-serif;
+              font-family: 'Lobster', sans-serif;
+              /* font-family: 'Luckiest Guy', sans-serif; */
               color: #66d9ff;
-              text-transform: uppercase;
+              /* text-transform: uppercase; */
               text-shadow: 2px 2px #0086b3;
             }
             .viewContent{
@@ -420,7 +421,7 @@ export default {
               grid-column: 1/7;
             }
             #designPage-backdrop{
-              background-color: rgba(255,255,255,0.7);
+              background-color: rgba(255, 250, 224,0.99);
               border-radius:15px;
               width:95%;
               justify-self:center;

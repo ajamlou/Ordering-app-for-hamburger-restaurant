@@ -37,7 +37,8 @@ export default {
 <style scoped>
 
 #orderingFrontPage-backdrop{
-  background-color: rgba(255, 255, 240,0.98);
+  background-color: rgba(255, 250, 224,0.99);
+  /* rgba(255, 255, 240,0.98); */
   border-radius:15px;
   width:95%;
   justify-self:center;
@@ -54,10 +55,9 @@ export default {
   grid-template-rows: 6em 30% 30%;
   grid-row-gap: 1em;
   height:100%;
-  justify-items:center;
-
-
+  justify-items: center;
 }
+
 #favoritesButton, #createBurgerButton {
   text-transform: uppercase;
   color: white;
@@ -74,40 +74,42 @@ export default {
 }
 
 #favoritesButton{
-  background-color: #DC143C;
+  background-color: #b9d7cb; /*ljusturkos*/
+  /* #9E283A; mörkrosa */
+  /* #DC143C; */
   grid-row:3/4;
 }
 #favoritesButton:hover {
-  background-color: #800000;
+  background-color: #6f8179;
   border-color: #000000;
 }
 #favoritesButton:active {
   border: 3.5px solid #802b00;
 }
 #createBurgerButton {
-  background-color: #DC143C;
+  background-color: #b9d7cb; /*ljusturkos*/
+  /* #DC143C; */
   grid-row:2/3;
 }
 #createBurgerButton:hover {
-  background-color: #800000;
+  background-color: #6f8179;
   border-color: #000000;
 }
 #createBurgerButton:active {
   border: 3.5px solid #004d26;
 }
 
-#welcome {
-  font-family: 'Lobster', sans-serif;
-  /* text-transform: uppercase; */
-}
 
 .welcome{
-  font-family: 'Luckiest Guy', sans-serif;
-  text-transform: uppercase;
+  font-family: 'Lobster', sans-serif;
+  /* font-family: 'Luckiest Guy', sans-serif; */
+  /* text-transform: uppercase; */
   text-align: center;
   font-size: 4em;
-  color: #66d9ff;
-  text-shadow: 2px 2px #0086b3;
+  color: #DF532F;
+  /* #66d9ff; */
+  text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
+  /* #9c3a20; mörkorange */
   grid-row:1/2;
 }
 @media screen and (max-width:905px){
