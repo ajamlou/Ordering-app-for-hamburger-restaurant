@@ -1,5 +1,12 @@
 <template>
-  <div id="checkout-div">
+  <div
+  id="checkoutPage-backdrop">
+  <div
+  id="checkout-div">
+  <div
+  id="checkoutPage-title">
+    {{uiLabels.checkout}}
+  </div>
       <SlotModal
       id="orderFinishedModal"
       v-if="this.showSlotModal">
@@ -47,6 +54,7 @@
   <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
 <!-- </div> -->
 
+</div>
 </div>
 </template>
 
@@ -148,6 +156,34 @@ export default{
 #checkout-div{
   display:grid;
   grid-template-columns: repeat(8, 1fr);
+  grid-row-gap: 1vh;
+  /* height:100%; */
+  width: 90%;
+  margin: auto auto auto auto;
+}
+#checkoutPage-backdrop{
+  background-color: rgba(255, 250, 224,0.99);
+  border-radius:15px;
+  width:95%;
+  justify-self:center;
+  margin-bottom: 3em;
+  padding-bottom: 3em;
+
+}
+
+#checkoutPage-title{
+  grid-column:1/9;
+  grid-row:1;
+  text-align: left;
+  align-self: center;
+  font-family: 'Lobster', sans-serif;
+  font-size: 14vmin;
+  /* font-family: 'Luckiest Guy', sans-serif; */
+  color: #ed6381; /*rosa*/
+  /* text-transform: uppercase; */
+  text-shadow: 2px 2px #444444;
+  border-bottom: dotted;
+  border-color: #ed6381;
 }
 
 #btn-order-wrap{
@@ -181,7 +217,7 @@ export default{
   width:15%;
   min-width:200px;
   align-items:stretch;
-  background-color:#3385ff;
+  background-color:#b9d7cb;;
   cursor:pointer;
   flex: 0 0 auto;
   border-radius: 10px;
@@ -189,7 +225,8 @@ export default{
   margin:auto 5px auto 5px;
 }
 #add-btn-div:hover{
-  background-color:rgba(100, 100, 100, 0.9);
+  background-color: #6f8179;
+  border-color: #000000;
 }
 #add-btn-div>p{
   margin:auto;
@@ -210,12 +247,18 @@ export default{
 } */
 
 #sumOfOrder{
-  grid-column: 4/6;
+  /* grid-column: 4/6;
   grid-row: 3;
+  font-size: 2em; */
+  justify-self: center;
+  margin:auto;
+  text-align:center;
   font-size: 2em;
+  grid-column:6/8;
+  grid-row:4;
 }
 #order-btn2{
-  grid-column: 7/9;
+  grid-column: 8;
   grid-row: 4;
   width:120px;
   height:80px;
@@ -225,23 +268,26 @@ export default{
   border:1px solid #7a7a7a;
   border-radius: 16px;
   color:white;
-  background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
+  background-color: #c5e5be;
+  /* background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
   background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
   background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
   background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
   background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
   background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 ); */
 }
-#order-btn2:active{border: 2px solid #595959;}
+/* #order-btn2:active{border: 2px solid #595959;} */
 #order-btn2:hover{
-  background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
+  background-color: #89a085;
+  border-color: #000000;
+  /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
   /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-  background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+  /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
   background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
 }
 
 .slotBody{
@@ -262,6 +308,18 @@ export default{
 }
 
 .btn-close:active{background-color: #1f7a1f}
+
+button{
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  text-shadow: 1px 1px 2px black;
+  text-transform: uppercase;
+}
 
 @media screen and (max-width:650px){
   #btn-order-wrap{

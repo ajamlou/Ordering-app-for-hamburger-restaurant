@@ -38,10 +38,12 @@ export default {
 
 #frontPage{
   display:grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto 30% 30%;
   grid-row-gap: 1em;
   height:100%;
   justify-items: center;
+  /* align-items: center;
+  justify-content:center; */
 }
 
 #orderingFrontPage-backdrop{
@@ -74,31 +76,26 @@ export default {
   height:inherit;
 }
 
-#favoritesButton{
-  background-color: #b9d7cb; /*ljusturkos*/
-  /* #9E283A; mörkrosa */
-  /* #DC143C; */
-  grid-row:3/4;
-}
-#favoritesButton:hover {
-  background-color: #6f8179;
-  border-color: #000000;
-}
-#favoritesButton:active {
-  border: 3.5px solid #802b00;
-}
 #createBurgerButton {
-  background-color: #b9d7cb; /*ljusturkos*/
-  /* #DC143C; */
   grid-row:2/3;
 }
-#createBurgerButton:hover {
+#favoritesButton{
+  grid-row:3/4;
+}
+#createBurgerButton,#favoritesButton{
+  background-color: #b9d7cb; /*ljusturkos*/
+}
+#createBurgerButton:hover,#favoritesButton:hover {
   background-color: #6f8179;
   border-color: #000000;
+}
+/* #favoritesButton:active {
+  border: 3.5px solid #802b00;
+}
 }
 #createBurgerButton:active {
   border: 3.5px solid #004d26;
-}
+} */
 
 
 .welcome{
@@ -113,6 +110,8 @@ export default {
   text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
   /* #9c3a20; mörkorange */
   grid-row: 1;
+  border-bottom: dotted;
+  border-color: #ed6381;
 }
 
 /* @media screen and (max-width:905px){

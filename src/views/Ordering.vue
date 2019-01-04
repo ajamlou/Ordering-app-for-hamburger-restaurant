@@ -535,7 +535,7 @@ export default {
               justify-self:center;
               margin-bottom:2em;
               padding-bottom:1em;
-              margin-top:2em;
+              /* margin-top:2em; */
               /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
