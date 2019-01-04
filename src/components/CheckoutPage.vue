@@ -166,7 +166,7 @@ export default{
   border-radius:15px;
   width:95%;
   justify-self:center;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   padding-bottom: 3em;
 
 }
@@ -259,7 +259,7 @@ export default{
 }
 #order-btn2{
   grid-column: 8;
-  grid-row: 4;
+  grid-row: 4/5;
   width:120px;
   height:80px;
   margin-right: 5vw;
