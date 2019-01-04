@@ -6,11 +6,11 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
-    <div id="header-title">
+    <!-- <div id="header-title">
       <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
-    </div>
+    </div> -->
 
     <OrderingViewFrontPage
     @Visibility="changeView"
@@ -105,8 +105,11 @@ class="viewContent"
 v-if = "currentView === 'designPage'">
 <div
 id="ordering">
+<div
+id="designPage-title">
+  {{uiLabels.yourOrder}}
+</div>
 <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-
 <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
 <div id="r2-div"> <!--Div för row 2 i ordering grid -->
   <div id="gluten-exp">
@@ -398,6 +401,7 @@ export default {
               /* background:url('../assets/chessboard.jpg'); */
               display: grid;
               grid-template-columns: repeat(6, 1fr);
+              grid-column-gap: 3vw;
               grid-template-rows: 100px;
               grid-auto-rows: auto;
 
@@ -423,15 +427,17 @@ export default {
               width:80px;
               height:50px;
               border:1px solid #7a7a7a;
-              margin: auto;
+              /* margin: auto; */
             }
 
-            #header-title{
-              grid-column:3/5;
+            /* Rubrik designPage */
+            #designPage-title{
+              grid-column:1/7;
               grid-row:1;
-              text-align: center;
+              text-align: left;
               align-self: center;
               font-family: 'Lobster', sans-serif;
+              font-size: 14vmin;
               /* font-family: 'Luckiest Guy', sans-serif; */
               color: #ed6381; /*rosa*/
               /* text-transform: uppercase; */
@@ -449,19 +455,25 @@ export default {
               margin-bottom:2em;
               padding-bottom:1em;
               margin-top:2em;
-              -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
               -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
             }
             #ordering {
               display:grid;
               grid-template-columns: repeat(6, 1fr);
-              margin:50px auto auto auto;
+              margin: auto auto auto auto;
               width: 90%;
+              grid-row-gap: 1vh;
             }
             #ordering h2{
               font-weight: bolder;
-              text-transform: uppercase;/*
+              text-transform: uppercase;
+              text-align: left;
+              border-top: dotted;
+              border-bottom: dotted;
+              border-color: #ed6381; /*rosa*/
+              /*
               font-family: 'Luckiest Guy', sans-serif;
               color: #66d9ff;
               text-shadow: 2px 2px #0086b3;*/
@@ -471,12 +483,12 @@ export default {
             }
 
             #bestallning{
-              grid-column: 1 / 4;
-              grid-row: 1;
+              grid-column: 1/7;
+              grid-row: 2;
               text-align: left;
             }
             #r2-div{
-              grid-row:1/2;
+              grid-row:1;
               grid-column: 4/7;
               display:grid;
               grid-template-columns: repeat(3,1fr);
@@ -535,7 +547,7 @@ export default {
 
             #categories-wrapper{
               grid-column: 1/7;
-              grid-row:2;
+              grid-row:3;
             }
             #favorites{
               grid-column: 1/7;
@@ -550,9 +562,10 @@ export default {
               grid-row: 1;
               border: 1px solid #7a7a7a;
               color:white;
-              width:120px;
-              height:80px;
+              width:80px;
+              height:50px;
               margin:auto;
+
               justify-self:center;
               background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
@@ -579,8 +592,8 @@ export default {
               margin:auto;
               text-align:center;
               font-size: 2em;
-              grid-column:3/5;
-              grid-row:3;
+              grid-column:5/6;
+              grid-row:4;
             }
 
             #next-btn{
@@ -589,7 +602,7 @@ export default {
               justify-self:end;
               border:1px solid #7a7a7a;
               grid-column: 6/7;
-              grid-row:3;
+              grid-row:4;
               color:white;
               background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
@@ -669,15 +682,22 @@ export default {
               background-color: #000;
               color: white;
             }
+
+/*------------------ CSS för ipad/mobiler-isch ------------*/
             @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+              #designPage-title{
+                grid-row: 1;
+                text-align: center;
+                font-size: 12vw;
+              }
               #bestallning{
                 grid-column: 1/7;
-                grid-row:1/2;
+                grid-row:3;
                 text-align:center;
               }
               #r2-div{
                 grid-column:1/7;
-                grid-row:2/3;
+                grid-row:2;
                 text-align:center;
                 justify-items: center;
                 align-items: center;
@@ -685,10 +705,13 @@ export default {
                 align-content: center;
               }
               #categories-wrapper{
-                grid-row:3/4;
+                grid-row:4;
               }
               #price-div, #next-btn{
-                grid-row:4/5;
+                grid-row:5;
+              }
+              #ordering h2{
+                font-size: 5vw;
               }
             }
             @media screen and (max-width:1206px){
@@ -698,12 +721,11 @@ export default {
               }
 
             }
-            @media screen and (max-width:650px){
-              #header-title{
-                grid-column:2/6;
-              }
-              #header-title h1{
-                font-size:2.3em;
+
+/* -------------------- CSS för mobiler -----------------*/
+            @media screen and (max-width:670px){
+              #designPage-title{
+                font-size: 13vw;
               }
               .icon{
                 display:block;
@@ -714,13 +736,13 @@ export default {
                 height:50px;
                 padding:0;
               }
-              h2{
-                font-size:1.8em;
+              #ordering h2{
+                font-size:6.3vw;
               }
             }
             @media screen and (max-width:480px){
               #next-btn{
-                grid-row:4;
+                grid-row:5;
               }
 
             }

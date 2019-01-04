@@ -38,7 +38,7 @@ export default {
 
 #frontPage{
   display:grid;
-  grid-template-rows: 25% 30% 30%;
+  grid-template-rows: auto auto auto;
   grid-row-gap: 1em;
   height:100%;
   justify-items: center;
@@ -112,7 +112,7 @@ export default {
   /* #66d9ff; - ljusblå*/
   text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
   /* #9c3a20; mörkorange */
-  grid-row: 1/2;
+  grid-row: 1;
 }
 
 /* @media screen and (max-width:905px){
@@ -125,7 +125,7 @@ export default {
 } */
 
 @media screen and (max-width:650px){
-  /* #welcome{
+  /* .welcome{
     font-size:3em;
   } */
 
