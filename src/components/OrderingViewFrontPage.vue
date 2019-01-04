@@ -36,16 +36,6 @@ export default {
 
 <style scoped>
 
-#frontPage{
-  display:grid;
-  grid-template-rows: auto 30% 30%;
-  grid-row-gap: 1em;
-  height:100%;
-  justify-items: center;
-  /* align-items: center;
-  justify-content:center; */
-}
-
 #orderingFrontPage-backdrop{
   /* grid-row: 2/5; */
   background-color: rgba(255, 250, 224,0.99);
@@ -59,6 +49,16 @@ export default {
   /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
   -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
   box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
+}
+
+#frontPage{
+  display:grid;
+  grid-template-rows: auto 30% 30%;
+  grid-row-gap: 1em;
+  height:100%;
+  justify-items: center;
+  /* align-items: center;
+  justify-content:center; */
 }
 
 #favoritesButton, #createBurgerButton {
@@ -122,6 +122,20 @@ export default {
     align-items: center;
   }
 } */
+
+/*------------------ CSS för ipad/mobiler-isch ------------*/
+@media screen and (max-width:1024px){
+  .welcome{ /* = Frontpagens titel*/
+    /* grid-row: 1;
+    text-align: center;
+    font-size: 12vw; */
+  }
+
+  #favoritesButton, #createBurgerButton{
+    /* width:;
+    font-size:; */
+  }
+}
 
 @media screen and (max-width:650px){
   /* .welcome{

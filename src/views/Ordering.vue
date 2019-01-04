@@ -455,6 +455,7 @@ export default {
               border:1px solid #7a7a7a;
               /* margin: auto; */
               background-color: #b9d7cb; /*ljusturkos*/
+              padding: 0;
             }
             #lang-btn:hover{
               background-color: #6f8179;
