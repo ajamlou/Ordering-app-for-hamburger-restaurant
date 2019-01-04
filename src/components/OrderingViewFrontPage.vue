@@ -124,9 +124,14 @@ export default {
   }
 } */
 
-@media screen and (max-width:1090px){
+@media screen and (max-width:1155px){
   .welcome{
-    font-size: 3em;
+    font-size: 5em;
+  }
+}
+@media screen and (max-width:945px){
+  .welcome{
+    font-size: 4em;
   }
 }
 
@@ -152,6 +157,11 @@ export default {
   #favoritesButton, #createBurgerButton{
     width:4em;
     font-size: 1.5em;
+  }
+}
+@media screen and (max-width:405px){
+  .welcome{
+    font-size: 3em;
   }
 }
 </style>
