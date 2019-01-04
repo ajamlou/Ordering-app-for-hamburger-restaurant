@@ -159,6 +159,7 @@ export default{
   grid-row-gap: 1vh;
   /* height:100%; */
   width: 90%;
+  height: 100%
   margin: auto auto auto auto;
 }
 #checkoutPage-backdrop{
@@ -321,10 +322,46 @@ button{
   text-transform: uppercase;
 }
 
-@media screen and (max-width:650px){
+/*------------------ CSS för ipad/mobiler-isch ------------*/
+@media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+  #checkout-div{
+    margin: auto auto auto 3em;
+  }
+  #designPage-title{
+    grid-row: 1;
+    text-align: center;
+    font-size: 12vw;
+  }
+
+  #sumOfOrder{
+    margin:auto;
+    text-align:left;
+    font-size: 2em;
+    grid-column:1/8;
+    grid-row:4;
+  }
+  #order-btn2{
+    grid-column: 8;
+    grid-row: 4/5;
+  }
+}
+
+/* -------------------- CSS för mobiler -----------------*/
+
+@media screen and (max-width:670px){
+  #checkoutPage-title{
+    font-size: 13vw;
+  }
   #btn-order-wrap{
     flex-direction: column;
     align-items: center;
+  }
+  #sumOfOrder{
+    margin:auto;
+    text-align:left;
+    font-size: 2em;
+    grid-column:1/8;
+    grid-row:4;
   }
 }
 
