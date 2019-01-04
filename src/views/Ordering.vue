@@ -737,7 +737,7 @@ export default {
             }
 
 /* -------------------- CSS för mobiler -----------------*/
-            @media screen and (max-width:670px){
+            @media screen and (max-width:740px){
               #designPage-title{
                 font-size: 13vw;
               }
