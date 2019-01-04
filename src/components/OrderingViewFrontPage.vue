@@ -1,8 +1,8 @@
 <template>
-<div
-id="orderingFrontPage-backdrop">
   <div
   id="frontPage">
+  <div
+  id="orderingFrontPage-backdrop">
   <div class="welcome">
     <div
     v-if = "this.breadcrumbs.length === 0">
@@ -37,12 +37,15 @@ export default {
 <style scoped>
 
 #orderingFrontPage-backdrop{
+  display:grid;
+  grid-template-rows: minmax(min-content, max-content) 30% 30%;
+  grid-row-gap: 1em;
+  justify-items:center;
   /* grid-row: 2/5; */
   background-color: rgba(255, 250, 224,0.99);
   /* rgba(255, 255, 240,0.98); */
   border-radius:15px;
   width:95%;
-  justify-self:center;
   margin-bottom: 3em;
   padding-bottom: 1em;
   /* margin-top:3em; */
@@ -53,8 +56,6 @@ export default {
 
 #frontPage{
   display:grid;
-  grid-template-rows: auto 30% 30%;
-  grid-row-gap: 1em;
   height:100%;
   justify-items: center;
   /* align-items: center;
@@ -122,6 +123,12 @@ export default {
     align-items: center;
   }
 } */
+
+@media screen and (max-width:1090px){
+  .welcome{
+    font-size: 4em;
+  }
+}
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:1024px){
