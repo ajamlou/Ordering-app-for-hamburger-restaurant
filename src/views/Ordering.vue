@@ -414,17 +414,102 @@ export default {
               background-size: 60px 60px;
               background-position: 0 0, 30px 30px;
             }
+            #bck-btn{
+              grid-column: 1;
+              grid-row: 1;
+              border: 1px solid #7a7a7a;
+              color:white;
+              width:100px;
+              height:50px;
+              margin:auto;
+              background-color: #e51e4a; /*mörkrosa*/
+              /* #ed6381; /*rosa*/
 
+              /* justify-self:center;
+              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
+            }
+            #bck-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
+              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
+            }
             #lang-btn{
-              grid-column:6/7;
+              grid-column:6;
               grid-row:1;
               color:white;
-              font-weight: 700;
-              width:80px;
+              /* font-weight: 700; */
+              width:100px;
               height:50px;
               border:1px solid #7a7a7a;
               /* margin: auto; */
+              background-color: #b9d7cb; /*ljusturkos*/
             }
+            #lang-btn:hover{
+              background-color: #6f8179;
+              border-color: #000000;
+            }
+            #bck-btn,#lang-btn{
+              align-self: center;
+              justify-self: center;
+            }
+
+/*---------------------- För språkknappen sv/eng -------------*/
+            /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
+            Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
+            /* .sv{
+              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .sv:hover{
+              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .sv:active{
+              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+            }
+            .en{
+              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            }
+            .en:hover{
+              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+            }
+            .en:active{
+              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+            } */
 
             /* Rubrik designPage */
             #designPage-title{
@@ -496,51 +581,6 @@ export default {
               padding:0 3px 3px 0;
             }
 
-            /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
-            Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-            .sv{
-              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .sv:hover{
-              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .sv:active{
-              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .en{
-              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-            .en:hover{
-              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-            .en:active{
-              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-
             #categories-wrapper{
               grid-column: 1/7;
               grid-row:3;
@@ -553,38 +593,6 @@ export default {
               grid-column: 1/7;
               grid-row:3;
             }
-            #bck-btn{
-              grid-column: 1/2;
-              grid-row: 1;
-              border: 1px solid #7a7a7a;
-              color:white;
-              width:80px;
-              height:50px;
-              margin:auto;
-              background-color: #e51e4a; /*mörkrosa*/
-              /* #ed6381; /*rosa*/
-
-              /* justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
-            }
-
-            #bck-btn:hover{
-              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
-            }
-            #next-btn:active{border: 2px solid #595959;}
 
             #price-div{
               justify-self: center;
@@ -603,23 +611,29 @@ export default {
               grid-column: 6/7;
               grid-row:4;
               color:white;
-              background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
+              background-color: #c5e5be;
+
+              /* #88bba7; /*mörkturkos matchar #b9d7cb; - ljusturkos*/
+
+              /* background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
               background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
               background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
               background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
               background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 ); */
             }
-            #next-btn:active{border: 2px solid #595959;}
+            /* #next-btn:active{border: 2px solid #595959;} */
             #next-btn:hover{
-              background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
+              background-color: #89a085;
+              border-color: #000000;
+              /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+              /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
               background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
               background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
               background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
             }
 
             .btn-close{
@@ -676,6 +690,7 @@ export default {
               cursor: pointer;
               border-radius: 16px;
               text-shadow: 1px 1px 2px black;
+              text-transform: uppercase;
             }
             button:hover{
               background-color: #000;
