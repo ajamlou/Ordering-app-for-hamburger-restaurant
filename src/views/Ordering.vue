@@ -407,11 +407,7 @@ export default {
 
               /* Här nedan görs bakgrunds schackrutorna: */
               background-color: rgb(255, 250, 224); /*beigegul*/
-              /*#9E283A; mörkrosa*/
-
-              /*#282826 mörgrå*/
-              /*#B5DAC9 turkostisch*/
-
+              /*#9E283A; mörkrosa, *#282826 mörgrå, #B5DAC9 turkostisch*/
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
@@ -565,25 +561,28 @@ export default {
               width:80px;
               height:50px;
               margin:auto;
+              background-color: #e51e4a; /*mörkrosa*/
+              /* #ed6381; /*rosa*/
 
-              justify-self:center;
+              /* justify-self:center;
               background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
               background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
               background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
             }
 
             #bck-btn:hover{
-              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
             #next-btn:active{border: 2px solid #595959;}
 
