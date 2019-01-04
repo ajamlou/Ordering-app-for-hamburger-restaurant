@@ -202,7 +202,7 @@ export default{
   overflow-x: auto;
   background-color: #006622;
   border-radius: 10px;
-  border: 3px solid black;
+  border: 1px solid #7a7a7a;
   margin-top: 3vh;
 }
 .flex-item{
