@@ -38,7 +38,7 @@ export default {
 
 #orderingFrontPage-backdrop{
   display:grid;
-  grid-template-rows: minmax(min-content, max-content) 30% 30%;
+  grid-template-rows: minmax(min-content,max-content) 30% 30%;
   grid-row-gap: 1em;
   justify-items:center;
   /* grid-row: 2/5; */
@@ -126,7 +126,7 @@ export default {
 
 @media screen and (max-width:1090px){
   .welcome{
-    font-size: 4em;
+    font-size: 3em;
   }
 }
 
