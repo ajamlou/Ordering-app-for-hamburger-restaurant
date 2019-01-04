@@ -159,7 +159,7 @@ export default{
   grid-row-gap: 1vh;
   /* height:100%; */
   width: 90%;
-  height: 100%
+  height: 100;
   margin: auto auto auto auto;
 }
 #checkoutPage-backdrop{
@@ -323,12 +323,8 @@ button{
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
-@media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+@media screen and (max-width:1206px){
   #checkout-div{
-<<<<<<< HEAD
-=======
-    margin: auto auto auto 3em;
->>>>>>> 3435790d545cbd7ca95b70b7fa3040d99ab43867
   }
   #designPage-title{
     grid-row: 1;
@@ -337,11 +333,7 @@ button{
   }
 
   #sumOfOrder{
-    margin:auto;
-    text-align:left;
-    font-size: 2em;
-    grid-column:1/8;
-    grid-row:4;
+    grid-column:6/8;
   }
   #order-btn2{
     grid-column: 8;
@@ -361,12 +353,11 @@ button{
   }
   #sumOfOrder{
     margin:auto;
-    text-align:left;
+    text-align:center;
     font-size: 2em;
-    grid-column:1/8;
+    grid-column:2/8;
     grid-row:4;
   }
-<<<<<<< HEAD
   #checkout-wrapper{
     /* Här vill jag få in att de ska vara mindre  */
     /* burgarrutor när det är mobilsize, typ kvadrater. */
@@ -375,8 +366,6 @@ button{
 #add-btn-div{
   /* Här vill jag få in att de vara samma size som burgarrutorna.*/
   }
-=======
->>>>>>> 3435790d545cbd7ca95b70b7fa3040d99ab43867
 }
 
 
