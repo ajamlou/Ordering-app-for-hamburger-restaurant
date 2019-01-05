@@ -15,7 +15,10 @@
         :ingredients="ingredients">
         </StaffViewStorage>
 
-        <StaffViewStatistics v-show = "decideContent === 'statistics'">
+        <StaffViewStatistics
+        v-show = "decideContent === 'statistics'"
+        :ingredients="ingredients"
+        :orders="orders">
         </StaffViewStatistics>
 
       </div>
@@ -32,7 +35,8 @@ export default {
 
   props: {
     decideContent:String,
-    ingredients: Array
+    ingredients: Array,
+    orders: Object
 
   },
   components:{

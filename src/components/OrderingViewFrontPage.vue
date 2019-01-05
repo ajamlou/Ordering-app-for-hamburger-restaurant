@@ -104,7 +104,7 @@ export default {
   /* font-family: 'Luckiest Guy', sans-serif; */
   /* text-transform: uppercase; */
   text-align: center;
-  font-size: 13vmin;
+  font-size: 8vw;
   color: #ed6381; /*mörkrosa*/
   /* #DF532F; - orange*/
   /* #66d9ff; - ljusblå*/
@@ -124,17 +124,6 @@ export default {
   }
 } */
 
-@media screen and (max-width:1155px){
-  .welcome{
-    font-size: 5em;
-  }
-}
-@media screen and (max-width:945px){
-  .welcome{
-    font-size: 4em;
-  }
-}
-
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:1024px){
   .welcome{ /* = Frontpagens titel*/
@@ -150,9 +139,9 @@ export default {
 }
 
 @media screen and (max-width:650px){
-  /* .welcome{
+   .welcome{
     font-size:3em;
-  } */
+  }
 
   #favoritesButton, #createBurgerButton{
     width:4em;

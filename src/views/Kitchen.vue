@@ -17,6 +17,7 @@
       @Visibility="changeView"
       v-if = "currentView === 'kitchenFrontPage'"
       :ingredients="ingredients"
+      :orders="orders"
       :uiLabels="uiLabels">
     </KitchenViewFrontPage>
   </div>
@@ -169,7 +170,6 @@ export default {
     },
     changeView: function(view){
       this.currentView = view;
-      console.log(this.transactions);
     },
   }
 }
