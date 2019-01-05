@@ -79,10 +79,6 @@ data.initializeData();
     data.changeStock(item, saldo);
     io.emit('currentQueue', {ingredients: data.getIngredients() });
   });
-
-  socket.on('getTransactions', function(){
-
-  })
 });
 
 const port = 8080;

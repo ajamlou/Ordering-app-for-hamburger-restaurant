@@ -16,6 +16,7 @@
   @switchVisibility = "toggleVisibility"
   :decideContent="decidedContent"
   :ingredients = "ingredients"
+  :orders="orders"
   v-show = "ModalVisibility === true">
   </KitchenModal>
 
@@ -56,6 +57,7 @@ export default {
   },
   props:{
     ingredients: Array,
+    orders:Object,
     uiLabels: Object
   },
   data: function(){
