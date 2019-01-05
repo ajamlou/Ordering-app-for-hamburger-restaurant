@@ -33,7 +33,7 @@
       <OrderItemFinished class="isFinished"
       v-for="(order, key) in orders"
       v-if="order.status === 'done'"
-      v-on:done="markDone(key)"
+      v-on:sent="markSentOut(key)"
       :order-id="key"
       :order="order"
       :lang="lang"
@@ -78,6 +78,9 @@ export default {
     },
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
+    },
+    markSentOut: function(orderid){
+      this.$store.state.socket.emit("orderSentOut", orderid);
     }
   }
 }
