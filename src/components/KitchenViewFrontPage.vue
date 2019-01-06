@@ -5,8 +5,8 @@
   <button id = "grillButton" @click = "emitSwitchVisibility('grillPage')">GRILL</button>
   <button  id = "preppButton" @click = "emitSwitchVisibility('preppPage')">PREPP</button>
 
-  <div id="modal-div">
-  <button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>
+  <div id="button-div">
+  <!--<button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>-->
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
   <button  id = "favoritesButton" @click="emitSwitchVisibility('f')">FAVORITER</button>
   </div>
@@ -103,6 +103,7 @@ export default {
 /*css för grill- och preppknappar*/
 #grillButton, #preppButton{
   width: 25vw;
+  min-width: 7em;
   height: 20vh;
   border-radius: 1vh;
   margin:auto;
@@ -124,10 +125,10 @@ export default {
 }
 
 /*css för statistik- och lagerknappar*/
-#modal-div{
+#button-div{
   grid-row:4;
 }
-#modal-div > *{
+#button-div > *{
 border: 2px solid white;
 color: white;
 text-shadow: 2px 2px #696969;
@@ -137,9 +138,8 @@ text-decoration: none;
 display: inline-block;
 font-size: 4vh;
 border-radius: 18px;
-font-size: 1.9vh;
-font-size: 1.9vw;
-width: 12vw;
+font-size: 1.5em;
+min-width: 7em;
 height: 10vh;
 margin: 5vh;
 background-color: #00b386;

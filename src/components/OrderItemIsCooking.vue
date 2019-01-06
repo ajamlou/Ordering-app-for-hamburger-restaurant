@@ -18,7 +18,9 @@
     </b-collapse>
 
         <div class="btns">
-          <button id="cancelButton" v-on:click="orderCanceled">
+          <button id="cancelButton"
+          v-on:click="orderCanceled"
+          :class="{'center':!isPrepp}">
             ✖
           </button>
 
@@ -128,6 +130,12 @@ export default {
   height:3em;
   width:3em;
   margin: 0 auto 0 0;
+}
+
+.center{
+  grid-column: 1/3;
+  display:block;
+  margin: 10px auto auto auto !important;
 }
 
 #cancelButton:active,
