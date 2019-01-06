@@ -469,7 +469,7 @@ export default {
 /*---------------------- För språkknappen sv/eng -------------*/
             /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
             Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-            /* .sv{
+             .sv{
               background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -510,7 +510,7 @@ export default {
               background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            } */
+            } 
 
             /* Rubrik designPage */
             #designPage-title{
