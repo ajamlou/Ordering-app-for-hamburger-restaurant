@@ -7,60 +7,60 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <!-- <div id="header-title">
-      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
-      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
-      <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
-    </div> -->
+    <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+    <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
+    <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
+  </div> -->
 
-    <OrderingViewFrontPage
-    @Visibility="changeView"
-    v-if = "currentView === 'frontPage'"
-    :uiLabels="uiLabels"
-    :breadcrumbs="breadcrumbs"
-    class="viewContent">
-  </OrderingViewFrontPage>
+  <OrderingViewFrontPage
+  @Visibility="changeView"
+  v-if = "currentView === 'frontPage'"
+  :uiLabels="uiLabels"
+  :breadcrumbs="breadcrumbs"
+  class="viewContent">
+</OrderingViewFrontPage>
 
-  <button
-  id = "bck-btn"
-  v-if = "this.breadcrumbs.length != 0"
-  @click= "goBack">
-  {{ uiLabels.back }}</button>
+<button
+id = "bck-btn"
+v-if = "this.breadcrumbs.length != 0"
+@click= "goBack">
+{{ uiLabels.back }}</button>
 
-  <FavoritesPage
-  id = "favorites"
-  v-if = "currentView === 'favoritesPage'"
-  class="viewContent"
-  @clearburger = "resetBurger"
-  @fav-ingredient = "addToMenu"
-  @fav-checkout = "addToCheckout();changeView('checkoutPage');"
-  :ingredients="ingredients"
-  :lang = "lang"
-  :menu = "menusArray"
-  :uiLabels = "uiLabels"
-  :favoriteBurger1 = "favoriteBurgers[0]"
-  :favoriteBurger2 = "favoriteBurgers[1]"
-  :favoriteBurger3 = "favoriteBurgers[2]"
-  :ingredient_ids = "ingredient_ids">
-  <!-- @info_to_modal="toggleShowIngredientsModal" -->
-  <!-- :extrasCategories = "extrasCategories"
-  :categoryItemCounter="categoryItemCounter" -->
+<FavoritesPage
+id = "favorites"
+v-if = "currentView === 'favoritesPage'"
+class="viewContent"
+@clearburger = "resetBurger"
+@fav-ingredient = "addToMenu"
+@fav-checkout = "addToCheckout();changeView('checkoutPage');"
+:ingredients="ingredients"
+:lang = "lang"
+:menu = "menusArray"
+:uiLabels = "uiLabels"
+:favoriteBurger1 = "favoriteBurgers[0]"
+:favoriteBurger2 = "favoriteBurgers[1]"
+:favoriteBurger3 = "favoriteBurgers[2]"
+:ingredient_ids = "ingredient_ids">
+<!-- @info_to_modal="toggleShowIngredientsModal" -->
+<!-- :extrasCategories = "extrasCategories"
+:categoryItemCounter="categoryItemCounter" -->
 </FavoritesPage>
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
-  <h2>{{uiLabels.extras}}</h2>
+<h2>{{uiLabels.extras}}</h2>
 
-  <CategoryRow
-  v-for="category in extrasCategories"
-  :key="category.categoryNr"
-  :category="category.categoryNr"
-  :added_items="chosenIngredients"
-  :category_name="uiLabels[category.label]"
-  :lang="lang"
-  :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
-  @remove_ingredient="removeFromMenu"
-  @info_to_modal="toggleShowIngredientsModal">
+<CategoryRow
+v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="chosenIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@remove_ingredient="removeFromMenu"
+@info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 </div>
 
@@ -106,15 +106,15 @@ v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="footer">
   <button
   type="button"
-  class="btn-close"
+  id="noBtn"
   @click="toggleSlotModal()">
   {{uiLabels.dontAbort}}
 </button>
 <button
-type="button"
-class="btn-close"
-@click="changeView('frontPage');clearAll();removeBackButton();toggleSlotModal()">
-{{uiLabels.abort}}
+  type="button"
+  id="yesBtn"
+  @click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+  {{uiLabels.abort}}
 </button>
 </div>
 </SlotModal>
@@ -127,7 +127,7 @@ v-if = "currentView === 'designPage'">
 id="ordering">
 <div
 id="designPage-title">
-  {{uiLabels.yourOrder}}
+{{uiLabels.yourOrder}}
 </div>
 <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
@@ -515,10 +515,10 @@ export default {
               justify-self: center;
             }
 
-/*---------------------- För språkknappen sv/eng -------------*/
+            /*---------------------- För språkknappen sv/eng -------------*/
             /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
             Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-             .sv{
+            .sv{
               background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -747,7 +747,7 @@ export default {
               color: white;
             }
 
-/*------------------ CSS för ipad/mobiler-isch ------------*/
+            /*------------------ CSS för ipad/mobiler-isch ------------*/
             @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
               #designPage-title{
                 grid-row: 1;
@@ -786,7 +786,7 @@ export default {
 
             }
 
-/* -------------------- CSS för mobiler -----------------*/
+            /* -------------------- CSS för mobiler -----------------*/
             @media screen and (max-width:740px){
               #designPage-title{
                 font-size: 13vw;
