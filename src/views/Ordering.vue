@@ -159,6 +159,7 @@ id="designPage-title">
   {{uiLabels.sum}}: {{price}}:-
 </div>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+<button id="cancelOrder-btn" >{{uiLabels.cancelOrder}}</button>
 </div>
 </div>
 </div>
@@ -445,6 +446,20 @@ export default {
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
+
+            #cancelOrder-btn{
+              color: white;
+              background-color: #e51e4a;
+              border: 1px solid #7a7a7a;
+              grid-row:4;
+              grid-column: 1/2;
+            }
+
+            #cancelOrder-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+            }
+
             #lang-btn{
               grid-column:6;
               grid-row:1;
@@ -510,7 +525,7 @@ export default {
               background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            } 
+            }
 
             /* Rubrik designPage */
             #designPage-title{
