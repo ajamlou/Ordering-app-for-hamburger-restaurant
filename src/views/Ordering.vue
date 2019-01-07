@@ -88,7 +88,7 @@ v-show="this.showIngredientsModal"
 </IngredientsModal>
 
 <SlotModal
-v-if="this.showSlotModal">
+v-if="this.showSlotModal && this.noIngredientModal">
 <div slot="header"></div>
 <div slot="body">{{uiLabels.noIngredients}}</div>
 <div slot="footer"><button
@@ -97,6 +97,26 @@ v-if="this.showSlotModal">
   @click="toggleSlotModal()">
   {{uiLabels.OKlabel}}
 </button></div>
+</SlotModal>
+
+<SlotModal
+v-if="this.showSlotModal && this.pressedAbortModal">
+<div slot="header"></div>
+<div slot="body">{{uiLabels.areYouSure}}</div>
+<div slot="footer">
+  <button
+  type="button"
+  class="btn-close"
+  @click="toggleSlotModal()">
+  {{uiLabels.dontAbort}}
+</button>
+<button
+type="button"
+class="btn-close"
+@click="changeView('frontPage');clearAll();removeBackButton();toggleSlotModal()">
+{{uiLabels.abort}}
+</button>
+</div>
 </SlotModal>
 
 <div
@@ -159,7 +179,8 @@ id="designPage-title">
   {{uiLabels.sum}}: {{price}}:-
 </div>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-<button id="cancelOrder-btn" @click="changeView('frontPage');clearAll();removeBackButton();">{{uiLabels.cancelOrder}}</button>
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
 </div>
 </div>
@@ -211,6 +232,8 @@ export default {
       modalCategory:0,
       showIngredientsModal: false,
       showSlotModal: false,
+      noIngredientModal: false,
+      pressedAbortModal: false,
       currentView: "frontPage",
       burgerCategories:[
         {categoryNr: 4,
@@ -259,6 +282,17 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                nextBtnModal:function(){
+                  this.pressedAbortModal = false;
+                  this.noIngredientModal = true;
+                  this.toggleSlotModal();
+                },
+                cancelBtnModal:function(){
+                  this.noIngredientModal = false;
+                  this.pressedAbortModal = true;
+                  this.toggleSlotModal();
+                },
+
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
@@ -367,7 +401,7 @@ export default {
                     }
                   }
                   else{
-                    this.toggleSlotModal();
+                    this.nextBtnModal();
                   }
                 },
                 newMenu:function(){
