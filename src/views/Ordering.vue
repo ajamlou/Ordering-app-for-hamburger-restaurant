@@ -159,7 +159,7 @@ id="designPage-title">
   {{uiLabels.sum}}: {{price}}:-
 </div>
 <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-<button id="cancelOrder-btn" >{{uiLabels.cancelOrder}}</button>
+<button id="cancelOrder-btn" @click="changeView('frontPage');clearAll();removeBackButton();">{{uiLabels.cancelOrder}}</button>
 </div>
 </div>
 </div>
@@ -345,7 +345,7 @@ export default {
                   this.changeView('designPage');
                 },
                 removeBackButton:function(){
-                  this.breadcrumbs.length=0;
+                  this.breadcrumbs=[];
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
