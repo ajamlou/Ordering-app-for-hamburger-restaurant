@@ -4,6 +4,7 @@
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
       <div id="header1">
+        <button @click="menuView=!menuView">Klicka</button>
         <h1>{{ uiLabels.ordersInQueue }}</h1>
         <img class="icon" src="../assets/w-exclamation.png"/>
       </div>
@@ -17,6 +18,7 @@
         :order = "order"
         :ui-labels = "uiLabels"
         :lang = "lang"
+        :menuView="menuView"
         :key = "key"
         :ingredients="ingredients">
       </OrderItemToPrepare>
@@ -68,8 +70,7 @@ export default {
 
   data: function(){
     return {
-      chosenIngredients: [],
-      price: 0,
+      menuView: false
     }
   },
 

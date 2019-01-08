@@ -18,6 +18,7 @@
         :lang="lang"
         :order="order"
         :ingredients="ingredients"
+        :menuView="menuView"
         @total_pattys="setNrOfPattys">
       </OrderItem>
     </b-collapse>
@@ -46,7 +47,8 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+    menuView: Boolean
   },
   data:function(){
     return{
