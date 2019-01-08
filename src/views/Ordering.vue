@@ -7,7 +7,7 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
-      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+      <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
@@ -174,6 +174,10 @@ id="designPage-title">
 </CategoryRow>
 </div>
 </div>
+<div id="price-div"
+v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
 </div>
 <!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
@@ -185,10 +189,6 @@ id="designPage-title">
   @click="addToCheckout();changeView('checkoutPage');">
   {{uiLabels.next}}
 </button>
-<div id="price-div"
-v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
-  {{uiLabels.sum}}: {{price}}:-
-</div>
 </div>
 </template>
 <script>
