@@ -36,10 +36,7 @@
   :lang = "lang"
   :menu = "menusArray"
   :uiLabels = "uiLabels"
-  :favoriteBurger1 = "favoriteBurgers[0]"
-  :favoriteBurger2 = "favoriteBurgers[1]"
-  :favoriteBurger3 = "favoriteBurgers[2]"
-  :favBurger = "favBurger"
+  :favBurgers = "favBurgers"
   :ingredient_ids = "ingredient_ids">
   <!-- @info_to_modal="toggleShowIngredientsModal" -->
   <!-- :extrasCategories = "extrasCategories"
