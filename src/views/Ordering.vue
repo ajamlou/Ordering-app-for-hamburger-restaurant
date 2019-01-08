@@ -72,7 +72,6 @@ v-if = "currentView === 'checkoutPage'"
 :orderNumber="orderNumber"
 :lang="lang"
 @remove_backButton="removeBackButton"
-@toggle_SlotModal="toggleSlotModal"
 @change_view="changeView"
 @new_burger="newBurger"
 @modify_menu="modifyMenu"
@@ -496,6 +495,8 @@ export default {
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
             #cancelOrder-btn{
+              width:120px;
+              height:80px;
               color: white;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
