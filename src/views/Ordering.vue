@@ -7,7 +7,7 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
-      <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
+      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
@@ -174,10 +174,6 @@ id="designPage-title">
 </CategoryRow>
 </div>
 </div>
-<div id="price-div"
-v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
-  {{uiLabels.sum}}: {{price}}:-
-</div>
 </div>
 <!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
@@ -189,6 +185,10 @@ v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
   @click="addToCheckout();changeView('checkoutPage');">
   {{uiLabels.next}}
 </button>
+<div id="price-div"
+v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
 </div>
 </template>
 <script>
@@ -452,8 +452,8 @@ export default {
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
-              background-size: 100px 100px;
-              background-position: 0 0, 50px 50px;
+              background-size: 60px 60px;
+              background-position: 0 0, 30px 30px;
             }
             #favorites{
               grid-column: 1/7;
@@ -507,9 +507,26 @@ export default {
               border-color: #000000;
             }
 
-            #noBtn{
+            #yesBtn{
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
+              color: white;
+            }
+
+            #yesBtn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+            }
+
+            #noBtn{
+              background-color: #c5e5be;
+              border:1px solid #7a7a7a;
+              color: white;
+            }
+
+            #noBtn:hover{
+              background-color: #89a085;
+              border-color: #000000;
             }
 
             #lang-btn{
