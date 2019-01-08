@@ -5,14 +5,11 @@
     <h4>#{{orderId}}</h4>
     <p>Antal Pattys: {{nrOfPattys}}</p>
   </div>
-    <div>
-      <b-btn v-b-toggle='orderId' id="collapsibleButton">
-        +
-      </b-btn>
-      <button id="sendToPreparing" v-on:click="orderCooked">
-        {{uiLabels.ready}}
-      </button>
-    </div>
+
+    <b-btn v-b-toggle='orderId' id="collapsibleButton">
+      <strong>+</strong>
+    </b-btn>
+
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
@@ -23,10 +20,17 @@
         :ingredients="ingredients"
         @total_pattys="setNrOfPattys">
       </OrderItem>
-      <button id="cancelButton" v-on:click="orderCanceled">
-        {{uiLabels.cancel}}
-      </button>
     </b-collapse>
+
+        <div class="btns">
+          <button id="cancelButton" v-on:click="orderCanceled">
+            ✖
+          </button>
+          <button id="sendToPreparing" v-on:click="orderCooked">
+            ➤
+          </button>
+        </div>
+
   </div>
 </div>
 </template>
@@ -71,30 +75,45 @@ export default {
 .prep-head > p{
   text-align: center;
 }
-
-#cancelButton, #sendToPreparing {
-  border: 1px solid white;
-  border-radius: 3em;
-  color: white;
-  margin: 0.5vh;
+.btns{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  width:100%;
 }
 
-#cancelButton {
-  background-color: #ff3333;
+#sendToPreparing, #collapsibleButton,#cancelButton {
+  border:0;
+  color:white;
+  padding:0;
+  text-align: center;
+  border-radius: 50%;
 }
 
 #sendToPreparing {
-  background-color: #4dffa6;
+  background-color: rgb(0,150,0);
+  height:3em;
+  width:3em;
+  margin: 0 0 0 auto;
 }
 
 #collapsibleButton {
   background-color: #3366ff;
-  border-radius: 3em;
-  margin: 0.5vh;
+  height:2.7em;
+  width:2.7em;
+  display:block;
+  margin: auto;
 }
 
-#cancelButton:active {border: 2px solid #d9d9d9;}
-#sendToPreparing:active {border: 2px solid #d9d9d9;}
+#cancelButton{
+  background-color: #ff3333;
+  border: 1px solid white;
+  height:3em;
+  width:3em;
+  margin: 0 auto 0 0;
+}
+
+#cancelButton:active,
+#sendToPreparing:active,
 #collapsibleButton:active {border: 2px solid #d9d9d9;}
 
 #cancelButton:hover {background-color: #b30000}

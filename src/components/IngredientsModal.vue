@@ -140,8 +140,8 @@ export default {
       max-height:90%;
     }
     .ingredient{
-      width:49%;
-      margin-top:2%;
+      width:98%;
+      margin:2% auto auto auto;
     }
   }
 </style>

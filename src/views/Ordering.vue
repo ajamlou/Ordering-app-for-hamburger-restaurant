@@ -6,6 +6,7 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
+<<<<<<< HEAD
     <div id="header-title">
       <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
@@ -44,10 +45,51 @@
   <!-- :extrasCategories = "extrasCategories"
   :categoryItemCounter="categoryItemCounter" -->
   <!-- @fav-checkout = "addToCheckout();changeView('checkoutPage');" -->
+=======
+    <!-- <div id="header-title">
+    <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+    <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
+    <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
+  </div> -->
+
+  <OrderingViewFrontPage
+  @Visibility="changeView"
+  v-if = "currentView === 'frontPage'"
+  :uiLabels="uiLabels"
+  :breadcrumbs="breadcrumbs"
+  class="viewContent">
+</OrderingViewFrontPage>
+
+<button
+id = "bck-btn"
+v-if = "this.breadcrumbs.length != 0"
+@click= "goBack">
+{{ uiLabels.back }}</button>
+
+<FavoritesPage
+id = "favorites"
+v-if = "currentView === 'favoritesPage'"
+class="viewContent"
+@clearburger = "resetBurger"
+@fav-ingredient = "addToMenu"
+@fav-checkout = "addToCheckout();changeView('checkoutPage');"
+:ingredients="ingredients"
+:lang = "lang"
+:menu = "menusArray"
+:uiLabels = "uiLabels"
+:favoriteBurger1 = "favoriteBurgers[0]"
+:favoriteBurger2 = "favoriteBurgers[1]"
+:favoriteBurger3 = "favoriteBurgers[2]"
+:ingredient_ids = "ingredient_ids">
+<!-- @info_to_modal="toggleShowIngredientsModal" -->
+<!-- :extrasCategories = "extrasCategories"
+:categoryItemCounter="categoryItemCounter" -->
+>>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 </FavoritesPage>
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
+<<<<<<< HEAD
   <h2>{{uiLabels.extras}}</h2>
   <CategoryRow
   v-for="category in extrasCategories"
@@ -60,6 +102,21 @@ v-if = "currentView === 'favoritesPage'">
   :item_count="categoryItemCounter[category.categoryNr -1]"
   @remove_ingredient="removeFromMenu"
   @info_to_modal="toggleShowIngredientsModal">
+=======
+<h2>{{uiLabels.extras}}</h2>
+
+<CategoryRow
+v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="chosenIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@remove_ingredient="removeFromMenu"
+@info_to_modal="toggleShowIngredientsModal">
+>>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 </CategoryRow>
 </div>
 
@@ -87,7 +144,7 @@ v-show="this.showIngredientsModal"
 </IngredientsModal>
 
 <SlotModal
-v-if="this.showSlotModal">
+v-if="this.showSlotModal && this.noIngredientModal">
 <div slot="header"></div>
 <div slot="body">{{uiLabels.noIngredients}}</div>
 <div slot="footer"><button
@@ -98,14 +155,37 @@ v-if="this.showSlotModal">
 </button></div>
 </SlotModal>
 
+<SlotModal
+v-if="this.showSlotModal && this.pressedAbortModal">
+<div slot="header"></div>
+<div slot="body">{{uiLabels.areYouSure}}</div>
+<div slot="footer">
+  <button
+  type="button"
+  id="noBtn"
+  @click="toggleSlotModal()">
+  {{uiLabels.dontAbort}}
+</button>
+<button
+  type="button"
+  id="yesBtn"
+  @click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+  {{uiLabels.abort}}
+</button>
+</div>
+</SlotModal>
+
 <div
 id="designPage-backdrop"
 class="viewContent"
 v-if = "currentView === 'designPage'">
 <div
 id="ordering">
+<div
+id="designPage-title">
+{{uiLabels.yourOrder}}
+</div>
 <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
-
 <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
 <div id="r2-div"> <!--Div för row 2 i ordering grid -->
   <div id="gluten-exp">
@@ -152,6 +232,9 @@ id="ordering">
 </div>
 </div>
 </div>
+<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
 
 <button id="next-btn"
@@ -212,6 +295,8 @@ export default {
       modalCategory:0,
       showIngredientsModal: false,
       showSlotModal: false,
+      noIngredientModal: false,
+      pressedAbortModal: false,
       currentView: "frontPage",
       burgerCategories:[
         {categoryNr: 4,
@@ -260,6 +345,17 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                nextBtnModal:function(){
+                  this.pressedAbortModal = false;
+                  this.noIngredientModal = true;
+                  this.toggleSlotModal();
+                },
+                cancelBtnModal:function(){
+                  this.noIngredientModal = false;
+                  this.pressedAbortModal = true;
+                  this.toggleSlotModal();
+                },
+
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
@@ -346,7 +442,7 @@ export default {
                   this.changeView('designPage');
                 },
                 removeBackButton:function(){
-                  this.breadcrumbs.length=0;
+                  this.breadcrumbs=[];
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
@@ -368,7 +464,7 @@ export default {
                     }
                   }
                   else{
-                    this.toggleSlotModal();
+                    this.nextBtnModal();
                   }
                 },
                 newMenu:function(){
@@ -403,24 +499,20 @@ export default {
               /* background:url('../assets/chessboard.jpg'); */
               display: grid;
               grid-template-columns: repeat(6, 1fr);
+              grid-column-gap: 3vw;
               grid-template-rows: 100px;
               grid-auto-rows: auto;
 
               /* Här nedan görs bakgrunds schackrutorna: */
-              background-color: rgb(255, 255, 240);
+              background-color: rgb(255, 250, 224); /*beigegul*/
+              /*#9E283A; mörkrosa, *#282826 mörgrå, #B5DAC9 turkostisch*/
               background-image:
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+              linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
+              linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
               background-size: 60px 60px;
               background-position: 0 0, 30px 30px;
-
-              /* background-color: #eee;
-              background-image:
-              linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-              linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
-              background-size: 60px 60px;
-              background-position: 0 0, 30px 30px; */
             }
+<<<<<<< HEAD
             #favorites{
               grid-column: 1/7;
               grid-row:1;
@@ -432,74 +524,75 @@ export default {
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
+=======
+            #bck-btn{
+              grid-column: 1;
+              grid-row: 1;
+              border: 1px solid #7a7a7a;
+>>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
               color:white;
-              font-weight: 700;
-              width:80px;
+              width:100px;
+              height:50px;
+              margin:auto;
+              background-color: #e51e4a; /*mörkrosa*/
+              /* #ed6381; /*rosa*/
+
+              /* justify-self:center;
+              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
+            }
+            #bck-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
+              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
+            }
+
+            #cancelOrder-btn{
+              color: white;
+              background-color: #e51e4a;
+              border: 1px solid #7a7a7a;
+              grid-row:4;
+              grid-column: 1/2;
+            }
+
+            #cancelOrder-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+            }
+
+            #lang-btn{
+              grid-column:6;
+              grid-row:1;
+              color:white;
+              /* font-weight: 700; */
+              width:100px;
               height:50px;
               border:1px solid #7a7a7a;
-              margin: auto;
+              /* margin: auto; */
+              background-color: #b9d7cb; /*ljusturkos*/
+              padding: 0;
             }
-            #header-title{
-              grid-column:3/5;
-              grid-row:1;
-              text-align: center;
+            #lang-btn:hover{
+              background-color: #6f8179;
+              border-color: #000000;
+            }
+            #bck-btn,#lang-btn{
               align-self: center;
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-transform: uppercase;
-              text-shadow: 2px 2px #0086b3;
-            }
-            .viewContent{
-              grid-row: 2;
-              grid-column: 1/7;
-            }
-            #designPage-backdrop{
-              background-color: rgba(255,255,255,0.7);
-              border-radius:15px;
-              width:95%;
-              justify-self:center;
-              margin-bottom:2em;
-              padding-bottom:1em;
-              margin-top:2em;
-              -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-              -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-            }
-            #ordering {
-              display:grid;
-              grid-template-columns: repeat(6, 1fr);
-              margin:50px auto auto auto;
-              width: 90%;
-            }
-            #ordering h2{
-              font-weight: bolder;
-              text-transform: uppercase;/*
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-shadow: 2px 2px #0086b3;*/
-            }
-            #extras, #extras-favorites{
-              margin-top:2em;
+              justify-self: center;
             }
 
-            #bestallning{
-              grid-column: 1 / 4;
-              grid-row: 1;
-              text-align: left;
-            }
-            #r2-div{
-              grid-row:1/2;
-              grid-column: 4/7;
-              display:grid;
-              grid-template-columns: repeat(3,1fr);
-              grid-template-rows: auto;
-              font-size:1em;
-            }
-            .icon{
-              height:3em;
-              padding:0 3px 3px 0;
-            }
-
+            /*---------------------- För språkknappen sv/eng -------------*/
             /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
             Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
             .sv{
@@ -545,10 +638,81 @@ export default {
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             }
 
+            /* Rubrik designPage */
+            #designPage-title{
+              grid-column:1/7;
+              grid-row:1;
+              text-align: left;
+              align-self: center;
+              font-family: 'Lobster', sans-serif;
+              font-size: 14vmin;
+              /* font-family: 'Luckiest Guy', sans-serif; */
+              color: #ed6381; /*rosa*/
+              /* text-transform: uppercase; */
+              text-shadow: 2px 2px #444444;
+            }
+            .viewContent{
+              grid-row: 2;
+              grid-column: 1/7;
+            }
+            #designPage-backdrop{
+              background-color: rgba(255, 250, 224,0.99);
+              border-radius:15px;
+              width:95%;
+              justify-self:center;
+              margin-bottom:2em;
+              padding-bottom:1em;
+              /* margin-top:2em; */
+              /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
+              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
+            }
+            #ordering {
+              display:grid;
+              grid-template-columns: repeat(6, 1fr);
+              margin: auto auto auto auto;
+              width: 90%;
+              grid-row-gap: 1vh;
+            }
+            #ordering h2{
+              font-weight: bolder;
+              text-transform: uppercase;
+              text-align: left;
+              border-top: dotted;
+              border-bottom: dotted;
+              border-color: #ed6381; /*rosa*/
+              /*
+              font-family: 'Luckiest Guy', sans-serif;
+              color: #66d9ff;
+              text-shadow: 2px 2px #0086b3;*/
+            }
+            #extras, #extras-favorites{
+              margin-top:2em;
+            }
+
+            #bestallning{
+              grid-column: 1/7;
+              grid-row: 2;
+              text-align: left;
+            }
+            #r2-div{
+              grid-row:1;
+              grid-column: 4/7;
+              display:grid;
+              grid-template-columns: repeat(3,1fr);
+              grid-template-rows: auto;
+              font-size:1em;
+            }
+            .icon{
+              height:3em;
+              padding:0 3px 3px 0;
+            }
+
             #categories-wrapper{
               grid-column: 1/7;
-              grid-row:2;
+              grid-row:3;
             }
+<<<<<<< HEAD
             #bck-btn{
               grid-column: 1/2;
               grid-row: 1;
@@ -577,14 +741,24 @@ export default {
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
             }
             #next-btn:active{border: 2px solid #595959;}
+=======
+            #favorites{
+              grid-column: 1/7;
+              grid-row:2;
+            }
+            #extras-favorites{
+              grid-column: 1/7;
+              grid-row:3;
+            }
+>>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 
             #price-div{
               justify-self: center;
               margin:auto;
               text-align:center;
               font-size: 2em;
-              grid-column:3/5;
-              grid-row:3;
+              grid-column:5/6;
+              grid-row:4;
             }
 
             #next-btn{
@@ -593,25 +767,31 @@ export default {
               justify-self:end;
               border:1px solid #7a7a7a;
               grid-column: 6/7;
-              grid-row:3;
+              grid-row:4;
               color:white;
-              background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
+              background-color: #c5e5be;
+
+              /* #88bba7; /*mörkturkos matchar #b9d7cb; - ljusturkos*/
+
+              /* background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
               background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
               background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
               background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
               background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 ); */
             }
-            #next-btn:active{border: 2px solid #595959;}
+            /* #next-btn:active{border: 2px solid #595959;} */
             #next-btn:hover{
-              background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
+              background-color: #89a085;
+              border-color: #000000;
+              /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+              /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
               background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
               background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
               background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
             }
 
             .btn-close{
@@ -668,20 +848,28 @@ export default {
               cursor: pointer;
               border-radius: 16px;
               text-shadow: 1px 1px 2px black;
+              text-transform: uppercase;
             }
             button:hover{
               background-color: #000;
               color: white;
             }
+
+            /*------------------ CSS för ipad/mobiler-isch ------------*/
             @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+              #designPage-title{
+                grid-row: 1;
+                text-align: center;
+                font-size: 12vw;
+              }
               #bestallning{
                 grid-column: 1/7;
-                grid-row:1/2;
+                grid-row:3;
                 text-align:center;
               }
               #r2-div{
                 grid-column:1/7;
-                grid-row:2/3;
+                grid-row:2;
                 text-align:center;
                 justify-items: center;
                 align-items: center;
@@ -689,10 +877,13 @@ export default {
                 align-content: center;
               }
               #categories-wrapper{
-                grid-row:3/4;
+                grid-row:4;
               }
               #price-div, #next-btn{
-                grid-row:4/5;
+                grid-row:5;
+              }
+              #ordering h2{
+                font-size: 5vw;
               }
             }
             @media screen and (max-width:1206px){
@@ -702,12 +893,11 @@ export default {
               }
 
             }
-            @media screen and (max-width:650px){
-              #header-title{
-                grid-column:2/6;
-              }
-              #header-title h1{
-                font-size:2.3em;
+
+            /* -------------------- CSS för mobiler -----------------*/
+            @media screen and (max-width:740px){
+              #designPage-title{
+                font-size: 13vw;
               }
               .icon{
                 display:block;
@@ -718,13 +908,13 @@ export default {
                 height:50px;
                 padding:0;
               }
-              h2{
-                font-size:1.8em;
+              #ordering h2{
+                font-size:6.3vw;
               }
             }
             @media screen and (max-width:480px){
               #next-btn{
-                grid-row:4;
+                grid-row:5;
               }
 
             }

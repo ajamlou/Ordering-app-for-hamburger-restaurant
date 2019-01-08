@@ -75,7 +75,8 @@ export default {
   position:relative;
   display:flex;
   flex-wrap: wrap;
-  background-color: rgba(255,183,101,0.8);
+  background-color: #b9d7cb; /*ljusturkos*/
+  /* rgba(255,183,101,0.8); */
   border-radius: 15px;
   margin: 0 0.5em 1em 0;
   height:calc(6em + 6px);
@@ -105,7 +106,9 @@ export default {
   margin:3px 3px 3px 0;
 }
 .extras{
-  background-color: rgba(90,174,211,0.8);
+  background-color: #b9d7cb; /*ljusturkos*/
+  /* #ed6381; /*mörkrosa*/ 
+  /* rgba(90,174,211,0.8); */
 }
 
 .ingredient:hover{

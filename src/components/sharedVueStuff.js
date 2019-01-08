@@ -7,11 +7,15 @@ var sharedVueStuff = {
       orders: {},
       uiLabels: {},
       ingredients: [],
+<<<<<<< HEAD
       transactions:[],
       lang: "sv",
       favBurger1: {},
       favBurger2: {},
       favBurger3: {}
+=======
+      lang: "sv"
+>>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
     }
   },
   created: function () {
@@ -28,9 +32,6 @@ var sharedVueStuff = {
 
     this.$store.state.socket.on('currentQueue', function (data) {
       this.orders = data.orders;
-      if (typeof data.transactions !== 'undefined') {
-      this.transactions = data.transactions;
-    }
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }

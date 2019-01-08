@@ -18,7 +18,7 @@
   "ingredients" : "Ingredients",
   "ready" : "Done",
   "order" : "My burger",
-  "language" : "Svenska",
+  "language" : "SVENSKA",
   "bread" : "Bread",
   "patty" : "Patty",
   "garnish" : "Garnish",
@@ -27,7 +27,7 @@
   "drinks" : "Drinks",
   "myBurger" : "Design your burger",
   "extras" : "Sides & drinks",
-  "back" : "Go back",
+  "back" : "←",
   "burger" : "Burger",
   "quantity" : "Quantity",
   "unitprice" : "Unit price",
@@ -45,5 +45,8 @@
   "vegan" : "Vegan",
   "OKlabel": "OK",
   "checkout" : "Checkout",
-  "anotherBurger": "Choose how to create the new burger"
+  "anotherBurger": "MaxDonald's",
+  "areYouSure": "Do you want to cancel your order?",
+  "abort": "Yes, cancel",
+  "dontAbort": "No, continue"
 }

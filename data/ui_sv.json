@@ -19,7 +19,7 @@
   "ready" : "Klart",
   "order" : "Min burgare",
   "maximize": "+",
-  "language" : "English",
+  "language" : "ENGLISH",
   "bread" : "Bröd",
   "patty" : "Protein",
   "garnish" : "Pålägg",
@@ -29,7 +29,7 @@
   "myBurger" : "Designa din hamburgare",
   "extras" : "Tillbehör & dryck",
   "cancel": "Avbryt",
-  "back" : "Gå tillbaka",
+  "back" : "←",
   "burger" : "Burgare",
   "back2": "TILLBAKA",
   "quantity" : "Antal",
@@ -48,5 +48,8 @@
   "vegan" : "Vegansk",
   "OKlabel": "OK",
   "checkout" : "Varukorg",
-  "anotherBurger": "Välj hur du vill skapa din nya burgare"
+  "anotherBurger": "MaxDonald's",
+  "areYouSure":"Är du säker på att du vill avbryta beställningen?",
+  "abort": "Ja, avbryt",
+  "dontAbort": "Nej, fortsätt"
 }

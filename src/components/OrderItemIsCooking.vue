@@ -1,6 +1,41 @@
 <template>
-  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
   <div>
+    <div class="prep-head">
+    <h4>#{{orderId}}</h4>
+  </div>
+
+    <b-btn v-b-toggle='orderId' id="collapsibleButton">
+      <strong>+</strong>
+    </b-btn>
+
+    <div>
+      <b-collapse class="collapsibleBtn" visible :id = "orderId">
+        <OrderItem
+        :ui-labels="uiLabels"
+        :lang="lang"
+        :order="order">
+      </OrderItem>
+    </b-collapse>
+
+        <div class="btns">
+          <button id="cancelButton"
+          v-on:click="orderCanceled"
+          :class="{'center':!isPrepp}">
+            ✖
+          </button>
+
+          <button
+          id="doneButton"
+          v-on:click="orderDone"
+          v-if="isPrepp">
+            ➤
+          </button>
+        </div>
+
+  </div>
+</div>
+  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
+  <!--<div>
     <h4>#{{orderId}}</h4>
     <div>
       <button id="plus" @click="show = !show">+</button>
@@ -20,7 +55,7 @@
       </p>
     </transition>
   </div>
-</div>
+</div>-->
 </template>
 
 <script>
@@ -53,36 +88,61 @@ export default {
 </script>
 
 <style scoped>
-#expanding {
-  transform-origin: top;
-  transition: .4s ease-in-out;
-  overflow: hidden;
+.prep-head{
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
-.slide-enter, .slide-leave-to {
-  transform: scaleY(0);
+.prep-head > p{
+  text-align: center;
 }
-#orderCookedButton, #cancelButton, #plus {
+.btns{
+  display:grid;
+  grid-template-columns: 50% 50%;
+  width:100%;
+}
+
+#doneButton, #collapsibleButton,#cancelButton {
+  border:0;
+  color:white;
+  padding:0;
+  text-align: center;
+  border-radius: 50%;
+}
+
+#doneButton {
+  background-color: rgb(0,150,0);
+  height:3em;
+  width:3em;
+  margin: 0 0 0 auto;
+}
+
+#collapsibleButton {
+  background-color: #3366ff;
+  height:2.7em;
+  width:2.7em;
+  display:block;
+  margin: auto;
+}
+
+#cancelButton{
+  background-color: #ff3333;
   border: 1px solid white;
-  border-radius: 3em;
-  color: white;
-  margin: 1.5vh;
-}
-#orderCookedButton {
-  background-color: green;
-}
-#cancelButton {
-  background-color: red;
-}
-#plus {
-  background-color: blue;
+  height:3em;
+  width:3em;
+  margin: 0 auto 0 0;
 }
 
-#orderCookedButton:active {border: 2px solid lightgreen;}
-#cancelButton:active {border: 2px solid orange;}
-#plus:active {border: 1px solid lightblue;}
+.center{
+  grid-column: 1/3;
+  display:block;
+  margin: 10px auto auto auto !important;
+}
 
-#orderCookedButton:hover {background-color: darkgreen;}
-#cancelButton:hover {background-color: darkred;}
-#plus:hover {background-color: darkblue}
+#cancelButton:active,
+#doneButton:active,
+#collapsibleButton:active {border: 2px solid #d9d9d9;}
 
+#cancelButton:hover {background-color: #b30000}
+#doneButton:hover {background-color: #00cc66}
+#collapsibleButton:hover {background-color: #0040ff}
 </style>

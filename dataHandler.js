@@ -128,6 +128,10 @@ Data.prototype.addOrder = function (order) {
       this.orders[orderId].status = "not-started";
     };
 
+    Data.prototype.markOrderSentOut = function (orderId) {
+      this.orders[orderId].status = "sentOut";
+    };
+
     Data.prototype.getTransactions = function(){
       return this.data[transactionsDataName];
     };
