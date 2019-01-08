@@ -175,7 +175,7 @@ id="designPage-title">
 </div>
 </div>
 </div>
-<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
