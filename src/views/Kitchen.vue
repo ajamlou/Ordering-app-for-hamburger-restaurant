@@ -24,7 +24,7 @@
 
 
 <!-- Om modalen för ändra favoriter ska visas eller ej -->
-<ChangeFavorites v-if ="currentView === 'f'"
+<ChangeFavorites id = "changeFavorites" v-if ="currentView === 'f'"
 :ingredients= "ingredients"
 :favBurgers= "favBurgers">
 </ChangeFavorites>
@@ -198,6 +198,9 @@ export default {
 
 .contentPage{
   grid-row: 1;
+  grid-column: 1/7;
+}
+#changeFavorites{
   grid-column: 1/7;
 }
 #backButton {

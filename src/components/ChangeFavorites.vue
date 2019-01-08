@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <div id = "favMainDiv">
     <div id = "burger" >
-      <h1>Burger 1</h1>
+      <h1 id = "header">Change the favorites</h1>
       <p>Enter name of Burger: <p>
         <input v-model = 'rows.name'>
         <p>Enter url to picture: <p>
           <input v-model = 'rows.url'>
           <div v-for="(row, index) in rows" :key = "index">
-            <p>{{row.title}}</p>
+            <p>{{row.title}} {{index+1}}</p>
             <input v-model="row.value"><button @click = "remove(index)">remove</button>
           </div>
           <button class = 'addRow' @click = "addrow">add ingedient</button>
           <br>
-          <p>Which burger do you want to replace?:</p>
+          <p>Which burger do you want to replace?</p>
           <div v-for = "(item, i) in favBurgers" :key = "i">
             <input type="radio" v-model = 'rows.checked' :value = "i"><p>{{item.name}}</p>
             <br>
@@ -53,8 +53,7 @@
       addrow: function(){
         console.log(this.favBurgers)
         this.rows.push({
-          title: 'ingredient'+this.rows.index,
-          value: ''
+          title: 'ingredient'
         })
         this.counter++
       },
@@ -74,7 +73,7 @@
         catch(err){
           this.favError();
         }
-        if(this.checkIfChecked()){
+        if(this.checkIfChecked() && !this.showSlotModal){
           let burger = {
             "name": this.rows.name,
             "url": this.rows.url,
@@ -95,12 +94,11 @@
           return true;
         }
         else{
-          this.favError();
+          this.showSlotModal = true;
         }
       },
       remove: function(index){
         this.rows.splice(index,1);
-        this.counter--;
       }
     }
   }
@@ -117,6 +115,15 @@
     display: inline-block;
     font-size: 16px;
   }
+  /* #burger{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  } */
+  /* #header{
+    grid-column: 3;
+  } */
+
   p{
     color:white;
   }
