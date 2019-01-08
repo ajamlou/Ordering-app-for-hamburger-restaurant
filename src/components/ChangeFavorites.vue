@@ -12,19 +12,36 @@
         <br>
         <button id = 'confirm' @click = "updateInfo">Confirm</button>
       </div>
+
+      <SlotModal
+      v-if="this.showSlotModal">
+      <div slot="header"><button @click = 'favError'>Go back</button></div>
+      <div slot="body">Incorrect input, try again</div>
+      </SlotModal>
+
     </div>
+
+
+
   </template>
 
   <script>
+
+  import SlotModal from '@/components/SlotModal.vue'
+
   export default {
     name: 'ChangeFavorites',
+    components:{
+      SlotModal
+    },
     props:{
       ingredients: Array
     },
     data: function(){
       return{
         rows: [],
-        counter: 1
+        counter: 1,
+        showSlotModal: false
       }
     },
     methods: {
@@ -38,6 +55,7 @@
       updateInfo: function(){
         let favoriteIngredients = [];
         let favoritePrice = 0;
+        try{
         for (var i = 0; i< this.rows.length; i++){
           favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_sv === this.rows[i].value)); /*lägger favoritingredienser i en array*/
           favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_sv === this.rows[i].value)).selling_price; /*räknar ut priset för de ingredienserna*/
@@ -46,13 +64,22 @@
             favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_en === this.rows[i].value)).selling_price;
           }
         }
+      }
+      catch(err){
+        this.favError();
+      }
+      if(favoritePrice > 0){
           let burger = {
             "ingredients": favoriteIngredients,
             "price": favoritePrice
           }
-          console.log(burger);
           this.$store.state.socket.emit('updateinfo', burger);
           this.rows = [];
+          this.counter = 0;
+        }
+      },
+        favError: function(){
+          this.showSlotModal = !this.showSlotModal;
         }
       }
     }
