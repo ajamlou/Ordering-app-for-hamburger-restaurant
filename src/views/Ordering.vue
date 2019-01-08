@@ -507,6 +507,11 @@ export default {
               border-color: #000000;
             }
 
+            #noBtn{
+              background-color: #e51e4a;
+              border: 1px solid #7a7a7a;
+            }
+
             #lang-btn{
               grid-column:6;
               grid-row:1;
