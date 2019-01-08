@@ -70,6 +70,7 @@
       }
       if(favoritePrice > 0){
           let burger = {
+            "name": this.rows.name,
             "ingredients": favoriteIngredients,
             "price": favoritePrice
           }
