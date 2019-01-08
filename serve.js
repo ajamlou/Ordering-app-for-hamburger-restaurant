@@ -40,8 +40,8 @@ io.on('connection', function (socket) {
   socket.emit('initialize', {
     orders: data.getAllOrders(),
     uiLabels: data.getUILabels(),
-    ingredients: data.getIngredients()
-    // favBurger: data.getFavburgers()
+    ingredients: data.getIngredients(),
+    favBurgers: data.getFavBurgers()
   });
 
     // When someone orders something
