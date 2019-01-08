@@ -3,95 +3,100 @@
   <div id="masterDivKitchen">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-      <button
-      id="backButton"
-      @click="currentView = 'kitchenFrontPage'"
-      v-if = "currentView != 'kitchenFrontPage'">
-        {{ uiLabels.back2 }}
-      </button>
+    <button
+    id="backButton"
+    @click="currentView = 'kitchenFrontPage'"
+    v-if = "currentView != 'kitchenFrontPage'">
+    {{ uiLabels.back2 }}
+  </button>
 
   <div
   class="contentPage"
   v-if = "currentView === 'kitchenFrontPage'">
-      <KitchenViewFrontPage
-      @Visibility="changeView"
-      v-if = "currentView === 'kitchenFrontPage'"
-      :ingredients="ingredients"
-      :orders="orders"
-      :uiLabels="uiLabels">
-    </KitchenViewFrontPage>
-  </div>
+  <KitchenViewFrontPage
+  @Visibility="changeView"
+  v-if = "currentView === 'kitchenFrontPage'"
+  :ingredients="ingredients"
+  :orders="orders"
+  :uiLabels="uiLabels">
+</KitchenViewFrontPage>
+</div>
+
+
+<!-- Om modalen för ändra favoriter ska visas eller ej -->
+<ChangeFavorites v-if ="currentView === 'f'">
+</ChangeFavorites>
 
 <!-- GrillView -->
 <!-- Använder class = grillPage i denna div för att sen kunna "skriva över"
 med ett id i GrillView.vue -->
-    <div class="contentPage"
-    v-show="currentView === 'grillPage'">
-      <GrillView
-      :ingredients="ingredients"
-      :uiLabels="uiLabels"
-      :orders="orders"
-      :lang="lang">
-      </GrillView>
-    </div>
+<div class="contentPage"
+v-show="currentView === 'grillPage'">
+<GrillView
+:ingredients="ingredients"
+:uiLabels="uiLabels"
+:orders="orders"
+:lang="lang">
+</GrillView>
+</div>
 
 <!-- PreppView -->
 <!-- Använder class = preppPage i denna div för att sen kunna "skriva över"
 med ett id i PreppView.vue -->
-    <PreppView
-    class="contentPage"
-    v-show="currentView === 'preppPage'"
-    :ingredients="ingredients"
-    :uiLabels="uiLabels"
-    :orders="orders"
-    :lang="lang">
-    </PreppView>
-  </div>
+<PreppView
+class="contentPage"
+v-show="currentView === 'preppPage'"
+:ingredients="ingredients"
+:uiLabels="uiLabels"
+:orders="orders"
+:lang="lang">
+</PreppView>
+</div>
 
-  <!-- <div id="kitchen-grid" v-show="currentView === 'grillPage'"> -->
+<!-- <div id="kitchen-grid" v-show="currentView === 'grillPage'"> -->
 
-    <!-- Här skapas beställningarna i "Inkomna". -->
-    <!-- <div id="orders">
-      <div id="header1">
-        <h1>{{ uiLabels.ordersInQueue }}</h1>
-      </div>
-      <div class="allOrders">
-        <OrderItemToPrepare class="toPrepare"
-        v-for="(order, key) in orders"
-        v-if="order.status === 'not-started'"
-        v-on:cancel = "markCanceled(key)"
-        v-on:done="markDone(key)"
-        :order-id="key"
-        :order="order"
-        :ui-labels="uiLabels"
-        :lang="lang"
-        :key="key">
-      </OrderItemToPrepare>
-    </div>
-  </div> -->
+<!-- Här skapas beställningarna i "Inkomna". -->
+<!-- <div id="orders">
+<div id="header1">
+<h1>{{ uiLabels.ordersInQueue }}</h1>
+</div>
+<div class="allOrders">
+<OrderItemToPrepare class="toPrepare"
+v-for="(order, key) in orders"
+v-if="order.status === 'not-started'"
+v-on:cancel = "markCanceled(key)"
+v-on:done="markDone(key)"
+:order-id="key"
+:order="order"
+:ui-labels="uiLabels"
+:lang="lang"
+:key="key">
+</OrderItemToPrepare>
+</div>
+</div> -->
 
-  <!-- Här skapas beställningarna i "Tillagas". -->
-  <!-- <div id="preparing">
-    <div id="header2">
-      <h1>{{ uiLabels.ordersPreparing }}</h1>
-    </div>
-    <div class="allOrders">
-      <OrderItemIsCooking class="isPreparing"
-      v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      v-on:cooked="markCooked(key)"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItemIsCooking>
-  </div>
+<!-- Här skapas beställningarna i "Tillagas". -->
+<!-- <div id="preparing">
+<div id="header2">
+<h1>{{ uiLabels.ordersPreparing }}</h1>
+</div>
+<div class="allOrders">
+<OrderItemIsCooking class="isPreparing"
+v-for="(order, key) in orders"
+v-if="order.status === 'done'"
+v-on:cooked="markCooked(key)"
+:order-id="key"
+:order="order"
+:ui-labels="uiLabels"
+:lang="lang"
+:key="key">
+</OrderItemIsCooking>
+</div>
 </div> -->
 
 <!-- <div class = "backButtonClass" @click="currentView = 'kitchenFrontPage'">
-  <button id = "backButton">
-    {{ uiLabels.back2 }}</button>
+<button id = "backButton">
+{{ uiLabels.back2 }}</button>
 </div> -->
 
 
@@ -117,6 +122,7 @@ v-show = "ModalVisibility === true">
 <script>
 //import methods and data that are shared between the component and kitchen views
 import KitchenModal from '@/components/KitchenModal.vue'
+import ChangeFavorites from '@/components/ChangeFavorites.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
@@ -143,7 +149,8 @@ export default {
     KitchenViewFrontPage,
     PreppView,
     GrillView,
-    SlotModal
+    SlotModal,
+    ChangeFavorites
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   //the ordering system and the kitchen
