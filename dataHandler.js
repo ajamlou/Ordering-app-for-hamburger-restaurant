@@ -4,6 +4,7 @@ let csv = require("csvtojson");
 
 let ingredientsDataName = "ingredients";
 let transactionsDataName = "transactions";
+let favoritesDataName = "favorites";
 let defaultLanguage = "sv";
 let fs1 = require('fs');
 
@@ -24,6 +25,41 @@ Data.prototype.getUILabels = function (lang) {
   return ui;
 };
 
+Data.prototype.getFavBurgers = function () {
+  var d = this.data;
+  var favorites = d[favoritesDataName];
+  var ingredients = d[ingredientsDataName];
+  var chosenIngredients = [];
+  var chosenBurgers = [];
+  for(var j = 0; j<favorites.length;j++){
+    var price = 0;
+    for(var i = 0; i<ingredients.length;i++){
+      var x = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient1)
+      if(x != undefined){
+        chosenIngredients.push(x);
+        price = price + x.selling_price;
+      }
+      var y = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient2)
+      if(y != undefined){
+        chosenIngredients.push(y);
+        price = price + y.selling_price;
+      }
+      var z = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient3)
+      if(z != undefined){
+        chosenIngredients.push(z);
+        price = price + z.selling_price;
+      }
+    }
+    let burger = {
+      name: favorites[j].burger_name,
+      url: favorites[j].url,
+      ingredients: chosenIngredients,
+      price: price
+    }
+    chosenBurgers.push(burger);
+  }
+return chosenBurgers;
+};
 /*
 Returns a JSON object array of ingredients with the fields from
 the CSV file, plus a calculated amount in stock, based on
@@ -43,10 +79,6 @@ Data.prototype.getIngredients = function () {
   });
 };
 
-// Data.prototype.getFavburgers = function() {
-//   var d =
-// }
-
 /*
 Function to load initial data from CSV files into the object
 */
@@ -54,7 +86,7 @@ Data.prototype.initializeTable = function (table) {
   csv({checkType: true})
   .fromFile("./data/" + table + ".csv")
   .then((jsonObj) => {
-    //console.log("JSON object", jsonObj, "done");
+    // console.log("JSON object", jsonObj, "done");
     this.data[table] = jsonObj;
   });
 };
@@ -65,6 +97,8 @@ Data.prototype.initializeData = function() {
   this.initializeTable(ingredientsDataName);
   // Load initial stock. Make alterations in the CSV file.
   this.initializeTable(transactionsDataName);
+  //ladda in favoriterna
+  this.initializeTable(favoritesDataName);
 }
 /*
 Adds an order to to the queue and makes an withdrawal from the
@@ -101,9 +135,9 @@ Data.prototype.addOrder = function (order) {
 
     return orderId;
   };
-Data.prototype.changeFavorites = function(info){
-return info;
-}
+  Data.prototype.changeFavorites = function(info){
+    return info;
+  }
   /*Var används denna??? */
   Data.prototype.changeStock = function (item, saldo) {
     var transactions = this.data[transactionsDataName]
