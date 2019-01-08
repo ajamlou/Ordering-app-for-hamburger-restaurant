@@ -88,7 +88,6 @@ export default {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: hidden;
-    overflow-y: auto;
     border-radius: 15px;
     width:45em;
     max-width:85%;
