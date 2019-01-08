@@ -7,13 +7,8 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
-<<<<<<< HEAD
       <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
       <!-- <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1> -->
-=======
-      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
-      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
->>>>>>> 1513eb46834d5b638cfe132772a346f7e1b6849d
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
