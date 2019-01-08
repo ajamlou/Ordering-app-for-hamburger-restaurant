@@ -32,7 +32,6 @@
   class="viewContent"
   @clearburger = "resetBurger"
   @fav-ingredient = "addToMenu"
-  @fav-checkout = "addToCheckout();changeView('checkoutPage');"
   :ingredients="ingredients"
   :lang = "lang"
   :menu = "menusArray"
@@ -44,12 +43,12 @@
   <!-- @info_to_modal="toggleShowIngredientsModal" -->
   <!-- :extrasCategories = "extrasCategories"
   :categoryItemCounter="categoryItemCounter" -->
+  <!-- @fav-checkout = "addToCheckout();changeView('checkoutPage');" -->
 </FavoritesPage>
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
   <h2>{{uiLabels.extras}}</h2>
-
   <CategoryRow
   v-for="category in extrasCategories"
   :key="category.categoryNr"
@@ -152,11 +151,17 @@ id="ordering">
 </CategoryRow>
 </div>
 </div>
-<div id="price-div">
+</div>
+</div>
+
+<button id="next-btn"
+  v-if= "currentView === 'designPage' || currentView === 'favoritesPage'"
+  @click="addToCheckout();changeView('checkoutPage');">
+  {{uiLabels.next}}
+</button>
+<div id="price-div"
+v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
   {{uiLabels.sum}}: {{price}}:-
-</div>
-<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-</div>
 </div>
 </div>
 </template>
@@ -416,6 +421,14 @@ export default {
               background-size: 60px 60px;
               background-position: 0 0, 30px 30px; */
             }
+            #favorites{
+              grid-column: 1/7;
+              grid-row:1;
+            }
+            #extras-favorites{
+              grid-column: 1/7;
+              grid-row:2;
+            }
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
@@ -535,14 +548,6 @@ export default {
             #categories-wrapper{
               grid-column: 1/7;
               grid-row:2;
-            }
-            #favorites{
-              grid-column: 1/7;
-              grid-row:2;
-            }
-            #extras-favorites{
-              grid-column: 1/7;
-              grid-row:3;
             }
             #bck-btn{
               grid-column: 1/2;
