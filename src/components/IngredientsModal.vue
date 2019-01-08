@@ -81,7 +81,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     align-content: start;
-    position: relative;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
