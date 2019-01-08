@@ -3,26 +3,14 @@
 <template>
     <div class = "wrapper">
       <div class = "favorites">
-      <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id)">
+      <div class = "burgers" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
         <h1 class = "header">{{item.name}}</h1>
-        <img :src= "item.pic" style="border-style: none;" width="100px" height="100px" class = "image">
-        <ul v-if = "item.id === 1">
-          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
+        <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
+        <ul>
+          <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
             {{thing["ingredient_"+ lang]}}
           </li>
-          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
-        </ul>
-        <ul v-if = "item.id === 2">
-          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
-            {{thing["ingredient_"+ lang]}}
-          </li>
-          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
-        </ul>
-        <ul v-if = "item.id === 3">
-          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
-            {{thing["ingredient_"+ lang]}}
-          </li>
-          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
+          <p>{{uiLabels.sum}}: {{item.price}} :-</p>
         </ul>
       </div>
     </div>
@@ -35,24 +23,6 @@ export default {
   name: 'FavortiesPage',
   data: function(){
     return{
-      price: 0,
-      units: 1,
-      categoryItemCounter: 1,
-      change: false,
-      favBurgers:[
-        {name:'Beefinator',
-        id: 1,
-        pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
-      },
-      {name:'Vegginator',
-      id: 2,
-      pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
-    },
-    {name:'Veganinator',
-    id: 3,
-    pic: "http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4160.png"
-  }
-]
 }
 },
 props:{
@@ -60,10 +30,7 @@ props:{
   lang: String,
   menu: Array,
   uiLabels: Object,
-  favBurger: Object,
-  favoriteBurger1: Object,
-  favoriteBurger2: Object,
-  favoriteBurger3: Object,
+  favBurgers: Array,
   ingredient_ids: Array,
   extrasCategories: Array
   // categoryItemCounter: Array
@@ -73,31 +40,14 @@ components:{
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
-  favToCheckout: function(id){
+  favToCheckout: function(index, item){
     // this.$emit("clearburger");
-    console.log(this.favBurger);
-    if(id === 1){
-      for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
-        this.$emit("fav-ingredient", this.favoriteBurger1.ingredients[i]);
+      for (var i = 0; i< item.ingredients.length; i++){
+        this.$emit("fav-ingredient", item.ingredients[i]);
       }
-    }
-    else if(id === 2){
-      for (i = 0; i< this.favoriteBurger2.ing_count; i++){
-        this.$emit("fav-ingredient", this.favoriteBurger2.ingredients[i]);
-      }
-    }
-    else{
-      for (i = 0; i< this.favoriteBurger3.ing_count; i++){
-        this.$emit("fav-ingredient", this.favoriteBurger3.ingredients[i]);
-      }
-    }
     // this.$emit("fav-checkout");
   },
-  burgerSelected: function(){
-    this.change = !this.change;
-  },
   toggleShowIngredientsModal:function(){
-    console.log("hey")
     this.$emit('info_to_modal', this.category)
   },
 }
