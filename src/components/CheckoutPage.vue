@@ -22,6 +22,27 @@
       </button></div>
     </Slotmodal>
 
+    <SlotModal
+    v-if="this.showSlotModal && this.pressedAbortModal">
+    <div slot="header"></div>
+    <div slot="body">{{uiLabels.areYouSure}}</div>
+    <div slot="footer" class="slotButtons">
+      <button
+      type="button"
+      id="noBtn"
+      @click="toggleSlotModal()">
+      {{uiLabels.dontAbort}}
+    </button>
+    <button
+      type="button"
+      id="yesBtn"
+      @click="orderFinished()">
+      {{uiLabels.abort}}
+    </button>
+    </div>
+    </SlotModal>
+    </div>
+
   <div id="btn-order-wrap">
     <div id="add-btn-div" @click="newBurger">
 
@@ -52,6 +73,7 @@
 <!-- <div id="checkout-foot"> -->
   <center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
   <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <!-- </div> -->
 
 </div>
@@ -73,12 +95,13 @@ export default{
     uiLabels:Object,
     menus: Array,
     lang: String,
-    orderNumber: Number
+    orderNumber: Number,
   },
   data: function(){
     return{
       showSlotModal:false,
-      slotContent:""
+      slotContent:"",
+      pressedAbortModal:false
     }
   },
   methods:{
@@ -91,6 +114,10 @@ export default{
         this.$emit('remove_backButton');
       }
       else this.showSlotModal=false;
+    },
+    cancelBtnModal: function(){
+      this.toggleSlotModal();
+      this.pressedAbortModal=true;
     },
     toggleSlotModal:function(){
       if(!this.showSlotModal){
@@ -289,6 +316,39 @@ export default{
   background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
   background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
+}
+
+#cancelOrder-btn{
+  color: white;
+  background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
+  grid-row:4;
+  grid-column: 1/2;
+}
+#cancelOrder-btn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+
+#yesBtn{
+  grid-column: 2/3;
+  background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
+  color: white;
+}
+#yesBtn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+#noBtn{
+  grid-column: 4/5;
+  background-color: #c5e5be;
+  border:1px solid #7a7a7a;
+  color: white;
+}
+#noBtn:hover{
+  background-color: #89a085;
+  border-color: #000000;
 }
 
 .slotBody{
