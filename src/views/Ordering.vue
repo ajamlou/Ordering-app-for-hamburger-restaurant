@@ -8,7 +8,7 @@
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
       <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
-      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
+      <!-- <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1> -->
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
@@ -39,6 +39,7 @@
   :favoriteBurger1 = "favoriteBurgers[0]"
   :favoriteBurger2 = "favoriteBurgers[1]"
   :favoriteBurger3 = "favoriteBurgers[2]"
+  :favBurger = "favBurger"
   :ingredient_ids = "ingredient_ids">
   <!-- @info_to_modal="toggleShowIngredientsModal" -->
   <!-- :extrasCategories = "extrasCategories"
