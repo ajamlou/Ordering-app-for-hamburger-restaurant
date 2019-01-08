@@ -43,6 +43,10 @@ Data.prototype.getIngredients = function () {
   });
 };
 
+// Data.prototype.getFavburgers = function() {
+//   var d =
+// }
+
 /*
 Function to load initial data from CSV files into the object
 */
@@ -97,7 +101,9 @@ Data.prototype.addOrder = function (order) {
 
     return orderId;
   };
-
+Data.prototype.changeFavorites = function(info){
+return info;
+}
   /*Var används denna??? */
   Data.prototype.changeStock = function (item, saldo) {
     var transactions = this.data[transactionsDataName]
