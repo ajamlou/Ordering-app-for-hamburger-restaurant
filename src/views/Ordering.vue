@@ -7,8 +7,8 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
-      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
-      <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
+      <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
+      <!-- <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1> -->
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
@@ -39,6 +39,7 @@
   :favoriteBurger1 = "favoriteBurgers[0]"
   :favoriteBurger2 = "favoriteBurgers[1]"
   :favoriteBurger3 = "favoriteBurgers[2]"
+  :favBurger = "favBurger"
   :ingredient_ids = "ingredient_ids">
   <!-- @info_to_modal="toggleShowIngredientsModal" -->
   <!-- :extrasCategories = "extrasCategories"
@@ -86,6 +87,7 @@ v-show="this.showIngredientsModal"
 @modal_info="toggleShowIngredientsModal">
 </IngredientsModal>
 
+<div class="slotModalClass">
 <SlotModal
 v-if="this.showSlotModal && this.noIngredientModal">
 <div slot="header"></div>
@@ -102,7 +104,7 @@ v-if="this.showSlotModal && this.noIngredientModal">
 v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="header"></div>
 <div slot="body">{{uiLabels.areYouSure}}</div>
-<div slot="footer">
+<div slot="footer" class="slotButtons">
   <button
   type="button"
   id="noBtn"
@@ -117,6 +119,7 @@ v-if="this.showSlotModal && this.pressedAbortModal">
 </button>
 </div>
 </SlotModal>
+</div>
 
 <div
 id="designPage-backdrop"
@@ -472,7 +475,6 @@ export default {
               margin:auto;
               background-color: #e51e4a; /*mörkrosa*/
               /* #ed6381; /*rosa*/
-
               /* justify-self:center;
               background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
@@ -493,37 +495,40 @@ export default {
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
-
             #cancelOrder-btn{
+              width:120px;
+              height:80px;
               color: white;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
               grid-row:4;
               grid-column: 1/2;
             }
-
             #cancelOrder-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
               border-color: #000000;
             }
 
+            .slotButtons{
+              grid-template-columns: repeat(6, 1fr);
+            }
+
             #yesBtn{
+              grid-column: 2/3;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
               color: white;
             }
-
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
               border-color: #000000;
             }
-
             #noBtn{
+              grid-column: 4/5;
               background-color: #c5e5be;
               border:1px solid #7a7a7a;
               color: white;
             }
-
             #noBtn:hover{
               background-color: #89a085;
               border-color: #000000;

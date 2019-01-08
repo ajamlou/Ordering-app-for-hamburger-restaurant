@@ -9,9 +9,7 @@ var sharedVueStuff = {
       ingredients: [],
       transactions:[],
       lang: "sv",
-      favBurger1: {},
-      favBurger2: {},
-      favBurger3: {}
+      favBurger: {}
     }
   },
   created: function () {
@@ -31,6 +29,10 @@ var sharedVueStuff = {
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }
+    }.bind(this));
+    this.$store.state.socket.on('newfavorites', function(data) {
+      this.favBurger = data;
+      console.log(data);
     }.bind(this));
 
   },

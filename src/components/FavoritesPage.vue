@@ -7,22 +7,22 @@
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.pic" style="border-style: none;" width="100px" height="100px" class = "image">
         <ul v-if = "item.id === 1">
-          <li  v-for = "thing in favoriteBurger1.ingredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
-          <p>{{uiLabels.sum}}: {{favoriteBurger1.price}} :-</p>
+          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
         </ul>
         <ul v-if = "item.id === 2">
-          <li  v-for = "thing in favoriteBurger2.ingredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
-          <p>{{uiLabels.sum}}: {{favoriteBurger2.price}} :-</p>
+          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
         </ul>
         <ul v-if = "item.id === 3">
-          <li  v-for = "thing in favoriteBurger3.ingredients" :key = "thing.ingredient_id">
+          <li  v-for = "thing in favBurger.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
           </li>
-          <p>{{uiLabels.sum}}: {{favoriteBurger3.price}} :-</p>
+          <p>{{uiLabels.sum}}: {{favBurger.price}} :-</p>
         </ul>
       </div>
     </div>
@@ -60,6 +60,7 @@ props:{
   lang: String,
   menu: Array,
   uiLabels: Object,
+  favBurger: Object,
   favoriteBurger1: Object,
   favoriteBurger2: Object,
   favoriteBurger3: Object,
@@ -74,6 +75,7 @@ methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(id){
     // this.$emit("clearburger");
+    console.log(this.favBurger);
     if(id === 1){
       for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger1.ingredients[i]);
