@@ -30,7 +30,7 @@ v-if="this.showSlotModal && this.pressedAbortModal">
   <button
   type="button"
   id="noBtn"
-  @click="toggleSlotModal()">
+  @click="continueOrder();toggleSlotModal()">
   {{uiLabels.dontAbort}}
 </button>
 <button
@@ -118,7 +118,9 @@ export default{
       this.toggleSlotModal();
       this.pressedAbortModal=true;
     },
-
+    continueOrder:function(){
+      this.pressedAbortModal=false;
+    },
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
