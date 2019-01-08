@@ -9,7 +9,7 @@ var sharedVueStuff = {
       ingredients: [],
       transactions:[],
       lang: "sv",
-      favBurger: {}
+      favBurgers: []
     }
   },
   created: function () {
@@ -18,6 +18,7 @@ var sharedVueStuff = {
       this.orders = data.orders;
       this.uiLabels = data.uiLabels;
       this.ingredients = data.ingredients;
+      this.favBurgers = data.favBurgers;
     }.bind(this));
 
     this.$store.state.socket.on('switchLang', function (data) {
@@ -31,7 +32,7 @@ var sharedVueStuff = {
       }
     }.bind(this));
     this.$store.state.socket.on('newfavorites', function(data) {
-      this.favBurger = data;
+      this.favBurgers = data;
       console.log(data);
     }.bind(this));
 
