@@ -5,55 +5,75 @@
   id="checkout-div">
   <div
   id="checkoutPage-title">
-    {{uiLabels.checkout}}
-  </div>
-      <SlotModal
-      id="orderFinishedModal"
-      v-if="this.showSlotModal">
-      <div slot="header"></div>
-      <div slot="body" class="slotBody">{{slotContent}}</div>
-      <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
-       är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
-      <div slot="footer"><button
-        type="button"
-        class="btn-close"
-        @click="orderFinished()">
-        {{uiLabels.OKlabel}}
-      </button></div>
-    </Slotmodal>
+  {{uiLabels.checkout}}
+</div>
+<SlotModal
+id="orderFinishedModal"
+v-if="this.showSlotModal">
+<div slot="header"></div>
+<div slot="body" class="slotBody">{{slotContent}}</div>
+<!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
+är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
+<div slot="footer"><button
+  type="button"
+  class="btn-close"
+  @click="orderFinished()">
+  {{uiLabels.OKlabel}}
+</button></div>
+</Slotmodal>
 
-  <div id="btn-order-wrap">
-    <div id="add-btn-div" @click="newBurger">
+<SlotModal
+v-if="this.showSlotModal && this.pressedAbortModal">
+<div slot="header"></div>
+<div slot="body">{{uiLabels.areYouSure}}</div>
+<div slot="footer">
+  <button
+  type="button"
+  id="noBtn"
+  @click="toggleSlotModal()">
+  {{uiLabels.dontAbort}}
+</button>
+<button
+type="button"
+id="yesBtn"
+@click="orderFinished()">
+{{uiLabels.abort}}
+</button>
+</div>
+</SlotModal>
+
+<div id="btn-order-wrap">
+  <div id="add-btn-div" @click="newBurger">
 
 
-      <div id="add-btn-top">
-        <div id="addButtonText">
-          <h5>{{uiLabels.addBurger}}</h5>
-        </div>
+    <div id="add-btn-top">
+      <div id="addButtonText">
+        <h5>{{uiLabels.addBurger}}</h5>
       </div>
-      <!-- <p>+</p> -->
     </div>
-    <div id="checkout-wrapper"
-    :class="{'noBorder' : !menusInOrder}">
-
-      <OrderInCheckout
-      class="flex-item"
-      v-for = "(menu, index) in menus"
-      :key ="index"
-      :id = "index"
-      :menu = "menu"
-      :uiLabels = "uiLabels"
-      :lang="lang"
-      @remove_menu="removeMenu"
-      @modify_menu="modifyMenu">
-    </OrderInCheckout>
+    <!-- <p>+</p> -->
   </div>
+  <div id="checkout-wrapper"
+  :class="{'noBorder' : !menusInOrder}">
+
+<OrderInCheckout
+  class="flex-item"
+  v-for = "(menu, index) in menus"
+  :key ="index"
+  :id = "index"
+  :menu = "menu"
+  :uiLabels = "uiLabels"
+  :lang="lang"
+  @remove_menu="removeMenu"
+  @modify_menu="modifyMenu">
+</OrderInCheckout>
+</div>
 </div>
 <!-- <div id="checkout-foot"> -->
-  <center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
-  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+<center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
 <!-- </div> -->
-
 </div>
 </div>
 </template>
@@ -73,12 +93,13 @@ export default{
     uiLabels:Object,
     menus: Array,
     lang: String,
-    orderNumber: Number
+    orderNumber: Number,
   },
   data: function(){
     return{
       showSlotModal:false,
-      slotContent:""
+      slotContent:"",
+      pressedAbortModal:false
     }
   },
   methods:{
@@ -92,6 +113,12 @@ export default{
       }
       else this.showSlotModal=false;
     },
+
+    cancelBtnModal: function(){
+      this.toggleSlotModal();
+      this.pressedAbortModal=true;
+    },
+
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
@@ -241,12 +268,6 @@ export default{
   padding-right: 1em;
 }
 
-/* #checkout-foot{
-  grid-column: 1/9;
-  grid-row: 3;
-  margin-top: 5vh;
-} */
-
 #sumOfOrder{
   /* grid-column: 4/6;
   grid-row: 3;
@@ -255,11 +276,11 @@ export default{
   margin:auto;
   text-align:center;
   font-size: 2em;
-  grid-column:6/8;
+  grid-column:4/6;
   grid-row:4;
 }
 #order-btn2{
-  grid-column: 8;
+  grid-column: 8/9;
   grid-row: 4/5;
   width:120px;
   height:80px;
@@ -289,6 +310,42 @@ export default{
   background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
   background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
+}
+
+#cancelOrder-btn{
+  width:120px;
+  height:80px;
+  margin-bottom: 1.5em;
+  color: white;
+  background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+#cancelOrder-btn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+
+#yesBtn{
+  grid-column: 3/5;
+  background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
+  color: white;
+}
+#yesBtn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+#noBtn{
+  grid-column: 5/7;
+  background-color: #c5e5be;
+  border:1px solid #7a7a7a;
+  color: white;
+}
+#noBtn:hover{
+  background-color: #89a085;
+  border-color: #000000;
 }
 
 .slotBody{
@@ -363,8 +420,8 @@ button{
     /* burgarrutor när det är mobilsize, typ kvadrater. */
   }
 
-#add-btn-div{
-  /* Här vill jag få in att de vara samma size som burgarrutorna.*/
+  #add-btn-div{
+    /* Här vill jag få in att de vara samma size som burgarrutorna.*/
   }
 }
 

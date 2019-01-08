@@ -113,9 +113,6 @@ export default {
     border: 1px solid #ccd;
     margin-top: 3px;
     align-self:start;
-    /*background-color: rgba(255, 255, 255, 0.5);
-    font-size: 1.3em;
-    color: rgb(100,100,100);*/
     border-radius: 15px;
     width:33%;
     height:6em;
