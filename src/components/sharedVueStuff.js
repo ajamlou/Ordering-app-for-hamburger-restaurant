@@ -32,8 +32,8 @@ var sharedVueStuff = {
       }
     }.bind(this));
     this.$store.state.socket.on('newfavorites', function(data) {
-      this.favBurgers = data;
-      console.log(data);
+      this.$set(this.favBurgers, data.index, data);
+      console.log(this.favBurgers)
     }.bind(this));
 
   },

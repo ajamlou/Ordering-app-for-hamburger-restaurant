@@ -57,6 +57,7 @@ io.on('connection', function (socket) {
       //om de nya favoritburgarna
       socket.on('updateinfo', function(info){
         var newfavorites = data.changeFavorites(info);
+        console.log(newfavorites);
         io.emit('newfavorites', newfavorites);
 
       });

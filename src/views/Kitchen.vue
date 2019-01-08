@@ -25,7 +25,8 @@
 
 <!-- Om modalen för ändra favoriter ska visas eller ej -->
 <ChangeFavorites v-if ="currentView === 'f'"
-:ingredients= "ingredients">
+:ingredients= "ingredients"
+:favBurgers= "favBurgers">
 </ChangeFavorites>
 
 <!-- GrillView -->

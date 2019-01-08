@@ -137,6 +137,7 @@ Data.prototype.addOrder = function (order) {
   };
   Data.prototype.changeFavorites = function(info){
     return info;
+
   }
   /*Var används denna??? */
   Data.prototype.changeStock = function (item, saldo) {
