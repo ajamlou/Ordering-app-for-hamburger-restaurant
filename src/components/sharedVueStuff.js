@@ -8,7 +8,10 @@ var sharedVueStuff = {
       uiLabels: {},
       ingredients: [],
       transactions:[],
-      lang: "sv"
+      lang: "sv",
+      favBurger1: {},
+      favBurger2: {},
+      favBurger3: {}
     }
   },
   created: function () {
