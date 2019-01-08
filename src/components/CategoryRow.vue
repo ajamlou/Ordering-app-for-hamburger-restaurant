@@ -119,7 +119,7 @@ export default {
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
 }
-@media screen and (max-width:1206px){
+@media screen and (max-width:1270px){
   .category{
     flex-wrap: wrap;
     justify-content: center;
