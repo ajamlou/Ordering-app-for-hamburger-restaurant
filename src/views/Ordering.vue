@@ -455,8 +455,8 @@ export default {
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
-              background-size: 60px 60px;
-              background-position: 0 0, 30px 30px;
+              background-size: 100px 100px;
+              background-position: 0 0, 50px 50px;
             }
             #favorites{
               grid-column: 1/7;
