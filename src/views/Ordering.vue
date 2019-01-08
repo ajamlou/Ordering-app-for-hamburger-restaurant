@@ -6,7 +6,6 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
-<<<<<<< HEAD
     <div id="header-title">
       <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
@@ -45,51 +44,10 @@
   <!-- :extrasCategories = "extrasCategories"
   :categoryItemCounter="categoryItemCounter" -->
   <!-- @fav-checkout = "addToCheckout();changeView('checkoutPage');" -->
-=======
-    <!-- <div id="header-title">
-    <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
-    <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
-    <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
-  </div> -->
-
-  <OrderingViewFrontPage
-  @Visibility="changeView"
-  v-if = "currentView === 'frontPage'"
-  :uiLabels="uiLabels"
-  :breadcrumbs="breadcrumbs"
-  class="viewContent">
-</OrderingViewFrontPage>
-
-<button
-id = "bck-btn"
-v-if = "this.breadcrumbs.length != 0"
-@click= "goBack">
-{{ uiLabels.back }}</button>
-
-<FavoritesPage
-id = "favorites"
-v-if = "currentView === 'favoritesPage'"
-class="viewContent"
-@clearburger = "resetBurger"
-@fav-ingredient = "addToMenu"
-@fav-checkout = "addToCheckout();changeView('checkoutPage');"
-:ingredients="ingredients"
-:lang = "lang"
-:menu = "menusArray"
-:uiLabels = "uiLabels"
-:favoriteBurger1 = "favoriteBurgers[0]"
-:favoriteBurger2 = "favoriteBurgers[1]"
-:favoriteBurger3 = "favoriteBurgers[2]"
-:ingredient_ids = "ingredient_ids">
-<!-- @info_to_modal="toggleShowIngredientsModal" -->
-<!-- :extrasCategories = "extrasCategories"
-:categoryItemCounter="categoryItemCounter" -->
->>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 </FavoritesPage>
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
-<<<<<<< HEAD
   <h2>{{uiLabels.extras}}</h2>
   <CategoryRow
   v-for="category in extrasCategories"
@@ -102,21 +60,6 @@ v-if = "currentView === 'favoritesPage'">
   :item_count="categoryItemCounter[category.categoryNr -1]"
   @remove_ingredient="removeFromMenu"
   @info_to_modal="toggleShowIngredientsModal">
-=======
-<h2>{{uiLabels.extras}}</h2>
-
-<CategoryRow
-v-for="category in extrasCategories"
-:key="category.categoryNr"
-:category="category.categoryNr"
-:added_items="chosenIngredients"
-:category_name="uiLabels[category.label]"
-:lang="lang"
-:threshold="category.threshold"
-:item_count="categoryItemCounter[category.categoryNr -1]"
-@remove_ingredient="removeFromMenu"
-@info_to_modal="toggleShowIngredientsModal">
->>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 </CategoryRow>
 </div>
 
@@ -232,7 +175,7 @@ id="designPage-title">
 </div>
 </div>
 </div>
-<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
+<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
@@ -512,7 +455,6 @@ export default {
               background-size: 60px 60px;
               background-position: 0 0, 30px 30px;
             }
-<<<<<<< HEAD
             #favorites{
               grid-column: 1/7;
               grid-row:1;
@@ -524,12 +466,6 @@ export default {
             #lang-btn{
               grid-column:6/7;
               grid-row:1;
-=======
-            #bck-btn{
-              grid-column: 1;
-              grid-row: 1;
-              border: 1px solid #7a7a7a;
->>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
               color:white;
               width:100px;
               height:50px;
@@ -712,7 +648,6 @@ export default {
               grid-column: 1/7;
               grid-row:3;
             }
-<<<<<<< HEAD
             #bck-btn{
               grid-column: 1/2;
               grid-row: 1;
@@ -741,16 +676,6 @@ export default {
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
             }
             #next-btn:active{border: 2px solid #595959;}
-=======
-            #favorites{
-              grid-column: 1/7;
-              grid-row:2;
-            }
-            #extras-favorites{
-              grid-column: 1/7;
-              grid-row:3;
-            }
->>>>>>> 58353410424b5ebdb934199ec530a1c051ffb824
 
             #price-div{
               justify-self: center;
