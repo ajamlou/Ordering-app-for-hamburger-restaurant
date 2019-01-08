@@ -80,10 +80,7 @@ Data.prototype.addOrder = function (order) {
   this.orders[orderId].status = "not-started";
   var transactions = this.data[transactionsDataName],
   //find out the currently highest transaction id
-  transId =  transactions[transactions.length - 1].transaction_id,
-  i = order.order.menus,
-  j,
-  k;
+  transId =  transactions[transactions.length - 1].transaction_id, i = order.order.menus, j, k;
 
   console.log(i);
   /*Här tar vi ut alla menyer ur en order*/

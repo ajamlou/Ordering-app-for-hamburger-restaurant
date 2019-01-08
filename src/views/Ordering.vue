@@ -6,11 +6,11 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
-    <!-- <div id="header-title">
-      <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1>
+    <div id="header-title">
+      <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
       <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1>
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
-    </div> -->
+    </div>
 
     <OrderingViewFrontPage
     @Visibility="changeView"
@@ -32,7 +32,6 @@
   class="viewContent"
   @clearburger = "resetBurger"
   @fav-ingredient = "addToMenu"
-  @fav-checkout = "addToCheckout();changeView('checkoutPage');"
   :ingredients="ingredients"
   :lang = "lang"
   :menu = "menusArray"
@@ -44,12 +43,12 @@
   <!-- @info_to_modal="toggleShowIngredientsModal" -->
   <!-- :extrasCategories = "extrasCategories"
   :categoryItemCounter="categoryItemCounter" -->
+  <!-- @fav-checkout = "addToCheckout();changeView('checkoutPage');" -->
 </FavoritesPage>
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
   <h2>{{uiLabels.extras}}</h2>
-
   <CategoryRow
   v-for="category in extrasCategories"
   :key="category.categoryNr"
@@ -88,7 +87,7 @@ v-show="this.showIngredientsModal"
 </IngredientsModal>
 
 <SlotModal
-v-if="this.showSlotModal">
+v-if="this.showSlotModal && this.noIngredientModal">
 <div slot="header"></div>
 <div slot="body">{{uiLabels.noIngredients}}</div>
 <div slot="footer"><button
@@ -99,6 +98,26 @@ v-if="this.showSlotModal">
 </button></div>
 </SlotModal>
 
+<SlotModal
+v-if="this.showSlotModal && this.pressedAbortModal">
+<div slot="header"></div>
+<div slot="body">{{uiLabels.areYouSure}}</div>
+<div slot="footer">
+  <button
+  type="button"
+  id="noBtn"
+  @click="toggleSlotModal()">
+  {{uiLabels.dontAbort}}
+</button>
+<button
+  type="button"
+  id="yesBtn"
+  @click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+  {{uiLabels.abort}}
+</button>
+</div>
+</SlotModal>
+
 <div
 id="designPage-backdrop"
 class="viewContent"
@@ -107,7 +126,7 @@ v-if = "currentView === 'designPage'">
 id="ordering">
 <div
 id="designPage-title">
-  {{uiLabels.yourOrder}}
+{{uiLabels.yourOrder}}
 </div>
 <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
 <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
@@ -155,12 +174,21 @@ id="designPage-title">
 </CategoryRow>
 </div>
 </div>
-<div id="price-div">
+<div id="price-div"
+v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
+<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
+
+<button id="next-btn"
+  v-if= "currentView === 'designPage' || currentView === 'favoritesPage'"
+  @click="addToCheckout();changeView('checkoutPage');">
+  {{uiLabels.next}}
+</button>
 </div>
 </template>
 <script>
@@ -210,6 +238,8 @@ export default {
       modalCategory:0,
       showIngredientsModal: false,
       showSlotModal: false,
+      noIngredientModal: false,
+      pressedAbortModal: false,
       currentView: "frontPage",
       burgerCategories:[
         {categoryNr: 4,
@@ -258,6 +288,17 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                nextBtnModal:function(){
+                  this.pressedAbortModal = false;
+                  this.noIngredientModal = true;
+                  this.toggleSlotModal();
+                },
+                cancelBtnModal:function(){
+                  this.noIngredientModal = false;
+                  this.pressedAbortModal = true;
+                  this.toggleSlotModal();
+                },
+
                 /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
@@ -344,7 +385,7 @@ export default {
                   this.changeView('designPage');
                 },
                 removeBackButton:function(){
-                  this.breadcrumbs.length=0;
+                  this.breadcrumbs=[];
                 },
                 /*Tar chosen ingredients och price och wrappar till ett objekt.
                 Pushar objektet till orders som sedan kommer loopas över i CheckoutPage*/
@@ -366,7 +407,7 @@ export default {
                     }
                   }
                   else{
-                    this.toggleSlotModal();
+                    this.nextBtnModal();
                   }
                 },
                 newMenu:function(){
@@ -411,13 +452,20 @@ export default {
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
-              background-size: 60px 60px;
-              background-position: 0 0, 30px 30px;
+              background-size: 100px 100px;
+              background-position: 0 0, 50px 50px;
             }
-            #bck-btn{
-              grid-column: 1;
-              grid-row: 1;
-              border: 1px solid #7a7a7a;
+            #favorites{
+              grid-column: 1/7;
+              grid-row:1;
+            }
+            #extras-favorites{
+              grid-column: 1/7;
+              grid-row:2;
+            }
+            #lang-btn{
+              grid-column:6/7;
+              grid-row:1;
               color:white;
               width:100px;
               height:50px;
@@ -445,6 +493,25 @@ export default {
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
+
+            #cancelOrder-btn{
+              color: white;
+              background-color: #e51e4a;
+              border: 1px solid #7a7a7a;
+              grid-row:4;
+              grid-column: 1/2;
+            }
+
+            #cancelOrder-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+            }
+
+            #noBtn{
+              background-color: #e51e4a;
+              border: 1px solid #7a7a7a;
+            }
+
             #lang-btn{
               grid-column:6;
               grid-row:1;
@@ -466,10 +533,10 @@ export default {
               justify-self: center;
             }
 
-/*---------------------- För språkknappen sv/eng -------------*/
+            /*---------------------- För språkknappen sv/eng -------------*/
             /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
             Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-             .sv{
+            .sv{
               background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
               background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
@@ -510,7 +577,7 @@ export default {
               background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            } 
+            }
 
             /* Rubrik designPage */
             #designPage-title{
@@ -586,14 +653,34 @@ export default {
               grid-column: 1/7;
               grid-row:3;
             }
-            #favorites{
-              grid-column: 1/7;
-              grid-row:2;
+            #bck-btn{
+              grid-column: 1/2;
+              grid-row: 1;
+              border: 1px solid #7a7a7a;
+              color:white;
+              width:120px;
+              height:80px;
+              margin:auto;
+              justify-self:center;
+              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
+              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
             }
-            #extras-favorites{
-              grid-column: 1/7;
-              grid-row:3;
+
+            #bck-btn:hover{
+              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
+              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
+              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
             }
+            #next-btn:active{border: 2px solid #595959;}
 
             #price-div{
               justify-self: center;
@@ -698,7 +785,7 @@ export default {
               color: white;
             }
 
-/*------------------ CSS för ipad/mobiler-isch ------------*/
+            /*------------------ CSS för ipad/mobiler-isch ------------*/
             @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
               #designPage-title{
                 grid-row: 1;
@@ -737,7 +824,7 @@ export default {
 
             }
 
-/* -------------------- CSS för mobiler -----------------*/
+            /* -------------------- CSS för mobiler -----------------*/
             @media screen and (max-width:740px){
               #designPage-title{
                 font-size: 13vw;

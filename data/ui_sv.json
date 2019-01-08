@@ -48,5 +48,8 @@
   "vegan" : "Vegansk",
   "OKlabel": "OK",
   "checkout" : "Varukorg",
-  "anotherBurger": "MaxDonald's"
+  "anotherBurger": "MaxDonald's",
+  "areYouSure":"Är du säker på att du vill avbryta beställningen?",
+  "abort": "Ja, avbryt",
+  "dontAbort": "Nej, fortsätt"
 }
