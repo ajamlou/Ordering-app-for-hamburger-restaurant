@@ -81,13 +81,14 @@ export default {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     align-content: start;
-    position: fixed;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: hidden;
+    overflow-y: auto;
     border-radius: 15px;
     width:45em;
     max-width:85%;
