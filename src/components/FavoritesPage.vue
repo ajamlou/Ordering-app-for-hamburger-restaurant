@@ -1,11 +1,11 @@
 
 
 <template>
-  <div  class = "wrapper">
-    <div id = "favorites">
+    <div class = "wrapper">
+      <div class = "favorites">
       <div class = "burgers" v-for = "item in favBurgers" :key = "item.id"  @click = "favToCheckout(item.id)">
         <h1 class = "header">{{item.name}}</h1>
-        <img :src= "item.pic" style="border-style: none;" width="200px" height="180px" class = "image">
+        <img :src= "item.pic" style="border-style: none;" width="100px" height="100px" class = "image">
         <ul v-if = "item.id === 1">
           <li  v-for = "thing in favoriteBurger1.ingredients" :key = "thing.ingredient_id">
             {{thing["ingredient_"+ lang]}}
@@ -25,24 +25,8 @@
           <p>{{uiLabels.sum}}: {{favoriteBurger3.price}} :-</p>
         </ul>
       </div>
+    </div>
   </div>
-  <!-- <div id = "extras">
-    <h2>{{uiLabels.extras}}</h2>
-    <CategoryRow
-    v-for="category in extrasCategories"
-    :key="category.categoryNr"
-    :category="category.categoryNr"
-    :added_items="chosenIngredients"
-    :category_name="uiLabels[category.label]"
-    :lang="lang"
-    :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr -1]"
-    @remove_ingredient="removeFromMenu"
-    @info_to_modal="toggleShowIngredientsModal">
-  </CategoryRow>
-  </div> -->
-
-</div>
 </template>
 
 <script>
@@ -89,7 +73,7 @@ components:{
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(id){
-    this.$emit("clearburger");
+    // this.$emit("clearburger");
     if(id === 1){
       for (var i = 0; i< this.favoriteBurger1.ing_count; i++){
         this.$emit("fav-ingredient", this.favoriteBurger1.ingredients[i]);
@@ -105,7 +89,7 @@ methods:{
         this.$emit("fav-ingredient", this.favoriteBurger3.ingredients[i]);
       }
     }
-    this.$emit("fav-checkout");
+    // this.$emit("fav-checkout");
   },
   burgerSelected: function(){
     this.change = !this.change;
@@ -122,25 +106,18 @@ methods:{
 
 .wrapper{
   height: 100vh;
+  width: 100vw;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 }
 
-#favorites{
-  grid-column: 1/7;
-  grid-row: 1/2;
-  margin:auto;
+.favorites{
+  grid-row: 2;
+  grid-column: 2/ span 1;
 }
-
-#extras{
-  grid-column: 1/7;
-  grid-row:2;
-  margin-top:2em;
-}
-
 
 .burgers{
-  float:left;
   background-color: white;
   border:5px solid rgb(255, 0, 0);
   width: 320px;
@@ -161,7 +138,6 @@ methods:{
 
 .ingredients{
   text-align: center;
-  list-style-type: none;
 }
 
 h1{

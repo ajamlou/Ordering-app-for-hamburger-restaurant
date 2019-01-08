@@ -45,5 +45,8 @@
   "vegan" : "Vegan",
   "OKlabel": "OK",
   "checkout" : "Checkout",
-  "anotherBurger": "MaxDonald's"
+  "anotherBurger": "MaxDonald's",
+  "areYouSure": "Do you want to cancel your order?",
+  "abort": "Cancel order",
+  "dontAbort": "Continue with order"
 }

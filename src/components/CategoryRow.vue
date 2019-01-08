@@ -107,12 +107,12 @@ export default {
 }
 .extras{
   background-color: #b9d7cb; /*ljusturkos*/
-  /* #ed6381; /*mörkrosa*/ 
+  /* #ed6381; /*mörkrosa*/
   /* rgba(90,174,211,0.8); */
 }
 
 .ingredient:hover{
-  background-color:rgba(200, 0, 0,0.9);
+  background-color:#ed6381;
   color: rgb(255,255,255);
 }
 .PlusButton:hover{

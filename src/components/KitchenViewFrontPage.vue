@@ -20,22 +20,6 @@
   v-show = "ModalVisibility === true">
   </KitchenModal>
 
-  <!-- Om modalen för ändra favoriter ska visas eller ej
-  <SlotModal v-if ="currentView === 'f'">
-    <div slot="header"><button
-          type="button"
-          class="backButton"
-          @click="currentView = 'kitchenFrontPage'">
-          Stäng
-        </button></div>
-
-        <div slot ="footer"><button
-          type="button"
-          class="backButton"
-          @click="changeFavorites">
-          Bekräfta
-        </button></div>
-  </SlotModal>-->
 
 </div>
 </template>
