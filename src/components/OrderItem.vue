@@ -72,7 +72,7 @@ export default {
 		},
 		computed:{
 			menusArray:function(){
-				let menuArray = this.menus;
+				let menuArray = this.order.menus;
 				return menuArray;
 			},
 		},
