@@ -113,14 +113,15 @@ Data.prototype.getOrderNumber = function () {
 
 Data.prototype.addOrder = function (order) {
   var orderId = this.getOrderNumber();
-  this.orders[orderId] = order.order;
+  this.orders[orderId] = order;
+  console.log(order);
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
   var transactions = this.data[transactionsDataName],
   //find out the currently highest transaction id
-  transId =  transactions[transactions.length - 1].transaction_id, i = order.order.menus, j, k;
+  transId =  transactions[transactions.length - 1].transaction_id, i = order.menus, j, k;
 
-  console.log(i);
+
   /*Här tar vi ut alla menyer ur en order*/
   for(j=0;j < i.length;j++){
     /*Här går vi igenom alla ingredienser, en meny i taget*/
@@ -132,7 +133,6 @@ Data.prototype.addOrder = function (order) {
         change: - 1*i[j].units});
       }
     }
-
     return orderId;
   };
   Data.prototype.changeFavorites = function(info){
