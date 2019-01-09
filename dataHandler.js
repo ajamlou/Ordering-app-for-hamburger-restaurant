@@ -29,35 +29,33 @@ Data.prototype.getFavBurgers = function () {
   var d = this.data;
   var favorites = d[favoritesDataName];
   var ingredients = d[ingredientsDataName];
-  var chosenIngredients = [];
   var chosenBurgers = [];
   for(var j = 0; j<favorites.length;j++){
     var price = 0;
-    for(var i = 0; i<ingredients.length;i++){
-      var x = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient1)
-      if(x != undefined){
-        chosenIngredients.push(x);
-        price = price + x.selling_price;
+    var filter = {
+      ingredient1: favorites[j].ingredient1,
+      ingredient2: favorites[j].ingredient2,
+      ingredient3: favorites[j].ingredient3
+    };
+    var chosenIngredients = ingredients.filter(function(ingredient){
+      for (var key in filter) {
+        if (ingredient.ingredient_id === filter[key])
+        return true;
       }
-      var y = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient2)
-      if(y != undefined){
-        chosenIngredients.push(y);
-        price = price + y.selling_price;
-      }
-      var z = ingredients.find(ingredient=>ingredients[i].ingredient_id === favorites[j].ingredient3)
-      if(z != undefined){
-        chosenIngredients.push(z);
-        price = price + z.selling_price;
-      }
+      return false;
     }
-    let burger = {
-      name: favorites[j].burger_name,
-      url: favorites[j].url,
-      ingredients: chosenIngredients,
-      price: price
-    }
-    chosenBurgers.push(burger);
+  );
+  for(var i = 0;i<chosenIngredients.length;i++){
+    price = price + chosenIngredients[i].selling_price;
   }
+  let burger = {
+    name: favorites[j].burger_name,
+    url: favorites[j].url,
+    ingredients: chosenIngredients,
+    price: price
+  };
+  chosenBurgers.push(burger);
+}
 return chosenBurgers;
 };
 /*
