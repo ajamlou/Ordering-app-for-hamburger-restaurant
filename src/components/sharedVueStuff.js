@@ -32,7 +32,7 @@ var sharedVueStuff = {
       }
     }.bind(this));
     this.$store.state.socket.on('newfavorites', function(data) {
-      this.$set(this.favBurgers, data.index, data);
+      this.favBurgers = data;
     }.bind(this));
 
   },
