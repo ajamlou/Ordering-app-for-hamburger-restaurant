@@ -1,7 +1,6 @@
 
 
 <template>
-    <div class = "wrapper">
       <div class = "favorites">
       <div class = "burgers" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
         <h1 class = "header">{{item.name}}</h1>
@@ -14,7 +13,6 @@
         </ul>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -51,14 +49,12 @@ methods:{
 .wrapper{
   height: 100vh;
   width: 100vw;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
 }
 
 .favorites{
-  grid-row: 2;
-  grid-column: 2/ span 1;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:center;
 }
 
 .burgers{

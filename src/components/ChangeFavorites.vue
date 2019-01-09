@@ -51,7 +51,6 @@
     },
     methods: {
       addrow: function(){
-        console.log(this.favBurgers)
         this.rows.push({
           title: 'ingredient'
         })
@@ -115,14 +114,6 @@
     display: inline-block;
     font-size: 16px;
   }
-  /* #burger{
-    display:grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  } */
-  /* #header{
-    grid-column: 3;
-  } */
 
   p{
     color:white;
