@@ -4,7 +4,7 @@
     <!-- Här skapas beställningarna i "Inkomna". -->
     <div id="orders">
       <div id="header1">
-        <button @click="menuView=!menuView">Klicka</button>
+        <button id="viewBtn" @click="menuView=!menuView">Byt vy</button>
         <h1>{{ uiLabels.ordersInQueue }}</h1>
         <img class="icon" src="../assets/w-exclamation.png"/>
       </div>
@@ -89,7 +89,7 @@ export default {
 #GrillGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  height:90vh;
+  height:92vh;
 }
 
 .allOrders {
@@ -132,6 +132,23 @@ export default {
   overflow:hidden;
   height:inherit;
 }
+
+#viewBtn{
+  border: 2px solid white;
+  color: white;
+  text-shadow: 2px 2px #696969;
+  cursor: pointer;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 0.5em;
+  border-radius: 18px;
+  background-color: #00b386;
+  width:5em;
+  margin: auto;
+}
+
+#viewBtn:hover{background-color: #018765;}
+
 .icon{
   height:2em;
   justify-self:end;

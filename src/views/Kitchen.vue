@@ -206,6 +206,14 @@ export default {
 #backButton {
   grid-row: 2;
   grid-column: 1;
+  border: 2px solid white;
+  color: white;
+  text-shadow: 2px 2px #696969;
+  cursor: pointer;
+  padding: 15px;
+  text-decoration: none;
+  border-radius: 18px;
+  background-color: #00b386;
 }
 #backButton:hover {background-color: #008060}
 #backButton:active {border: 2px solid grey;}

@@ -153,8 +153,7 @@ export default{
     placeOrder:function(){
       this.toggleSlotModal();
       if(this.menusInOrder){
-        let menus = {menus: this.menus};
-        this.$store.state.socket.emit('order', {order: menus});
+        this.$store.state.socket.emit('order', {menus: this.menus})
         // this.$emit('clear_all');
       }
     }
