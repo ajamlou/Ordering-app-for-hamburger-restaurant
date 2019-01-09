@@ -18,7 +18,6 @@
 </template>
 
 <script>
-// import CategoryRow from '@/components/CategoryRow.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -28,24 +27,17 @@ export default {
 props:{
   ingredients:Array,
   lang: String,
-  menu: Array,
   uiLabels: Object,
-  favBurgers: Array,
-  ingredient_ids: Array,
-  extrasCategories: Array
-  // categoryItemCounter: Array
+  favBurgers: Array
 },
 components:{
-  // CategoryRow
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(index, item){
-    // this.$emit("clearburger");
       for (var i = 0; i< item.ingredients.length; i++){
         this.$emit("fav-ingredient", item.ingredients[i]);
       }
-    // this.$emit("fav-checkout");
   },
   toggleShowIngredientsModal:function(){
     this.$emit('info_to_modal', this.category)

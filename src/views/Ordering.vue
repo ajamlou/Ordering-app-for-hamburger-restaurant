@@ -46,18 +46,18 @@
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
-  <h2>{{uiLabels.extras}}</h2>
-  <CategoryRow
-  v-for="category in extrasCategories"
-  :key="category.categoryNr"
-  :category="category.categoryNr"
-  :added_items="chosenIngredients"
-  :category_name="uiLabels[category.label]"
-  :lang="lang"
-  :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
-  @remove_ingredient="removeFromMenu"
-  @info_to_modal="toggleShowIngredientsModal">
+<h2>{{uiLabels.extras}}</h2>
+<CategoryRow
+v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="chosenIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@remove_ingredient="removeFromMenu"
+@info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
 </div>
 
@@ -85,16 +85,16 @@ v-show="this.showIngredientsModal"
 </IngredientsModal>
 
 <div class="slotModalClass">
-<SlotModal
-v-if="this.showSlotModal && this.noIngredientModal">
-<div slot="header"></div>
-<div slot="body">{{uiLabels.noIngredients}}</div>
-<div slot="footer"><button
-  type="button"
-  class="btn-close"
-  @click="toggleSlotModal()">
-  {{uiLabels.OKlabel}}
-</button></div>
+  <SlotModal
+  v-if="this.showSlotModal && this.noIngredientModal">
+  <div slot="header"></div>
+  <div slot="body">{{uiLabels.noIngredients}}</div>
+  <div slot="footer"><button
+    type="button"
+    class="btn-close"
+    @click="toggleSlotModal()">
+    {{uiLabels.OKlabel}}
+  </button></div>
 </SlotModal>
 
 <SlotModal
@@ -109,10 +109,10 @@ v-if="this.showSlotModal && this.pressedAbortModal">
   {{uiLabels.dontAbort}}
 </button>
 <button
-  type="button"
-  id="yesBtn"
-  @click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
-  {{uiLabels.abort}}
+type="button"
+id="yesBtn"
+@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+{{uiLabels.abort}}
 </button>
 </div>
 </SlotModal>
@@ -174,21 +174,15 @@ id="designPage-title">
 </CategoryRow>
 </div>
 </div>
-</div>
-<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+</div>
+<div id="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
 <!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
 
-<button id="next-btn"
-  v-if= "currentView === 'designPage' || currentView === 'favoritesPage'"
-  @click="addToCheckout();changeView('checkoutPage');">
-  {{uiLabels.next}}
-</button>
-<div id="price-div"
-v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
-  {{uiLabels.sum}}: {{price}}:-
-</div>
 </div>
 </template>
 <script>
@@ -828,7 +822,7 @@ export default {
               #categories-wrapper{
                 grid-row:4;
               }
-              #price-div, #next-btn{
+              #price-div{
                 grid-row:5;
               }
               #ordering h2{
