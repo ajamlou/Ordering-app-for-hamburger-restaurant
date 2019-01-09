@@ -1,7 +1,6 @@
 
 
 <template>
-    <div class = "wrapper">
       <div class = "favorites">
       <div class = "burgers" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
         <h1 class = "header">{{item.name}}</h1>
@@ -14,11 +13,9 @@
         </ul>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-// import CategoryRow from '@/components/CategoryRow.vue'
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -28,24 +25,17 @@ export default {
 props:{
   ingredients:Array,
   lang: String,
-  menu: Array,
   uiLabels: Object,
-  favBurgers: Array,
-  ingredient_ids: Array,
-  extrasCategories: Array
-  // categoryItemCounter: Array
+  favBurgers: Array
 },
 components:{
-  // CategoryRow
 },
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(index, item){
-    // this.$emit("clearburger");
       for (var i = 0; i< item.ingredients.length; i++){
         this.$emit("fav-ingredient", item.ingredients[i]);
       }
-    // this.$emit("fav-checkout");
   },
   toggleShowIngredientsModal:function(){
     this.$emit('info_to_modal', this.category)
@@ -59,14 +49,12 @@ methods:{
 .wrapper{
   height: 100vh;
   width: 100vw;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
 }
 
 .favorites{
-  grid-row: 2;
-  grid-column: 2/ span 1;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content:center;
 }
 
 .burgers{

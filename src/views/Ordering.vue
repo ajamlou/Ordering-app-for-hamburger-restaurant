@@ -7,8 +7,6 @@
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
     <div id="header-title">
-      <!-- <h1 v-if="currentView==='designPage'">{{uiLabels.yourOrder}}</h1> -->
-      <!-- <h1 v-if="currentView==='checkoutPage'">{{uiLabels.checkout}}</h1> -->
       <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
     </div>
 
@@ -46,19 +44,22 @@
 
 <div id="extras-favorites"
 v-if = "currentView === 'favoritesPage'">
-  <h2>{{uiLabels.extras}}</h2>
-  <CategoryRow
-  v-for="category in extrasCategories"
-  :key="category.categoryNr"
-  :category="category.categoryNr"
-  :added_items="chosenIngredients"
-  :category_name="uiLabels[category.label]"
-  :lang="lang"
-  :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
-  @remove_ingredient="removeFromMenu"
-  @info_to_modal="toggleShowIngredientsModal">
+<h2>{{uiLabels.extras}}</h2>
+<div   id = "fav-category">
+<CategoryRow
+v-for="category in extrasCategories"
+:key="category.categoryNr"
+:category="category.categoryNr"
+:added_items="chosenIngredients"
+:category_name="uiLabels[category.label]"
+:lang="lang"
+:threshold="category.threshold"
+:item_count="categoryItemCounter[category.categoryNr -1]"
+@remove_ingredient="removeFromMenu"
+@info_to_modal="toggleShowIngredientsModal">
 </CategoryRow>
+</div>
+<button id="fav-next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
 
 
@@ -85,16 +86,16 @@ v-show="this.showIngredientsModal"
 </IngredientsModal>
 
 <div class="slotModalClass">
-<SlotModal
-v-if="this.showSlotModal && this.noIngredientModal">
-<div slot="header"></div>
-<div slot="body">{{uiLabels.noIngredients}}</div>
-<div slot="footer"><button
-  type="button"
-  class="btn-close"
-  @click="toggleSlotModal()">
-  {{uiLabels.OKlabel}}
-</button></div>
+  <SlotModal
+  v-if="this.showSlotModal && this.noIngredientModal">
+  <div slot="header"></div>
+  <div slot="body">{{uiLabels.noIngredients}}</div>
+  <div slot="footer"><button
+    type="button"
+    class="btn-close"
+    @click="toggleSlotModal()">
+    {{uiLabels.OKlabel}}
+  </button></div>
 </SlotModal>
 
 <SlotModal
@@ -109,10 +110,10 @@ v-if="this.showSlotModal && this.pressedAbortModal">
   {{uiLabels.dontAbort}}
 </button>
 <button
-  type="button"
-  id="yesBtn"
-  @click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
-  {{uiLabels.abort}}
+type="button"
+id="yesBtn"
+@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+{{uiLabels.abort}}
 </button>
 </div>
 </SlotModal>
@@ -174,21 +175,15 @@ id="designPage-title">
 </CategoryRow>
 </div>
 </div>
-</div>
-<!-- <button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button> -->
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<button id="next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+</div>
+<div id="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
 <!-- changeView('frontPage');clearAll();removeBackButton(); -->
 </div>
 
-<button id="next-btn"
-  v-if= "currentView === 'designPage' || currentView === 'favoritesPage'"
-  @click="addToCheckout();changeView('checkoutPage');">
-  {{uiLabels.next}}
-</button>
-<div id="price-div"
-v-if= "currentView === 'designPage' || currentView === 'favoritesPage'">
-  {{uiLabels.sum}}: {{price}}:-
-</div>
 </div>
 </template>
 <script>
@@ -457,11 +452,25 @@ export default {
             }
             #favorites{
               grid-column: 1/7;
-              grid-row:1;
+              grid-row:0/1;
             }
             #extras-favorites{
               grid-column: 1/7;
-              grid-row:2;
+              grid-row:3;
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+              grid-template-rows: 50px 250px 50px;
+            }
+            #fav-category{
+              grid-column-start: 1;
+              grid-column-end: 7;
+              grid-row: 2;
+            }
+            #fav-next-btn{
+              grid-column-start: 6;
+              grid-column-end: 7;
+              grid-row-start: 3;
+              grid-row-end: 4;
             }
             #lang-btn{
               grid-column:6/7;
@@ -828,7 +837,7 @@ export default {
               #categories-wrapper{
                 grid-row:4;
               }
-              #price-div, #next-btn{
+              #price-div{
                 grid-row:5;
               }
               #ordering h2{
