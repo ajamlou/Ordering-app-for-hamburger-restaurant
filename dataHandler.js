@@ -18,6 +18,7 @@ function Data() {
   this.data = {};
   this.orders = {};
   this.currentOrderNumber = 0;
+  this.currentFavorites = [];
 }
 
 Data.prototype.getUILabels = function (lang) {
@@ -26,37 +27,44 @@ Data.prototype.getUILabels = function (lang) {
 };
 
 Data.prototype.getFavBurgers = function () {
-  var d = this.data;
-  var favorites = d[favoritesDataName];
-  var ingredients = d[ingredientsDataName];
-  var chosenBurgers = [];
-  for(var j = 0; j<favorites.length;j++){
-    var price = 0;
-    var filter = {
-      ingredient1: favorites[j].ingredient1,
-      ingredient2: favorites[j].ingredient2,
-      ingredient3: favorites[j].ingredient3
-    };
-    var chosenIngredients = ingredients.filter(function(ingredient){
-      for (var key in filter) {
-        if (ingredient.ingredient_id === filter[key])
-        return true;
+  if(this.currentFavorites.length === 0){
+    var d = this.data;
+    var favorites = d[favoritesDataName];
+    var ingredients = d[ingredientsDataName];
+    var chosenBurgers = [];
+    for(var j = 0; j<favorites.length;j++){
+      var price = 0;
+      var filter = {
+        ingredient1: favorites[j].ingredient1,
+        ingredient2: favorites[j].ingredient2,
+        ingredient3: favorites[j].ingredient3
+      };
+      var chosenIngredients = ingredients.filter(function(ingredient){
+        for (var key in filter) {
+          if (ingredient.ingredient_id === filter[key])
+          return true;
+        }
+        return false;
       }
-      return false;
+    );
+    for(var i = 0;i<chosenIngredients.length;i++){
+      price = price + chosenIngredients[i].selling_price;
     }
-  );
-  for(var i = 0;i<chosenIngredients.length;i++){
-    price = price + chosenIngredients[i].selling_price;
+    let burger = {
+      name: favorites[j].burger_name,
+      url: favorites[j].url,
+      ingredients: chosenIngredients,
+      price: price
+    };
+    chosenBurgers.push(burger);
   }
-  let burger = {
-    name: favorites[j].burger_name,
-    url: favorites[j].url,
-    ingredients: chosenIngredients,
-    price: price
-  };
-  chosenBurgers.push(burger);
+  this.currentFavorites = chosenBurgers;
+  return this.currentFavorites;
 }
-return chosenBurgers;
+else{
+  console.log('hello you are in the else statement')
+  return this.currentFavorites;
+}
 };
 /*
 Returns a JSON object array of ingredients with the fields from
@@ -133,9 +141,14 @@ Data.prototype.addOrder = function (order) {
     }
     return orderId;
   };
-  Data.prototype.changeFavorites = function(info){
-    return info;
-
+  Data.prototype.changeFavorites = function(data){
+    console.log(this.data.index);
+    if(data.index === 'add'){
+      this.currentFavorites.push(data);
+    }
+    else{
+      this.currentFavorites.splice(data.index,1,data)
+    }
   }
   /*Var används denna??? */
   Data.prototype.changeStock = function (item, saldo) {
@@ -145,6 +158,7 @@ Data.prototype.addOrder = function (order) {
       ingredient_id: item.ingredient.ingredient_id,
       change: saldo - item.ingredient.stock});
     };
+
 
     Data.prototype.getAllOrders = function () {
       return this.orders;

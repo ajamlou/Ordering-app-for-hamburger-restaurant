@@ -14,13 +14,14 @@
           <br>
           <p>Which burger do you want to replace?</p>
           <div v-for = "(item, i) in favBurgers" :key = "i">
-            <input type="radio" v-model = 'rows.checked' :value = "i"><p>{{item.name}}</p>
-            <br>
+            <p>{{item.name}}</p>
+            <input type="radio" v-model = 'rows.checked' :value = "i"><br>
           </div>
+          <p>I want to add this as an additional Burger</p>
+          <input type="radio" v-model='rows.checked' value = 'add' >
           <br>
           <button class = 'confirm' @click = "updateInfo">Confirm</button>
         </div>
-
         <SlotModal
         v-if="this.showSlotModal">
         <div slot="header"><button @click = 'favError'>Go back</button></div>

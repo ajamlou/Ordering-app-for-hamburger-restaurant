@@ -36,6 +36,7 @@ var data = new Data();
 data.initializeData();
 
 io.on('connection', function (socket) {
+  console.log('hello you are in the io.on function')
   // Send list of orders and text labels when a client connects
   socket.emit('initialize', {
     orders: data.getAllOrders(),
@@ -56,10 +57,8 @@ io.on('connection', function (socket) {
       //skickar information till alla clienter som är anslunta
       //om de nya favoritburgarna
       socket.on('updateinfo', function(info){
-        var newfavorites = data.changeFavorites(info);
-        console.log(newfavorites);
-        io.emit('newfavorites', newfavorites);
-
+        data.changeFavorites(info);
+        io.emit('newfavorites', data.getFavBurgers());
       });
       // send UI labels in the chosen language
       socket.on('switchLang', function (lang) {
