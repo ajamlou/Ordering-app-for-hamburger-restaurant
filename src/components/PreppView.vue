@@ -90,7 +90,7 @@ export default {
 #PreppGrid {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  height:90vh;
+  height:92vh;;
 }
 
 .allOrders {
