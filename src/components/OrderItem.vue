@@ -123,7 +123,7 @@ export default {
 			let ingredients = this.menusArray[index].ingredients.slice();
 			if(category != undefined){
 				/*Filtrerar ut så enbart den aktuella kategorin räknas på*/
-				ingredients=ingredients.filter((ingredient) => ingredient.category==category);
+				ingredients=ingredients.filter((ingredient) => ingredient.category===category);
 			}
 			/*Nedanstående else-sats sorterar ingrediens-arrayen på kategori genom att använda JavaScript-metoden sort() med en manuell anonym sorteringsfunktion*/
 			else{
