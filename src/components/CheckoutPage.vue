@@ -182,28 +182,27 @@ export default{
 
 <style scoped>
 #checkout-div{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-row-gap: 1vh;
-  /* height:100%; */
   width: 90%;
   height: 100;
-  margin: auto auto auto auto;
+  margin: auto;
 }
 #checkoutPage-backdrop{
   background-color: rgba(255, 250, 224,0.99);
-  border-radius:15px;
-  width:95%;
-  justify-self:center;
+  border-radius: 5vh;
+  width: 95%;
+  justify-self: center;
   margin-bottom: 1em;
   padding-bottom: 3em;
 
 }
 
 #checkoutPage-title{
-  grid-column:1/9;
-  grid-row:1;
-  text-align: left;
+  grid-column: 1/9;
+  grid-row: 1;
+  text-align: center;
   align-self: center;
   font-family: 'Lobster', sans-serif;
   font-size: 14vmin;
@@ -216,16 +215,16 @@ export default{
 }
 
 #btn-order-wrap{
-  position:relative;
-  display:flex;
+  position: relative;
+  display: flex;
   flex-wrap: nowrap;
-  grid-column:1/9;
+  grid-column: 1/9;
 }
 #checkout-wrapper{
   text-transform: capitalize;
   grid-column: 1/9;
   grid-row: 1;
-  display:flex;
+  display: flex;
   flex-wrap: nowrap;
   text-align: center;
   overflow-x: auto;
@@ -234,64 +233,69 @@ export default{
   border: 1px solid #7a7a7a;
   margin-top: 3vh;
 }
-.flex-item{
+/* .flex-item{
   flex: 0 0 auto;
-}
+} */
 
 #add-btn-div{
-  display:flex;
-  flex-direction: column;
-  word-wrap: break-word;
+  display: flex;
   text-align: center;
-  width:15%;
-  min-width:200px;
-  align-items:stretch;
-  background-color:#b9d7cb;;
-  cursor:pointer;
-  flex: 0 0 auto;
+  max-width: 20vh;
+  background-color: #b9d7cb;;
+  cursor: pointer;
   border-radius: 10px;
   color: white;
-  margin:auto 5px auto 5px;
+  margin: 3vh 1vh 0 0;
+  /* flex-direction: column;
+  word-wrap: break-word;
+  flex: 0 0 auto;
+  align-items: stretch; */
+
 }
 #add-btn-div:hover{
   background-color: #6f8179;
   border-color: #000000;
 }
 #add-btn-div>p{
-  margin:auto;
+  margin: auto;
   font-size: 2em;
 }
 
 #addButtonText{
-  padding-top: 2em;
+  padding: 1em 2em;
+  text-shadow: 1px 1px 1px black;
+  /* padding-top: 2em;
   padding-bottom: 2em;
   padding-left: 1em;
-  padding-right: 1em;
+  padding-right: 1em; */
 }
 
 #sumOfOrder{
-  /* grid-column: 4/6;
-  grid-row: 3;
-  font-size: 2em; */
   justify-self: center;
-  margin:auto;
-  text-align:center;
+  margin: auto;
+  text-align: center;
   font-size: 2em;
-  grid-column:4/6;
-  grid-row:4;
+  grid-column: 4/6;
+  grid-row: 4;
 }
+
+#order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
+  border: 1px solid #7a7a7a;
+  color: white;
+}
+
 #order-btn2{
   grid-column: 8/9;
   grid-row: 4/5;
-  width:120px;
-  height:80px;
+  background-color: #c5e5be;
+  /* width: 10vw;
+  height: 10vh;
   margin-right: 5vw;
   margin-bottom: 1.5em;
-  justify-self:end;
-  border:1px solid #7a7a7a;
+  justify-self: end;
+  border: 1px solid #7a7a7a;
   border-radius: 16px;
-  color:white;
-  background-color: #c5e5be;
+  color: white; */
   /* background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
   background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
   background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
@@ -300,13 +304,15 @@ export default{
   background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 ); */
 }
+
 /* #order-btn2:active{border: 2px solid #595959;} */
+
 #order-btn2:hover{
   background-color: #89a085;
   border-color: #000000;
   /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%);
-  /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-  /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
+  background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
+  background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
   background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
   background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
@@ -314,14 +320,15 @@ export default{
 }
 
 #cancelOrder-btn{
-  width:120px;
-  height:80px;
-  margin-bottom: 1.5em;
-  color: white;
-  background-color: #e51e4a;
-  border: 1px solid #7a7a7a;
   grid-column: 1/2;
   grid-row: 4/5;
+  background-color: #e51e4a;
+  /* width: 10vw;
+  height: 10vh;
+  margin-bottom: 1.5em;
+  color: white;
+  border: 1px solid #7a7a7a; */
+
 }
 #cancelOrder-btn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
@@ -329,32 +336,32 @@ export default{
 }
 
 #yesBtn{
-  grid-column: 3/5;
   background-color: #e51e4a;
+  /* grid-column: 4/5;
   border: 1px solid #7a7a7a;
-  color: white;
+  color: white; */
 }
 #yesBtn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
   border-color: #000000;
 }
 #noBtn{
-  grid-column: 5/7;
   background-color: #c5e5be;
-  border:1px solid #7a7a7a;
-  color: white;
+  /* grid-column: 5/7;
+  border: 1px solid #7a7a7a;
+  color: white; */
 }
 #noBtn:hover{
   background-color: #89a085;
   border-color: #000000;
 }
 
-.slotBody{
-  margin-top: 5vh;
-}
+/* .slotBody{
+  margin: auto;
+} */
 
 .noBorder{
-  border:0 !important;
+  border: 0 !important;
 }
 
 .btn-close{
@@ -369,7 +376,7 @@ export default{
 .btn-close:active{background-color: #1f7a1f}
 
 button{
-  padding: 10px 20px;
+  padding: 10% 15%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -391,7 +398,7 @@ button{
   }
 
   #sumOfOrder{
-    grid-column:6/8;
+    grid-column: 6/8;
   }
   #order-btn2{
     grid-column: 8;
@@ -410,11 +417,11 @@ button{
     align-items: center;
   }
   #sumOfOrder{
-    margin:auto;
-    text-align:center;
+    margin: auto;
+    text-align: center;
     font-size: 2em;
-    grid-column:2/8;
-    grid-row:4;
+    grid-column: 2/8;
+    grid-row: 4;
   }
   #checkout-wrapper{
     /* Här vill jag få in att de ska vara mindre  */
