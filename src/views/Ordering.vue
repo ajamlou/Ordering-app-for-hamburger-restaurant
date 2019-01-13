@@ -690,31 +690,36 @@ export default {
               grid-row:3;
             }
             #bck-btn{
-              grid-column: 1/2;
+              grid-column: 1;
               grid-row: 1;
+              background-color: #e51e4a;
               border: 1px solid #7a7a7a;
               color:white;
-              width:120px;
-              height:80px;
+              width:100px;
+              height:50px;
               margin:auto;
               justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+
+
+              /* background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
               background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
               background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
+
             }
 
             #bck-btn:hover{
-              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
+
             }
             #next-btn:active{border: 2px solid #595959;}
 
@@ -871,6 +876,7 @@ export default {
                 height:50px;
                 padding:0;
               }
+
               #ordering h2{
                 font-size:6.3vw;
               }
