@@ -395,7 +395,6 @@ export default {
 
               /* Här nedan görs bakgrunds schackrutorna: */
               background-color: rgb(255, 250, 224); /*beigegul*/
-              /*#9E283A; mörkrosa, *#282826 mörgrå, #B5DAC9 turkostisch*/
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
@@ -424,36 +423,11 @@ export default {
               grid-row-start: 3;
               grid-row-end: 4;
             }
-            #lang-btn{
-              grid-column:6/7;
-              grid-row:1;
-              color:white;
-              width:100px;
-              height:50px;
-              margin:auto;
-              background-color: #e51e4a; /*mörkrosa*/
-              /* #ed6381; /*rosa*/
-              /* justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
-            }
+
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
               border-color: #000000;
-              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
-
 
             .slotButtons{
               grid-template-columns: repeat(6, 1fr);
@@ -463,7 +437,6 @@ export default {
               grid-column: 2/3;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
-              color: white;
             }
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
@@ -473,7 +446,6 @@ export default {
               grid-column: 4/5;
               background-color: #c5e5be;
               border:1px solid #7a7a7a;
-              color: white;
             }
             #noBtn:hover{
               background-color: #89a085;
@@ -483,12 +455,9 @@ export default {
             #lang-btn{
               grid-column:6;
               grid-row:1;
-              color:white;
-              /* font-weight: 700; */
               width:100px;
               height:50px;
               border:1px solid #7a7a7a;
-              /* margin: auto; */
               background-color: #b9d7cb; /*ljusturkos*/
               padding: 0;
             }
@@ -566,10 +535,6 @@ export default {
               border-top: dotted;
               border-bottom: dotted;
               border-color: #ed6381; /*rosa*/
-              /*
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-shadow: 2px 2px #0086b3;*/
             }
             #extras, #extras-favorites{
               margin-top:2em;
@@ -579,32 +544,12 @@ export default {
               grid-row: 1;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
-              color:white;
               width:100px;
               height:50px;
               margin:auto;
               justify-self:center;
-
-
-              /* background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
-
-            }
-
-            #bck-btn:hover{
-              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
-
+              font-size: 35px;
+              padding: 0;
             }
             #next-btn:active{border: 2px solid #595959;}
 
@@ -615,10 +560,9 @@ export default {
               border:1px solid #7a7a7a;
               grid-column: 6/7;
               grid-row:4;
-              color:white;
               background-color: #c5e5be;}
               /* #next-btn:active{border: 2px solid #595959;} */
-              #next-btn:hover{
+            #next-btn:hover{
                 background-color: #89a085;
                 border-color: #000000;
                 /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
@@ -641,21 +585,21 @@ export default {
               }
 
               button{
-                background-color: #ddd;
-                border: none;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                margin: 4px 2px;
-                cursor: pointer;
-                border-radius: 16px;
-                text-shadow: 1px 1px 2px black;
-                text-transform: uppercase;
+                  color: black;
+                  /* #444444; */
+                  text-transform: uppercase;
+                  border: none;
+                  /* padding: 10px 20px; */
+                  text-align: center;
+                  display: inline-block;
+                  margin: 4px 2px;
+                  cursor: pointer;
+                  border-radius: 16px;
+                  /* font-weight: bold; */
+                  font-size: 20px;
               }
               button:hover{
                 background-color: #000;
-                color: white;
               }
 
               /*------------------ CSS för ipad/mobiler-isch ------------*/

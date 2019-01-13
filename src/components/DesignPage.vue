@@ -128,7 +128,6 @@ export default {
 #cancelOrder-btn{
   width:120px;
   height:80px;
-  color: white;
   background-color: #e51e4a;
   border: 1px solid #7a7a7a;
   grid-row:4;
@@ -211,7 +210,6 @@ export default {
   border:1px solid #7a7a7a;
   grid-column: 6/7;
   grid-row:4;
-  color:white;
   background-color: #c5e5be;
 
 }
@@ -238,21 +236,22 @@ export default {
 }
 
 button{
-  background-color: #ddd;
+  color: black;
+  /* #444444; */
+  text-transform: uppercase;
   border: none;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 16px;
-  text-shadow: 1px 1px 2px black;
-  text-transform: uppercase;
+  /* font-weight: bold; */
+  font-size: 25px;
+
 }
 button:hover{
   background-color: #000;
-  color: white;
 }
 #price-div{
   display:inline-block;
@@ -309,6 +308,14 @@ button:hover{
   }
   #ordering h2{
     font-size:6.3vw;
+  }
+  #cancelOrder-btn,#next-btn{
+    font-size: 18px;
+    width: 80px;
+    height: 60px;
+  }
+  #price-div{
+    font-size: 25px;
   }
 }
 
