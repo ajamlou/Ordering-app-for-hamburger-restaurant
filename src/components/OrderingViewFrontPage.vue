@@ -64,7 +64,7 @@ export default {
 
 #favoritesButton, #createBurgerButton {
   text-transform: uppercase;
-  color: white;
+  color: #444444;
   display: grid;
   font-size: 2em;
   border-radius: 3vh;

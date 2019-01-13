@@ -154,6 +154,7 @@ export default{
         this.slotContent=this.uiLabels.emptyCheckout;
       }
     },
+    //Beställningsinformation emittas när en trycker på "Beställ"
     placeOrder:function(){
       this.toggleSlotModal();
       if(this.menusInOrder){
@@ -300,6 +301,8 @@ export default{
 
 #yesBtn{
   background-color: #e51e4a;
+  grid-column: auto;
+  grid-row: auto;
 }
 
 #yesBtn:hover{
