@@ -1,3 +1,5 @@
+<!-- Komponent för att skapa modaler. Modalen innehåller slots som går
+att fylla på olika platser (header, body, footer) -->
 <template>
   <transition name="modal-fade">
   <div class="modal-backdrop">
