@@ -9,13 +9,13 @@
       <div id = "burger-wrapper">
         <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
           <h1 class = "header">{{item.name}}</h1>
-          <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
-          <ul>
+          <img :src= "item.url" class = "image">
+          <ul class ="ingredients">
             <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
               {{thing["ingredient_"+ lang]}}
             </li>
-            <p>{{uiLabels.sum}}: {{item.price}} :-</p>
           </ul>
+          <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
       <div id="extras-title">
@@ -125,7 +125,6 @@ export default {
   text-shadow: 2px 2px #444444;
 }
 
-
 #burger-wrapper{
   grid-column: 1/7;
   grid-row:2;
@@ -135,13 +134,38 @@ export default {
 }
 
 .burgers{
-  border:5px solid rgb(255, 0, 0);
   width: 320px;
   height: 320px;
+  border-radius: 160px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
+.header{
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.image{
+   width: 150px ;
+   height: 150px;
+   grid-column: 2;
+   grid-row: 2;
+}
+
+.ingredients{
+  grid-column: 1/3;
+  grid-row: 3;
+}
+
+.price{
+  grid-column: 2;
+  grid-row:4;
+}
+
+
 .selected{
-  background-color: green;
+  background-color: #b9d7cb;
 }
 
 #extras-title{
@@ -171,9 +195,6 @@ export default {
   background-color: #89a085;
   border-color: #000000;
 }
-.header{
-  text-align: center;
-}
 button{
   color: black;
   text-transform: uppercase;
@@ -185,15 +206,7 @@ button{
   border-radius: 16px;
   font-size: 25px;
 }
-.image{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.ingredients{
-  text-align: center;
-}
 
 h1{
   font-size: 1.5em;
@@ -202,6 +215,4 @@ h1{
 li{
   list-style-type:none;
 }
-
-
 </style>
