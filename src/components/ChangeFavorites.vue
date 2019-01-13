@@ -144,11 +144,16 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
   }
 
   .confirm{
     margin-left: 20vw;
+    font-size: 16px;
+  }
+  #goBack{
+    height: 10vh;
+    width: 10vw;
+    font-size: 18px;
   }
 
   .confirm:hover{background-color: #367c39}
