@@ -48,7 +48,6 @@
     data: function(){
       return{
         rows: [],
-        counter: 1,
         showSlotModal: false
       }
     },
@@ -57,7 +56,6 @@
         this.rows.push({
           title: 'Ingrediens'
         })
-        this.counter++
       },
       //funktionen hittar ingredienserna baserat på ingrediensernas svenska
       //och engelska namn och skickar informationen till servern
@@ -85,11 +83,11 @@
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
             "price": favoritePrice,
-            "index": this.rows.checked
+            "index": this.rows.checked,
+            "selected": false
           }
           this.$store.state.socket.emit('updateinfo', burger);
           this.rows = [];
-          this.counter = 1;
         }
       },
       favError: function(){ //funktion som visar eller döljer felmodalen
