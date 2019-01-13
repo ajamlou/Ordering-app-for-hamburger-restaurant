@@ -187,7 +187,7 @@ export default{
   cursor: pointer;
   border-radius: 16px;
 }
-button:hover{
+.btns button:hover{
   background-color: #000;
   color: white;
 }
