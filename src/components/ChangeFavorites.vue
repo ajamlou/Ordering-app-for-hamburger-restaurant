@@ -2,31 +2,31 @@
   <div>
     <div id = "favMaster" >
       <div id = "burger" >
-        <h1 id = "header">Change the favorites</h1>
-        <p>Enter name of Burger: <p>
+        <h1 id = "header">Ändra på favoriterna</h1>
+        <p>Namn på ny burgare: <p>
           <input v-model = 'rows.name'>
-          <p>Enter url to picture: <p>
+          <p>URL till den nya bilden: <p>
             <input v-model = 'rows.url'>
             <div v-for="(row, index) in rows" :key = "index">
               <p>{{row.title}} {{index+1}}</p>
-              <input v-model="row.value"><button @click = "remove(index)">remove</button>
+              <input v-model="row.value"><button @click = "remove(index)">Ta bort</button>
             </div>
-            <button class = 'addRow' @click = "addrow">add ingedient</button>
+            <button class = 'addRow' @click = "addrow">Lägg till ingrediens</button>
             <br>
-            <p>Which burger do you want to replace?</p>
+            <p>Vilken burgare vill du ersätta?</p>
             <div v-for = "(item, i) in favBurgers" :key = "i">
               <p>{{item.name}}:</p>
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i"><br>
             </div>
-            <p>I want to add this as an additional Burger:</p>
+            <p>Lägg till som en ny hamburgare:</p>
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
             <br>
             <button class = 'confirm' @click = "updateInfo">Confirm</button>
           </div>
           <SlotModal
           v-if="this.showSlotModal">
-          <div slot="header"><button @click = 'favError'>Go back</button></div>
-          <div slot="body">Incorrect input, try again</div>
+          <div slot="header"><button @click = 'favError'>Gå tillbaka</button></div>
+          <div slot="body">Fel inparametrar, testa igen!</div>
         </SlotModal>
       </div>
     </div>
