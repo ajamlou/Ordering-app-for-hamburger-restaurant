@@ -213,6 +213,7 @@ export default {
                 }
               },
               created: function () {
+                /*När komponenten skapas fås ett orderNumber*/
                 this.$store.state.socket.on('orderNumber', function (data) {
                   this.orderNumber = data;
                 }.bind(this));
@@ -226,6 +227,7 @@ export default {
                     this.isSv=false;
                   }
                 },
+                /*Aktiverar slotModal*/
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -235,18 +237,20 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                /*Bestämmer content till slotModal, denna är för tom beställning*/
                 nextBtnModal:function(){
                   this.pressedAbortModal = false;
                   this.noIngredientModal = true;
                   this.toggleSlotModal();
                 },
+                /*Bestämmer content till slotModal, denna är för avbryta beställning*/
                 cancelBtnModal:function(){
                   this.noIngredientModal = false;
                   this.pressedAbortModal = true;
                   this.toggleSlotModal();
                 },
 
-                /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
+                /*togglar ingrediensmodalen och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
                     this.showIngredientsModal = false;
@@ -257,7 +261,7 @@ export default {
                     this.showIngredientsModal = true;
                   }
                 },
-
+                /*Byter vy mellan design, frontpage, checkout osv*/
                 changeView: function(view){
                   /*Gör så att vi inte kan byta vy med en tom order*/
                   if(this.chosenIngredients.length <= 0){
@@ -311,18 +315,22 @@ export default {
                     }
                   }
                 },
+                /*Lägger till en ingrediens till menyn samt lägger till
+                +1 i categoryitemcounter*/
                 addToMenu: function (item) {
                   this.showIngredientsModal = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  /*console.log(item);*/
                 },
+                /*Tar bort ingrediens samt drar bort -1 från categoryitemcounter*/
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                /*När en meny ändras från checkout ser denna funktion till
+                att ingredienserna från menyn laddas tillbaka korrekt in i designpage*/
                 modifyMenu:function(ingredients,units,index,itemCounter){
                   this.chosenIngredients=ingredients;
                   this.categoryItemCounter=itemCounter;
@@ -331,6 +339,7 @@ export default {
                   this.isModifying = true;
                   this.changeView('designPage');
                 },
+                /*nollställer breadcrumbs (döljer back-button)*/
                 removeBackButton:function(){
                   this.breadcrumbs=[];
                 },
@@ -357,18 +366,24 @@ export default {
                     this.nextBtnModal();
                   }
                 },
-                newMenu:function(){
-                  this.resetBurger();
-                  this.changeView('designPage');
-                },
+                // newMenu:function(){
+                //   this.resetBurger();
+                //   this.changeView('designPage');
+                // },
+
+                /*Denna ropas på från checkout för att nollställa alla burgar-relaterade
+                arrayer och byter vy till frontpage*/
                 newBurger:function(){
                   this.resetBurger();
                   this.changeView('frontPage');
                 },
+                /*Nollställer allt, ropas på när en order blivit lagd
+                eller ett köp avbrutits*/
                 clearAll:function(){
                   this.resetBurger();
                   this.menusArray=[];
                 },
+                /*Nollställer alla variabler som har med att skapa burgare att göra*/
                 resetBurger:function(){
                   this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = [];
