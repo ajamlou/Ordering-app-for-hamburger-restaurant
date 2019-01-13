@@ -47,7 +47,7 @@ id="yesBtn"
       </div>
     <!-- <p>+</p> -->
   </div>
-  <div id="checkout-wrapper":class="{'noBorder' : !menusInOrder}">
+  <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
   <OrderInCheckout
   class="flex-item"
   v-for = "(menu, index) in menus"
