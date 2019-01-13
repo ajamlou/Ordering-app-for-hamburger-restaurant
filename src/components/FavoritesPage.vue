@@ -1,18 +1,18 @@
 
 
 <template>
-      <div class = "favorites">
-      <div class ="burgers" :class="{'selected': isSelected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
-        <h1 class = "header">{{item.name}}</h1>
-        <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
-        <ul>
-          <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
-            {{thing["ingredient_"+ lang]}}
-          </li>
-          <p>{{uiLabels.sum}}: {{item.price}} :-</p>
-        </ul>
-      </div>
+  <div class = "favorites">
+    <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+      <h1 class = "header">{{item.name}}</h1>
+      <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
+      <ul>
+        <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
+          {{thing["ingredient_"+ lang]}}
+        </li>
+        <p>{{uiLabels.sum}}: {{item.price}} :-</p>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script>
@@ -20,30 +20,36 @@ export default {
   name: 'FavortiesPage',
   data: function(){
     return{
-      isSelected: false
-}
-},
-props:{
-  ingredients:Array,
-  lang: String,
-  uiLabels: Object,
-  favBurgers: Array
-},
-components:{
-},
-methods:{
-  // skickar favoritburgaren som väljs till ordering och lägger in den där
-  favToCheckout: function(index, item){
-   this.isSelected = !this.isSelected;
+    }
+  },
+  props:{
+    ingredients:Array,
+    lang: String,
+    uiLabels: Object,
+    favBurgers: Array
+  },
+  components:{
+  },
+  methods:{
+    // skickar favoritburgaren som väljs till ordering och lägger in den där
+    favToCheckout: function(index, item){
+      this.$emit("clearburger");
+      this.unselect();
+      item.selected = !item.selected;
       for (var i = 0; i< item.ingredients.length; i++){
         this.$emit("fav-ingredient", item.ingredients[i]);
       }
-  },
-  //visar ingrediensmodalen för tillbehör
-  toggleShowIngredientsModal:function(){
-    this.$emit('info_to_modal', this.category)
-  },
-}
+    },
+    unselect: function(){
+      for(var i=0; i<this.favBurgers.length; i++){
+        this.favBurgers[i].selected = false;
+      }
+    },
+    //visar ingrediensmodalen för tillbehör
+    toggleShowIngredientsModal:function(){
+      this.$emit('info_to_modal', this.category)
+    },
+  }
 }
 </script>
 <style scoped>
@@ -61,7 +67,6 @@ methods:{
 }
 
 .burgers{
-  background-color: white;
   border:5px solid rgb(255, 0, 0);
   width: 320px;
   height: 320px;
@@ -69,9 +74,6 @@ methods:{
 
 .selected{
   background-color: green;
-  border:5px solid rgb(255, 0, 0);
-  width: 320px;
-  height: 320px;
 }
 
 
