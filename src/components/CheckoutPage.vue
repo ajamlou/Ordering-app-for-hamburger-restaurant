@@ -13,12 +13,14 @@ v-if="this.showSlotModal">
 <div slot="body" class="slotBody">{{slotContent}}</div>
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
-<div slot="footer"><button
+<div slot="footer">
+  <button
   type="button"
   class="btn-close"
   @click="orderFinished()">
   {{uiLabels.OKlabel}}
-</button></div>
+  </button>
+</div>
 </Slotmodal>
 
 <SlotModal
@@ -42,30 +44,28 @@ id="yesBtn"
 
 <div id="btn-order-wrap">
   <div id="add-btn-div" @click="newBurger">
-      <div id="addButtonText">
-        <h5>{{uiLabels.addBurger}}</h5>
-      </div>
+    <div id="addButtonText">
+      <h5>{{uiLabels.addBurger}}</h5>
+    </div>
     <!-- <p>+</p> -->
   </div>
   <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
-  <OrderInCheckout
-  class="flex-item"
-  v-for = "(menu, index) in menus"
-  :key ="index"
-  :id = "index"
-  :menu = "menu"
-  :uiLabels = "uiLabels"
-  :lang="lang"
-  @remove_menu="removeMenu"
-  @modify_menu="modifyMenu">
-</OrderInCheckout>
+    <OrderInCheckout
+    class="flex-item"
+    v-for = "(menu, index) in menus"
+    :key ="index"
+    :id = "index"
+    :menu = "menu"
+    :uiLabels = "uiLabels"
+    :lang="lang"
+    @remove_menu="removeMenu"
+    @modify_menu="modifyMenu">
+  </OrderInCheckout>
 </div>
 </div>
-<!-- <div id="checkout-foot"> -->
 <center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
-<!-- </div> -->
 </div>
 </div>
 </template>
