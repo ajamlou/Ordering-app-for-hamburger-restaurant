@@ -154,6 +154,7 @@ export default{
         this.slotContent=this.uiLabels.emptyCheckout;
       }
     },
+    //Beställningsinformation emittas när en trycker på "Beställ"
     placeOrder:function(){
       this.toggleSlotModal();
       if(this.menusInOrder){
