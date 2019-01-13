@@ -248,6 +248,7 @@ button{
   border-radius: 16px;
   /* font-weight: bold; */
   font-size: 25px;
+  
 
 }
 button:hover{
@@ -309,14 +310,16 @@ button:hover{
   #ordering h2{
     font-size:6.3vw;
   }
-  #cancelOrder-btn,#next-btn{
-    font-size: 18px;
-    width: 80px;
-    height: 60px;
-  }
-  #price-div{
-    font-size: 25px;
-  }
+}
+@media screen and (max-width:500px){
+#cancelOrder-btn,#next-btn{
+  font-size: 18px;
+  width: 80px;
+  height: 60px;
+}
+#price-div{
+  font-size: 25px;
+}
 }
 
 
