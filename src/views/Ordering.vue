@@ -6,9 +6,7 @@
     <button v-on:click="switchLang();checkLang()"
     id="lang-btn"
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
-    <div id="header-title">
-      <h1 v-if="currentView==='favoritesPage'">{{uiLabels.chooseAFavorite}}</h1>
-    </div>
+
 
     <OrderingViewFrontPage
     @Visibility="changeView"
@@ -42,7 +40,6 @@
 </designPage>
 
 <FavoritesPage
-id = "favoritesPage"
 class = "viewContent"
 v-if = "currentView === 'favoritesPage'"
 @clearburger = "resetBurger"

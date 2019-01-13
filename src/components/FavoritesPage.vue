@@ -1,33 +1,43 @@
 
 
 <template>
-  <div class = "favorites">
-    <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
-      <h1 class = "header">{{item.name}}</h1>
-      <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
-      <ul>
-        <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
-          {{thing["ingredient_"+ lang]}}
-        </li>
-        <p>{{uiLabels.sum}}: {{item.price}} :-</p>
-      </ul>
+  <div id = "favorites-backdrop">
+    <div id ="favorites-master">
+      <div id="favorites-title">
+        {{uiLabels.chooseAFavorite}}
+      </div>
+      <div id = "burger-wrapper">
+        <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+          <h1 class = "header">{{item.name}}</h1>
+          <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
+          <ul>
+            <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
+              {{thing["ingredient_"+ lang]}}
+            </li>
+            <p>{{uiLabels.sum}}: {{item.price}} :-</p>
+          </ul>
+        </div>
+      </div>
+      <div id="extras-title">
+        {{uiLabels.extras}}
+      </div>
+      <div id = 'category-wrapper'>
+        <CategoryRow
+        v-for="category in extrasCategories"
+        :key="category.categoryNr"
+        :category="category.categoryNr"
+        :added_items="chosenIngredients"
+        :category_name="uiLabels[category.label]"
+        :lang="lang"
+        :threshold="category.threshold"
+        :item_count="categoryItemCounter[category.categoryNr -1]"
+        @remove_ingredient="removeFromMenu"
+        @info_to_modal="toggleShowIngredientsModal">
+      </CategoryRow>
     </div>
-
-<h2>{{uiLabels.extras}}</h2>
-    <CategoryRow
-    v-for="category in extrasCategories"
-    :key="category.categoryNr"
-    :category="category.categoryNr"
-    :added_items="chosenIngredients"
-    :category_name="uiLabels[category.label]"
-    :lang="lang"
-    :threshold="category.threshold"
-    :item_count="categoryItemCounter[category.categoryNr -1]"
-    @remove_ingredient="removeFromMenu"
-    @info_to_modal="toggleShowIngredientsModal">
-  </CategoryRow>
-  <button id="fav-next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+    <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
   </div>
+</div>
 </template>
 
 <script>
@@ -85,13 +95,40 @@ export default {
 </script>
 <style scoped>
 
-
-.wrapper{
-  height: 100vh;
-  width: 100vw;
+#favorites-backdrop{
+  background-color: rgba(255, 250, 224,0.99);
+  border-radius:15px;
+  width:95%;
+  justify-self:center;
+  margin-bottom:2em;
+  padding-bottom:1em;
 }
 
-.favorites{
+#favorites-master {
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto auto auto auto;
+  width: 90%;
+  grid-row-gap: 1vh;
+}
+
+#favorites-title{
+  grid-column:1/7;
+  grid-row:1;
+  text-align: left;
+  align-self: center;
+  font-family: 'Lobster', sans-serif;
+  font-size: 10vmin;
+  /* font-family: 'Luckiest Guy', sans-serif; */
+  color: #ed6381; /*rosa*/
+  /* text-transform: uppercase; */
+  text-shadow: 2px 2px #444444;
+}
+
+
+#burger-wrapper{
+  grid-column: 1/7;
+  grid-row:2;
   display:flex;
   flex-wrap: wrap;
   justify-content:center;
@@ -107,12 +144,47 @@ export default {
   background-color: green;
 }
 
+#extras-title{
+  grid-column: 1/7;
+  grid-row: 3;
+  font-size: 2em;
+}
 
+#category-wrapper{
+  grid-column: 1/7;
+  grid-row:4;
+}
 
+#next-button{
+  grid-column: 6/7;
+  grid-row:5;
+  border:1px solid #7a7a7a;
+  width:120px;
+  height:80px;
+  justify-self:end;
+  background-color: #c5e5be;
+}
+#next-button:active{
+  border: 2px solid #595959;
+}
+#next-button:hover{
+  background-color: #89a085;
+  border-color: #000000;
+}
 .header{
   text-align: center;
 }
-
+button{
+  color: black;
+  text-transform: uppercase;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  font-size: 25px;
+}
 .image{
   display: block;
   margin-left: auto;
