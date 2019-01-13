@@ -29,7 +29,7 @@
   "myBurger" : "Designa din hamburgare",
   "extras" : "Tillbehör & dryck",
   "cancel": "Avbryt",
-  "back" : "←",
+  "back" : "⇦",
   "burger" : "Burgare",
   "back2": "TILLBAKA",
   "quantity" : "Antal",
@@ -49,7 +49,7 @@
   "OKlabel": "OK",
   "checkout" : "Varukorg",
   "anotherBurger": "MaxDonald's",
-  "areYouSure":"Är du säker?",
+  "areYouSure":"Vill du avbryta din beställning?",
   "abort": "Avbryt beställning",
   "dontAbort": "Fortsätt beställa"
 }

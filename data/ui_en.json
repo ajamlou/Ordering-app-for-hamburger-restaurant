@@ -27,7 +27,7 @@
   "drinks" : "Drinks",
   "myBurger" : "Design your burger",
   "extras" : "Sides & drinks",
-  "back" : "←",
+  "back" : "⇦",
   "burger" : "Burger",
   "quantity" : "Quantity",
   "unitprice" : "Unit price",
@@ -46,7 +46,7 @@
   "OKlabel": "OK",
   "checkout" : "Checkout",
   "anotherBurger": "MaxDonald's",
-  "areYouSure": "Are you sure?",
+  "areYouSure": "Do you want to cancel your order?",
   "abort": "Cancel order",
   "dontAbort": "Continue with order"
 }

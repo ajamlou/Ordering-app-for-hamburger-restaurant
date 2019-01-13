@@ -213,6 +213,7 @@ export default {
                 }
               },
               created: function () {
+                /*När komponenten skapas fås ett orderNumber*/
                 this.$store.state.socket.on('orderNumber', function (data) {
                   this.orderNumber = data;
                 }.bind(this));
@@ -226,6 +227,7 @@ export default {
                     this.isSv=false;
                   }
                 },
+                /*Aktiverar slotModal*/
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -235,18 +237,20 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                /*Bestämmer content till slotModal, denna är för tom beställning*/
                 nextBtnModal:function(){
                   this.pressedAbortModal = false;
                   this.noIngredientModal = true;
                   this.toggleSlotModal();
                 },
+                /*Bestämmer content till slotModal, denna är för avbryta beställning*/
                 cancelBtnModal:function(){
                   this.noIngredientModal = false;
                   this.pressedAbortModal = true;
                   this.toggleSlotModal();
                 },
 
-                /*togglar modal och bestämmer vilken kategori av ingredienser som ska visas*/
+                /*togglar ingrediensmodalen och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
                     this.showIngredientsModal = false;
@@ -257,7 +261,7 @@ export default {
                     this.showIngredientsModal = true;
                   }
                 },
-
+                /*Byter vy mellan design, frontpage, checkout osv*/
                 changeView: function(view){
                   /*Gör så att vi inte kan byta vy med en tom order*/
                   if(this.chosenIngredients.length <= 0){
@@ -311,18 +315,22 @@ export default {
                     }
                   }
                 },
+                /*Lägger till en ingrediens till menyn samt lägger till
+                +1 i categoryitemcounter*/
                 addToMenu: function (item) {
                   this.showIngredientsModal = false;
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  /*console.log(item);*/
                 },
+                /*Tar bort ingrediens samt drar bort -1 från categoryitemcounter*/
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
                   this.categoryItemCounter[item.category-1]-=1;
                   this.price -= item.selling_price;
                 },
+                /*När en meny ändras från checkout ser denna funktion till
+                att ingredienserna från menyn laddas tillbaka korrekt in i designpage*/
                 modifyMenu:function(ingredients,units,index,itemCounter){
                   this.chosenIngredients=ingredients;
                   this.categoryItemCounter=itemCounter;
@@ -331,6 +339,7 @@ export default {
                   this.isModifying = true;
                   this.changeView('designPage');
                 },
+                /*nollställer breadcrumbs (döljer back-button)*/
                 removeBackButton:function(){
                   this.breadcrumbs=[];
                 },
@@ -357,18 +366,24 @@ export default {
                     this.nextBtnModal();
                   }
                 },
-                newMenu:function(){
-                  this.resetBurger();
-                  this.changeView('designPage');
-                },
+                // newMenu:function(){
+                //   this.resetBurger();
+                //   this.changeView('designPage');
+                // },
+
+                /*Denna ropas på från checkout för att nollställa alla burgar-relaterade
+                arrayer och byter vy till frontpage*/
                 newBurger:function(){
                   this.resetBurger();
                   this.changeView('frontPage');
                 },
+                /*Nollställer allt, ropas på när en order blivit lagd
+                eller ett köp avbrutits*/
                 clearAll:function(){
                   this.resetBurger();
                   this.menusArray=[];
                 },
+                /*Nollställer alla variabler som har med att skapa burgare att göra*/
                 resetBurger:function(){
                   this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = [];
@@ -395,7 +410,6 @@ export default {
 
               /* Här nedan görs bakgrunds schackrutorna: */
               background-color: rgb(255, 250, 224); /*beigegul*/
-              /*#9E283A; mörkrosa, *#282826 mörgrå, #B5DAC9 turkostisch*/
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
@@ -424,36 +438,11 @@ export default {
               grid-row-start: 3;
               grid-row-end: 4;
             }
-            #lang-btn{
-              grid-column:6/7;
-              grid-row:1;
-              color:white;
-              width:100px;
-              height:50px;
-              margin:auto;
-              background-color: #e51e4a; /*mörkrosa*/
-              /* #ed6381; /*rosa*/
-              /* justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
-            }
+
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
               border-color: #000000;
-              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
-
 
             .slotButtons{
               grid-template-columns: repeat(6, 1fr);
@@ -463,7 +452,6 @@ export default {
               grid-column: 2/3;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
-              color: white;
             }
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
@@ -473,7 +461,6 @@ export default {
               grid-column: 4/5;
               background-color: #c5e5be;
               border:1px solid #7a7a7a;
-              color: white;
             }
             #noBtn:hover{
               background-color: #89a085;
@@ -483,12 +470,9 @@ export default {
             #lang-btn{
               grid-column:6;
               grid-row:1;
-              color:white;
-              /* font-weight: 700; */
               width:100px;
               height:50px;
               border:1px solid #7a7a7a;
-              /* margin: auto; */
               background-color: #b9d7cb; /*ljusturkos*/
               padding: 0;
             }
@@ -546,60 +530,25 @@ export default {
               background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             }
-
-
             .viewContent{
               grid-row: 2;
               grid-column: 1/7;
             }
-            #ordering {
-              display:grid;
-              grid-template-columns: repeat(6, 1fr);
-              margin: auto auto auto auto;
-              width: 90%;
-              grid-row-gap: 1vh;
-            }
-            #ordering h2{
-              font-weight: bolder;
-              text-transform: uppercase;
-              text-align: left;
-              border-top: dotted;
-              border-bottom: dotted;
-              border-color: #ed6381; /*rosa*/
-              /*
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-shadow: 2px 2px #0086b3;*/
-            }
+
             #extras, #extras-favorites{
               margin-top:2em;
             }
             #bck-btn{
-              grid-column: 1/2;
+              grid-column: 1;
               grid-row: 1;
+              background-color: #e51e4a;
               border: 1px solid #7a7a7a;
-              color:white;
-              width:120px;
-              height:80px;
+              width:100px;
+              height:50px;
               margin:auto;
               justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 );
-            }
-
-            #bck-btn:hover{
-              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
+              font-size: 35px;
+              padding: 0;
             }
             #next-btn:active{border: 2px solid #595959;}
 
@@ -610,10 +559,9 @@ export default {
               border:1px solid #7a7a7a;
               grid-column: 6/7;
               grid-row:4;
-              color:white;
               background-color: #c5e5be;}
               /* #next-btn:active{border: 2px solid #595959;} */
-              #next-btn:hover{
+            #next-btn:hover{
                 background-color: #89a085;
                 border-color: #000000;
                 /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
@@ -636,21 +584,21 @@ export default {
               }
 
               button{
-                background-color: #ddd;
-                border: none;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                margin: 4px 2px;
-                cursor: pointer;
-                border-radius: 16px;
-                text-shadow: 1px 1px 2px black;
-                text-transform: uppercase;
+                  color: black;
+                  /* #444444; */
+                  text-transform: uppercase;
+                  border: none;
+                  /* padding: 10px 20px; */
+                  text-align: center;
+                  display: inline-block;
+                  margin: 4px 2px;
+                  cursor: pointer;
+                  border-radius: 16px;
+                  /* font-weight: bold; */
+                  font-size: 20px;
               }
               button:hover{
                 background-color: #000;
-                color: white;
               }
 
               /*------------------ CSS för ipad/mobiler-isch ------------*/
