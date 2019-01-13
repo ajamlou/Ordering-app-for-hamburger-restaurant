@@ -274,6 +274,7 @@ export default {
                     this.isSv=false;
                   }
                 },
+                //Togglar en tom modal
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -283,11 +284,14 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                //Modal som kommer upp om en trycker på "Nästa" och ingen
+                //ingrediens/tillbehör är vald
                 nextBtnModal:function(){
                   this.pressedAbortModal = false;
                   this.noIngredientModal = true;
                   this.toggleSlotModal();
                 },
+                // Modal för avbryt-knapp
                 cancelBtnModal:function(){
                   this.noIngredientModal = false;
                   this.pressedAbortModal = true;
@@ -379,6 +383,7 @@ export default {
                   this.isModifying = true;
                   this.changeView('designPage');
                 },
+                //Tillbakaknapp försvinner
                 removeBackButton:function(){
                   this.breadcrumbs=[];
                 },
@@ -490,9 +495,9 @@ export default {
               background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
             }
-            #bck-btn:hover{
+            /* #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-              border-color: #000000;
+              /* border-color: #000000; */
               /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
               /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
@@ -500,7 +505,7 @@ export default {
               background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
-            }
+
             #cancelOrder-btn{
               width:120px;
               height:80px;
@@ -682,15 +687,25 @@ export default {
               grid-row:3;
             }
             #bck-btn{
-              grid-column: 1/2;
+              background-color: #e51e4a;
+              grid-column: 1;
               grid-row: 1;
               border: 1px solid #7a7a7a;
               color:white;
-              width:120px;
-              height:80px;
+              width:100px;
+              height:50px;
               margin:auto;
+              padding:0;
               justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
+            }
+
+            #bck-btn:hover{
+              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+              border-color: #000000;
+            }
+
+
+              /* background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
               background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
               background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
               background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
@@ -700,14 +715,14 @@ export default {
             }
 
             #bck-btn:hover{
-              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
+              background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
               /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
+              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
               background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 );
-            }
+            } */
             #next-btn:active{border: 2px solid #595959;}
 
             #price-div{

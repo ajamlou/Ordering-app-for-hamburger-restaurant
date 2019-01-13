@@ -113,14 +113,17 @@ export default{
       }
       else this.showSlotModal=false;
     },
-
+    //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
       this.toggleSlotModal();
       this.pressedAbortModal=true;
     },
+    //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
+    //försvinner modalen
     continueOrder:function(){
       this.pressedAbortModal=false;
     },
+    //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
@@ -136,6 +139,7 @@ export default{
       this.$emit('modify_menu',ingredients,units,index,itemCounter);
       this.menus.splice(index,1);
     },
+    //Byter vy när en trycker på "Lägg till burgare"
     newBurger:function(){
       this.$emit('change_view','frontPage');
       this.$emit('new_burger');
