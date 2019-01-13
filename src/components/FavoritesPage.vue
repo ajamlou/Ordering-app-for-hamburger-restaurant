@@ -2,7 +2,7 @@
 
 <template>
       <div class = "favorites">
-      <div class = "burgers" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+      <div class ="burgers" :class="{'selected': isSelected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
         <h1 class = "header">{{item.name}}</h1>
         <img :src= "item.url" style="border-style: none;" width="100px" height="100px" class = "image">
         <ul>
@@ -20,6 +20,7 @@ export default {
   name: 'FavortiesPage',
   data: function(){
     return{
+      isSelected: false
 }
 },
 props:{
@@ -33,10 +34,12 @@ components:{
 methods:{
   // skickar favoritburgaren som väljs till ordering och lägger in den där
   favToCheckout: function(index, item){
+   this.isSelected = !this.isSelected;
       for (var i = 0; i< item.ingredients.length; i++){
         this.$emit("fav-ingredient", item.ingredients[i]);
       }
   },
+  //visar ingrediensmodalen för tillbehör
   toggleShowIngredientsModal:function(){
     this.$emit('info_to_modal', this.category)
   },
@@ -59,6 +62,13 @@ methods:{
 
 .burgers{
   background-color: white;
+  border:5px solid rgb(255, 0, 0);
+  width: 320px;
+  height: 320px;
+}
+
+.selected{
+  background-color: green;
   border:5px solid rgb(255, 0, 0);
   width: 320px;
   height: 320px;
