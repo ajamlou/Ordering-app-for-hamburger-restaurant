@@ -1,32 +1,34 @@
 <template>
-  <div id = "favMainDiv">
-    <div id = "burger" >
-      <h1 id = "header">Change the favorites</h1>
-      <p>Enter name of Burger: <p>
-        <input v-model = 'rows.name'>
-        <p>Enter url to picture: <p>
-          <input v-model = 'rows.url'>
-          <div v-for="(row, index) in rows" :key = "index">
-            <p>{{row.title}} {{index+1}}</p>
-            <input v-model="row.value"><button @click = "remove(index)">remove</button>
+  <div>
+    <div id = "favMaster" >
+      <div id = "burger" >
+        <h1 id = "header">Change the favorites</h1>
+        <p>Enter name of Burger: <p>
+          <input v-model = 'rows.name'>
+          <p>Enter url to picture: <p>
+            <input v-model = 'rows.url'>
+            <div v-for="(row, index) in rows" :key = "index">
+              <p>{{row.title}} {{index+1}}</p>
+              <input v-model="row.value"><button @click = "remove(index)">remove</button>
+            </div>
+            <button class = 'addRow' @click = "addrow">add ingedient</button>
+            <br>
+            <p>Which burger do you want to replace?</p>
+            <div v-for = "(item, i) in favBurgers" :key = "i">
+              <p>{{item.name}}:</p>
+              <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i"><br>
+            </div>
+            <p>I want to add this as an additional Burger:</p>
+            <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
+            <br>
+            <button class = 'confirm' @click = "updateInfo">Confirm</button>
           </div>
-          <button class = 'addRow' @click = "addrow">add ingedient</button>
-          <br>
-          <p>Which burger do you want to replace?</p>
-          <div v-for = "(item, i) in favBurgers" :key = "i">
-            <p>{{item.name}}</p>
-            <input type="radio" v-model = 'rows.checked' :value = "i"><br>
-          </div>
-          <p>I want to add this as an additional Burger</p>
-          <input type="radio" v-model='rows.checked' value = 'add' >
-          <br>
-          <button class = 'confirm' @click = "updateInfo">Confirm</button>
-        </div>
-        <SlotModal
-        v-if="this.showSlotModal">
-        <div slot="header"><button @click = 'favError'>Go back</button></div>
-        <div slot="body">Incorrect input, try again</div>
-      </SlotModal>
+          <SlotModal
+          v-if="this.showSlotModal">
+          <div slot="header"><button @click = 'favError'>Go back</button></div>
+          <div slot="body">Incorrect input, try again</div>
+        </SlotModal>
+      </div>
     </div>
   </template>
 
@@ -106,6 +108,14 @@
   </script>
 
   <style scoped>
+
+  #favMaster{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  #burger{
+    grid-column: 2/3;
+  }
   .confirm{
     background-color: #4CAF50; /* Green */
     border: none;
@@ -116,7 +126,21 @@
     display: inline-block;
     font-size: 16px;
   }
-
+  .radio{
+    -webkit-appearance:button;
+    -moz-appearance:button;
+    appearance:button;
+    border:4px solid #ccc;
+    border-top-color:#bbb;
+    border-left-color:#bbb;
+    background:#fff;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+  }
+  .radio:checked{
+    border:20px solid #4099ff;
+  }
   p{
     color:white;
   }
