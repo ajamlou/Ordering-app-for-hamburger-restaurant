@@ -9,19 +9,18 @@
             <input v-model = 'rows.url'>
             <div v-for="(row, index) in rows" :key = "index">
               <p>{{row.title}} {{index+1}}</p>
-              <input v-model="row.value"><button @click = "remove(index)">Ta bort</button>
+              <input v-model="row.value"><button id="cancelBtn" @click = "remove(index)">Ta bort</button>
             </div>
-            <button class = 'addRow' @click = "addrow">Lägg till ingrediens</button>
+            <button class = 'addRow' @click = "addRow()">Lägg till ingrediens</button>
             <br>
             <br>
             <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
             <div v-for = "(item, i) in favBurgers" :key = "i">
               <p>{{item.name}}:</p>
-              <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i"><br>
+              <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i">
             </div>
             <p>Lägg till som en ny hamburgare:</p>
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
-            <br>
             <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
           </div>
           <SlotModal
@@ -54,9 +53,9 @@
       }
     },
     methods: {
-      addrow: function(){ //lägger till en ingrediens
+      addRow: function(){ //lägger till en ingrediens
         this.rows.push({
-          title: 'ingredient'
+          title: 'Ingrediens'
         })
         this.counter++
       },
@@ -126,6 +125,18 @@
     grid-column: 3/6;
   }
 
+  #cancelBtn{
+    background-color: red;
+    color: white;
+    border: 2px solid white;
+    border-radius: 7px;
+    margin-left: 5px;
+    height: 5vh;
+  }
+  #cancelBtn:hover{
+    background-color: #b30000;
+  }
+
   .confirm, #goBack{
     background-color: #4CAF50; /* Green */
     border: 2px solid white;
@@ -137,6 +148,11 @@
     display: inline-block;
     font-size: 16px;
   }
+
+  .confirm{
+    margin-left: 20vw;
+  }
+
   .confirm:hover{background-color: #367c39}
   #goBack:hover{background-color: #367c39}
 
@@ -157,10 +173,12 @@
   }
 
   .addRow{
+    margin-top: 1vh;
     background-color: #1b61e4;
     color: white;
     border-radius: 7px;
     border: 1px solid white;
+    height: 7vh;
   }
   .addRow:hover{background-color: #103a89}
 
