@@ -46,44 +46,34 @@ export default {
   .modal {
     text-align:center;
     display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(2,1fr);
-    align-content: start;
-    position: fixed;
+    /* grid-template-columns: repeat(5,1fr);*/
+    /* grid-template-rows: repeat(2,1fr); */
+    /* align-content: start; */
+    /* position: fixed; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: hidden;
+    /* box-shadow: 2px 2px 20px 1px;
+    overflow-x: hidden; */
     border-radius: 15px;
-    width:45em;
-    height: 15em;
-    max-width:80%;
-    max-height:150%;
-    padding-bottom: 10px;
+    /* max-width:80%; */
+    /* max-height:150%; */
+    /* padding: 5vh; */
   }
 
   .mod-bod{
-    grid-column: 1/6;
-    grid-row: 1/2;
-    height:100%;
-    width:90%;
-    font-size: 1.5em;
-    margin:auto;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    grid-column: auto;
+    grid-row: auto;
+    /* height:100%; */
+    /* width:90%; */
+    font-size: 4vh;
+    margin: auto;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
     overflow-y: auto;
-    overflow-x: hidden;
-    padding:3px;
+    /* overflow-x: hidden; */
+    padding: 3vh;
   }
 
-  .mod-foot {
-    grid-column:3/4;
-    grid-row: 2/3;
-    color: white;
-    margin-top: none;
-    margin-bottom: 1em;
-    height: 20%;
-  }
 </style>
