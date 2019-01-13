@@ -21,7 +21,7 @@
             <p>Lägg till som en ny hamburgare:</p>
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
             <br>
-            <button class = 'confirm' @click = "updateInfo">Confirm</button>
+            <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
           </div>
           <SlotModal
           v-if="this.showSlotModal">
