@@ -95,6 +95,7 @@
         }
         else{
           this.showSlotModal = true;
+          return false;
         }
       },
       remove: function(index){
