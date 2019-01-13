@@ -47,9 +47,13 @@ export default {
     return {}
   },
   methods: {
+    /*emittar en meddelande som säger till vilken ingrediens som ska bort och på vilken
+    plats denna ligger*/
     removeIngredient:function(item,index){
       this.$emit('remove_ingredient',item,index);
     },
+    /*emittar vilken kategori categoryrow tillhör så att ingredientsmodal
+    ska veta vilka ingredienser som ska visas*/
     emitInfoToModal:function(){
       this.$emit('info_to_modal', this.category)
     },
