@@ -546,31 +546,11 @@ export default {
               background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
               background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
             }
-
-
             .viewContent{
               grid-row: 2;
               grid-column: 1/7;
             }
-            #ordering {
-              display:grid;
-              grid-template-columns: repeat(6, 1fr);
-              margin: auto auto auto auto;
-              width: 90%;
-              grid-row-gap: 1vh;
-            }
-            #ordering h2{
-              font-weight: bolder;
-              text-transform: uppercase;
-              text-align: left;
-              border-top: dotted;
-              border-bottom: dotted;
-              border-color: #ed6381; /*rosa*/
-              /*
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-shadow: 2px 2px #0086b3;*/
-            }
+
             #extras, #extras-favorites{
               margin-top:2em;
             }
