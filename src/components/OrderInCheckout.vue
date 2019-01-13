@@ -55,6 +55,7 @@ export default{
     lang: String
   },
   methods:{
+    /*Increment och decrement styr värdet i input-fältet*/
     increment:function(){
       this.menu.units += 1;
     },
@@ -62,15 +63,18 @@ export default{
       if(this.menu.units != 1){
       this.menu.units -= 1;}
     },
+    /*Emittar till parent vilken order som ska tas bort och dess id*/
     removeMenu:function(){
       this.$emit('remove_menu',this.id);
     },
+    /*Skickar info om ordern som ska ändras (ingredienser, antal osv)*/
     modifyMenu:function(){
       this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id,this.menu.itemCount);
       this.$emit('change_view','designPage');
     },
   },
   computed:{
+    /*Räknar ut om det finns ingredienser i kategori 5 eller högre*/
     existsExtras:function(){
       let extras = false;
       let i;
