@@ -61,6 +61,11 @@ export default {
   overflow: hidden;
   height:2em;
   padding:0;
+  text-transform: capitalize;
+}
+
+.modal-body{
+  text-transform: capitalize;
 }
 .ing-container{
   display: grid;

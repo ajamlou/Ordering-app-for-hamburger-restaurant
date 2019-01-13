@@ -2,7 +2,7 @@
   <div>
     <div id = "favMaster" >
       <div id = "burger" >
-        <h1 id = "header">Ändra på favoriterna</h1>
+        <h1 id = "header">ÄNDRA PÅ FAVORITERNA</h1>
         <p>Namn på ny burgare: <p>
           <input v-model = 'rows.name'>
           <p>URL till den nya bilden: <p>
@@ -13,7 +13,8 @@
             </div>
             <button class = 'addRow' @click = "addrow">Lägg till ingrediens</button>
             <br>
-            <p>Vilken burgare vill du ersätta?</p>
+            <br>
+            <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
             <div v-for = "(item, i) in favBurgers" :key = "i">
               <p>{{item.name}}:</p>
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i"><br>
@@ -25,8 +26,8 @@
           </div>
           <SlotModal
           v-if="this.showSlotModal">
-          <div slot="header"><button @click = 'favError'>Gå tillbaka</button></div>
-          <div slot="body">Fel inparametrar, testa igen!</div>
+          <div slot="body"><h3>Fel inparametrar, testa igen!</h3></div>
+          <div slot="footer"><button id="goBack" @click = 'favError'>Gå tillbaka</button></div>
         </SlotModal>
       </div>
     </div>
@@ -115,14 +116,20 @@
 
   #favMaster{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(7, 1fr);
   }
   #burger{
-    grid-column: 2/3;
+    grid-column: 3/6;
   }
-  .confirm{
+
+  #header{
+    grid-column: 3/6;
+  }
+
+  .confirm, #goBack{
     background-color: #4CAF50; /* Green */
-    border: none;
+    border: 2px solid white;
+    border-radius: 10px;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -130,6 +137,9 @@
     display: inline-block;
     font-size: 16px;
   }
+  .confirm:hover{background-color: #367c39}
+  #goBack:hover{background-color: #367c39}
+
   .radio{
     -webkit-appearance:button;
     -moz-appearance:button;
@@ -145,6 +155,15 @@
   .radio:checked{
     border:20px solid #4099ff;
   }
+
+  .addRow{
+    background-color: #1b61e4;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid white;
+  }
+  .addRow:hover{background-color: #103a89}
+
   p{
     color:white;
   }
