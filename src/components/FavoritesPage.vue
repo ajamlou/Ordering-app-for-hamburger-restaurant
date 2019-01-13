@@ -12,10 +12,27 @@
         <p>{{uiLabels.sum}}: {{item.price}} :-</p>
       </ul>
     </div>
+
+<h2>{{uiLabels.extras}}</h2>
+    <CategoryRow
+    v-for="category in extrasCategories"
+    :key="category.categoryNr"
+    :category="category.categoryNr"
+    :added_items="chosenIngredients"
+    :category_name="uiLabels[category.label]"
+    :lang="lang"
+    :threshold="category.threshold"
+    :item_count="categoryItemCounter[category.categoryNr -1]"
+    @remove_ingredient="removeFromMenu"
+    @info_to_modal="toggleShowIngredientsModal">
+  </CategoryRow>
+  <button id="fav-next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
   </div>
 </template>
 
 <script>
+import CategoryRow from '@/components/CategoryRow.vue'
+
 export default {
   name: 'FavortiesPage',
   data: function(){
@@ -26,9 +43,14 @@ export default {
     ingredients:Array,
     lang: String,
     uiLabels: Object,
-    favBurgers: Array
+    favBurgers: Array,
+    extrasCategories: Array,
+    chosenIngredients: Array,
+    categoryItemCounter: Array
+
   },
   components:{
+    CategoryRow
   },
   methods:{
     // skickar favoritburgaren som väljs till ordering och lägger in den där
@@ -45,10 +67,19 @@ export default {
         this.favBurgers[i].selected = false;
       }
     },
-    //visar ingrediensmodalen för tillbehör
-    toggleShowIngredientsModal:function(){
-      this.$emit('info_to_modal', this.category)
+    removeFromMenu: function(item,index){
+      this.$emit('removeIngredient',item,index);
     },
+    //visar ingrediensmodalen för tillbehör
+    toggleShowIngredientsModal:function(data){
+      this.$emit('info_to_modal', data);
+    },
+    addToCheckout: function(){
+      this.$emit('addToCheckout');
+    },
+    changeView: function(data){
+      this.$emit('changeView',data);
+    }
   }
 }
 </script>

@@ -41,39 +41,24 @@
   @change_view="changeView">
 </designPage>
 
-  <FavoritesPage
-  id = "favorites"
-  v-if = "currentView === 'favoritesPage'"
-  class="viewContent"
-  @clearburger = "resetBurger"
-  @fav-ingredient = "addToMenu"
-  :ingredients="ingredients"
-  :lang = "lang"
-  :menu = "menusArray"
-  :uiLabels = "uiLabels"
-  :favBurgers = "favBurgers"
-  :ingredient_ids = "ingredient_ids">
+<FavoritesPage
+id = "favoritesPage"
+class = "viewContent"
+v-if = "currentView === 'favoritesPage'"
+@clearburger = "resetBurger"
+@fav-ingredient = "addToMenu"
+:ingredients="ingredients"
+:lang = "lang"
+:uiLabels = "uiLabels"
+:favBurgers = "favBurgers"
+:extrasCategories = "extrasCategories"
+:chosenIngredients="chosenIngredients"
+:categoryItemCounter="categoryItemCounter"
+@remove_ingredient="removeFromMenu"
+@info_to_modal="toggleShowIngredientsModal"
+@addToCheckout = "addToCheckout"
+@changeView = "changeView">
 </FavoritesPage>
-
-<div id="extras-favorites"
-v-if = "currentView === 'favoritesPage'">
-<h2>{{uiLabels.extras}}</h2>
-<div   id = "fav-category">
-  <CategoryRow
-  v-for="category in extrasCategories"
-  :key="category.categoryNr"
-  :category="category.categoryNr"
-  :added_items="chosenIngredients"
-  :category_name="uiLabels[category.label]"
-  :lang="lang"
-  :threshold="category.threshold"
-  :item_count="categoryItemCounter[category.categoryNr -1]"
-  @remove_ingredient="removeFromMenu"
-  @info_to_modal="toggleShowIngredientsModal">
-</CategoryRow>
-</div>
-<button id="fav-next-btn" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-</div>
 
 
 <CheckoutPage
@@ -561,7 +546,7 @@ export default {
               grid-row:4;
               background-color: #c5e5be;}
               /* #next-btn:active{border: 2px solid #595959;} */
-            #next-btn:hover{
+              #next-btn:hover{
                 background-color: #89a085;
                 border-color: #000000;
                 /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
@@ -584,18 +569,18 @@ export default {
               }
 
               button{
-                  color: black;
-                  /* #444444; */
-                  text-transform: uppercase;
-                  border: none;
-                  /* padding: 10px 20px; */
-                  text-align: center;
-                  display: inline-block;
-                  margin: 4px 2px;
-                  cursor: pointer;
-                  border-radius: 16px;
-                  /* font-weight: bold; */
-                  font-size: 20px;
+                color: black;
+                /* #444444; */
+                text-transform: uppercase;
+                border: none;
+                /* padding: 10px 20px; */
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 16px;
+                /* font-weight: bold; */
+                font-size: 20px;
               }
               button:hover{
                 background-color: #000;
