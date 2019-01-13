@@ -34,28 +34,6 @@
 
   </div>
 </div>
-  <!-- Egen komponent för att kunna hantera det som sker i "Tillagas" enklare -->
-  <!--<div>
-    <h4>#{{orderId}}</h4>
-    <div>
-      <button id="plus" @click="show = !show">+</button>
-      <button id="orderCookedButton" v-on:click="orderDone" v-if="isPrepp">
-        {{uiLabels.ready}}
-      </button>
-      <transition name="slide">
-        <p id="expanding" v-if="show">
-          <OrderItem
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :order="order">
-        </OrderItem>
-        <button id="cancelButton" v-on:click="orderCanceled">
-          {{uiLabels.cancel}}
-        </button>
-      </p>
-    </transition>
-  </div>
-</div>-->
 </template>
 
 <script>

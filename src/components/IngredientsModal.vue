@@ -42,6 +42,8 @@ export default {
   }
   },
   methods:{
+    /*emittar vilken ingrediens som valts och hindrar användaren från att
+    välja en ny ingrediens under 1 sekund*/
     emitAddIngredient:function(item){
       if(this.hasClicked){
         return;
