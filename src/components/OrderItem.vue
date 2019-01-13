@@ -71,12 +71,14 @@ export default {
 
 		},
 		computed:{
+			/*enbart till för att korta ner namnet på this.order.menus*/
 			menusArray:function(){
 				let menuArray = this.order.menus;
 				return menuArray;
 			},
 		},
 		methods:{
+			/*Räknar ut antalet av varje ingrediens i varje beställning*/
 			calculateOccurrencesWholeOrder:function(category){
 				let i,
 				flatArray = [],
@@ -117,7 +119,7 @@ export default {
 			}, {});
 			return flatArray;
 		},
-
+		/*Räknar ut antalet av varje ingrediens för varje burgare*/
 		calculateOccurrences:function(index,category){
 
 			let ingredients = this.menusArray[index].ingredients.slice();
