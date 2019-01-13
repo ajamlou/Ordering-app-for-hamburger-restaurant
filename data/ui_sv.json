@@ -49,7 +49,7 @@
   "OKlabel": "OK",
   "checkout" : "Varukorg",
   "anotherBurger": "MaxDonald's",
-  "areYouSure":"Är du säker?",
+  "areYouSure":"Vill du avbryta din beställning?",
   "abort": "Avbryt beställning",
   "dontAbort": "Fortsätt beställa"
 }
