@@ -13,12 +13,14 @@ v-if="this.showSlotModal">
 <div slot="body" class="slotBody">{{slotContent}}</div>
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
-<div slot="footer"><button
+<div slot="footer">
+  <button
   type="button"
   class="btn-close"
   @click="orderFinished()">
   {{uiLabels.OKlabel}}
-</button></div>
+  </button>
+</div>
 </Slotmodal>
 
 <SlotModal
@@ -42,30 +44,33 @@ id="yesBtn"
 
 <div id="btn-order-wrap">
   <div id="add-btn-div" @click="newBurger">
-      <div id="addButtonText">
-        <h5>{{uiLabels.addBurger}}</h5>
-      </div>
+    <div id="addButtonText">
+      <h5>{{uiLabels.addBurger}}</h5>
+    </div>
     <!-- <p>+</p> -->
   </div>
-  <div id="checkout-wrapper":class="{'noBorder' : !menusInOrder}">
-  <OrderInCheckout
-  class="flex-item"
-  v-for = "(menu, index) in menus"
-  :key ="index"
-  :id = "index"
-  :menu = "menu"
-  :uiLabels = "uiLabels"
-  :lang="lang"
-  @remove_menu="removeMenu"
-  @modify_menu="modifyMenu">
-</OrderInCheckout>
+  <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
+    <OrderInCheckout
+    class="flex-item"
+    v-for = "(menu, index) in menus"
+    :key ="index"
+    :id = "index"
+    :menu = "menu"
+    :uiLabels = "uiLabels"
+    :lang="lang"
+    @remove_menu="removeMenu"
+    @modify_menu="modifyMenu">
+  </OrderInCheckout>
 </div>
 </div>
-<!-- <div id="checkout-foot"> -->
-<center id="sumOfOrder"><p>{{uiLabels.sum}}: {{totalPrice}}:-</p></center>
+
+<div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<div id="sumOfOrder">
+  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p>
+</div>
 <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
-<!-- </div> -->
+</div>
 </div>
 </div>
 </template>
@@ -253,7 +258,12 @@ font-size: 2em;
 
 #addButtonText{
   padding: 1em 2em;
-  text-shadow: 1px 1px 1px black;
+}
+
+#bottom-div{
+  grid-column: 1/7;
+  display:grid;
+  justify-content: space-between;
 }
 
 #sumOfOrder{
@@ -267,7 +277,6 @@ font-size: 2em;
 
 #order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
   border: 1px solid #7a7a7a;
-  color: white;
 }
 
 #order-btn2{
@@ -332,6 +341,8 @@ font-size: 2em;
 .btn-close:active{background-color: #1f7a1f}
 
 button{
+  color: black;
+  font-size: 16px;
   padding: 10% 15%;
   text-align: center;
   text-decoration: none;
@@ -339,7 +350,6 @@ button{
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 16px;
-  text-shadow: 1px 1px 2px black;
   text-transform: uppercase;
 }
 

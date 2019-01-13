@@ -286,6 +286,9 @@ export default {
                   if(this.isModifying){
                     this.addToCheckout();
                   }
+                  if(this.currentView==="favoritesPage"){
+                    this.resetBurger();
+                  }
                   /*Om vi backar från checkout, ta bort senaste ordern*/
                   if(this.currentView==='checkoutPage'){
                     this.menusArray.pop();
@@ -293,11 +296,6 @@ export default {
                   if(this.breadcrumbs.length>0){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
-
-                    /*Om vi kommer till favoriter igen, nollställ burgaren*/
-                    if(this.currentView==="favoritesPage"){
-                      this.resetBurger();
-                    }
                   }
                 },
                 /*Lägger till en ingrediens till menyn samt lägger till
