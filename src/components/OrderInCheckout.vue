@@ -103,6 +103,7 @@ export default{
   display:grid;
   background-color:rgba(255,255,255,0.9);
   border: 1px solid rgb(100,100,100);
+  flex:none;
 }
 
 .ord-check-foot{
