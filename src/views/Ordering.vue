@@ -337,7 +337,6 @@ export default {
                       count = 0;
                     }
                   }
-                  /*console.log(this.favoriteBurgers);*/
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -364,7 +363,6 @@ export default {
                   this.categoryItemCounter[item.category -1]+=1;
                   this.chosenIngredients.push(item);
                   this.price += +item.selling_price;
-                  /*console.log(item);*/
                 },
                 removeFromMenu: function(item,index) {
                   this.chosenIngredients.splice(index,1);
@@ -434,7 +432,6 @@ export default {
               margin-top:0 !important;
               padding-top:0 !important;
               background-color:#f8ffd6;
-              /* background:url('../assets/chessboard.jpg'); */
               display: grid;
               grid-template-columns: repeat(6, 1fr);
               grid-column-gap: 3vw;
@@ -443,7 +440,6 @@ export default {
 
               /* Här nedan görs bakgrunds schackrutorna: */
               background-color: rgb(255, 250, 224); /*beigegul*/
-              /*#9E283A; mörkrosa, *#282826 mörgrå, #B5DAC9 turkostisch*/
               background-image:
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444),
               linear-gradient(45deg, #444444 25%, transparent 25%, transparent 75%, #444444 75%, #444444);
@@ -480,26 +476,10 @@ export default {
               height:50px;
               margin:auto;
               background-color: #e51e4a; /*mörkrosa*/
-              /* #ed6381; /*rosa*/
-              /* justify-self:center;
-              background: -moz-linear-gradient(to bottom, #ff4d4d 51%, #ff0000 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));
-              background: -webkit-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -o-linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              background: -ms-linear-gradient(top, #ff4d4d 51%,#ff0000 51%);
-              background: linear-gradient(to bottom, #ff4d4d 51%,#ff0000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4d4d', endColorstr='#ff0000',GradientType=0 ); */
             }
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
               border-color: #000000;
-              /* background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%); */
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
-              background: linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#b30000',GradientType=0 ); */
             }
             #cancelOrder-btn{
               width:120px;
@@ -520,7 +500,7 @@ export default {
             }
 
             #yesBtn{
-              grid-column: 2/3;
+              grid-column: 1/3;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
               color: white;
@@ -544,11 +524,9 @@ export default {
               grid-column:6;
               grid-row:1;
               color:white;
-              /* font-weight: 700; */
               width:100px;
               height:50px;
               border:1px solid #7a7a7a;
-              /* margin: auto; */
               background-color: #b9d7cb; /*ljusturkos*/
               padding: 0;
             }
@@ -615,9 +593,7 @@ export default {
               align-self: center;
               font-family: 'Lobster', sans-serif;
               font-size: 14vmin;
-              /* font-family: 'Luckiest Guy', sans-serif; */
               color: #ed6381; /*rosa*/
-              /* text-transform: uppercase; */
               text-shadow: 2px 2px #444444;
             }
             .viewContent{
@@ -631,10 +607,6 @@ export default {
               justify-self:center;
               margin-bottom:2em;
               padding-bottom:1em;
-              /* margin-top:2em; */
-              /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-              -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-              box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
             }
             #ordering {
               display:grid;
@@ -650,10 +622,7 @@ export default {
               border-top: dotted;
               border-bottom: dotted;
               border-color: #ed6381; /*rosa*/
-              /*
-              font-family: 'Luckiest Guy', sans-serif;
-              color: #66d9ff;
-              text-shadow: 2px 2px #0086b3;*/
+
             }
             #extras, #extras-favorites{
               margin-top:2em;
@@ -701,7 +670,6 @@ export default {
 
             #bck-btn:hover{
               background: -moz-linear-gradient(to bottom, #ff0000 51%, #b30000 51%);
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
               background: -webkit-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -o-linear-gradient(to bottom, #ff0000 51%,#b30000 51%);
               background: -ms-linear-gradient(top, #ff0000 51%,#b30000 51%);
@@ -728,34 +696,16 @@ export default {
               grid-row:4;
               color:white;
               background-color: #c5e5be;
-
-              /* #88bba7; /*mörkturkos matchar #b9d7cb; - ljusturkos*/
-
-              /* background: -moz-linear-gradient(to bottom, #70db70 51%, #33cc33 51%);
-              background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#70db70), color-stop(51%,#33cc33));
-              background: -webkit-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-              background: -o-linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-              background: -ms-linear-gradient(top, #70db70 51%,#33cc33 51%);
-              background: linear-gradient(to bottom, #70db70 51%,#33cc33 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70db70', endColorstr='#33cc33',GradientType=0 ); */
             }
-            /* #next-btn:active{border: 2px solid #595959;} */
+
             #next-btn:hover{
               background-color: #89a085;
               border-color: #000000;
-              /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
-              /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-              /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-              background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-              background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
-              background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
             }
 
             .btn-close{
               background-color: #33cc33;
               border-radius: 10px;
-              /* position: relative; */
               width: 2em;
               height: 2em;
               font-size: 2em;
@@ -777,23 +727,8 @@ export default {
               overflow-x: auto;
               overflow-y:hidden;
               border-radius: 15px;
-              /*display: grid;
-              grid-gap: 0px;
-              grid-template-columns: repeat(10,10%);
-              grid-template-areas: "title";
-              text-align: center;*/
+
             }
-            /* #order-btn{
-            grid-column: 6/7;
-            grid-row:4;
-            margin-bottom: 20px;
-            padding:20px 30px 20px 30px;
-            font-size: 2em;
-            background-color: rgb(0, 150, 0);
-            #order-btn:hover{
-            color:black;
-            background-color: rgb(0, 200, 0);
-            } */
 
             button{
               background-color: #ddd;
