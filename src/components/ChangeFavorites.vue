@@ -53,12 +53,16 @@
       }
     },
     methods: {
-      addrow: function(){
+      addrow: function(){ //lägger till en ingrediens
         this.rows.push({
           title: 'ingredient'
         })
         this.counter++
       },
+      //funktionen hittar ingredienserna baserat på ingrediensernas svenska
+      //och engelska namn och skickar informationen till servern
+      //funktionen har en inbyggd errrorhandler som hanterar fel som kan uppstå
+      //och medddelar användaren
       updateInfo: function(){
         let favoriteIngredients = [];
         let favoritePrice = 0;
@@ -73,7 +77,7 @@
           }
         }
         catch(err){
-          this.favError();
+          this.favError(); //Kallar på funktionen som hanterar felet
         }
         if(this.checkIfChecked() && !this.showSlotModal){
           let burger = {
@@ -88,10 +92,10 @@
           this.counter = 1;
         }
       },
-      favError: function(){
+      favError: function(){ //funktion som visar eller döljer felmodalen
         this.showSlotModal = !this.showSlotModal;
       },
-      checkIfChecked: function(){
+      checkIfChecked: function(){ //kollar att någon radiobutton är checked, kallar på felhanteraren annars
         if(this.rows.checked != null){
           return true;
         }
@@ -100,7 +104,7 @@
           return false;
         }
       },
-      remove: function(index){
+      remove: function(index){ //tar bort en ingrediens
         this.rows.splice(index,1);
       }
     }
