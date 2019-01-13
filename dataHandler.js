@@ -54,7 +54,8 @@ Data.prototype.getFavBurgers = function () {
       name: favorites[j].burger_name,
       url: favorites[j].url,
       ingredients: chosenIngredients,
-      price: price
+      price: price,
+      selected: false
     };
     chosenBurgers.push(burger);
   }
