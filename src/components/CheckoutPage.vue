@@ -10,7 +10,6 @@
 <SlotModal
 id="orderFinishedModal"
 v-if="this.showSlotModal">
-<div slot="header"></div>
 <div slot="body" class="slotBody">{{slotContent}}</div>
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
@@ -24,7 +23,6 @@ v-if="this.showSlotModal">
 
 <SlotModal
 v-if="this.showSlotModal && this.pressedAbortModal">
-<div slot="header"></div>
 <div slot="body">{{uiLabels.areYouSure}}</div>
 <div slot="footer">
   <button
@@ -44,19 +42,13 @@ id="yesBtn"
 
 <div id="btn-order-wrap">
   <div id="add-btn-div" @click="newBurger">
-
-
-    <div id="add-btn-top">
       <div id="addButtonText">
         <h5>{{uiLabels.addBurger}}</h5>
       </div>
-    </div>
     <!-- <p>+</p> -->
   </div>
-  <div id="checkout-wrapper"
-  :class="{'noBorder' : !menusInOrder}">
-
-<OrderInCheckout
+  <div id="checkout-wrapper":class="{'noBorder' : !menusInOrder}">
+  <OrderInCheckout
   class="flex-item"
   v-for = "(menu, index) in menus"
   :key ="index"
@@ -254,10 +246,10 @@ export default{
   border-color: #000000;
 }
 
-#add-btn-div>p{
-  margin: auto;
-  font-size: 2em;
-}
+/* #add-btn-div>p{
+margin: auto;
+font-size: 2em;
+} */
 
 #addButtonText{
   padding: 1em 2em;
@@ -312,6 +304,8 @@ export default{
 
 #noBtn{
   background-color: #c5e5be;
+  grid-column: auto;
+  grid-row: auto;
 }
 
 #noBtn:hover{
@@ -319,10 +313,9 @@ export default{
   border-color: #000000;
 }
 
-/* .slotBody{
-  margin: auto;
-} */
-
+.slotBody{
+  padding: 3em;
+}
 .noBorder{
   border: 0 !important;
 }

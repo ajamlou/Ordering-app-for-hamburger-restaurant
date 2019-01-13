@@ -46,12 +46,12 @@ export default {
 
 
   .modal {
-    text-align:center;
+    text-align: center;
     display: grid;
     /* grid-template-columns: repeat(5,1fr);*/
     /* grid-template-rows: repeat(2,1fr); */
     /* align-content: start; */
-    /* position: fixed; */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -59,6 +59,7 @@ export default {
     /* box-shadow: 2px 2px 20px 1px;
     overflow-x: hidden; */
     border-radius: 15px;
+    /* overflow: auto; */
     /* max-width:80%; */
     /* max-height:150%; */
     /* padding: 5vh; */
@@ -73,7 +74,7 @@ export default {
     margin: auto;
     /* justify-content: space-between; */
     /* flex-wrap: wrap; */
-    overflow-y: auto;
+    overflow: auto;
     /* overflow-x: hidden; */
     padding: 3vh;
   }
