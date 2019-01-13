@@ -33,7 +33,7 @@
   "unitprice" : "Unit price",
   "remove" : "Remove",
   "modify" : "Modify",
-  "addBurger": "Press here to add another burger and/or side",
+  "addBurger": "Add another burger and/or side",
   "noIngredients" : "Your order contains no ingredients. Please add ingredients to your order or press the 'Go back' button.",
   "emptyCheckout" : "Your checkout cart is empty. Please add something to your cart before ordering.",
   "checkoutFinished" : "Thank you for your order! Your order number is: ",
