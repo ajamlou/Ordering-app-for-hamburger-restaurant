@@ -274,6 +274,7 @@ export default {
                     this.isSv=false;
                   }
                 },
+                //Togglar en tom modal
                 toggleSlotModal:function(){
                   this.showIngredientsModal = false;
                   if(!this.showSlotModal){
@@ -283,11 +284,14 @@ export default {
                     this.showSlotModal=false;
                   }
                 },
+                //Modal som kommer upp om en trycker på "Nästa" och ingen
+                //ingrediens/tillbehör är vald
                 nextBtnModal:function(){
                   this.pressedAbortModal = false;
                   this.noIngredientModal = true;
                   this.toggleSlotModal();
                 },
+                // Modal för avbryt-knapp
                 cancelBtnModal:function(){
                   this.noIngredientModal = false;
                   this.pressedAbortModal = true;
@@ -379,6 +383,7 @@ export default {
                   this.isModifying = true;
                   this.changeView('designPage');
                 },
+                //Tillbakaknapp försvinner
                 removeBackButton:function(){
                   this.breadcrumbs=[];
                 },
