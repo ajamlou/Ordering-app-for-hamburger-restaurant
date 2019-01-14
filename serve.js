@@ -36,7 +36,6 @@ var data = new Data();
 data.initializeData();
 
 io.on('connection', function (socket) {
-  console.log('hello you are in the io.on function')
   // Send list of orders and text labels when a client connects
   socket.emit('initialize', {
     orders: data.getAllOrders(),

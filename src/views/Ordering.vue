@@ -58,7 +58,8 @@ v-if = "currentView === 'favoritesPage'"
 @change_view = "changeView"
 @clear_all="clearAll"
 @remove_backButton="removeBackButton"
-@clearburger = "resetFavBurger">
+@clearburger = "resetFavBurger"
+@unselect = "unselect">
 </FavoritesPage>
 
 
@@ -74,7 +75,8 @@ v-if = "currentView === 'checkoutPage'"
 @change_view="changeView"
 @new_burger="newBurger"
 @modify_menu="modifyMenu"
-@clear_all="clearAll">
+@clear_all="clearAll"
+@unselect="unselect">
 </CheckoutPage>
 
 <IngredientsModal ref="modal"
@@ -112,7 +114,7 @@ v-if="this.showSlotModal && this.pressedAbortModal">
 <button
 type="button"
 id="yesBtn"
-@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
+@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();unselect('no');">
 {{uiLabels.abort}}
 </button>
 </div>
@@ -230,7 +232,14 @@ export default {
                   this.pressedAbortModal = true;
                   this.toggleSlotModal();
                 },
-
+                //sätter alla favoritburgarna till false
+                unselect: function(index){
+                  for(var i=0; i<this.favBurgers.length; i++){
+                    if(index != i){
+                      this.favBurgers[i].selected = false;
+                    }
+                  }
+                },
                 /*togglar ingrediensmodalen och bestämmer vilken kategori av ingredienser som ska visas*/
                 toggleShowIngredientsModal: function(category) {
                   if (this.showIngredientsModal){
