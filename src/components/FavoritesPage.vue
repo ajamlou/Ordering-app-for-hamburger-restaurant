@@ -181,13 +181,12 @@ export default {
   border-color: #ed6381;
 }
 #allergen-div{
-  grid-row:1;
   grid-column: 4/7;
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 1.2em;
+  grid-row:2;
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: auto;
+  font-size:1em;
 }
 #burger-wrapper{
   grid-column: 1/7;
@@ -221,8 +220,8 @@ export default {
   grid-row: 2;
 }
 .icon{
-  width: 50px ;
-  height: 50px;
+  height:3em;
+  padding:0 3px 3px 0;
 }
 .description{
   grid-column: 1/4;
@@ -339,13 +338,20 @@ h1{
   #allergen-div{
     grid-column:1/7;
     grid-row:2;
-    font-size: 1em;
+    text-align:center;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
     border-bottom: dotted;
     border-color: #ed6381; /*rosa*/
   }
-  #allergen-div img{
-    width: 30px;
-    height: 30px
+}
+
+@media screen and (max-width:740px){
+  .icon{
+    display:block;
+    margin:auto;
   }
 }
 
