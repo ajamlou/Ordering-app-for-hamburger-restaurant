@@ -106,9 +106,7 @@ export default {
 
   }
 }
-
 </script>
-
 
 <style scoped>
 #ordering {

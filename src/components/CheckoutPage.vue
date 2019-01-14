@@ -304,6 +304,9 @@ export default{
   background-color: #89a085;
   border-color: #000000;
 }
+#yesBtn,#noBtn{
+  font-size: 25px;
+}
 .slotBody{
   padding: 3em;
 }
@@ -330,6 +333,7 @@ button{
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
+  margin: 4px 2px;
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/

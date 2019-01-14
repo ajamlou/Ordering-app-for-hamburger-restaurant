@@ -411,11 +411,9 @@ export default {
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
             }
-
             .slotButtons{
               grid-template-columns: repeat(6, 1fr);
             }
-
             #yesBtn{
               grid-column: 2/3;
               background-color: #e51e4a;
@@ -431,6 +429,9 @@ export default {
             }
             #noBtn:hover{
               background-color: #89a085;
+            }
+            #yesBtn,#noBtn{
+              font-size: 25px;
             }
 
             #lang-btn{
