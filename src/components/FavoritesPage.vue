@@ -198,8 +198,6 @@ export default {
   display:flex;
   flex-wrap: wrap;
   justify-content:space-around;
-  /* border-bottom: dotted;
-  border-color: #ed6381; /*rosa */
 }
 
 .background{
@@ -233,6 +231,7 @@ export default {
   grid-column: 1/4;
   grid-row:4;
   text-align: center;
+  font-size: 17px;
 }
 .allergens{
   grid-column: 1/4;
@@ -247,13 +246,6 @@ export default {
   height: 25px;
 }
 
-
-/* .ingredients{
-grid-column: 1/3;
-grid-row: 3;
-display:flex;
-flex-wrap: wrap;
-} */
 .price{
   grid-column: 2;
   grid-row:5;
