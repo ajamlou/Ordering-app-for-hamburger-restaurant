@@ -39,9 +39,9 @@
       </CategoryRow>
     </div>
 
-<!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
-avbrytknappen som tryckts på. -->
-  <SlotModal
+    <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
+    avbrytknappen som tryckts på. -->
+    <SlotModal
     v-if="this.showSlotModal && this.pressedAbortModal">
     <div slot="header"></div>
     <div slot="body">{{uiLabels.areYouSure}}</div>
@@ -57,11 +57,14 @@ avbrytknappen som tryckts på. -->
     id="yesBtn"
     @click="emptyOrder()">
     {{uiLabels.abort}}
-    </button>
-    </div>
-  </SlotModal>
-  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
-  <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+  </button>
+</div>
+</SlotModal>
+<div id="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
 </div>
 </template>
@@ -86,7 +89,8 @@ export default {
     favBurgers: Array,
     extrasCategories: Array,
     chosenIngredients: Array,
-    categoryItemCounter: Array
+    categoryItemCounter: Array,
+    price: Number
 
   },
   components:{
@@ -238,6 +242,15 @@ flex-wrap: wrap;
   text-align:center;
 }
 
+#price-div{
+  display:inline-block;
+  justify-self: center;
+  margin:auto;
+  text-align:center;
+  font-size: 2em;
+  grid-column:2/6;
+  grid-row:5;
+}
 
 .selected{
   background-color: #b9d7cb;
@@ -300,7 +313,7 @@ flex-wrap: wrap;
   background-color: #c5e5be;
 }
 #yesBtn{
-    background-color: #e51e4a;
+  background-color: #e51e4a;
 }
 
 #noBtn:hover{

@@ -56,7 +56,7 @@ Data.prototype.getFavBurgers = function () {
     }
     let allergy = [];
     for(let i = 0;i<chosenIngredients.length;i++){
-      if(chosenIngredients[i].milk_free === 1){
+      if(chosenIngredients[i].milk_free === 1 && chosenIngredients[i].gluten_free === 1 && chosenIngredients[i].vegan === 1){
         allergy.push(true);
       }
       else{
