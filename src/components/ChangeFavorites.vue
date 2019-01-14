@@ -14,15 +14,15 @@
             type="text"
             v-model = 'rows.url'>
 
-            <label>Rabatt på hamburgaren(ange i %): </label>
-              <input
-              type="text"
-              v-model = 'rows.discount'>
-
-            <label>Beskrivning av den nya burgaren: </label>
+            <label>Beskrivning av den nya burgaren (sv): </label>
               <textarea
               rows="4"
-              v-model = 'rows.description'></textarea>
+              v-model = 'rows.description_sv'></textarea>
+
+              <label>Beskrivning av den nya burgaren (en): </label>
+              <textarea
+              rows="4"
+              v-model = 'rows.description_en'></textarea>
 
                 <div v-for="(row, index) in rows"
                 class="new-ing"
@@ -179,17 +179,15 @@ export default {
         if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
           this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
         }
-        if(this.rows.discount === undefined){
-          this.rows.discount = 0;
-        }
         let burger = {
           "name": this.capitalize(this.rows.name),
           "url": this.rows.url,
           "ingredients": favoriteIngredients,
-          "price": favoritePrice*(1-(this.rows.discount/100)),
+          "price": favoritePrice,
           "index": this.rows.checked,
           "selected": false,
-          "description": this.rows.description
+          "description_sv": this.rows.description_sv,
+          "description_en": this.rows.description_en
         }
         this.$store.state.socket.emit('updateinfo', burger);
         this.rows = [];
