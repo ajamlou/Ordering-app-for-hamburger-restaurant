@@ -56,10 +56,9 @@
     </button>
     </div>
   </SlotModal>
-
+  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+  <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
-<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
-<button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
 </template>
 
@@ -270,8 +269,11 @@ flex-wrap: wrap;
 
 #cancelOrder-btn{
   grid-column: 1/2;
-  grid-row: 4/5;
+  grid-row: 5;
+  width:120px;
+  height:80px;
   background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
 }
 
 #cancelOrder-btn:hover{
