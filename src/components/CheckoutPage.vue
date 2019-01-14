@@ -102,10 +102,7 @@ export default{
     cancelBtnModal: function(){
       this.$emit('cancel_btn_modal')
     },
-<<<<<<< HEAD
-=======
 
->>>>>>> 8361c372e090390103ba5784b922699f8278fdcf
     //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
