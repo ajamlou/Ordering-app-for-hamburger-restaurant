@@ -1,19 +1,21 @@
 <template>
+<!-- Ingredient behandlar en ingrediensruta som sedan visas i IngredientsModal. -->
   <div class="ingredient"
   @click="ingredientClicked">
-    <p class="ingredient-name">
-      {{item["ingredient_"+ lang]}}</p>
+  <p class="ingredient-name">
+    {{item["ingredient_"+ lang]}}</p>
     <p class="ingredient-price">
-       {{item.selling_price}}:-
-     </p>
-     <div class="ico-div">
-     <img class="ico" src="../assets/dairy.png"
-     v-if="!item.milk_free"/>
-     <img class="ico" src="../assets/vegan.png"
-     v-if="item.vegan"/>
-     <img class="ico" src="../assets/gluten.png"
-     v-if="!item.gluten_free"/>
-   </div>
+      {{item.selling_price}}:-
+    </p>
+    <!-- Allergener i aktuell ingrediens: -->
+    <div class="ico-div">
+      <img class="ico" src="../assets/dairy.png"
+      v-if="!item.milk_free"/>
+      <img class="ico" src="../assets/vegan.png"
+      v-if="item.vegan"/>
+      <img class="ico" src="../assets/gluten.png"
+      v-if="!item.gluten_free"/>
+    </div>
   </div>
 </template>
 <script>
@@ -23,7 +25,7 @@ export default {
     item: Object,
     lang: String
   },
-    data: function () {
+  data: function () {
     return {
     };
   },
@@ -31,9 +33,6 @@ export default {
     ingredientClicked: function () {
       this.$emit('ingredient_clicked');
     },
-  /*  resetCounter: function () {
-      this.counter = 0;
-    }*/
   }
 }
 </script>
@@ -62,7 +61,6 @@ export default {
   align-content: center;
   padding-right:4px;
 }
-
 .ingredient{
   font-size: 1.2em;
   display:grid;
@@ -71,11 +69,10 @@ export default {
   grid-template-columns: calc(1px + 1.1em) repeat(3,1fr) calc(1px + 1.4em);
   max-height:6em;
   -ms-word-break: break-all;
-     word-break: break-all;
-     word-break: break-word;
-     text-transform: capitalize;
+  word-break: break-all;
+  word-break: break-word;
+  text-transform: capitalize;
 }
-
 .ingredient:hover{
   background-color: rgba(100, 100, 100, 0.5);
   color: rgb(80,80,80);
@@ -83,5 +80,4 @@ export default {
 .ingredient-price{
   margin:auto;
 }
-
 </style>
