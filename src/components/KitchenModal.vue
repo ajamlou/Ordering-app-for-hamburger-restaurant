@@ -1,56 +1,53 @@
 <template>
-    <div class="storage-backdrop">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-      <div class="storage-wrapper">
-        <button
-        type="button"
-        class="close-button"
-        @click='switchVisibility'>
-        X
-      </button>
-      <div>
-        Vara
-      </div>
-      <div>
-        Antal i lager
-      </div>
-      <div>
-        Säljpris
-      </div>
-      <div class="storage-body">
-        <div v-for="ingredient in ingredients"
-        class="ing-container"
-        :key="ingredient.ingredient_id">
-          <div>
-            {{ingredient.ingredient_sv}}
-          </div>
-          <div>
-            {{ingredient.stock}}
-          </div>
-          <div>
-          {{ingredient.selling_price}}
-          </div>
-      </div>
+  <div class="storage-backdrop">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <div class="storage-wrapper">
+      <button
+      type="button"
+      class="close-button"
+      @click='switchVisibility'>
+      X
+    </button>
+    <div>
+      Vara
     </div>
+    <div>
+      Antal i lager
+    </div>
+    <div>
+      Säljpris
+    </div>
+    <div class="storage-body">
+      <div v-for="ingredient in ingredients"
+      class="ing-container"
+      :key="ingredient.ingredient_id">
+      <div>
+        {{ingredient.ingredient_sv}}
+      </div>
+      <div>
+        {{ingredient.stock}}
+      </div>
+      <div>
+        {{ingredient.selling_price}}
+      </div>
     </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>
-// import StaffViewStorage from '@/components/StaffViewStorage.vue'
 
 export default {
   name: 'KitchenModal',
   props: {
     decideContent:String,
     ingredients: Array,
-    // orders: Object
   },
   components: {
-    // StaffViewStorage,
-    // SlotModal
   },
   methods: {
+    // Visa modalen med lagerhållning:
     switchVisibility: function() {
       this.$emit("visibility")
     }
@@ -70,7 +67,6 @@ export default {
   transition: opacity 0.3s ease;
   color: black;
 }
-
 .storage-wrapper {
   position: fixed;
   text-align: center;
@@ -85,7 +81,6 @@ export default {
   height: 75%;
   text-underline-position: auto;
 }
-
 .storage-body {
   grid-column: 1/4;
   width: auto;
@@ -96,13 +91,11 @@ export default {
   overflow-x: hidden;
   text-transform: capitalize;
 }
-
 .ing-container {
   display: grid;
   border-bottom: 1px solid rgba(0,0,0,0.1);
   grid-template-columns: 33% 33% 33%;
 }
-
 .close-button {
   grid-column: 3/4;
   justify-self: end;
@@ -115,7 +108,7 @@ export default {
   color: white;
   background: red;
 }
-
-.close-button:hover {background-color: #660000}
-
+.close-button:hover {
+  background-color: #660000
+}
 </style>
