@@ -161,8 +161,37 @@ export default {
         /*Nedanstående if-sats kollar om längden på urlen är 0
         eller om urlen är 0 efter att vi trimmat den (dvs kollar om urlen
         bara är massa mellanslag)*/
-        if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
-          this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
+          if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
+            this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
+          }
+          if(this.rows.discount === undefined){
+            this.rows.discount = 0;
+          }
+          let burger = {
+            "name": this.capitalize(this.rows.name),
+            "url": this.rows.url,
+            "ingredients": favoriteIngredients,
+            "price": Math.floor(favoritePrice*(1-(this.rows.discount/100))),
+            "index": this.rows.checked,
+            "selected": false,
+            "description": this.rows.description
+          }
+          this.$store.state.socket.emit('updateinfo', burger);
+          this.rows = [];
+        }
+      },
+      favError: function(){ //funktion som visar eller döljer felmodalen
+        this.showSlotModal = !this.showSlotModal;
+      },
+      /*Gör första bokstaven i namnet på burgaren till stor bokstav*/
+      capitalize:function(string){
+        let firstLetter = string.charAt(0).toUpperCase();
+        let restOfString = string.slice(1);
+        return firstLetter + restOfString;
+      },
+      checkIfChecked: function(){ //kollar att någon radiobutton är checked, kallar på felhanteraren annars
+        if(this.rows.checked != null){
+          return true;
         }
         let burger = {
           "name": this.capitalize(this.rows.name),
@@ -199,7 +228,6 @@ export default {
       this.rows.splice(index,1);
     }
   }
-}
 </script>
 
 <style scoped>

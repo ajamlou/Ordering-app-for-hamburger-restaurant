@@ -13,6 +13,8 @@
           <div class = "description">
             {{item.description}}
           </div>
+          <div class = "allergy">
+          </div>
           <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
             [ i ]
           </div>
@@ -37,7 +39,9 @@
       </CategoryRow>
     </div>
 
-  <SlotModal
+    <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
+    avbrytknappen som tryckts på. -->
+    <SlotModal
     v-if="this.showSlotModal && this.pressedAbortModal">
     <div slot="header"></div>
     <div slot="body">{{uiLabels.areYouSure}}</div>
@@ -53,11 +57,14 @@
     id="yesBtn"
     @click="emptyOrder()">
     {{uiLabels.abort}}
-    </button>
-    </div>
-  </SlotModal>
-  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
-  <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+  </button>
+</div>
+</SlotModal>
+<div id="price-div">
+  {{uiLabels.sum}}: {{price}}:-
+</div>
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+<button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
 </div>
 </div>
 </template>
@@ -82,7 +89,8 @@ export default {
     favBurgers: Array,
     extrasCategories: Array,
     chosenIngredients: Array,
-    categoryItemCounter: Array
+    categoryItemCounter: Array,
+    price: Number
 
   },
   components:{
@@ -90,7 +98,11 @@ export default {
     SlotModal
   },
   beforeMount: function(){
-
+    // for(let i =0;i<this.favBurgers.length;i++){
+    //   for(let obj in this.favBurgers[i])
+    //   obj.ingredients[]
+    //
+    // }
 
   },
   methods:{
@@ -109,27 +121,34 @@ export default {
       }
     },
     removeFromMenu: function(item,index){
-      this.$emit('removeIngredient',item,index);
+      this.$emit('remove_ingredient',item,index);
     },
     //visar ingrediensmodalen för tillbehör
     toggleShowIngredientsModal:function(data){
       this.$emit('info_to_modal', data);
     },
+    //Skickar information om ordern till i varukorgen
     addToCheckout: function(){
       this.$emit('addToCheckout');
     },
+    //Byter vy
     changeView: function(data){
       this.$emit('change_view',data);
     },
+    //När en trycker på "Avbryt beställning" clearas allt och en tas tillbaka
+    //till framsidan.
     emptyOrder:function(){
       this.$emit('change_view','frontPage');
       this.$emit('clear_all');
       this.$emit('remove_backButton');
     },
+    //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
+    //ska vara där inne.
     cancelBtnModal: function(){
       this.toggleSlotModal();
       this.pressedAbortModal=true;
     },
+    //Togglar en modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
@@ -142,7 +161,13 @@ export default {
 }
 </script>
 <style scoped>
-
+#favorites-master {
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto auto auto auto;
+  width: 90%;
+  grid-row-gap: 1vh;
+}
 #favorites-backdrop{
   background-color: rgba(255, 250, 224,0.99);
   border-radius:15px;
@@ -151,28 +176,18 @@ export default {
   margin-bottom:2em;
   padding-bottom:1em;
 }
-
-#favorites-master {
-  display:grid;
-  grid-template-columns: repeat(6, 1fr);
-  margin: auto auto auto auto;
-  width: 90%;
-  grid-row-gap: 1vh;
-}
-
 #favorites-title{
   grid-column:1/7;
   grid-row:1;
-  text-align: left;
+  text-align: center;
   align-self: center;
   font-family: 'Lobster', sans-serif;
   font-size: 10vmin;
-  /* font-family: 'Luckiest Guy', sans-serif; */
   color: #ed6381; /*rosa*/
-  /* text-transform: uppercase; */
   text-shadow: 2px 2px #444444;
+  border-bottom: dotted;
+  border-color: #ed6381;
 }
-
 #burger-wrapper{
   grid-column: 1/7;
   grid-row:2;
@@ -180,7 +195,6 @@ export default {
   flex-wrap: wrap;
   justify-content:center;
 }
-
 .burgers{
   width: 320px;
   height: 320px;
@@ -188,27 +202,27 @@ export default {
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
-
 .header{
   grid-column: 2;
   grid-row: 1;
   text-align: center;
   font-size: 2em;
 }
-
 .image{
   width: 150px ;
   height: 150px;
   grid-column: 2;
   grid-row: 2;
 }
-
 .description{
   grid-column: 1/4;
   grid-row:3;
   text-align: center;
 }
-
+.allergy{
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
 .ingredient-tooltip{
   grid-column: 3;
   grid-row: 3;
@@ -216,21 +230,27 @@ export default {
   color: blue;
   font-weight:bold;
 }
-
-
 /* .ingredients{
 grid-column: 1/3;
 grid-row: 3;
 display:flex;
 flex-wrap: wrap;
 } */
-
 .price{
   grid-column: 2;
   grid-row:4;
   text-align:center;
 }
 
+#price-div{
+  display:inline-block;
+  justify-self: center;
+  margin:auto;
+  text-align:center;
+  font-size: 2em;
+  grid-column:2/6;
+  grid-row:5;
+}
 
 .selected{
   background-color: #b9d7cb;
@@ -293,7 +313,7 @@ flex-wrap: wrap;
   background-color: #c5e5be;
 }
 #yesBtn{
-    background-color: #e51e4a;
+  background-color: #e51e4a;
 }
 
 #noBtn:hover{
