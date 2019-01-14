@@ -3,10 +3,10 @@
   id="frontPage">
   <div
   id="orderingFrontPage-backdrop">
-  <div class="frontpage-title">
+  <div class="welcome">
     <div
     v-if = "this.breadcrumbs.length === 0">
-      {{uiLabels.frontpage-titleText}}
+      {{uiLabels.welcomeText}}
     </div>
     <div
     v-if = "this.breadcrumbs.length != 0">
@@ -51,7 +51,7 @@ export default {
   margin-bottom: 3em;
   padding-bottom: 1em;
 }
-.frontpage-title{
+.welcome{
   font-family: 'Lobster', sans-serif;
   text-align: center;
   font-size: 8vw;
@@ -89,7 +89,7 @@ export default {
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:650px){
-   .frontpage-title{
+   .welcome{
     font-size:3em;
   }
   #favoritesButton, #createBurgerButton{
@@ -98,7 +98,7 @@ export default {
   }
 }
 @media screen and (max-width:405px){
-  .frontpage-title{
+  .welcome{
     font-size: 3em;
   }
 }
