@@ -203,8 +203,6 @@ export default{
   justify-self: center;
   margin-bottom:2em;
   padding-bottom:1em;
-  /* margin-bottom: 2em; */
-  /* padding-bottom: 3em; */
 }
 #checkoutPage-title{
   grid-column: 1/9;
@@ -271,7 +269,7 @@ export default{
   margin:auto;
   text-align:center;
   font-size: 2em;
-  grid-column: 4/6;
+  grid-column: 3/7;
   grid-row: 1;
 }
 #order-btn2{
