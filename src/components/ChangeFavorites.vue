@@ -101,7 +101,7 @@ x
             "name": this.capitalize(this.rows.name),
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
-            "price": favoritePrice*(1-(this.rows.discount/100)),
+            "price": Math.floor(favoritePrice*(1-(this.rows.discount/100))),
             "index": this.rows.checked,
             "selected": false,
             "description": this.rows.description
