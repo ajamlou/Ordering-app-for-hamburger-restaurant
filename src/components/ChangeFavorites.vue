@@ -92,11 +92,10 @@
             "name": this.rows.name,
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
-            "price": favoritePrice,
+            "price": favoritePrice*(1-(this.rows.discount/100)),
             "index": this.rows.checked,
             "selected": false,
-            "description": this.rows.description,
-            "discount-price": favoritePrice*(1-(this.rows.discount/100))
+            "description": this.rows.description
           }
           this.$store.state.socket.emit('updateinfo', burger);
           this.rows = [];
