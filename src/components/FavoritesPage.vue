@@ -154,6 +154,7 @@ export default {
 .header{
   grid-column: 2;
   grid-row: 1;
+  text-align: center;
 }
 
 .image{
