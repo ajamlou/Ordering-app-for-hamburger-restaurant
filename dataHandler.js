@@ -68,7 +68,7 @@ Data.prototype.getFavBurgers = function () {
         vegan = false;
       }
     }
-    console.log(allergy);
+    console.log(lactose_free);
 
     let burger = {
       name: favorites[j].burger_name,
@@ -77,7 +77,9 @@ Data.prototype.getFavBurgers = function () {
       price: price,
       selected: false,
       description: favorites[j].description,
-      allergy:
+      gluten_free: gluten_free,
+      lactose_free: lactose_free,
+      vegan: vegan
     }
     chosenBurgers.push(burger);
   }
