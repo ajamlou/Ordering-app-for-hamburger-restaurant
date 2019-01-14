@@ -23,7 +23,7 @@
             v-for = "(item, index) in favBurgers"
             class = "existingBurger"
             :key = "`item-${index}`">
-
+x
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
               <label>{{item.name}}</label>
             </div>
@@ -93,6 +93,9 @@
         bara är massa mellanslag)*/
           if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
             this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
+          }
+          if(this.rows.discount === undefined){
+            this.rows.discount = 0;
           }
           let burger = {
             "name": this.rows.name,
