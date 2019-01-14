@@ -36,7 +36,7 @@ v-if="this.showSlotModal && this.pressedAbortModal">
 <button
 type="button"
 id="yesBtn"
-@click="orderFinished()">
+@click="emptyOrder()">
 {{uiLabels.abort}}
 </button>
 </div>
@@ -96,7 +96,7 @@ export default{
     return{
       showSlotModal:false,
       slotContent:"",
-      pressedAbortModal:false
+      pressedAbortModal:false,
     }
   },
   methods:{
@@ -109,6 +109,14 @@ export default{
         this.$emit('remove_backButton');
       }
       else this.showSlotModal=false;
+    },
+
+    emptyOrder:function(){
+      if(this.menus.length===0){
+        this.$emit('change_view','frontPage');
+        this.$emit('clear_all');
+        this.$emit('remove_backButton');
+      }
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
