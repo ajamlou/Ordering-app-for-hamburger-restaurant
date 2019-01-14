@@ -10,7 +10,7 @@
       <strong v-if="myToggle">+</strong>
       <strong v-if="!myToggle">-</strong>
     </b-btn>
-
+    
     <div>
       <!-- Det som collapsibleButton döljer -->
       <b-collapse class="collapsibleBtn" visible :id = "orderId">

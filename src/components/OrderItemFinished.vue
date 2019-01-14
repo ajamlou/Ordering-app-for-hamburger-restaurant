@@ -1,12 +1,12 @@
 <template>
-<!-- Egen komponent för att kunna hantera det som sker i "Färdiga" enklare -->
+  <!-- Egen komponent för att kunna hantera det som sker i "Färdiga" enklare -->
   <div>
-      <h4>#{{orderId}}</h4>
+    <h4>#{{orderId}}</h4>
 
-      <b-btn :pressed.sync="myToggle" v-b-toggle='orderId' variant="outline-primary" id="collapsibleButton">
-        <strong v-if="myToggle">+</strong>
-        <strong v-if="!myToggle">-</strong>
-      </b-btn>
+    <b-btn :pressed.sync="myToggle" v-b-toggle='orderId' variant="outline-primary" id="collapsibleButton">
+      <strong v-if="myToggle">+</strong>
+      <strong v-if="!myToggle">-</strong>
+    </b-btn>
 
     <div>
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
@@ -43,9 +43,9 @@ export default {
   },
   methods: {
     orderSent: function () { //skickar 'done' till parent som kan fånga med v-on:done
-      this.$emit('sent');
-    }
+    this.$emit('sent');
   }
+}
 }
 </script>
 
