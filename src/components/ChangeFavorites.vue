@@ -137,6 +137,7 @@
   #favMaster{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    padding-top:10px;
   }
   #burger{
     grid-column: 3/6;
