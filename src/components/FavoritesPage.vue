@@ -205,7 +205,7 @@ export default {
 .background{
   width: 320px;
   height: 360px;
-  border-radius: 160px;
+  border-radius: 50px;
 }
 
 .burgers{
