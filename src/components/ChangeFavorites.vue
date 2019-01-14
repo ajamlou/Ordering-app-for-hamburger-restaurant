@@ -95,7 +95,7 @@
             this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
           }
           let burger = {
-            "name": this.rows.name,
+            "name": this.capitalize(this.rows.name),
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
             "price": favoritePrice*(1-(this.rows.discount/100)),
@@ -109,6 +109,12 @@
       },
       favError: function(){ //funktion som visar eller döljer felmodalen
         this.showSlotModal = !this.showSlotModal;
+      },
+      /*Gör första bokstaven i namnet på burgaren till stor bokstav*/
+      capitalize:function(string){
+        let firstLetter = string.charAt(0).toUpperCase();
+        let restOfString = string.slice(1);
+        return firstLetter + restOfString;
       },
       checkIfChecked: function(){ //kollar att någon radiobutton är checked, kallar på felhanteraren annars
         if(this.rows.checked != null){
