@@ -258,6 +258,9 @@ export default {
                   if(this.isModifying){
                     this.addToCheckout();
                   }
+                  if(this.breadcrumbs.length===1 && this.currentView==='designPage'){
+                    this.clearAll();
+                  }
                   if(this.currentView==="favoritesPage"){
                     this.resetBurger();
                   }
