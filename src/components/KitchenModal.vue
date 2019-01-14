@@ -1,12 +1,11 @@
 <template>
-  <transition name="storage-modal">
     <div class="storage-backdrop">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
       <div class="storage-wrapper">
         <button
         type="button"
         class="close-button"
-        @click="$emit('switchVisibility')">
+        @click='switchVisibility'>
         X
       </button>
       <div>
@@ -18,29 +17,44 @@
       <div>
         Säljpris
       </div>
-      <div class="storage-body" id="ing-mod">
-        <StaffViewStorage
-        v-show = "decideContent === 'storage'"
-        :ingredients="ingredients">
-      </StaffViewStorage>
+      <div class="storage-body">
+        <div v-for="ingredient in ingredients"
+        class="ing-container"
+        :key="ingredient.ingredient_id">
+          <div>
+            {{ingredient.ingredient_sv}}
+          </div>
+          <div>
+            {{ingredient.stock}}
+          </div>
+          <div>
+          {{ingredient.selling_price}}
+          </div>
+      </div>
+    </div>
     </div>
   </div>
-</div>
-</transition>
 </template>
 
 <script>
-import StaffViewStorage from '@/components/StaffViewStorage.vue'
+// import StaffViewStorage from '@/components/StaffViewStorage.vue'
+
 export default {
   name: 'KitchenModal',
   props: {
     decideContent:String,
     ingredients: Array,
-    orders: Object
+    // orders: Object
   },
-  components:{
-    StaffViewStorage,
+  components: {
+    // StaffViewStorage,
+    // SlotModal
   },
+  methods: {
+    switchVisibility: function() {
+      this.$emit("visibility")
+    }
+  }
 }
 </script>
 
@@ -65,9 +79,8 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   background: #FFFFFF;
-  overflow: auto;
   border-radius: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   width: 75%;
   text-underline-position: auto;
 }
@@ -78,7 +91,16 @@ export default {
   height: 50vh;
   background-color: #fff;
   font-family: 'Montserrat', sans-serif;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-transform: capitalize;
+}
+
+.ing-container {
+  display: grid;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  grid-template-columns: 33% 33% 33%;
+
 }
 
 .close-button {
