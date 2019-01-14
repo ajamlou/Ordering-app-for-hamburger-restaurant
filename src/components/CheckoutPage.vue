@@ -112,11 +112,9 @@ export default{
     },
 
     emptyOrder:function(){
-      if(this.menus.length===0){
         this.$emit('change_view','frontPage');
         this.$emit('clear_all');
         this.$emit('remove_backButton');
-      }
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
