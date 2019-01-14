@@ -8,7 +8,7 @@
     :class="{'sv' : isSv, 'en' : !isSv }">{{ uiLabels.language }}</button>
 
 
-    <OrderingViewFrontPage
+  <OrderingViewFrontPage
     @Visibility="changeView"
     v-if = "currentView === 'frontPage'"
     :uiLabels="uiLabels"
@@ -85,6 +85,7 @@ v-show="this.showIngredientsModal"
 @modal_info="toggleShowIngredientsModal">
 </IngredientsModal>
 
+<!-- Modal för nästa-knappen -->
 <div class="slotModalClass">
   <SlotModal
   v-if="this.showSlotModal && this.noIngredientModal">
@@ -98,6 +99,7 @@ v-show="this.showIngredientsModal"
   </button></div>
 </SlotModal>
 
+<!-- Modal för avbrytknappen -->
 <SlotModal
 v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="header"></div>
@@ -200,6 +202,7 @@ export default {
                 }.bind(this));
               },
               methods: {
+                //Kollar vilket språk som är i nuvarande vy
                 checkLang:function(){
                   if(this.lang==="sv"){
                     this.isSv=true;
