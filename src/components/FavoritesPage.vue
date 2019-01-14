@@ -1,5 +1,3 @@
-
-
 <template>
   <div id = "favorites-backdrop">
     <div id ="favorites-master">
@@ -7,7 +5,8 @@
         {{uiLabels.chooseAFavorite}}
       </div>
       <div id = "burger-wrapper">
-        <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class ="burgers">
           <h1 class = "header">{{item.name}}</h1>
           <img :src= "item.url" class = "image">
           <div class = "description">
@@ -21,6 +20,7 @@
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
+    </div>
       <div id="extras-title">
         {{uiLabels.extras}}
       </div>
@@ -38,7 +38,7 @@
         @info_to_modal="toggleShowIngredientsModal">
       </CategoryRow>
     </div>
-    
+
 <!-- Är onödig, men vänta lite med att ta bort -->
     <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
     avbrytknappen som tryckts på. -->
@@ -59,8 +59,9 @@
     @click="emptyOrder()">
     {{uiLabels.abort}}
   </button>
-</div>
-</SlotModal> -->
+</div> -->
+<!-- </SlotModal> -->
+
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
@@ -148,7 +149,17 @@ export default {
     //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
     //ska vara där inne.
     cancelBtnModal: function(){
-      this.$emit('cancel_btn_modal')
+      this.toggleSlotModal();
+      this.pressedAbortModal=true;
+    },
+    //Togglar en modal
+    toggleSlotModal:function(){
+      if(!this.showSlotModal){
+        this.showSlotModal=true;
+      }
+      else{
+        this.showSlotModal=false;
+      }
     },
   }
 }
@@ -190,13 +201,18 @@ export default {
   /* border-bottom: dotted;
   border-color: #ed6381; /*rosa */
 }
-.burgers{
+
+.background{
   width: 320px;
   height: 320px;
   border-radius: 160px;
+}
+
+.burgers{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .header{
   grid-column: 2;
   grid-row: 1;
@@ -299,28 +315,6 @@ flex-wrap: wrap;
   border-color: #000000;
 }
 
-#yesBtn,#noBtn{
-  grid-column: auto;
-  grid-row: auto;
-  height: 10vh;
-}
-
-#yesBtn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
-}
-
-#noBtn{
-  background-color: #c5e5be;
-}
-#yesBtn{
-  background-color: #e51e4a;
-}
-
-#noBtn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
 button{
   color: black;
   text-transform: uppercase;
