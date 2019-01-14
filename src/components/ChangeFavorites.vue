@@ -34,21 +34,37 @@
                 <button class = 'addRow' @click = "addRow()">Lägg till ingrediens</button>
                 <br>
                 <br>
-                <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
+                <h2>VILKEN BURGARE VILL DU ERSÄTTA?</h2>
+                <div id="radio-done">
+
+                  <div id="radio">
                 <div
                 v-for = "(item, index) in favBurgers"
                 class = "existingBurger"
                 :key = "`item-${index}`">
 
-                <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
+                <input
+                type="radio"
+                class = "radio"
+                v-model = 'rows.checked'
+                :value = "index">
+
                 <label>{{item.name}}</label>
+
               </div>
+
               <div class ="existingBurger">
-                <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
+                <input
+                type="radio"
+                class = "radio"
+                v-model='rows.checked'
+                value = 'add' >
                 <label>Lägg till som en ny hamburgare</label>
               </div>
+            </div>
               <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
             </div>
+          </div>
 
             <div role="tablist" id="fullaccordion">
 
@@ -264,17 +280,29 @@ export default {
   padding-top:15px;
   grid-column-gap: 3em;
 }
+#header{
+  margin-left:20px;
+}
 #burger{
   display:grid;
   grid-column: 1/4;
   grid-row:2/3;
-  margin-left:10px;
+  margin-left:20px;
+}
+#burger > label{
+  margin-bottom:0;
+}
+
+#radio-done{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
 }
 
 #fullaccordion{
   grid-column:4/8;
   grid-row: 2;
   margin-right:20px;
+  margin-top: calc(1em + 2.4px);
 }
 
 #header{
@@ -306,7 +334,6 @@ export default {
 }
 
 .confirm{
-  margin-left: 20vw;
   font-size: 16px;
 }
 #goBack{
@@ -360,7 +387,7 @@ input[type="text"],textarea{
   margin: auto auto auto 0;
 }
 
-p, label, h1{
+p, label, h1,h2,h3,h4,h5,h6{
   color:white;
 }
 
