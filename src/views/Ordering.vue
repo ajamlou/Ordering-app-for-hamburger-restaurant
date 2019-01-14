@@ -52,9 +52,9 @@ v-if = "currentView === 'favoritesPage'"
 @remove_ingredient="removeFromMenu"
 @info_to_modal="toggleShowIngredientsModal"
 @addToCheckout = "addToCheckout"
-@changeView = "changeView"
-@clearburger = "resetFavBurger"
-@fav-ingredient = "addToMenu">
+@change_view = "changeView"
+@clear_all="clearAll"
+@remove_backButton="removeBackButton">
 </FavoritesPage>
 
 
