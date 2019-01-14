@@ -32,16 +32,6 @@ export default {
 </script>
 
 <style scoped>
- /* .modal-header{
-  position: fixed;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  text-align: center;
-  overflow: hidden;
-  height:2em;
-  padding:0;
-  text-transform: capitalize;
-}  */
 
 .modal-body{
   text-transform: capitalize;

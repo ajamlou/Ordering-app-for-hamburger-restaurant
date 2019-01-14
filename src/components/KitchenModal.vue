@@ -96,14 +96,4 @@ export default {
 
 .close-button:hover {background-color: #660000}
 
-.storage-modal-fade-enter,
-.storage-modal-fade-leave-active {
-opacity: 0;
-}
-
-.storage-modal-fade-enter-active,
-.storage-modal-fade-leave-active {
-transition: opacity .1s ease;
-}
-
 </style>
