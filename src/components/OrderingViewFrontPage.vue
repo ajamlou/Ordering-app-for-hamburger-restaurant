@@ -80,7 +80,6 @@ export default {
 }
 #createBurgerButton:hover,#favoritesButton:hover {
   background-color: #6f8179;
-  border-color: #000000;
 }
 
 .welcome{
