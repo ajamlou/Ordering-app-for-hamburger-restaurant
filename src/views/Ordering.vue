@@ -385,217 +385,198 @@ export default {
               background-size: 100px 100px;
               background-position: 0 0, 50px 50px;
             }
-            #favorites{
-              grid-column: 1/7;
-              grid-row:0/1;
-            }
-            #extras-favorites{
-              grid-column: 1/7;
-              grid-row:3;
-              display: grid;
-              grid-template-columns: repeat(6, 1fr);
-              grid-template-rows: 50px 250px 50px;
-            }
-            #fav-category{
-              grid-column-start: 1;
-              grid-column-end: 7;
-              grid-row: 2;
-            }
-            #fav-next-btn{
-              grid-column-start: 6;
-              grid-column-end: 7;
-              grid-row-start: 3;
-              grid-row-end: 4;
-            }
+            /* #favorites{
+            grid-column: 1/7;
+            grid-row:0/1;
+          }
+          #extras-favorites{
+          grid-column: 1/7;
+          grid-row:3;
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          grid-template-rows: 50px 250px 50px;
+        }
+        #fav-category{
+        grid-column-start: 1;
+        grid-column-end: 7;
+        grid-row: 2;
+      }
+      #fav-next-btn{
+      grid-column-start: 6;
+      grid-column-end: 7;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      }*/
 
-            #bck-btn:hover{
-              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-            }
-            .slotButtons{
-              grid-template-columns: repeat(6, 1fr);
-            }
-            #yesBtn{
-              background-color: #e51e4a;
-            }
-            #yesBtn:hover{
-              background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-            }
-            #noBtn{
-              background-color: #c5e5be;
-            }
-            #noBtn:hover{
-              background-color: #89a085;
-            }
-            #yesBtn,#noBtn{
-              font-size: 25px;
-              height: 10vh;
-              width: 40vh;
-            }
+      #bck-btn:hover{
+        background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+      }
+      .slotButtons{
+        grid-template-columns: repeat(6, 1fr);
+      }
+      #yesBtn{
+        background-color: #e51e4a;
+      }
+      #yesBtn:hover{
+        background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+      }
+      #noBtn{
+        background-color: #c5e5be;
+      }
+      #noBtn:hover{
+        background-color: #89a085;
+      }
+      #yesBtn,#noBtn{
+        font-size: 25px;
+        height: 10vh;
+        width: 40vh;
+      }
 
-            #lang-btn{
-              grid-column:6;
-              grid-row:1;
-              width:100px;
-              height:50px;
-              background-color: #b9d7cb; /*ljusturkos*/
-              padding: 0;
-            }
-            #lang-btn:hover{
-              background-color: #6f8179;
-            }
-            #bck-btn,#lang-btn{
-              align-self: center;
-              justify-self: center;
-            }
+      #lang-btn{
+        grid-column:6;
+        grid-row:1;
+        width:100px;
+        height:50px;
+        background-color: #b9d7cb; /*ljusturkos*/
+        padding: 0;
+      }
+      #lang-btn:hover{
+        background-color: #6f8179;
+      }
+      #bck-btn,#lang-btn{
+        align-self: center;
+        justify-self: center;
+      }
 
-            /*---------------------- För språkknappen sv/eng -------------*/
-            /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
-            Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
-            .sv{
-              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .sv:hover{
-              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .sv:active{
-              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
-            }
-            .en{
-              background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-            .en:hover{
-              background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-            .en:active{
-              background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-              background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
-            }
-            .viewContent{
-              grid-row: 2;
-              grid-column: 1/7;
-            }
+      /*---------------------- För språkknappen sv/eng -------------*/
+      /*Nedan ser rätt rörigt ut, men det är bara för att det ska funka på alla webbläsare.
+      Vi bestämmer en bakgrundsbild och lägger på lite skuggor å sånt*/
+      .sv{
+        background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+      }
+      .sv:hover{
+        background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/en.jpg) center center no-repeat;
+      }
+      .sv:active{
+        background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/en.jpg) center center no-repeat;
+      }
+      .en{
+        background: -moz-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.2) 51%, rgba(0,0,0,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+      }
+      .en:hover{
+        background: -moz-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(200,200,200,0.2) 51%, rgba(0,0,0,0.4) 51%),url(../assets/sv.jpg) center center no-repeat;
+      }
+      .en:active{
+        background: -moz-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -o-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: -ms-linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.4) 51%, rgba(200,200,200,0.2) 51%),url(../assets/sv.jpg) center center no-repeat;
+      }
+      .viewContent{
+        grid-row: 2;
+        grid-column: 1/7;
+      }
+      #bck-btn{
+        grid-column: 1;
+        grid-row: 1;
+        background-color: #e51e4a;
+        width:100px;
+        height:50px;
+        margin:auto;
+        justify-self:center;
+        font-size: 35px;
+        padding: 0;
+      }
+      .btn-close{
+        background-color: #c5e5be;
+        border-radius: 10px;
+        width: 2em;
+        height: 2em;
+        font-size: 2em;
+        /* color: black; */
+      }
+      .btn-close:hover{
+        background-color: #89a085;
+      }
 
-            #extras, #extras-favorites{
-              margin-top:2em;
-            }
-            #bck-btn{
-              grid-column: 1;
-              grid-row: 1;
-              background-color: #e51e4a;
-              width:100px;
-              height:50px;
-              margin:auto;
-              justify-self:center;
-              font-size: 35px;
-              padding: 0;
-            }
-            #next-btn:active{border: 2px solid #595959;}
+      button{
+        color: black;
+        text-transform: uppercase;
+        border-color: black;
+        border-width: thin;
+        text-align: center;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+        font-size: 20px;
+      }
 
-            #next-btn{
-              width:120px;
-              height:80px;
-              justify-self:end;
-              grid-column: 6/7;
-              grid-row:4;
-              background-color: #c5e5be;}
+      /*------------------ CSS för ipad/mobiler-isch ------------*/
+      @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+        #designPage-title{
+          grid-row: 1;
+          text-align: center;
+          font-size: 12vw;
+        }
+        #bestallning{
+          grid-column: 1/7;
+          grid-row:3;
+          text-align:center;
+        }
+        #r2-div{
+          grid-column:1/7;
+          grid-row:2;
+          text-align:center;
+          justify-items: center;
+          align-items: center;
+          justify-content: center;
+          align-content: center;
+        }
+        #categories-wrapper{
+          grid-row:4;
+        }
 
-              #next-btn:hover{
-                background-color: #89a085;
-              }
+        #ordering h2{
+          font-size: 5vw;
+        }
+        #ordering{
+          margin:10px auto auto auto;
+        }
+      }
 
-              .btn-close{
-                background-color: #33cc33;
-                border-radius: 10px;
-                width: 2em;
-                height: 2em;
-                font-size: 2em;
-                color: white;
-              }
-
-              button{
-                color: black;
-                text-transform: uppercase;
-                border-color: black;
-                border-width: thin;
-                text-align: center;
-                display: inline-block;
-                margin: 4px 2px;
-                cursor: pointer;
-                border-radius: 16px;
-                font-size: 20px;
-              }
-              button:hover{
-                background-color: #000;
-              }
-
-              /*------------------ CSS för ipad/mobiler-isch ------------*/
-              @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
-                #designPage-title{
-                  grid-row: 1;
-                  text-align: center;
-                  font-size: 12vw;
-                }
-                #bestallning{
-                  grid-column: 1/7;
-                  grid-row:3;
-                  text-align:center;
-                }
-                #r2-div{
-                  grid-column:1/7;
-                  grid-row:2;
-                  text-align:center;
-                  justify-items: center;
-                  align-items: center;
-                  justify-content: center;
-                  align-content: center;
-                }
-                #categories-wrapper{
-                  grid-row:4;
-                }
-
-                #ordering h2{
-                  font-size: 5vw;
-                }
-                #ordering{
-                  margin:10px auto auto auto;
-                }
-              }
-
-            /* -------------------- CSS för mobiler -----------------*/
-            @media screen and (max-width:740px){
-              #bck-btn,#lang-btn{
-                width:90px;
-                height:50px;
-                padding:0;
-              }
-              #yesBtn,#noBtn{
-                font-size: 18px;
-                height: 10vh;
-                width: 20vh;
-              }
-
-            }
-            </style>
+      /* -------------------- CSS för mobiler -----------------*/
+      @media screen and (max-width:740px){
+        #bck-btn,#lang-btn{
+          width:90px;
+          height:50px;
+          padding:0;
+        }
+        #yesBtn,#noBtn{
+          font-size: 18px;
+          height: 10vh;
+          width: 20vh;
+        }
+      }
+      </style>
