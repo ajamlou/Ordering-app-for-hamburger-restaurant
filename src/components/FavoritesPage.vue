@@ -1,5 +1,3 @@
-
-
 <template>
   <div id = "favorites-backdrop">
     <div id ="favorites-master">
@@ -38,7 +36,7 @@
         @info_to_modal="toggleShowIngredientsModal">
       </CategoryRow>
     </div>
-    
+
 <!-- Är onödig, men vänta lite med att ta bort -->
     <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
     avbrytknappen som tryckts på. -->
@@ -61,6 +59,7 @@
   </button>
 </div>
 </SlotModal> -->
+
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
@@ -299,28 +298,6 @@ flex-wrap: wrap;
   border-color: #000000;
 }
 
-#yesBtn,#noBtn{
-  grid-column: auto;
-  grid-row: auto;
-  height: 10vh;
-}
-
-#yesBtn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
-}
-
-#noBtn{
-  background-color: #c5e5be;
-}
-#yesBtn{
-  background-color: #e51e4a;
-}
-
-#noBtn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
 button{
   color: black;
   text-transform: uppercase;
