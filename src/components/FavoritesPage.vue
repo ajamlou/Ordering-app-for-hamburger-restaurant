@@ -17,27 +17,27 @@
       </div>
       <div id = "burger-wrapper">
         <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
-        <div class ="burgers">
-          <h1 class = "header">{{item.name}}</h1>
-          <img :src= "item.url" class = "image">
-          <div class = "description">
-            {{item["description_"+ lang]}}
+          <div class ="burgers">
+            <h1 class = "header">{{item.name}}</h1>
+            <img :src= "item.url" class = "image">
+            <div class = "description">
+              {{item["description_"+ lang]}}
+            </div>
+            <div class = "allergens">
+              <div id="gluten-exp" v-if = "!item.gluten_free">
+                <img src="../assets/gluten.png">
+              </div>
+              <div id="dairy-exp" v-if = "!item.lactose_free">
+                <img src="../assets/dairy.png">
+              </div>
+              <div id="vegan-exp" v-if = "item.vegan">
+                <img src="../assets/vegan.png">
+              </div>
+            </div>
+            <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
           </div>
-          <div class = "allergens">
-            <div id="gluten-exp" v-if = "!item.gluten_free">
-              <img src="../assets/gluten.png">
-            </div>
-            <div id="dairy-exp" v-if = "!item.lactose_free">
-              <img src="../assets/dairy.png">
-            </div>
-            <div id="vegan-exp" v-if = "item.vegan">
-              <img src="../assets/vegan.png">
-            </div>
-          </div>
-          <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
-    </div>
       <div id="extras-title">
         {{uiLabels.extras}}
       </div>
@@ -56,14 +56,14 @@
       </CategoryRow>
     </div>
 
-<div id="bottom-div">
-<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
-<div id="price-div">
-  {{uiLabels.sum}}: {{price}}:-
-</div>
-<button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-</div>
-</div>
+    <div id="bottom-div">
+      <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+      <div id="price-div">
+        {{uiLabels.sum}}: {{price}}:-
+      </div>
+      <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -94,14 +94,6 @@ export default {
     CategoryRow,
     SlotModal
   },
-  beforeMount: function(){
-    // for(let i =0;i<this.favBurgers.length;i++){
-    //   for(let obj in this.favBurgers[i])
-    //   obj.ingredients[]
-    //
-    // }
-
-  },
   methods:{
     // skickar favoritburgaren som väljs till ordering och lägger in den där
     favToCheckout: function(index, item){
@@ -112,11 +104,13 @@ export default {
         this.$emit("fav-ingredient", item.ingredients[i]);
       }
     },
+    //sätter alla favoritburgarnas select till false
     unselect: function(){
       for(var i=0; i<this.favBurgers.length; i++){
         this.favBurgers[i].selected = false;
       }
     },
+    //tar bort ingredienser från extras
     removeFromMenu: function(item,index){
       this.$emit('remove_ingredient',item,index);
     },
@@ -369,7 +363,7 @@ h1{
   #price-div{
     font-size: 25px;
   }
-  .burgers{
+  .background{
     border-bottom: dotted;
     border-color: #ed6381; /*rosa*/
   }
