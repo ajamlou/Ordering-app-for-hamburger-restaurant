@@ -7,6 +7,10 @@
           <input v-model = 'rows.name'>
           <p>URL till den nya bilden: <p>
             <input v-model = 'rows.url'>
+            <p>Beskrivning av den nya burgaren: <p>
+              <input v-model = 'rows.description'>
+              <p>Rabatt på hamburgaren(ange i %): <p>
+                <input v-model = 'rows.discount'>
             <div v-for="(row, index) in rows" :key = "index">
               <p>{{row.title}} {{index+1}}</p>
               <input v-model="row.value"><button id="cancelBtn" @click = "remove(index)">Ta bort</button>
@@ -84,7 +88,9 @@
             "ingredients": favoriteIngredients,
             "price": favoritePrice,
             "index": this.rows.checked,
-            "selected": false
+            "selected": false,
+            "description": this.rows.description,
+            "discount-price": favoritePrice*(1-(this.rows.discount/100))
           }
           this.$store.state.socket.emit('updateinfo', burger);
           this.rows = [];

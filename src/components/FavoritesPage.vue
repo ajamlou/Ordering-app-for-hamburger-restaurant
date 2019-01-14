@@ -10,11 +10,12 @@
         <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
           <h1 class = "header">{{item.name}}</h1>
           <img :src= "item.url" class = "image">
-          <ul class ="ingredients">
-            <li  v-for = "(thing, index) in item.ingredients" :key = 'index'>
-              {{thing["ingredient_"+ lang]}}
-            </li>
-          </ul>
+          <div class = "description">
+            {{item.description}}
+          </div>
+          <div v-tooltip.right = "tooltip" class ="ingredient-tooltip">
+            [ i ]
+          </div>
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
@@ -47,6 +48,7 @@ export default {
   name: 'FavortiesPage',
   data: function(){
     return{
+      tooltip: 'Oh yeaaah'
     }
   },
   props:{
@@ -61,6 +63,14 @@ export default {
   },
   components:{
     CategoryRow
+  },
+  created:{
+    mountTooltipData: function(){
+      this.tooltip = '';
+      // for(var i = 0; i<this.favBurgers.length;i++){
+      //   this.tooltip = this.tooltip + this.favBurgers[i].ingredients
+      // }
+    }
   },
   methods:{
     // skickar favoritburgaren som väljs till ordering och lägger in den där
@@ -147,16 +157,30 @@ export default {
 }
 
 .image{
-   width: 150px ;
-   height: 150px;
-   grid-column: 2;
-   grid-row: 2;
+  width: 150px ;
+  height: 150px;
+  grid-column: 2;
+  grid-row: 2;
 }
 
-.ingredients{
+.description{
   grid-column: 1/3;
+  grid-row:3;
+  text-align: center;
+}
+
+.ingredient-tooltip{
+  grid-column: 3;
   grid-row: 3;
 }
+
+
+/* .ingredients{
+  grid-column: 1/3;
+  grid-row: 3;
+  display:flex;
+  flex-wrap: wrap;
+} */
 
 .price{
   grid-column: 2;
@@ -210,9 +234,5 @@ button{
 
 h1{
   font-size: 1.5em;
-}
-
-li{
-  list-style-type:none;
 }
 </style>
