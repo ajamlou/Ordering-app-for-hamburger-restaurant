@@ -179,20 +179,9 @@ export default {
         if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
           this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
         }
-        let gluten_free = true;
-        let lactose_free = true;
-        let vegan = true;
-        for(let i = 0;i<favoriteIngredients.length;i++){
-          if(favoriteIngredients[i].milk_free === 0){
-            lactose_free = false;
-          }
-          if(favoriteIngredients[i].gluten_free === 0){
-            gluten_free = false;
-          }
-          if(favoriteIngredients[i].vegan === 0){
-            vegan = false;
-          }
-        }
+
+        let allergies = this.checkAllergies(favoriteIngredients);
+
         let burger = {
           "name": this.capitalize(this.rows.name),
           "url": this.rows.url,
@@ -202,13 +191,32 @@ export default {
           "selected": false,
           "description_sv": this.rows.description_sv,
           "description_en": this.rows.description_en,
-          "gluten_free": gluten_free,
-          "lactose_free":lactose_free,
-          "vegan":vegan
+          "gluten_free": allergies.gluten_free,
+          "lactose_free":allergies.lactose_free,
+          "vegan":allergies.vegan
         }
         this.$store.state.socket.emit('updateinfo', burger);
         this.rows = [];
       }
+    },
+    checkAllergies:function(ingredients){
+      let allergies = {
+        'gluten_free': true,
+      'lactose_free': true,
+      'vegan': true };
+
+      for(let i = 0;i<ingredients.length;i++){
+        if(ingredients[i].milk_free === 0){
+          allergies.lactose_free = false;
+        }
+        if(ingredients[i].gluten_free === 0){
+          allergies.gluten_free = false;
+        }
+        if(ingredients[i].vegan === 0){
+          allergies.vegan = false;
+        }
+      }
+      return allergies;
     },
     favError: function(){ //funktion som visar eller döljer felmodalen
       this.showSlotModal = !this.showSlotModal;
