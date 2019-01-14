@@ -13,6 +13,7 @@ id="orderFinishedModal"
 v-if="this.showSlotModal">
 <div slot="header"></div>
 <div id="slotTextFinished" slot="body">{{slotContent}}</div>
+
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
 <div slot="footer">
@@ -102,12 +103,6 @@ export default{
       this.$emit('cancel_btn_modal')
     },
 
-    //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
-    //försvinner modalen
-    // continueOrder:function(){
-    //   this.pressedAbortModal=false;
-    // },
-
     //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
@@ -144,7 +139,6 @@ export default{
       this.toggleSlotModal();
       if(this.menusInOrder){
         this.$store.state.socket.emit('order', {menus: this.menus})
-        // this.$emit('clear_all');
       }
     }
   },
@@ -194,7 +188,7 @@ export default{
   align-self: center;
   font-family: 'Lobster', sans-serif;
   font-size: 14vmin;
-  color: #ed6381; /*rosa*/
+  color: #ed6381;
   text-shadow: 2px 2px #444444;
   border-bottom: dotted;
   border-color: #ed6381;
@@ -218,12 +212,10 @@ export default{
   grid-column: 1/9;
 }
 #add-btn-div{
-  /* display: flex; */
   max-width: 185.3px;
   background-color: #b9d7cb;
   cursor: pointer;
   border-radius: 10px;
-  color: black;
   margin: 3vh 1vh 0 0;
   font-size: 25px;
 }
@@ -239,11 +231,10 @@ export default{
 }
 #cancelOrder-btn{
   grid-column: 1/2;
-  grid-row: 1;
   background-color: #e51e4a;
 }
 #cancelOrder-btn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  background-color: #a01533;
 }
 #sumOfOrder{
   justify-self: center;
@@ -251,11 +242,9 @@ export default{
   text-align:center;
   font-size: 2em;
   grid-column: 3/7;
-  grid-row: 1;
 }
 #order-btn2{
   grid-column: 8/9;
-  grid-row: 1;
   background-color: #c5e5be;
 }
 #order-btn2:hover{
@@ -265,10 +254,7 @@ export default{
   width:120px;
   height:80px;
   font-size: 25px;
-}
-
-#slotTextFinished{
-  /* padding: 3em; */
+  grid-row: 1;
 }
 .noBorder{
   border: 0 !important;
@@ -280,13 +266,11 @@ export default{
   height: 2.5em;
   font-size: 2em;
   color: black;
-
 }
 button{
-  color: black;
+  color: #000000;
   font-size: 16px;
   text-align: center;
-  text-decoration: none;
   border-color: black;
   border-width: thin;
   border-radius: 16px;
@@ -295,7 +279,7 @@ button{
   cursor: pointer;
 }
 
-/*------------------ CSS för ipad/mobiler-isch ------------*/
+/*------------------ CSS för mindre skärmar ------------*/
 @media screen and (max-width:1206px){
   #designPage-title{
     grid-row: 1;
@@ -303,8 +287,6 @@ button{
     font-size: 12vw;
   }
 }
-
-/* -------------------- CSS för mindre skärmar -----------------*/
 
 @media screen and (max-width:740px){
   #checkoutPage-title{
@@ -340,8 +322,8 @@ button{
   }
 }
 @media screen and (max-width:380px){
-#slotTextFinished{
-  font-size: 20px;
-}
+  #slotTextFinished{
+    font-size: 20px;
+  }
 }
 </style>

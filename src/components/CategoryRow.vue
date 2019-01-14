@@ -5,27 +5,24 @@
   <div class="cat-title">
     <h2>{{ category_name }}: </h2>
   </div>
-    <div class="box-wrapper">
+  <div class="box-wrapper">
 
-      <Ingredient
-      v-for="(item, index) in added_items"
-      v-if="item.category === category"
-      :item="item"
-      :lang="lang"
-      :key="index"
-      @ingredient_clicked="removeIngredient(item,index)">
-    </Ingredient>
+    <Ingredient
+    v-for="(item, index) in added_items"
+    v-if="item.category === category"
+    :item="item"
+    :lang="lang"
+    :key="index"
+    @ingredient_clicked="removeIngredient(item,index)">
+  </Ingredient>
 
-    <button @click="emitInfoToModal"
-    class="PlusButton"
-    v-show="threshold > item_count">
-    +
-    </button>
-
-
-  </div>
+  <button @click="emitInfoToModal"
+  class="PlusButton"
+  v-show="threshold > item_count">
+  +
+</button>
 </div>
-
+</div>
 </template>
 
 <script>
@@ -59,7 +56,6 @@ export default {
     },
   }
 }
-
 </script>
 
 <style scoped>
@@ -79,8 +75,7 @@ export default {
   position:relative;
   display:flex;
   flex-wrap: wrap;
-  background-color: #b9d7cb; /*ljusturkos*/
-  /* rgba(255,183,101,0.8); */
+  background-color: #b9d7cb;
   border-radius: 15px;
   margin: 0 0.5em 1em 0;
   height:calc(6em + 6px);
@@ -103,16 +98,13 @@ export default {
   padding:0;
   margin:3px 3px 3px 0;
 }
-
 .ingredient{
   text-align:center;
   overflow-wrap: break-word;
   margin:3px 3px 3px 0;
 }
 .extras{
-  background-color: #b9d7cb; /*ljusturkos*/
-  /* #ed6381; /*mörkrosa*/
-  /* rgba(90,174,211,0.8); */
+  background-color: #b9d7cb;
 }
 
 .ingredient:hover{
@@ -129,11 +121,9 @@ export default {
     justify-content: center;
     height:auto;
   }
-
   .cat-title{
     width:100%;
   }
-
   .box-wrapper{
     justify-content: space-around;
   }
