@@ -118,15 +118,20 @@ h5, h6{
   grid-column:1/3;
   grid-row:1;
   text-align: center;
+  margin-bottom:2px;
 }
 .ord-quant{
   grid-column:1/3;
   grid-row:2;
   display:grid;
 }
+.ord-quant > label{
+  margin-bottom: 2px;
+}
 .num-input{
   border: 2px solid #ddd;
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
 }
 
 .num-input,
@@ -138,8 +143,9 @@ h5, h6{
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
-  max-width: 5rem;
-  padding: .5rem;
+  width:inherit;
+  /* max-width: 5rem;
+  padding: .5rem; */
   border: solid #ddd;
   border-width: 0 2px;
   text-align: center;
@@ -155,7 +161,6 @@ h5, h6{
   border: none;
   align-items: center;
   justify-content: center;
-  width: 3rem;
   height: 3rem;
   cursor: pointer;
   margin: 0;

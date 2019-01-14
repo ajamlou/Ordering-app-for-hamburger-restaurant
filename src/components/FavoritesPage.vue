@@ -149,8 +149,7 @@ export default {
     //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
     //ska vara där inne.
     cancelBtnModal: function(){
-      this.toggleSlotModal();
-      this.pressedAbortModal=true;
+      this.$emit('cancel_btn_modal')
     },
     //Togglar en modal
     toggleSlotModal:function(){
@@ -212,6 +211,7 @@ export default {
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .header{
   grid-column: 2;
   grid-row: 1;
