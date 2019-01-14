@@ -509,8 +509,8 @@ export default {
       .btn-close{
         background-color: #c5e5be;
         border-radius: 10px;
-        width: 2em;
-        height: 2em;
+        width: 5em;
+        height: 2.5em;
         font-size: 2em;
         /* color: black; */
       }
@@ -582,9 +582,14 @@ export default {
         .btn-close{
           background-color: #c5e5be;
           border-radius: 5px;
-          width: 2em;
+          width: 4em;
           height: 2em;
           font-size: 1.5em;
+        }
+      }
+      @media screen and (max-width:380px){
+        #slotTextNoIngredients{
+          font-size: 20px;
         }
       }
       </style>

@@ -44,7 +44,6 @@ export default {
     z-index: 9998;
   }
 
-
   .modal {
     text-align: center;
     display: grid;
