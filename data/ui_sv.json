@@ -8,6 +8,7 @@
   "newOrder" : "Ny beställning",
   "pay" : "Betala",
   "sum" :"Summa",
+  "price":"Pris",
   "ordersInQueue" : "INKOMNA",
   "ordersPreparing" : "TILLAGAS",
   "ordersFinished" : "FÄRDIGA",
