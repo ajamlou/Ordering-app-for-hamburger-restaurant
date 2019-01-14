@@ -3,18 +3,27 @@
   id="frontPage">
   <div
   id="orderingFrontPage-backdrop">
+
+<!-- I welcome: Avgör om titeln på sidan visar välkomsttext eller entillburgaretext. -->
   <div class="welcome">
     <div
     v-if = "this.breadcrumbs.length === 0">
     {{uiLabels.welcomeText}}
   </div>
   <div
-  v-if = "this.breadcrumbs.length != 0">
-  {{uiLabels.anotherBurger}}
+    v-if = "this.breadcrumbs.length != 0">
+    {{uiLabels.anotherBurger}}
+  </div>
 </div>
-</div>
-<button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">{{uiLabels.createYourBurger}}</button>
-<button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">{{uiLabels.chooseAFavorite}}</button>
+
+<!-- Om man klickar på designa egen kommer man till designsidan, om man klickar favorite
+kommer man till favoritsidan: -->
+<button id = "createBurgerButton" @click = "emitSwitchVisibility('designPage')">
+  {{uiLabels.createYourBurger}}
+</button>
+<button id = "favoritesButton" @click = "emitSwitchVisibility('favoritesPage')">
+  {{uiLabels.chooseAFavorite}}
+</button>
 </div>
 </div>
 </template>
@@ -27,6 +36,7 @@ export default {
     breadcrumbs: Array
   },
   methods: {
+    // Avgör om designPage eller favoritesPage ska visas.
     emitSwitchVisibility: function(view) {
       this.$emit('Visibility',view)
     }
@@ -55,20 +65,20 @@ export default {
   font-family: 'Lobster', sans-serif;
   text-align: center;
   font-size: 8vw;
-  color: #ed6381; /*mörkrosa*/
-  text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
+  color: #ed6381;
+  text-shadow: 2px 2px #444444;
   grid-row: 1;
   border-bottom: dotted;
   border-color: #ed6381;
 }
 #favoritesButton, #createBurgerButton {
-  background-color: #b9d7cb; /*ljusturkos*/
+  background-color: #b9d7cb;
   text-transform: uppercase;
   color: #444444;
   display: grid;
   font-size: 2em;
   border-radius: 3vh;
-  border-color: black;
+  border-color: #000000;
   border-width: thin;
   align-items: center;
   justify-content:center;
