@@ -258,8 +258,10 @@ export default {
                   if(this.isModifying){
                     this.addToCheckout();
                   }
-                  if(this.breadcrumbs.length===1 && this.currentView==='designPage'){
-                    this.clearAll();
+                  if(this.breadcrumbs.length===1){
+                    this.cancelBtnModal();
+                    // this.clearAll();
+                    //this.currentView==='designPage'
                   }
                   if(this.currentView==="favoritesPage"){
                     this.resetBurger();
@@ -268,7 +270,7 @@ export default {
                   if(this.currentView==='checkoutPage'){
                     this.menusArray.pop();
                   }
-                  if(this.breadcrumbs.length>0){
+                  if(this.breadcrumbs.length>1){
                     this.currentView = this.breadcrumbs[this.breadcrumbs.length -1];
                     this.breadcrumbs.pop();
                   }
