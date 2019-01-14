@@ -452,7 +452,7 @@ export default {
               grid-row:1;
               width:100px;
               height:50px;
-              border:1px solid #7a7a7a;
+              /* border:1px solid #7a7a7a; */
               background-color: #b9d7cb; /*ljusturkos*/
               padding: 0;
             }
@@ -522,7 +522,7 @@ export default {
               grid-column: 1;
               grid-row: 1;
               background-color: #e51e4a;
-              border: 1px solid #7a7a7a;
+              /* border: 1px solid #7a7a7a; */
               width:100px;
               height:50px;
               margin:auto;
@@ -536,7 +536,7 @@ export default {
               width:120px;
               height:80px;
               justify-self:end;
-              border:1px solid #7a7a7a;
+              /* border:1px solid #7a7a7a; */
               grid-column: 6/7;
               grid-row:4;
               background-color: #c5e5be;}
@@ -565,16 +565,14 @@ export default {
 
               button{
                 color: black;
-                /* #444444; */
                 text-transform: uppercase;
-                border: none;
-                /* padding: 10px 20px; */
+                border-color: black;
+                border-width: thin;
                 text-align: center;
                 display: inline-block;
                 margin: 4px 2px;
                 cursor: pointer;
                 border-radius: 16px;
-                /* font-weight: bold; */
                 font-size: 20px;
               }
               button:hover{

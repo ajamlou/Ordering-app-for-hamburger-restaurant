@@ -35,31 +35,22 @@ export default {
 </script>
 
 <style scoped>
+#frontPage{
+  display:grid;
+  height:100%;
+  justify-items: center;
+}
 
 #orderingFrontPage-backdrop{
   display:grid;
   grid-template-rows: minmax(min-content,max-content) 30% 30%;
   grid-row-gap: 1em;
   justify-items:center;
-  /* grid-row: 2/5; */
   background-color: rgba(255, 250, 224,0.99);
-  /* rgba(255, 255, 240,0.98); */
   border-radius:15px;
   width:95%;
   margin-bottom: 3em;
   padding-bottom: 1em;
-  /* margin-top:3em; */
-  /* -webkit-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-  -moz-box-shadow: 10px 7px 14px 0px rgba(158,158,158,1);
-  box-shadow: 10px 7px 14px 0px rgba(158,158,158,1); */
-}
-
-#frontPage{
-  display:grid;
-  height:100%;
-  justify-items: center;
-  /* align-items: center;
-  justify-content:center; */
 }
 
 #favoritesButton, #createBurgerButton {
@@ -69,6 +60,7 @@ export default {
   font-size: 2em;
   border-radius: 3vh;
   border-color: black;
+  border-width: thin;
   align-items: center;
   justify-content:center;
   cursor: pointer;
@@ -90,51 +82,24 @@ export default {
   background-color: #6f8179;
   border-color: #000000;
 }
-/* #favoritesButton:active {
-  border: 3.5px solid #802b00;
-}
-}
-#createBurgerButton:active {
-  border: 3.5px solid #004d26;
-} */
-
 
 .welcome{
   font-family: 'Lobster', sans-serif;
-  /* font-family: 'Luckiest Guy', sans-serif; */
-  /* text-transform: uppercase; */
   text-align: center;
   font-size: 8vw;
   color: #ed6381; /*mörkrosa*/
-  /* #DF532F; - orange*/
-  /* #66d9ff; - ljusblå*/
   text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
-  /* #9c3a20; mörkorange */
   grid-row: 1;
   border-bottom: dotted;
   border-color: #ed6381;
 }
 
-/* @media screen and (max-width:905px){
-  #frontPage{
-    grid-template-rows: auto auto auto auto;
-    grid-auto-rows: auto;
-    justify-content: center;
-    align-items: center;
-  }
-} */
-
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:1024px){
   .welcome{ /* = Frontpagens titel*/
-    /* grid-row: 1;
-    text-align: center;
-    font-size: 12vw; */
   }
 
   #favoritesButton, #createBurgerButton{
-    /* width:;
-    font-size:; */
   }
 }
 
