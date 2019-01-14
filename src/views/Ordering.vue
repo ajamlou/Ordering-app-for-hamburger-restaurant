@@ -261,8 +261,6 @@ export default {
                   }
                   if(this.breadcrumbs.length===1){
                     this.cancelBtnModal();
-                    // this.clearAll();
-                    //this.currentView==='designPage'
                   }
                   if(this.currentView==="favoritesPage"){
                     this.resetBurger();
