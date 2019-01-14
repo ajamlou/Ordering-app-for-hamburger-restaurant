@@ -405,6 +405,7 @@ h2{
 .ing-container > p{
   color:black;
   margin:0;
+  font-weight:bold;
 }
 
 </style>
