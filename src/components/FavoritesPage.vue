@@ -7,7 +7,8 @@
         {{uiLabels.chooseAFavorite}}
       </div>
       <div id = "burger-wrapper">
-        <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class ="burgers">
           <h1 class = "header">{{item.name}}</h1>
           <img :src= "item.url" class = "image">
           <div class = "description">
@@ -21,6 +22,7 @@
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
+    </div>
       <div id="extras-title">
         {{uiLabels.extras}}
       </div>
@@ -199,10 +201,14 @@ export default {
   /* border-bottom: dotted;
   border-color: #ed6381; /*rosa */
 }
-.burgers{
+
+.background{
   width: 320px;
   height: 320px;
   border-radius: 160px;
+}
+
+.burgers{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
