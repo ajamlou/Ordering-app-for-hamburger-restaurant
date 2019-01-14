@@ -10,9 +10,6 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-/*import Tooltip from 'vue-directive-tooltip';
-import 'vue-directive-tooltip/css/index.css';
-Vue.use(Tooltip);*/
 Vue.use(BootstrapVue);
 
 
