@@ -34,7 +34,7 @@
               <img src="../assets/vegan.png">
             </div>
           </div>
-          <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
+          <p class = "price">{{uiLabels.price}}: {{item.price}} :-</p>
         </div>
       </div>
     </div>
@@ -198,14 +198,12 @@ export default {
   display:flex;
   flex-wrap: wrap;
   justify-content:space-around;
-  /* border-bottom: dotted;
-  border-color: #ed6381; /*rosa */
 }
 
 .background{
   width: 320px;
   height: 360px;
-  border-radius: 160px;
+  border-radius: 50px;
 }
 
 .burgers{
@@ -233,6 +231,7 @@ export default {
   grid-column: 1/4;
   grid-row:4;
   text-align: center;
+  font-size: 17px;
 }
 .allergens{
   grid-column: 1/4;
@@ -247,13 +246,6 @@ export default {
   height: 25px;
 }
 
-
-/* .ingredients{
-grid-column: 1/3;
-grid-row: 3;
-display:flex;
-flex-wrap: wrap;
-} */
 .price{
   grid-column: 2;
   grid-row:5;

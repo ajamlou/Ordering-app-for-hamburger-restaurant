@@ -7,10 +7,12 @@
   id="checkoutPage-title">
   {{uiLabels.checkout}}
 </div>
+
 <SlotModal
 id="orderFinishedModal"
 v-if="this.showSlotModal">
-<div id="slotTextFinished" slot="body" class="slotBody">{{slotContent}}</div>
+<div slot="header"></div>
+<div id="slotTextFinished" slot="body">{{slotContent}}</div>
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
 <div slot="footer">
@@ -265,8 +267,8 @@ export default{
   font-size: 25px;
 }
 
-.slotBody{
-  padding: 3em;
+#slotTextFinished{
+  /* padding: 3em; */
 }
 .noBorder{
   border: 0 !important;
@@ -274,12 +276,11 @@ export default{
 .btn-close{
   background-color: #c5e5be;
   border-radius: 10px;
-  width: 2em;
-  height: 2em;
+  width: 5em;
+  height: 2.5em;
   font-size: 2em;
   color: black;
-  margin-bottom: 1em;
-  margin-top: 1em;
+
 }
 button{
   color: black;
@@ -303,7 +304,7 @@ button{
   }
 }
 
-/* -------------------- CSS för mobiler -----------------*/
+/* -------------------- CSS för mindre skärmar -----------------*/
 
 @media screen and (max-width:740px){
   #checkoutPage-title{
@@ -322,7 +323,7 @@ button{
   .btn-close{
     background-color: #c5e5be;
     border-radius: 5px;
-    width: 2em;
+    width: 4em;
     height: 2em;
     font-size: 1.5em;
   }
@@ -337,5 +338,10 @@ button{
   #sumOfOrder{
     font-size: 25px;
   }
+}
+@media screen and (max-width:380px){
+#slotTextFinished{
+  font-size: 20px;
+}
 }
 </style>
