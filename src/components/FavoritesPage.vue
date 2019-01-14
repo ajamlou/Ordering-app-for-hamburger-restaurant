@@ -38,10 +38,11 @@
         @info_to_modal="toggleShowIngredientsModal">
       </CategoryRow>
     </div>
-
+    
+<!-- Är onödig, men vänta lite med att ta bort -->
     <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
     avbrytknappen som tryckts på. -->
-    <SlotModal
+    <!-- <SlotModal
     v-if="this.showSlotModal && this.pressedAbortModal">
     <div slot="header"></div>
     <div slot="body">{{uiLabels.areYouSure}}</div>
@@ -59,7 +60,7 @@
     {{uiLabels.abort}}
   </button>
 </div>
-</SlotModal>
+</SlotModal> -->
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
