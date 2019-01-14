@@ -56,7 +56,6 @@ import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
 export default {
   name: 'Ordering',
   components: {
-    //   OrderItem,
     OrderItemToPrepare,
     OrderItemIsCooking
   },
@@ -75,6 +74,8 @@ export default {
   },
 
   methods: {
+    // Metoder nedan avgör vad som ska hända när man klickar på olika knappar
+    // i beställningar:
     markCanceled: function (orderid) {
       this.$store.state.socket.emit("orderCanceled", orderid);
     },
@@ -91,13 +92,11 @@ export default {
   grid-template-columns: repeat(2,1fr);
   height:92vh;
 }
-
 .allOrders {
   overflow-y: auto;
   overflow-x: hidden;
   height:86%;
 }
-
 #header1, #header2 {
   display:grid;
   grid-template-columns: repeat(3,1fr);
@@ -114,7 +113,6 @@ export default {
 #header1 >h1, #header2 > h1{
   grid-column: 2/3;
 }
-
 #header1 {
   background: #DC143C;
   border-right: 2px solid white;
@@ -124,7 +122,6 @@ export default {
   border-left: 3px solid white;
   border-right: 3px solid white;
 }
-
 #orders, #preparing {
   font-size: 1em;
   border: 3px solid white;
@@ -132,7 +129,6 @@ export default {
   overflow:hidden;
   height:inherit;
 }
-
 #viewBtn{
   border: 2px solid white;
   color: white;
@@ -146,17 +142,16 @@ export default {
   width:5em;
   margin: auto;
 }
-
-#viewBtn:hover{background-color: #018765;}
-
+#viewBtn:hover{
+  background-color: #018765;
+}
 .icon{
   height:2em;
   justify-self:end;
   grid-column:3/4;
   padding-right:5px;
 }
-
-/*----- css för de svarta beställningsboxarna ----*/
+/*----- css för de svarta beställningsboxarna: ----*/
 .toPrepare, .isPreparing {
   border: 2px solid white;
   font-size: 0.85em;
@@ -170,5 +165,4 @@ export default {
   background-color: black;
   color: white;
 }
-/*-------------------------------------------------*/
 </style>

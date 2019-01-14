@@ -213,9 +213,9 @@ export default {
   padding: 15px;
   text-decoration: none;
   border-radius: 18px;
-  background-color: #00b386;
+  background-color: #dc143c;
 }
-#backButton:hover {background-color: #008060}
+#backButton:hover {background-color: #98102b}
 #backButton:active {border: 2px solid grey;}
 
 

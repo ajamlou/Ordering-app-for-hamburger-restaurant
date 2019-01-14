@@ -51,7 +51,7 @@ v-if="this.showSlotModal">
   <div id="sumOfOrder">
     {{uiLabels.sum}}: {{totalPrice}}:-
   </div>
-  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+  <button id="order-btn2" @click="isFinishedTimer();decideSlotContent();placeOrder();">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -140,7 +140,12 @@ export default{
       if(this.menusInOrder){
         this.$store.state.socket.emit('order', {menus: this.menus})
       }
-    }
+    },
+    // Om en inte trycker på "OK" efter att en order lagts kommer framsidan
+    // automatiskt fram efter 10s.
+    isFinishedTimer:function(){
+      setTimeout(this.orderFinished,10000);
+    },
   },
   computed:{
     menusInOrder:function(){
