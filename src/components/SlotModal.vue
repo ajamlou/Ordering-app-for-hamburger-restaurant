@@ -47,34 +47,20 @@ export default {
   .modal {
     text-align: center;
     display: grid;
-    /* grid-template-columns: repeat(5,1fr);*/
-    /* grid-template-rows: repeat(2,1fr); */
-    /* align-content: start; */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #FFFFFF;
-    /* box-shadow: 2px 2px 20px 1px;
-    overflow-x: hidden; */
     border-radius: 15px;
-    /* overflow: auto; */
-    /* max-width:80%; */
-    /* max-height:150%; */
-    /* padding: 5vh; */
   }
 
   .mod-bod{
     grid-column: auto;
     grid-row: auto;
-    /* height:100%; */
-    /* width:90%; */
     font-size: 4vh;
     margin: auto;
-    /* justify-content: space-between; */
-    /* flex-wrap: wrap; */
     overflow: auto;
-    /* overflow-x: hidden; */
     padding: 3vh;
   }
 
