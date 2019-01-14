@@ -44,10 +44,7 @@ id="yesBtn"
 
 <div id="btn-order-wrap">
   <button id="add-btn-div" @click="newBurger">
-    <div id="addButtonText">
-      <h5>{{uiLabels.addBurger}}</h5>
-    </div>
-    <!-- <p>+</p> -->
+      {{uiLabels.addBurger}}
   </button>
   <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
     <OrderInCheckout
@@ -246,12 +243,15 @@ export default{
 
 #add-btn-div{
   display: flex;
-  max-width: 184px;
+  max-width: 185.133px;
   background-color: #b9d7cb;;
   cursor: pointer;
   border-radius: 10px;
   color: black;
   margin: 3vh 1vh 0 0;
+  align-items: center;
+  justify-content:center;
+  font-size: 25px;
   /* border: 1px solid rgb(100,100,100); */
 }
 
@@ -260,12 +260,12 @@ export default{
   border-color: #000000;
 }
 
-#addButtonText{
+/* #addButtonText{
   text-align: center;
   padding: 1em 2em;
   vertical-align: middle;
   line-height: 90px;
-}
+} */
 
 #bottom-div{
   grid-row: 3/4;
@@ -336,7 +336,7 @@ export default{
 }
 
 #order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
-  border: 1px solid #7a7a7a;
+  /* border: 1px solid #7a7a7a; */
 }
 
 .slotBody{
