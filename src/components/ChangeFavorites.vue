@@ -19,12 +19,15 @@
             <br>
             <br>
             <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
-            <div v-for = "(item, index) in favBurgers" :key = "`item-${index}`">
-              <p>{{item.name}}:</p>
+            <div
+            v-for = "(item, index) in favBurgers"
+            :key = "`item-${index}`">
+            
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
+              <label>{{item.name}}</label>
             </div>
-            <p>Lägg till som en ny hamburgare:</p>
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
+            <label>Lägg till som en ny hamburgare</label>
             <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
           </div>
           <SlotModal
@@ -197,10 +200,7 @@
   }
   .addRow:hover{background-color: #103a89}
 
-  p{
+  p, label, h1{
     color:white;
-  }
-  h1{
-    color: white;
   }
   </style>
