@@ -22,26 +22,6 @@ v-if="this.showSlotModal">
 </button>
 </div>
 </Slotmodal>
-<!-- Är onödig, men vänta lite med att ta bort -->
-<!--
-<SlotModal
-v-if="this.showSlotModal && this.pressedAbortModal">
-<div slot="body">{{uiLabels.areYouSure}}</div>
-<div slot="footer">
-<button
-type="button"
-id="noBtn"
-@click="continueOrder();toggleSlotModal()">
-{{uiLabels.dontAbort}}
-</button>
-<button
-type="button"
-id="yesBtn"
-@click="emptyOrder()">
-{{uiLabels.abort}}
-</button>
-</div>
-</SlotModal> -->
 
 <div id="btn-order-wrap">
   <button id="add-btn-div" @click="newBurger">
@@ -95,7 +75,6 @@ export default{
     return{
       showSlotModal:false,
       slotContent:"",
-      pressedAbortModal:false,
     }
   },
   methods:{

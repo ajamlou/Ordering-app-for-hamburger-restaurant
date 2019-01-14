@@ -25,13 +25,13 @@
           </div>
           <div class = "allergens">
             <div id="gluten-exp" v-if = "!item.gluten_free">
-              <img src="../assets/gluten.png" class="icon">
+              <img src="../assets/gluten.png">
             </div>
             <div id="dairy-exp" v-if = "!item.lactose_free">
-              <img src="../assets/dairy.png" class="icon">
+              <img src="../assets/dairy.png">
             </div>
             <div id="vegan-exp" v-if = "!item.vegan">
-              <img src="../assets/vegan.png" class="icon">
+              <img src="../assets/vegan.png">
             </div>
           </div>
           <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
@@ -59,29 +59,6 @@
       </CategoryRow>
     </div>
 
-<!-- Är onödig, men vänta lite med att ta bort -->
-    <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
-    avbrytknappen som tryckts på. -->
-    <!-- <SlotModal
-    v-if="this.showSlotModal && this.pressedAbortModal">
-    <div slot="header"></div>
-    <div slot="body">{{uiLabels.areYouSure}}</div>
-    <div slot="footer" class="slotButtons">
-      <button
-      type="button"
-      id="noBtn"
-      @click="toggleSlotModal()">
-      {{uiLabels.dontAbort}}
-    </button>
-    <button
-    type="button"
-    id="yesBtn"
-    @click="emptyOrder()">
-    {{uiLabels.abort}}
-  </button>
-</div> -->
-<!-- </SlotModal> -->
-
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
@@ -103,7 +80,6 @@ export default {
     return{
       tooltip: 'Oh yeaaah',
       showSlotModal:false,
-      pressedAbortModal:false,
     }
   },
   props:{
@@ -201,10 +177,10 @@ export default {
 }
 #favorites-title{
   grid-column:1/7;
-  grid-row:1;
+  grid-row:2;
   align-self: center;
   font-family: 'Lobster', sans-serif;
-  font-size: 7vmin;
+  font-size: 10vmin;
   color: #ed6381; /*rosa*/
   text-shadow: 2px 2px #444444;
   border-bottom: dotted;
@@ -215,13 +191,13 @@ export default {
   grid-column: 4/7;
   display:flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-size: 1.2em;
 }
 #burger-wrapper{
   grid-column: 1/7;
-  grid-row:2;
+  grid-row:3;
   display:flex;
   flex-wrap: wrap;
   justify-content:center;
@@ -258,13 +234,22 @@ export default {
 }
 .description{
   grid-column: 1/4;
-  grid-row:3;
+  grid-row:4;
   text-align: center;
 }
 .allergens{
-  grid-column: 3/4;
-  grid-row: 1/3;
+  grid-column: 1/4;
+  grid-row: 3;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
+.allergens img{
+  width: 25px ;
+  height: 25px;
+}
+
 .ingredient-tooltip{
   grid-column: 3;
   grid-row: 3;
@@ -280,13 +265,13 @@ flex-wrap: wrap;
 } */
 .price{
   grid-column: 2;
-  grid-row:4;
+  grid-row:5;
   text-align:center;
 }
 
 #bottom-div{
   grid-column: 1/7;
-  grid-row: 5;
+  grid-row: 6;
   display:grid;
   justify-content: space-between;
 }
@@ -306,7 +291,7 @@ flex-wrap: wrap;
 
 #extras-title{
   grid-column: 1/7;
-  grid-row: 3;
+  grid-row: 4;
   font-size: 2em;
   /* border-top: dotted; */
   border-bottom: dotted;
@@ -317,7 +302,7 @@ flex-wrap: wrap;
 
 #category-wrapper{
   grid-column: 1/7;
-  grid-row:4;
+  grid-row:5;
 }
 
 #next-button{
@@ -362,6 +347,24 @@ button{
 
 h1{
   font-size: 1.5em;
+}
+
+
+@media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
+  #favorites-title{
+    grid-row: 1;
+    text-align: center;
+    font-size: 12vw;
+  }
+  #allergen-div{
+    grid-column:1/7;
+    grid-row:2;
+    font-size: 1em;
+  }
+  #allergen-div img{
+    width: 30px;
+    height: 30px
+  }
 }
 
 @media screen and (max-width:500px){
