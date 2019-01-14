@@ -23,7 +23,7 @@ v-if="this.showSlotModal">
 </div>
 </Slotmodal>
 <!-- Är onödig, men vänta lite med att ta bort -->
-<!-- 
+<!--
 <SlotModal
 v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="body">{{uiLabels.areYouSure}}</div>
@@ -120,11 +120,13 @@ export default{
     cancelBtnModal: function(){
       this.$emit('cancel_btn_modal')
     },
+
     //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
     //försvinner modalen
-    continueOrder:function(){
-      this.pressedAbortModal=false;
-    },
+    // continueOrder:function(){
+    //   this.pressedAbortModal=false;
+    // },
+
     //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
@@ -286,28 +288,7 @@ export default{
   border:1px solid #7a7a7a;
   font-size: 25px;
 }
-#yesBtn,#noBtn{
-  grid-column: auto;
-  grid-row: auto;
-  height: 10vh;
-}
-#yesBtn{
-  background-color: #e51e4a;
-}
-#yesBtn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
-}
-#noBtn{
-  background-color: #c5e5be;
-}
-#noBtn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
-#yesBtn,#noBtn{
-  font-size: 25px;
-}
+
 .slotBody{
   padding: 3em;
 }

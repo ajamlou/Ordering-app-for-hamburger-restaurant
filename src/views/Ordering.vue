@@ -415,23 +415,21 @@ export default {
               grid-template-columns: repeat(6, 1fr);
             }
             #yesBtn{
-              grid-column: 2/3;
               background-color: #e51e4a;
-              height: 10vh;
             }
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
             }
             #noBtn{
-              grid-column: 4/5;
               background-color: #c5e5be;
-              height: 10vh;
             }
             #noBtn:hover{
               background-color: #89a085;
             }
             #yesBtn,#noBtn{
               font-size: 25px;
+              height: 10vh;
+              width: 40vh;
             }
 
             #lang-btn{
@@ -577,16 +575,14 @@ export default {
                 #categories-wrapper{
                   grid-row:4;
                 }
-                /*#price-div{
-                grid-row:5;
-              } */
+
                 #ordering h2{
                   font-size: 5vw;
                 }
-            }
-            #ordering{
-              margin:10px auto auto auto;
-            }
+                #ordering{
+                  margin:10px auto auto auto;
+                }
+              }
 
             /* -------------------- CSS för mobiler -----------------*/
             @media screen and (max-width:740px){
@@ -595,5 +591,11 @@ export default {
                 height:50px;
                 padding:0;
               }
+              #yesBtn,#noBtn{
+                font-size: 18px;
+                height: 10vh;
+                width: 20vh;
+              }
+
             }
             </style>
