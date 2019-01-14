@@ -124,7 +124,7 @@ export default {
       this.$emit('addToCheckout');
     },
     changeView: function(data){
-      this.$emit('changeView',data);
+      this.$emit('change_view',data);
     },
     emptyOrder:function(){
       this.$emit('change_view','frontPage');
