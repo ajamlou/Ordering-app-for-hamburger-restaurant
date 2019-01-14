@@ -9,7 +9,7 @@
   </div>
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
   <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
-  <div id="r2-div"> <!--Div för row 2 i ordering grid -->
+  <div id="allergen-div"> <!--Div för row 2 i ordering grid -->
     <div id="gluten-exp">
       <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
     </div>
@@ -111,38 +111,13 @@ export default {
 
 
 <style scoped>
-/* Rubrik designPage */
-#designPage-title{
-  grid-column:1/7;
-  grid-row:1;
-  text-align: left;
-  align-self: center;
-  font-family: 'Lobster', sans-serif;
-  font-size: 14vmin;
-  /* font-family: 'Luckiest Guy', sans-serif; */
-  color: #ed6381; /*rosa*/
-  /* text-transform: uppercase; */
-  text-shadow: 2px 2px #444444;
-}
-
-#cancelOrder-btn{
-  width:120px;
-  height:80px;
-  background-color: #e51e4a;
-  border: 1px solid #7a7a7a;
-  grid-row:4;
-  grid-column: 1/2;
-}
-#cancelOrder-btn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
-}
-#bottom-div{
-  grid-column: 1/7;
+#ordering {
   display:grid;
-  justify-content: space-between;
+  grid-template-columns: repeat(6, 1fr);
+  margin: auto auto auto auto;
+  width: 90%;
+  grid-row-gap: 1vh;
 }
-
 #designPage-backdrop{
   background-color: rgba(255, 250, 224,0.99);
   border-radius:15px;
@@ -151,12 +126,15 @@ export default {
   margin-bottom:2em;
   padding-bottom:1em;
 }
-#ordering {
-  display:grid;
-  grid-template-columns: repeat(6, 1fr);
-  margin: auto auto auto auto;
-  width: 90%;
-  grid-row-gap: 1vh;
+#designPage-title{
+  grid-column:1/7;
+  grid-row:1;
+  text-align: left;
+  align-self: center;
+  font-family: 'Lobster', sans-serif;
+  font-size: 14vmin;
+  color: #ed6381; /*rosa*/
+  text-shadow: 2px 2px #444444;
 }
 #ordering h2{
   font-weight: bolder;
@@ -169,13 +147,12 @@ export default {
 #extras, #extras-favorites{
   margin-top:2em;
 }
-
 #bestallning{
   grid-column: 1/7;
   grid-row: 2;
   text-align: left;
 }
-#r2-div{
+#allergen-div{
   grid-row:1;
   grid-column: 4/7;
   display:grid;
@@ -187,37 +164,10 @@ export default {
   height:3em;
   padding:0 3px 3px 0;
 }
-
 #categories-wrapper{
   grid-column: 1/7;
   grid-row:3;
 }
-#next-btn:active{border: 2px solid #595959;}
-
-#price-div{
-  justify-self: center;
-  margin:auto;
-  text-align:center;
-  font-size: 2em;
-  grid-column:5/6;
-  grid-row:4;
-}
-
-#next-btn{
-  width:120px;
-  height:80px;
-  justify-self:end;
-  border:1px solid #7a7a7a;
-  grid-column: 6/7;
-  grid-row:4;
-  background-color: #c5e5be;
-
-}
-#next-btn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
-
 .ingredient{
   border: 1px solid #ccd;
   background-color: rgba(255, 255, 255, 0.5);
@@ -226,7 +176,6 @@ export default {
   text-align: center;
   margin:auto auto 7px auto;
 }
-
 .ingredient-wrapper{ /*Denna styr horisontell scroll*/
   display: flex;
   flex-wrap: nowrap;
@@ -234,25 +183,22 @@ export default {
   overflow-y:hidden;
   border-radius: 15px;
 }
-
-button{
-  color: black;
-  /* #444444; */
-  text-transform: uppercase;
-  border: none;
-  /* padding: 10px 20px; */
-  text-align: center;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 16px;
-  /* font-weight: bold; */
-  font-size: 25px;
-  
-
+#bottom-div{
+  grid-column: 1/7;
+  display:grid;
+  justify-content: space-between;
 }
-button:hover{
-  background-color: #000;
+#cancelOrder-btn{
+  width:120px;
+  height:80px;
+  background-color: #e51e4a;
+  /* border: 1px solid #7a7a7a; */
+  grid-row:4;
+  grid-column: 1/2;
+}
+#cancelOrder-btn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
 }
 #price-div{
   display:inline-block;
@@ -263,6 +209,32 @@ button:hover{
   grid-column:2/6;
   grid-row:4;
 }
+#next-btn{
+  width:120px;
+  height:80px;
+  justify-self:end;
+  grid-column: 6/7;
+  grid-row:4;
+  background-color: #c5e5be;
+}
+#next-btn:hover{
+  background-color: #89a085;
+  border-color: #000000;
+}
+
+button{
+  display: inline-block;
+  margin: 4px 2px;
+  text-transform: uppercase;
+  font-size: 25px;
+  text-align: center;
+  color: black;
+  border-color: black;
+  border-radius: 16px;
+  border-width: thin;
+  cursor: pointer;
+}
+
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
   #designPage-title{
@@ -275,7 +247,7 @@ button:hover{
     grid-row:3;
     text-align:center;
   }
-  #r2-div{
+  #allergen-div{
     grid-column:1/7;
     grid-row:2;
     text-align:center;
@@ -287,15 +259,12 @@ button:hover{
   #categories-wrapper{
     grid-row:4;
   }
-  /*#price-div{
-  grid-row:5;
-  } */
   #ordering h2{
     font-size: 5vw;
   }
-}
-#ordering{
-  margin:10px auto auto auto;
+  #ordering{
+    margin:10px auto auto auto;
+  }
 }
 
 /* -------------------- CSS för mobiler -----------------*/
@@ -311,16 +280,15 @@ button:hover{
     font-size:6.3vw;
   }
 }
+
 @media screen and (max-width:500px){
-#cancelOrder-btn,#next-btn{
-  font-size: 18px;
-  width: 80px;
-  height: 60px;
+  #cancelOrder-btn,#next-btn{
+    font-size: 18px;
+    width: 80px;
+    height: 60px;
+  }
+  #price-div{
+    font-size: 25px;
+  }
 }
-#price-div{
-  font-size: 25px;
-}
-}
-
-
 </style>

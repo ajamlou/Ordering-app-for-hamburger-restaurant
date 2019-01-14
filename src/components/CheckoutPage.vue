@@ -43,12 +43,10 @@ id="yesBtn"
 </SlotModal>
 
 <div id="btn-order-wrap">
-  <div id="add-btn-div" @click="newBurger">
-    <div id="addButtonText">
-      <h5>{{uiLabels.addBurger}}</h5>
-    </div>
-    <!-- <p>+</p> -->
-  </div>
+  <button id="add-btn-div" @click="newBurger">
+      {{uiLabels.addBurger}}
+  </button>
+
   <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
     <OrderInCheckout
     class="flex-item"
@@ -198,7 +196,6 @@ export default{
   height: 100;
   margin: auto;
 }
-
 #checkoutPage-backdrop{
   background-color: rgba(255, 250, 224,0.99);
   border-radius: 5vh;
@@ -206,10 +203,7 @@ export default{
   justify-self: center;
   margin-bottom:2em;
   padding-bottom:1em;
-  /* margin-bottom: 2em; */
-  /* padding-bottom: 3em; */
 }
-
 #checkoutPage-title{
   grid-column: 1/9;
   grid-row: 1;
@@ -222,14 +216,6 @@ export default{
   border-bottom: dotted;
   border-color: #ed6381;
 }
-
-#btn-order-wrap{
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  grid-column: 1/9;
-}
-
 #checkout-wrapper{
   text-transform: capitalize;
   grid-column: 1/9;
@@ -240,35 +226,28 @@ export default{
   overflow-x: auto;
   background-color: #006622;
   border-radius: 10px;
-  border: 1px solid #7a7a7a;
   margin-top: 3vh;
 }
-
-#add-btn-div{
+#btn-order-wrap{
+  position: relative;
   display: flex;
-  text-align: center;
-  max-width: 20vh;
-  background-color: #b9d7cb;;
+  flex-wrap: nowrap;
+  grid-column: 1/9;
+}
+#add-btn-div{
+  /* display: flex; */
+  max-width: 185.3px;
+  background-color: #b9d7cb;
   cursor: pointer;
   border-radius: 10px;
-  color: white;
+  color: black;
   margin: 3vh 1vh 0 0;
+  font-size: 25px;
 }
-
 #add-btn-div:hover{
   background-color: #6f8179;
   border-color: #000000;
 }
-
-/* #add-btn-div>p{
-margin: auto;
-font-size: 2em;
-} */
-
-#addButtonText{
-  padding: 1em 2em;
-}
-
 #bottom-div{
   grid-row: 3/4;
   grid-column: 1/9;
@@ -276,97 +255,79 @@ font-size: 2em;
   grid-template-columns: repeat(8,1fr);
   justify-content: space-between;
 }
-
-#sumOfOrder{
-  justify-self: center;
-  margin:auto;
-  text-align:center;
-  font-size: 2em;
-  grid-column: 1/9;
-  grid-row: 1;
-}
-
-#order-btn2{
-  grid-column: 8/9;
-  grid-row: 1;
-  background-color: #c5e5be;
-}
-
-#order-btn2:hover{
-  background-color: #89a085;
-}
-
 #cancelOrder-btn{
   grid-column: 1/2;
   grid-row: 1;
   background-color: #e51e4a;
 }
-
 #cancelOrder-btn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
   border-color: #000000;
 }
-
+#sumOfOrder{
+  justify-self: center;
+  margin:auto;
+  text-align:center;
+  font-size: 2em;
+  grid-column: 3/7;
+  grid-row: 1;
+}
+#order-btn2{
+  grid-column: 8/9;
+  grid-row: 1;
+  background-color: #c5e5be;
+}
+#order-btn2:hover{
+  background-color: #89a085;
+}
 #order-btn2, #cancelOrder-btn{
   width:120px;
   height:80px;
   border:1px solid #7a7a7a;
   font-size: 25px;
 }
-
 #yesBtn,#noBtn{
   grid-column: auto;
   grid-row: auto;
   height: 10vh;
 }
-
+#yesBtn{
+  background-color: #e51e4a;
+}
 #yesBtn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
   border-color: #000000;
 }
-
 #noBtn{
   background-color: #c5e5be;
 }
-#yesBtn{
-  background-color: #e51e4a;
-}
-
 #noBtn:hover{
   background-color: #89a085;
   border-color: #000000;
 }
-
-#order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
-  border: 1px solid #7a7a7a;
-}
-
 .slotBody{
   padding: 3em;
 }
 .noBorder{
   border: 0 !important;
 }
-
 .btn-close{
-  background-color: #33cc33;
+  background-color: #c5e5be;
   border-radius: 10px;
   width: 2em;
   height: 2em;
   font-size: 2em;
-  color: white;
+  color: black;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
-
-.btn-close:active{background-color: #1f7a1f}
-
 button{
   color: black;
   font-size: 16px;
-  /* padding: 10% 15%; */
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
-  /* margin: 4px 2px; */
+  border-width: thin;
+  border-color: black;
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
@@ -374,19 +335,10 @@ button{
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
 @media screen and (max-width:1206px){
-  #checkout-div{
-  }
   #designPage-title{
     grid-row: 1;
     text-align: center;
     font-size: 12vw;
-  }
-
-  #sumOfOrder{
-  }
-  #order-btn2{
-    /* grid-column: 8;
-    grid-row: 4/5; */
   }
 }
 
@@ -403,15 +355,16 @@ button{
   #sumOfOrder{
     font-size: 2em;
   }
-  #checkout-wrapper{
-    /* Här vill jag få in att de ska vara mindre  */
-    /* burgarrutor när det är mobilsize, typ kvadrater. */
-  }
-
-  #add-btn-div{
-    /* Här vill jag få in att de vara samma size som burgarrutorna.*/
-  }
 }
 
-
+@media screen and (max-width:500px){
+  #order-btn2,#cancelOrder-btn{
+    font-size: 18px;
+    width: 80px;
+    height: 60px;
+  }
+  #sumOfOrder{
+    font-size: 25px;
+  }
+}
 </style>

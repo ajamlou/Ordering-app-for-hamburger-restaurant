@@ -44,24 +44,48 @@ Data.prototype.getFavBurgers = function () {
         ingredient7: favorites[j].ingredient7
       };
       var chosenIngredients = ingredients.filter(function(ingredient){
-        for (var key in filter) {
+        for (let key in filter) {
           if (ingredient.ingredient_id === filter[key])
           return true;
         }
         return false;
       }
     );
-    for(var i = 0;i<chosenIngredients.length;i++){
+    for(let i = 0;i<chosenIngredients.length;i++){
       price = price + chosenIngredients[i].selling_price;
     }
+    let allergy = [];
+    for(let i = 0;i<chosenIngredients.length;i++){
+      if(chosenIngredients[i].milk_free === 1 && chosenIngredients[i].gluten_free === 1 && chosenIngredients[i].vegan === 1){
+        allergy.push(true);
+      }
+      else{
+        allergy.push(false);
+      }
+      if(chosenIngredients[i].gluten_free === 1){
+        allergy.push(true);
+      }
+      else{
+        allergy.push(false);
+      }
+      if(chosenIngredients[i].vegan === 1){
+        allergy.push(true);
+      }
+      else{
+        allergy.push(false);
+      }
+    }
+    console.log(allergy);
+
     let burger = {
       name: favorites[j].burger_name,
       url: favorites[j].url,
       ingredients: chosenIngredients,
       price: price,
       selected: false,
-      description: favorites[j].description
-    };
+      description: favorites[j].description,
+      allergy: allergy
+    }
     chosenBurgers.push(burger);
   }
   this.currentFavorites = chosenBurgers;
