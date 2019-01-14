@@ -47,7 +47,7 @@
   "OKlabel": "OK",
   "checkout" : "Checkout",
   "anotherBurger": "MaxDonald's",
-  "areYouSure": "Do you want to cancel your order?",
+  "areYouSure": "Cancel order?",
   "abort": "Cancel order",
   "dontAbort": "Continue with order"
 }
