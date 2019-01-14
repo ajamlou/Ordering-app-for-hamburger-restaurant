@@ -89,7 +89,7 @@ v-show="this.showIngredientsModal"
   <SlotModal
   v-if="this.showSlotModal && this.noIngredientModal">
   <div slot="header"></div>
-  <div slot="body">{{uiLabels.noIngredients}}</div>
+  <div id="slotTextNoIngredients" slot="body">{{uiLabels.noIngredients}}</div>
   <div slot="footer"><button
     type="button"
     class="btn-close"
@@ -118,8 +118,6 @@ id="yesBtn"
 </div>
 </SlotModal>
 </div>
-
-
 
 </div>
 </template>
@@ -350,7 +348,10 @@ export default {
                   this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = this.chosenIngredients.filter(ingredient => ingredient.category > 4);
                   console.log(this.chosenIngredients)
-                  this.price = 0;
+                  this.price = this.chosenIngredients.reduce((sum,ingredient)=>{
+                    sum+=ingredient.selling_price;
+                  return sum
+                },0);
                 },
                 /*Nollställer alla variabler som har med att skapa burgare att göra*/
                 resetBurger:function(){
@@ -577,6 +578,16 @@ export default {
           font-size: 18px;
           height: 10vh;
           width: 20vh;
+        }
+        #slotTextNoIngredients{
+          font-size: 24px;
+        }
+        .btn-close{
+          background-color: #c5e5be;
+          border-radius: 5px;
+          width: 2em;
+          height: 2em;
+          font-size: 1.5em;
         }
       }
       </style>
