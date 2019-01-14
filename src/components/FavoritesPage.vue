@@ -147,7 +147,10 @@ export default {
         this.showSlotModal=false;
       }
     },
-  }
+  },
+  mounted(){
+    this.bus$on('submit', this.unselect())
+  },
 }
 </script>
 <style scoped>
