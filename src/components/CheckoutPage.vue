@@ -51,7 +51,7 @@ v-if="this.showSlotModal">
   <div id="sumOfOrder">
     {{uiLabels.sum}}: {{totalPrice}}:-
   </div>
-  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+  <button id="order-btn2" @click="isFinishedTimer();decideSlotContent();placeOrder();">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -102,7 +102,10 @@ export default{
     cancelBtnModal: function(){
       this.$emit('cancel_btn_modal')
     },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8361c372e090390103ba5784b922699f8278fdcf
     //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
@@ -140,7 +143,10 @@ export default{
       if(this.menusInOrder){
         this.$store.state.socket.emit('order', {menus: this.menus})
       }
-    }
+    },
+    isFinishedTimer:function(){
+      setTimeout(this.orderFinished,10000);
+    },
   },
   computed:{
     menusInOrder:function(){
