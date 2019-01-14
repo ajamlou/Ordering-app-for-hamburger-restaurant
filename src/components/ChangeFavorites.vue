@@ -277,18 +277,18 @@ export default {
   border-radius:50%;
 }
 .radio:checked{
-  border:20px solid #4099ff;
+  border:20px solid #17a2b8;
 }
 
 .addRow{
   margin-top: 1vh;
-  background-color: #1b61e4;
+  background-color: #17a2b8;
   color: white;
   border-radius: 7px;
   border: 1px solid white;
   height: 7vh;
 }
-.addRow:hover{background-color: #103a89}
+.addRow:hover{background-color: #138496}
 
 .existingBurger{
   display:grid;
