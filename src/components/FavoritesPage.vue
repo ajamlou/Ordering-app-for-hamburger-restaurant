@@ -4,6 +4,17 @@
       <div id="favorites-title">
         {{uiLabels.chooseAFavorite}}
       </div>
+      <div id="allergen-div"> <!--Div för row 2 i ordering grid -->
+        <div id="gluten">
+          <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
+        </div>
+        <div id="dairy">
+          <img src="../assets/dairy.png" class="icon"><span>{{uiLabels.dairy}}</span>
+        </div>
+        <div id="vegan">
+          <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
+        </div>
+      </div>
       <div id = "burger-wrapper">
         <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
         <div class ="burgers">
@@ -12,7 +23,16 @@
           <div class = "description">
             {{item.description}}
           </div>
-          <div class = "allergy">
+          <div class = "allergens">
+            <div id="gluten-exp" v-if = "!item.gluten_free">
+              <img src="../assets/gluten.png" class="icon">
+            </div>
+            <div id="dairy-exp" v-if = "!item.lactose_free">
+              <img src="../assets/dairy.png" class="icon">
+            </div>
+            <div id="vegan-exp" v-if = "!item.vegan">
+              <img src="../assets/vegan.png" class="icon">
+            </div>
           </div>
           <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
             [ i ]
@@ -182,14 +202,22 @@ export default {
 #favorites-title{
   grid-column:1/7;
   grid-row:1;
-  text-align: center;
   align-self: center;
   font-family: 'Lobster', sans-serif;
-  font-size: 10vmin;
+  font-size: 7vmin;
   color: #ed6381; /*rosa*/
   text-shadow: 2px 2px #444444;
   border-bottom: dotted;
   border-color: #ed6381;
+}
+#allergen-div{
+  grid-row:1;
+  grid-column: 4/7;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
 }
 #burger-wrapper{
   grid-column: 1/7;
@@ -203,7 +231,7 @@ export default {
 
 .background{
   width: 320px;
-  height: 320px;
+  height: 360px;
   border-radius: 160px;
 }
 
@@ -224,14 +252,18 @@ export default {
   grid-column: 2;
   grid-row: 2;
 }
+.icon{
+  width: 50px ;
+  height: 50px;
+}
 .description{
   grid-column: 1/4;
   grid-row:3;
   text-align: center;
 }
-.allergy{
+.allergens{
   grid-column: 3/4;
-  grid-row: 1/2;
+  grid-row: 1/3;
 }
 .ingredient-tooltip{
   grid-column: 3;
@@ -278,6 +310,7 @@ flex-wrap: wrap;
   font-size: 2em;
   /* border-top: dotted; */
   border-bottom: dotted;
+  border-top: dotted;
   border-color: #ed6381; /*rosa*/
   text-transform: uppercase;
 }
@@ -340,5 +373,10 @@ h1{
   #price-div{
     font-size: 25px;
   }
+  .burgers{
+    border-bottom: dotted;
+    border-color: #ed6381; /*rosa*/
+  }
+
 }
 </style>
