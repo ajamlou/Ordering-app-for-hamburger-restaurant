@@ -42,61 +42,61 @@
               v-for="(tab, index) in tabs"
               :key="index">
 
-                <b-card-header
-                header-tag="header"
-                class="p-1"
-                role="tab">
+              <b-card-header
+              header-tag="header"
+              class="p-1"
+              role="tab">
 
-                  <b-btn
-                  block
-                  href="#"
-                  v-b-toggle="'accordion'+index"
-                  variant="info">{{tab.label}}</b-btn>
+              <b-btn
+              block
+              href="#"
+              v-b-toggle="'accordion'+index"
+              variant="info">{{tab.label}}</b-btn>
 
-                </b-card-header>
+            </b-card-header>
 
-                <b-collapse
-                :id="'accordion'+index"
-                visible
-                accordion="my-accordion"
-                role="tabpanel">
+            <b-collapse
+            :id="'accordion'+index"
+            visible
+            accordion="my-accordion"
+            role="tabpanel">
 
-                  <b-card-body>
-                    <div class="ing-container">
-                      <p>ID:</p>
-                      <p>Namn (sv):</p>
-                      <p>Namn (en):</p>
-                      <p>Lager:</p>
-                    </div>
-                    <div
-                    v-for="ingredient in ingredients"
-                    :key="ingredient.ingredient_id">
-                    <div
-                    v-if="ingredient.category===tab.category"
-                    class="ing-container">
-                    <div>
-                      {{ingredient.ingredient_id}}
-                    </div>
-                    <div>
-                      {{ingredient.ingredient_sv}}
-                    </div>
-                    <div>
-                      {{ingredient.ingredient_en}}
-                    </div>
-                    <div>
-                      {{ingredient.stock}}
-                    </div>
-                  </div>
-                </div>
-              </b-card-body>
-            </b-collapse>
-          </b-card>
-        </div>
+            <b-card-body>
+              <div class="ing-container">
+                <p>ID:</p>
+                <p>Namn (sv):</p>
+                <p>Namn (en):</p>
+                <p>Lager:</p>
+              </div>
+              <div
+              v-for="ingredient in ingredients"
+              :key="ingredient.ingredient_id">
+              <div
+              v-if="ingredient.category===tab.category"
+              class="ing-container">
+              <div>
+                {{ingredient.ingredient_id}}
+              </div>
+              <div>
+                {{ingredient.ingredient_sv}}
+              </div>
+              <div>
+                {{ingredient.ingredient_en}}
+              </div>
+              <div>
+                {{ingredient.stock}}
+              </div>
+            </div>
+          </div>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+  </div>
 
-<SlotModal
-v-if="this.showSlotModal">
-<div slot="body"><h3>Fel inparametrar, testa igen!</h3></div>
-<div slot="footer"><button id="goBack" @click = 'favError'>Gå tillbaka</button></div>
+  <SlotModal
+  v-if="this.showSlotModal">
+  <div slot="body"><h3>Fel inparametrar, testa igen!</h3></div>
+  <div slot="footer"><button id="goBack" @click = 'favError'>Gå tillbaka</button></div>
 </SlotModal>
 </div>
 </div>
@@ -121,13 +121,13 @@ export default {
       showSlotModal: false,
       tabs:[
         {'label':'Bröd',
-      'category':4},
-      {'label':'Protein',
-    'category':1},
-    {'label':'Pålägg',
-  'category':2},
-  {'label':'Sås',
-'category':3},
+        'category':4},
+        {'label':'Protein',
+        'category':1},
+        {'label':'Pålägg',
+        'category':2},
+        {'label':'Sås',
+        'category':3},
       ]
     }
   },
@@ -161,37 +161,11 @@ export default {
         /*Nedanstående if-sats kollar om längden på urlen är 0
         eller om urlen är 0 efter att vi trimmat den (dvs kollar om urlen
         bara är massa mellanslag)*/
-          if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
-            this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
-          }
-          if(this.rows.discount === undefined){
-            this.rows.discount = 0;
-          }
-          let burger = {
-            "name": this.capitalize(this.rows.name),
-            "url": this.rows.url,
-            "ingredients": favoriteIngredients,
-            "price": Math.floor(favoritePrice*(1-(this.rows.discount/100))),
-            "index": this.rows.checked,
-            "selected": false,
-            "description": this.rows.description
-          }
-          this.$store.state.socket.emit('updateinfo', burger);
-          this.rows = [];
+        if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
+          this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
         }
-      },
-      favError: function(){ //funktion som visar eller döljer felmodalen
-        this.showSlotModal = !this.showSlotModal;
-      },
-      /*Gör första bokstaven i namnet på burgaren till stor bokstav*/
-      capitalize:function(string){
-        let firstLetter = string.charAt(0).toUpperCase();
-        let restOfString = string.slice(1);
-        return firstLetter + restOfString;
-      },
-      checkIfChecked: function(){ //kollar att någon radiobutton är checked, kallar på felhanteraren annars
-        if(this.rows.checked != null){
-          return true;
+        if(this.rows.discount === undefined){
+          this.rows.discount = 0;
         }
         let burger = {
           "name": this.capitalize(this.rows.name),
@@ -228,6 +202,7 @@ export default {
       this.rows.splice(index,1);
     }
   }
+}
 </script>
 
 <style scoped>
@@ -302,18 +277,18 @@ export default {
   border-radius:50%;
 }
 .radio:checked{
-  border:20px solid #4099ff;
+  border:20px solid #17a2b8;
 }
 
 .addRow{
   margin-top: 1vh;
-  background-color: #1b61e4;
+  background-color: #17a2b8;
   color: white;
   border-radius: 7px;
   border: 1px solid white;
   height: 7vh;
 }
-.addRow:hover{background-color: #103a89}
+.addRow:hover{background-color: #138496}
 
 .existingBurger{
   display:grid;

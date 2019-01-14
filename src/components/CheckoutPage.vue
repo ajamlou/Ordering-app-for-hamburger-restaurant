@@ -22,7 +22,8 @@ v-if="this.showSlotModal">
   </button>
 </div>
 </Slotmodal>
-
+<!-- Är onödig, men vänta lite med att ta bort -->
+<!--
 <SlotModal
 v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="body">{{uiLabels.areYouSure}}</div>
@@ -40,7 +41,7 @@ id="yesBtn"
 {{uiLabels.abort}}
 </button>
 </div>
-</SlotModal>
+</SlotModal> -->
 
 <div id="btn-order-wrap">
   <button id="add-btn-div" @click="newBurger">
@@ -117,14 +118,15 @@ export default{
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
-      this.toggleSlotModal();
-      this.pressedAbortModal=true;
+      this.$emit('cancel_btn_modal')
     },
+
     //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
     //försvinner modalen
-    continueOrder:function(){
-      this.pressedAbortModal=false;
-    },
+    // continueOrder:function(){
+    //   this.pressedAbortModal=false;
+    // },
+
     //Togglar en tom modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
@@ -286,25 +288,7 @@ export default{
   border:1px solid #7a7a7a;
   font-size: 25px;
 }
-#yesBtn,#noBtn{
-  grid-column: auto;
-  grid-row: auto;
-  height: 10vh;
-}
-#yesBtn{
-  background-color: #e51e4a;
-}
-#yesBtn:hover{
-  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
-}
-#noBtn{
-  background-color: #c5e5be;
-}
-#noBtn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
+
 .slotBody{
   padding: 3em;
 }
@@ -331,6 +315,7 @@ button{
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
+  margin: 4px 2px;
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
