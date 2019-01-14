@@ -89,13 +89,13 @@ export default {
   cursor: pointer;
 }
 #grillButton{
-  color: #e52c1a;
-  border:10px double #e52c1a;
+  color: #ff9999;
+  border:10px double #ff4d4d;
   grid-row:2;
 }
 #preppButton {
-  color:#237aae;
-  border:10px double #237aae;
+  color:#80bfff;
+  border:10px double #3399ff;
   grid-row:3;
 }
 

@@ -36,19 +36,43 @@
         @info_to_modal="toggleShowIngredientsModal">
       </CategoryRow>
     </div>
-    <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
-  </div>
+
+  <SlotModal
+    v-if="this.showSlotModal && this.pressedAbortModal">
+    <div slot="header"></div>
+    <div slot="body">{{uiLabels.areYouSure}}</div>
+    <div slot="footer" class="slotButtons">
+      <button
+      type="button"
+      id="noBtn"
+      @click="toggleSlotModal()">
+      {{uiLabels.dontAbort}}
+    </button>
+    <button
+    type="button"
+    id="yesBtn"
+    @click="emptyOrder()">
+    {{uiLabels.abort}}
+    </button>
+    </div>
+  </SlotModal>
+  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+  <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+</div>
 </div>
 </template>
 
 <script>
 import CategoryRow from '@/components/CategoryRow.vue'
+import SlotModal from '@/components/SlotModal.vue'
 
 export default {
   name: 'FavortiesPage',
   data: function(){
     return{
-      tooltip: 'Oh yeaaah'
+      tooltip: 'Oh yeaaah',
+      showSlotModal:false,
+      pressedAbortModal:false,
     }
   },
   props:{
@@ -62,15 +86,12 @@ export default {
 
   },
   components:{
-    CategoryRow
+    CategoryRow,
+    SlotModal
   },
-  created:{
-    mountTooltipData: function(){
-      this.tooltip = '';
-      // for(var i = 0; i<this.favBurgers.length;i++){
-      //   this.tooltip = this.tooltip + this.favBurgers[i].ingredients
-      // }
-    }
+  beforeMount: function(){
+
+
   },
   methods:{
     // skickar favoritburgaren som väljs till ordering och lägger in den där
@@ -98,8 +119,25 @@ export default {
       this.$emit('addToCheckout');
     },
     changeView: function(data){
-      this.$emit('changeView',data);
-    }
+      this.$emit('change_view',data);
+    },
+    emptyOrder:function(){
+      this.$emit('change_view','frontPage');
+      this.$emit('clear_all');
+      this.$emit('remove_backButton');
+    },
+    cancelBtnModal: function(){
+      this.toggleSlotModal();
+      this.pressedAbortModal=true;
+    },
+    toggleSlotModal:function(){
+      if(!this.showSlotModal){
+        this.showSlotModal=true;
+      }
+      else{
+        this.showSlotModal=false;
+      }
+    },
   }
 }
 </script>
@@ -180,10 +218,10 @@ export default {
 
 
 /* .ingredients{
-  grid-column: 1/3;
-  grid-row: 3;
-  display:flex;
-  flex-wrap: wrap;
+grid-column: 1/3;
+grid-row: 3;
+display:flex;
+flex-wrap: wrap;
 } */
 
 .price{
@@ -221,6 +259,42 @@ export default {
   border: 2px solid #595959;
 }
 #next-button:hover{
+  background-color: #89a085;
+  border-color: #000000;
+}
+
+#cancelOrder-btn{
+  grid-column: 1/2;
+  grid-row: 5;
+  width:120px;
+  height:80px;
+  background-color: #e51e4a;
+  border: 1px solid #7a7a7a;
+}
+
+#cancelOrder-btn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+
+#yesBtn{
+  background-color: #e51e4a;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+#yesBtn:hover{
+  background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
+  border-color: #000000;
+}
+
+#noBtn{
+  background-color: #c5e5be;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+#noBtn:hover{
   background-color: #89a085;
   border-color: #000000;
 }
