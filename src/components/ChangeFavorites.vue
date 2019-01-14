@@ -161,24 +161,17 @@ export default {
       let favoritePrice = 0;
       try{
         for (var i = 0; i< this.rows.length; i++){
-          favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_sv.toUpperCase() === this.rows[i].value.toUpperCase())); /*lägger favoritingredienser i en array*/
-          favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_sv.toUpperCase() === this.rows[i].value.toUpperCase())).selling_price; /*räknar ut priset för de ingredienserna*/
-          if(favoriteIngredients.length === 0 && favoritePrice === 0){
-            favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_en.toUpperCase() === this.rows[i].value.toUpperCase())); /*Kollar om de skrivit in på engelska*/
-            favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_en.toUpperCase() === this.rows[i].value.toUpperCase())).selling_price;
-          }
+          let ingredient = this.findIngredient(i);
+          favoriteIngredients.push(ingredient); /*lägger favoritingredienser i en array*/
+          favoritePrice += ingredient.selling_price; /*räknar ut priset för de ingredienserna*/
         }
       }
       catch(err){
         this.favError(); //Kallar på funktionen som hanterar felet
       }
       if(this.checkIfChecked() && !this.showSlotModal){
-        /*Nedanstående if-sats kollar om längden på urlen är 0
-        eller om urlen är 0 efter att vi trimmat den (dvs kollar om urlen
-        bara är massa mellanslag)*/
-        if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
-          this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
-        }
+
+        this.URLValidation()
 
         let allergies = this.checkAllergies(favoriteIngredients);
 
@@ -199,6 +192,19 @@ export default {
         this.rows = [];
       }
     },
+    /*Tittar i rows och ser om den angivna ingrediensen finns, både
+    på id, sv och en*/
+    findIngredient:function(index){
+      let ingredient = this.ingredients.find(ingredient=>ingredient.ingredient_sv.toUpperCase() === this.rows[index].value.toUpperCase());
+      if(ingredient == undefined){
+        ingredient = this.ingredients.find(ingredient=>ingredient.ingredient_en.toUpperCase() === this.rows[index].value.toUpperCase());
+        if(ingredient == undefined){
+          ingredient = this.ingredients.find(ingredient=>ingredient.ingredient_id == this.rows[index].value);
+        }
+    }
+    return ingredient;
+  },
+    /*Tar en array av ingredienser och ser vilka allergener den innehåller*/
     checkAllergies:function(ingredients){
       let allergies = {
         'gluten_free': true,
@@ -217,6 +223,13 @@ export default {
         }
       }
       return allergies;
+    },
+    /*Kollar om längden på urlen är 0 efter att vi
+    trimmat den (dvs kollar om urlen bara är massa mellanslag)*/
+    URLValidation:function(){
+      if (this.rows.url === undefined||this.rows.url.trim().length === 0){
+        this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
+      }
     },
     favError: function(){ //funktion som visar eller döljer felmodalen
       this.showSlotModal = !this.showSlotModal;
