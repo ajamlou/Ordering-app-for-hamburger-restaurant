@@ -62,7 +62,7 @@
                 <label>Lägg till som en ny hamburgare</label>
               </div>
             </div>
-              <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
+              <button class = 'confirm' @click = "updateInfo">BEKRÄFTA</button>
             </div>
           </div>
 
@@ -296,6 +296,7 @@ export default {
 #radio-done{
   display:grid;
   grid-template-columns: 2fr 1fr;
+  margin-bottom:25px;
 }
 
 #fullaccordion{
@@ -389,6 +390,10 @@ input[type="text"],textarea{
 
 p, label, h1,h2,h3,h4,h5,h6{
   color:white;
+}
+
+h2{
+  margin-top: 0.5em;
 }
 
 .ing-container{
