@@ -350,7 +350,10 @@ export default {
                   this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = this.chosenIngredients.filter(ingredient => ingredient.category > 4);
                   console.log(this.chosenIngredients)
-                  this.price = 0;
+                  this.price = this.chosenIngredients.reduce((sum,ingredient)=>{
+                    sum+=ingredient.selling_price;
+                  return sum
+                },0);
                 },
                 /*Nollställer alla variabler som har med att skapa burgare att göra*/
                 resetBurger:function(){
