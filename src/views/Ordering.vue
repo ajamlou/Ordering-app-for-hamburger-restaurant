@@ -42,8 +42,6 @@
 <FavoritesPage
 class = "viewContent"
 v-if = "currentView === 'favoritesPage'"
-@clearburger = "resetBurger"
-@fav-ingredient = "addToMenu"
 :ingredients="ingredients"
 :lang = "lang"
 :uiLabels = "uiLabels"
@@ -54,7 +52,9 @@ v-if = "currentView === 'favoritesPage'"
 @remove_ingredient="removeFromMenu"
 @info_to_modal="toggleShowIngredientsModal"
 @addToCheckout = "addToCheckout"
-@changeView = "changeView">
+@changeView = "changeView"
+@clearburger = "resetFavBurger"
+@fav-ingredient = "addToMenu">
 </FavoritesPage>
 
 
@@ -153,12 +153,8 @@ export default {
       isSv:true,
       categoryItemCounter: [0,0,0,0,0,0], /*Denna räknar hur många items som valts från resp. kategori*/
       chosenIngredients: [],
-      ingredient_ids:[50,6,8,11,12,48  ,  50,1,9,26,32,36  ,  52,1,7,34,15,40], /*Denna har ingredient-id för alla favoritingredienser*/
       breadcrumbs:[], /*Denna sparar i vilken ordning olika views har ändrats i*/
       price: 0,
-      favoriteIngredients: [],
-      favoriteBurgers: [],
-      favoritePrice:0,
       orderNumber: 0,
       menusArray:[], /*Sparar enskilda menyer i en array*/
       units:1, /*Extra viktig främst när vi ändrar en meny*/
@@ -251,31 +247,8 @@ export default {
                       return;
                     }
                   }
-                  if(view === 'favoritesPage'){
-                    this.changeFavorites();
-                  }
                   this.breadcrumbs.push(this.currentView); /*Lägger till föregående view i breadcrumbs*/
                   this.currentView = view;
-                },
-                changeFavorites: function(){
-                  let count = 0;
-                  for (var i = 0; i< this.ingredient_ids.length; i++){
-                    this.favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])); /*lägger favoritingredienser i en array*/
-                    this.favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_id === this.ingredient_ids[i])).selling_price; /*räknar ut priset för de ingredienserna*/
-                    count++;
-                    if(this.favoriteIngredients.length === Math.trunc(this.ingredient_ids.length/3)){ /* tar de första 3 ingredienserna och priset för dem och lägger in de i en array*/
-                      let burger = {
-                        "ingredients": this.favoriteIngredients,
-                        "price": this.favoritePrice,
-                        "ing_count": count
-                      }
-                      this.favoriteBurgers.push(burger);
-                      this.favoriteIngredients = []; /*nollställer favortieIngredients arrayen och favoritpriset*/
-                      this.favoritePrice = 0;
-                      count = 0;
-                    }
-                  }
-                  /*console.log(this.favoriteBurgers);*/
                 },
                 /*goBack hämtar senast föregående view från breadcrumbs och tar sedan bort den från minnet*/
                 goBack: function(){
@@ -362,6 +335,12 @@ export default {
                 clearAll:function(){
                   this.resetBurger();
                   this.menusArray=[];
+                },
+                resetFavBurger:function(){
+                  this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
+                  this.chosenIngredients = this.chosenIngredients.filter(ingredient => ingredient.category > 4);
+                  console.log(this.chosenIngredients)
+                  this.price = 0;
                 },
                 /*Nollställer alla variabler som har med att skapa burgare att göra*/
                 resetBurger:function(){
@@ -607,21 +586,21 @@ export default {
                 }
                 /*#price-div{
                 grid-row:5;
-                } */
-                #ordering h2{
-                  font-size: 5vw;
-                }
+              } */
+              #ordering h2{
+                font-size: 5vw;
               }
-              #ordering{
-                margin:10px auto auto auto;
-              }
+            }
+            #ordering{
+              margin:10px auto auto auto;
+            }
 
-              /* -------------------- CSS för mobiler -----------------*/
-              @media screen and (max-width:740px){
-                #bck-btn,#lang-btn{
-                  width:90px;
-                  height:50px;
-                  padding:0;
-                }
+            /* -------------------- CSS för mobiler -----------------*/
+            @media screen and (max-width:740px){
+              #bck-btn,#lang-btn{
+                width:90px;
+                height:50px;
+                padding:0;
               }
-              </style>
+            }
+            </style>

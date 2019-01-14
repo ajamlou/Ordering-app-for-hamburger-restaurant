@@ -64,13 +64,9 @@ export default {
   components:{
     CategoryRow
   },
-  created:{
-    mountTooltipData: function(){
-      this.tooltip = '';
-      // for(var i = 0; i<this.favBurgers.length;i++){
-      //   this.tooltip = this.tooltip + this.favBurgers[i].ingredients
-      // }
-    }
+  beforeMount: function(){
+
+
   },
   methods:{
     // skickar favoritburgaren som väljs till ordering och lägger in den där

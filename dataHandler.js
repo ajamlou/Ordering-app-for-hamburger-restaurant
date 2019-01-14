@@ -68,7 +68,6 @@ Data.prototype.getFavBurgers = function () {
   return this.currentFavorites;
 }
 else{
-  console.log('hello you are in the else statement')
   return this.currentFavorites;
 }
 };
