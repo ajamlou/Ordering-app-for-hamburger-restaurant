@@ -1,16 +1,4 @@
 <template>
-  <div>
-  <div class="modal-header">
-      <div>
-        Vara
-      </div>
-      <div>
-        Antal
-      </div>
-      <div>
-        Säljpris
-      </div>
-  </div>
 
   <div class="modal-body">
     <div v-for="ingredient in ingredients"
@@ -28,16 +16,10 @@
   </div>
 </div>
 
-  <div class="modal-footer">
-    <slot name="footer">
-    </slot>
-  </div>
-</div>
 </template>
 
 <!-- Hämta antal kvar av varje ingrediens. I ingredient kan jag skriva item.stock för att få antal.
 Vill få in alla ingredienser och skriva ut allas antal.-->
-
 
 <script>
 
@@ -46,23 +28,10 @@ export default {
   props: {
     ingredients: Array
   },
-  methods: {
-
-  }
 }
 </script>
 
 <style scoped>
-.modal-header{
-  /* position: fixed; */
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  text-align: center;
-  overflow: hidden;
-  height:2em;
-  padding:0;
-  text-transform: capitalize;
-}
 
 .modal-body{
   text-transform: capitalize;

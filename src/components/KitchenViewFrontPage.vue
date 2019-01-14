@@ -6,7 +6,6 @@
   <button  id = "preppButton" @click = "emitSwitchVisibility('preppPage')">PREPP</button>
 
   <div id="button-div">
-  <!--<button  id = "statisticsButton" @click="toggleVisibility(), decideContent('s')">STATISTIK</button>-->
   <button  id = "storageButton" @click="toggleVisibility(), decideContent('l')">LAGER</button>
   <button  id = "favoritesButton" @click="emitSwitchVisibility('f')">FAVORITER</button>
   </div>
@@ -19,24 +18,19 @@
   :orders="orders"
   v-show = "ModalVisibility === true">
   </KitchenModal>
-
-
 </div>
 </template>
 
 <script>
 import KitchenModal from '@/components/KitchenModal.vue'
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
-import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import SlotModal from'@/components/SlotModal.vue'
-
 
 export default {
   name: 'KitchenViewFrontPage',
   components:{
     KitchenModal,
     StaffViewStorage,
-    StaffViewStatistics,
     SlotModal
   },
   props:{
@@ -68,9 +62,6 @@ export default {
     decideContent: function(string){
       if (string === "l"){
         this.decidedContent = "storage";
-      }
-      else {
-        this.decidedContent = "statistics";
       }
     }
   }

@@ -312,10 +312,10 @@ export default{
   font-size: 25px;
 }
 
-#yesBtn{
-  background-color: #e51e4a;
+#yesBtn,#noBtn{
   grid-column: auto;
   grid-row: auto;
+  height: 10vh;
 }
 
 #yesBtn:hover{
@@ -325,8 +325,9 @@ export default{
 
 #noBtn{
   background-color: #c5e5be;
-  grid-column: auto;
-  grid-row: auto;
+}
+#yesBtn{
+  background-color: #e51e4a;
 }
 
 #noBtn:hover{
