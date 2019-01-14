@@ -51,6 +51,7 @@ v-if = "currentView === 'favoritesPage'"
 :categoryItemCounter="categoryItemCounter"
 :price = "price"
 @remove_ingredient="removeFromMenu"
+@cancel_btn_modal="cancelBtnModal"
 @fav-ingredient="addToMenu"
 @info_to_modal="toggleShowIngredientsModal"
 @addToCheckout = "addToCheckout"
@@ -69,6 +70,7 @@ v-if = "currentView === 'checkoutPage'"
 :orderNumber="orderNumber"
 :lang="lang"
 @remove_backButton="removeBackButton"
+@cancel_btn_modal="cancelBtnModal"
 @change_view="changeView"
 @new_burger="newBurger"
 @modify_menu="modifyMenu"
@@ -409,11 +411,9 @@ export default {
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
             }
-
             .slotButtons{
               grid-template-columns: repeat(6, 1fr);
             }
-
             #yesBtn{
               grid-column: 2/3;
               background-color: #e51e4a;
@@ -429,6 +429,9 @@ export default {
             }
             #noBtn:hover{
               background-color: #89a085;
+            }
+            #yesBtn,#noBtn{
+              font-size: 25px;
             }
 
             #lang-btn{

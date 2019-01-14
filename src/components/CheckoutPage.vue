@@ -117,8 +117,7 @@ export default{
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
-      this.toggleSlotModal();
-      this.pressedAbortModal=true;
+      this.$emit('cancel_btn_modal')
     },
     //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
     //försvinner modalen
@@ -305,6 +304,9 @@ export default{
   background-color: #89a085;
   border-color: #000000;
 }
+#yesBtn,#noBtn{
+  font-size: 25px;
+}
 .slotBody{
   padding: 3em;
 }
@@ -331,6 +333,7 @@ button{
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
+  margin: 4px 2px;
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
