@@ -388,7 +388,7 @@ input[type="text"],textarea{
   margin: auto auto auto 0;
 }
 
-p, label, h1,h2,h3,h4,h5,h6{
+p, label, h1,h2,h4,h5,h6{
   color:white;
 }
 

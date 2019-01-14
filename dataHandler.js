@@ -9,7 +9,6 @@ let defaultLanguage = "sv";
 let fs1 = require('fs');
 
 fs1.watch("./data/", (event_type, file_name) => {
-  console.log("Deleting Require cache for " + file_name);
   delete require.cache[ require.resolve("./data/" + file_name)];
 });
 
@@ -116,13 +115,11 @@ Data.prototype.initializeTable = function (table) {
   csv({checkType: true})
   .fromFile("./data/" + table + ".csv")
   .then((jsonObj) => {
-    // console.log("JSON object", jsonObj, "done");
     this.data[table] = jsonObj;
   });
 };
 
 Data.prototype.initializeData = function() {
-  console.log("Starting to build data tables");
   // Load initial ingredients. If you want to add columns, do it in the CSV file.
   this.initializeTable(ingredientsDataName);
   // Load initial stock. Make alterations in the CSV file.
@@ -144,7 +141,6 @@ Data.prototype.getOrderNumber = function () {
 Data.prototype.addOrder = function (order) {
   var orderId = this.getOrderNumber();
   this.orders[orderId] = order;
-  console.log(order);
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
   var transactions = this.data[transactionsDataName],
@@ -166,7 +162,6 @@ Data.prototype.addOrder = function (order) {
     return orderId;
   };
   Data.prototype.changeFavorites = function(data){
-    console.log(this.data.index);
     if(data.index === 'add'){
       this.currentFavorites.push(data);
     }
@@ -174,7 +169,6 @@ Data.prototype.addOrder = function (order) {
       this.currentFavorites.splice(data.index,1,data)
     }
   }
-  /*Var används denna??? */
   Data.prototype.changeStock = function (item, saldo) {
     var transactions = this.data[transactionsDataName]
     var transId = transactions[transactions.length - 1].transaction_id
@@ -212,7 +206,4 @@ Data.prototype.addOrder = function (order) {
     Data.prototype.getTransactions = function(){
       return this.data[transactionsDataName];
     };
-
-
-
     module.exports = Data;
