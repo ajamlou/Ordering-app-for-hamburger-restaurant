@@ -22,14 +22,12 @@
 
 <script>
 import KitchenModal from '@/components/KitchenModal.vue'
-// import StaffViewStorage from '@/components/StaffViewStorage.vue'
 import SlotModal from'@/components/SlotModal.vue'
 
 export default {
   name: 'KitchenViewFrontPage',
   components:{
     KitchenModal,
-    // StaffViewStorage,
     SlotModal
   },
   props:{
@@ -62,14 +60,14 @@ export default {
   justify-items: center;
   grid-gap: 10px;
 }
-/*css för grill- och preppknappar*/
+/*css för grill- och preppknappar:*/
 #grillButton, #preppButton{
   width: 25vw;
   min-width: 7em;
   height: 20vh;
   border-radius: 1vh;
   margin: auto;
-  color: white; /*textcolor*/
+  color: #FFFFFF;
   font-size: 5vh;
   text-shadow: 2px 2px #000000;
   background: rgba(255,255,255,0.2);
@@ -85,14 +83,13 @@ export default {
   border: 10px double #3399ff;
   grid-row: 3;
 }
-
-/*css för lager- och favoritknappar*/
+/*css för lager- och favoritknappar:*/
 #button-div{
   grid-row: 4;
 }
 #button-div > *{
-  border: 2px solid white;
-  color: white;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
   text-shadow: 2px 2px #696969;
   cursor: pointer;
   padding: 15px;
@@ -106,5 +103,4 @@ export default {
   margin: 5vh;
   background-color: #00b386;
 }
-
 </style>

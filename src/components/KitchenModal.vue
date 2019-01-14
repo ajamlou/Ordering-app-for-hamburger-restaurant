@@ -47,7 +47,6 @@ export default {
   components: {
   },
   methods: {
-    // Visa modalen med lagerhållning:
     switchVisibility: function() {
       this.$emit("visibility")
     }
