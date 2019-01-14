@@ -60,11 +60,13 @@
   </button>
 </div>
 </SlotModal>
+<div id="bottom-div">
+<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
   {{uiLabels.sum}}: {{price}}:-
 </div>
-<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <button id="next-button" @click="addToCheckout();changeView('checkoutPage');">{{uiLabels.next}}</button>
+</div>
 </div>
 </div>
 </template>
@@ -194,6 +196,8 @@ export default {
   display:flex;
   flex-wrap: wrap;
   justify-content:center;
+  /* border-bottom: dotted;
+  border-color: #ed6381; /*rosa */ */
 }
 .burgers{
   width: 320px;
@@ -242,14 +246,20 @@ flex-wrap: wrap;
   text-align:center;
 }
 
+#bottom-div{
+  grid-column: 1/7;
+  grid-row: 5;
+  display:grid;
+  justify-content: space-between;
+}
+
 #price-div{
   display:inline-block;
   justify-self: center;
   margin:auto;
   text-align:center;
   font-size: 2em;
-  grid-column:2/6;
-  grid-row:5;
+  grid-column:3/5;
 }
 
 .selected{
@@ -260,6 +270,10 @@ flex-wrap: wrap;
   grid-column: 1/7;
   grid-row: 3;
   font-size: 2em;
+  /* border-top: dotted; */
+  border-bottom: dotted;
+  border-color: #ed6381; /*rosa*/
+  text-transform: uppercase;
 }
 
 #category-wrapper{
@@ -269,8 +283,6 @@ flex-wrap: wrap;
 
 #next-button{
   grid-column: 6/7;
-  grid-row:5;
-  border:1px solid #7a7a7a;
   width:120px;
   height:80px;
   justify-self:end;
@@ -286,11 +298,9 @@ flex-wrap: wrap;
 
 #cancelOrder-btn{
   grid-column: 1/2;
-  grid-row: 5;
   width:120px;
   height:80px;
   background-color: #e51e4a;
-  border: 1px solid #7a7a7a;
 }
 
 #cancelOrder-btn:hover{
@@ -323,17 +333,28 @@ flex-wrap: wrap;
 button{
   color: black;
   text-transform: uppercase;
-  border: none;
   text-align: center;
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 16px;
   font-size: 25px;
+  border-color: black;
+  border-width: thin;
 }
-
 
 h1{
   font-size: 1.5em;
+}
+
+@media screen and (max-width:500px){
+  #cancelOrder-btn,#next-button{
+    font-size: 18px;
+    width: 80px;
+    height: 60px;
+  }
+  #price-div{
+    font-size: 25px;
+  }
 }
 </style>
