@@ -13,6 +13,8 @@
           <div class = "description">
             {{item.description}}
           </div>
+          <div class = "allergy">
+          </div>
           <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
             [ i ]
           </div>
@@ -220,6 +222,11 @@ export default {
   grid-column: 1/4;
   grid-row:3;
   text-align: center;
+}
+
+.allergy{
+  grid-column: 3/4;
+  grid-row: 1/2;
 }
 
 .ingredient-tooltip{
