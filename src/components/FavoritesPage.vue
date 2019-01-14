@@ -59,29 +59,6 @@
       </CategoryRow>
     </div>
 
-<!-- Är onödig, men vänta lite med att ta bort -->
-    <!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
-    avbrytknappen som tryckts på. -->
-    <!-- <SlotModal
-    v-if="this.showSlotModal && this.pressedAbortModal">
-    <div slot="header"></div>
-    <div slot="body">{{uiLabels.areYouSure}}</div>
-    <div slot="footer" class="slotButtons">
-      <button
-      type="button"
-      id="noBtn"
-      @click="toggleSlotModal()">
-      {{uiLabels.dontAbort}}
-    </button>
-    <button
-    type="button"
-    id="yesBtn"
-    @click="emptyOrder()">
-    {{uiLabels.abort}}
-  </button>
-</div> -->
-<!-- </SlotModal> -->
-
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="price-div">
@@ -103,7 +80,6 @@ export default {
     return{
       tooltip: 'Oh yeaaah',
       showSlotModal:false,
-      pressedAbortModal:false,
     }
   },
   props:{
