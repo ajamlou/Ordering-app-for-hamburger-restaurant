@@ -141,6 +141,8 @@ export default{
         this.$store.state.socket.emit('order', {menus: this.menus})
       }
     },
+    // Om en inte trycker på "OK" efter att en order lagts kommer framsidan
+    // automatiskt fram efter 10s.
     isFinishedTimer:function(){
       setTimeout(this.orderFinished,10000);
     },
