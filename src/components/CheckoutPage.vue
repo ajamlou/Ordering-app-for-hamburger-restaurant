@@ -110,7 +110,8 @@ export default{
       }
       else this.showSlotModal=false;
     },
-
+    //Oavsett om beställningen är tom eller avbryts den när man trycker på
+    //"Avbryt beställning" i modalen.
     emptyOrder:function(){
         this.$emit('change_view','frontPage');
         this.$emit('clear_all');
