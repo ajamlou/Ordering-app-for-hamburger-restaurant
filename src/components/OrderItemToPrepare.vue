@@ -2,15 +2,17 @@
   <!-- Egen komponent för att kunna hantera det som sker i "Inkomna" enklare -->
   <div>
     <div class="prep-head">
-    <h4>#{{orderId}}</h4>
-    <p>Antal Pattys: {{nrOfPattys}}</p>
-  </div>
+      <h4>#{{orderId}}</h4>
+      <p>Antal Pattys: {{nrOfPattys}}</p>
+    </div>
 
-    <b-btn v-b-toggle='orderId' id="collapsibleButton">
-      <strong>+</strong>
+    <b-btn :pressed.sync="myToggle" v-b-toggle='orderId' variant="outline-primary" id="collapsibleButton">
+      <strong v-if="myToggle">+</strong>
+      <strong v-if="!myToggle">-</strong>
     </b-btn>
 
     <div>
+      <!-- Det som collapsibleButton döljer -->
       <b-collapse class="collapsibleBtn" visible :id = "orderId">
         <OrderItem
         :onlypatty="true"
@@ -23,14 +25,14 @@
       </OrderItem>
     </b-collapse>
 
-        <div class="btns">
-          <button id="cancelButton" v-on:click="orderCanceled">
-            ✖
-          </button>
-          <button id="sendToPreparing" v-on:click="orderCooked">
-            ➤
-          </button>
-        </div>
+    <div class="btns">
+      <b-btn variant="danger" id="cancelButton" v-on:click="orderCanceled">
+        ✖
+      </b-btn>
+      <b-btn variant="success" id="sendToPreparing" v-on:click="orderCooked">
+        ➤
+      </b-btn>
+    </div>
 
   </div>
 </div>
@@ -52,7 +54,8 @@ export default {
   },
   data:function(){
     return{
-      nrOfPattys:0
+      nrOfPattys: 0,
+      myToggle: false
     }
   },
   methods: {
@@ -78,48 +81,32 @@ export default {
   text-align: center;
 }
 .btns{
-  display:grid;
+  display: grid;
   grid-template-columns: 50% 50%;
-  width:100%;
+  width: 100%;
+  padding-top: 10px;
 }
 
-#sendToPreparing, #collapsibleButton,#cancelButton {
-  border:0;
-  color:white;
-  padding:0;
+#sendToPreparing, #collapsibleButton, #cancelButton {
+  height: 3em;
+  width: 3em;
   text-align: center;
   border-radius: 50%;
 }
 
 #sendToPreparing {
-  background-color: rgb(0,150,0);
-  height:3em;
-  width:3em;
   margin: 0 0 0 auto;
 }
 
 #collapsibleButton {
-  background-color: #3366ff;
-  height:2.7em;
-  width:2.7em;
-  display:block;
+  display: block;
   margin: auto;
 }
 
 #cancelButton{
-  background-color: #ff3333;
-  border: 1px solid white;
-  height:3em;
-  width:3em;
   margin: 0 auto 0 0;
 }
 
-#cancelButton:active,
-#sendToPreparing:active,
-#collapsibleButton:active {border: 2px solid #d9d9d9;}
-
-#cancelButton:hover {background-color: #b30000}
-#sendToPreparing:hover {background-color: #00cc66}
 #collapsibleButton:hover {background-color: #0040ff}
 
 </style>
