@@ -193,6 +193,7 @@ export default {
   grid-column: 2;
   grid-row: 1;
   text-align: center;
+  font-size: 2em;
 }
 
 .image{
