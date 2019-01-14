@@ -21,13 +21,16 @@
             <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
             <div
             v-for = "(item, index) in favBurgers"
+            class = "existingBurger"
             :key = "`item-${index}`">
-            
+
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
               <label>{{item.name}}</label>
             </div>
+            <div class ="existingBurger">
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
             <label>Lägg till som en ny hamburgare</label>
+          </div>
             <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
           </div>
           <SlotModal
@@ -95,7 +98,7 @@
             "name": this.rows.name,
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
-            "price": Math.floor(favoritePrice*(1-(this.rows.discount/100))),
+            "price": favoritePrice*(1-(this.rows.discount/100)),
             "index": this.rows.checked,
             "selected": false,
             "description": this.rows.description
@@ -198,6 +201,16 @@
     height: 7vh;
   }
   .addRow:hover{background-color: #103a89}
+
+  .existingBurger{
+    display:grid;
+    grid-template-columns: 50px auto;
+    grid-gap: 10px;
+    margin-bottom: 10px;
+  }
+  .existingBurger > *{
+    margin: auto auto auto 0;
+  }
 
   p, label, h1{
     color:white;
