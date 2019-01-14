@@ -28,6 +28,7 @@ v-for="(occurrences,id,occIndex) in calculateOccurrences(menuindex)"
 </div>
 </div>
 
+<!-- Tar ut bara pattys ifall man bara vill se dessa i grillen: -->
 <div
 v-if="!menuView && onlypatty"
 v-for="(occurrences,id,occIndex) in calculateOccurrencesWholeOrder(1)"
@@ -35,9 +36,7 @@ class="mg4"
 :key="occIndex">
 {{ingredients.find((item) => item.ingredient_id == id)["ingredient_"+lang]}} × {{occurrences}}
 </div>
-
 </div>
-
 </template>
 
 <script>
@@ -97,7 +96,6 @@ export default {
 								occ[ingredient.ingredient_id] = (occ[ingredient.ingredient_id] || 0) + 1*this.menusArray[i].units;
 							}
 						}
-
 						else{
 							occ[ingredient.ingredient_id] = (occ[ingredient.ingredient_id] || 0) + 1*this.menusArray[i].units;
 						}
@@ -147,18 +145,14 @@ export default {
 	.masterOrderitem{
 		text-transform: capitalize;
 	}
-
 	.border-bottom{
 		padding-bottom: 5px;
 		border-bottom: 1px dotted white!important;
 	}
-
 	.quant{
 		text-decoration: underline;
 	}
-
 	.mg4{
 		margin: 4px;
 	}
-
 	</style>
