@@ -1,15 +1,15 @@
 <template>
-
   <div id="designPage-backdrop">
-    <div
+  <div
     id="ordering">
     <div
     id="designPage-title">
     {{uiLabels.yourOrder}}
-  </div>
-  <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+    </div>
   <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
-  <div id="allergen-div"> <!--Div för row 2 i ordering grid -->
+
+<!-- Egen division för allergeninfo och symboler. -->
+  <div id="allergen-div">
     <div id="gluten-exp">
       <img src="../assets/gluten.png" class="icon"><span>{{uiLabels.gluten}}</span>
     </div>
@@ -20,7 +20,6 @@
       <img src="../assets/vegan.png" class="icon"><span>{{uiLabels.vegan}}</span>
     </div>
   </div>
-
 
   <div id="categories-wrapper">
     <CategoryRow
@@ -53,6 +52,8 @@
   </CategoryRow>
 </div>
 </div>
+
+<!-- Egen division för det som ska finnas längst ned på sidan. -->
 <div id="bottom-div">
   <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
   <div id="price-div">
@@ -102,8 +103,6 @@ export default {
     changeView:function(){
       this.$emit('change_view', 'checkoutPage')
     }
-
-
   }
 }
 </script>
@@ -131,20 +130,22 @@ export default {
   align-self: center;
   font-family: 'Lobster', sans-serif;
   font-size: 14vmin;
-  color: #ed6381; /*rosa*/
+  color: #ed6381;
   text-shadow: 2px 2px #444444;
 }
+/* Rubriker till ingrediensraderna: */
 #ordering h2{
   font-weight: bolder;
   text-transform: uppercase;
   text-align: left;
   border-top: dotted;
   border-bottom: dotted;
-  border-color: #ed6381; /*rosa*/
+  border-color: #ed6381;
 }
 #extras, #extras-favorites{
   margin-top:2em;
 }
+/* Rubrik designa din hamburgare:  */
 #bestallning{
   grid-column: 1/7;
   grid-row: 2;
@@ -185,18 +186,18 @@ export default {
   grid-column: 1/7;
   display:grid;
   justify-content: space-between;
+  grid-row:5;
 }
-#cancelOrder-btn{
+#cancelOrder-btn,#next-btn{
   width:120px;
   height:80px;
+}
+#cancelOrder-btn{
   background-color: #e51e4a;
-  /* border: 1px solid #7a7a7a; */
-  grid-row:4;
   grid-column: 1/2;
 }
 #cancelOrder-btn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
 }
 #price-div{
   display:inline-block;
@@ -205,21 +206,15 @@ export default {
   text-align:center;
   font-size: 2em;
   grid-column:2/6;
-  grid-row:4;
 }
 #next-btn{
-  width:120px;
-  height:80px;
   justify-self:end;
   grid-column: 6/7;
-  grid-row:4;
   background-color: #c5e5be;
 }
 #next-btn:hover{
-background-color: #89a085;
-border-color: #000000;
+  background-color: #89a085;
 }
-
 button{
   display: inline-block;
   margin: 4px 2px;
