@@ -21,13 +21,16 @@
             <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
             <div
             v-for = "(item, index) in favBurgers"
+            class = "existingBurger"
             :key = "`item-${index}`">
-            
+x
               <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
               <label>{{item.name}}</label>
             </div>
+            <div class ="existingBurger">
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
             <label>Lägg till som en ny hamburgare</label>
+          </div>
             <button class = 'confirm' @click = "updateInfo">Bekräfta</button>
           </div>
           <SlotModal
@@ -91,11 +94,14 @@
           if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
             this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
           }
+          if(this.rows.discount === undefined){
+            this.rows.discount = 0;
+          }
           let burger = {
-            "name": this.rows.name,
+            "name": this.capitalize(this.rows.name),
             "url": this.rows.url,
             "ingredients": favoriteIngredients,
-            "price": Math.floor(favoritePrice*(1-(this.rows.discount/100))),
+            "price": favoritePrice*(1-(this.rows.discount/100)),
             "index": this.rows.checked,
             "selected": false,
             "description": this.rows.description
@@ -106,6 +112,12 @@
       },
       favError: function(){ //funktion som visar eller döljer felmodalen
         this.showSlotModal = !this.showSlotModal;
+      },
+      /*Gör första bokstaven i namnet på burgaren till stor bokstav*/
+      capitalize:function(string){
+        let firstLetter = string.charAt(0).toUpperCase();
+        let restOfString = string.slice(1);
+        return firstLetter + restOfString;
       },
       checkIfChecked: function(){ //kollar att någon radiobutton är checked, kallar på felhanteraren annars
         if(this.rows.checked != null){
@@ -198,6 +210,16 @@
     height: 7vh;
   }
   .addRow:hover{background-color: #103a89}
+
+  .existingBurger{
+    display:grid;
+    grid-template-columns: 50px auto;
+    grid-gap: 10px;
+    margin-bottom: 10px;
+  }
+  .existingBurger > *{
+    margin: auto auto auto 0;
+  }
 
   p, label, h1{
     color:white;
