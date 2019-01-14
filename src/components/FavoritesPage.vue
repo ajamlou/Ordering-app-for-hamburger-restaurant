@@ -13,7 +13,7 @@
           <div class = "description">
             {{item.description}}
           </div>
-          <div v-tooltip.right = "tooltip" class ="ingredient-tooltip">
+          <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
             [ i ]
           </div>
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
@@ -174,6 +174,8 @@ export default {
   grid-column: 3;
   grid-row: 3;
   text-align: right;
+  color: blue;
+  font-weight:bold;
 }
 
 
@@ -187,6 +189,7 @@ export default {
 .price{
   grid-column: 2;
   grid-row:4;
+  text-align:center;
 }
 
 
