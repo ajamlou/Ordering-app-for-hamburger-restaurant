@@ -280,7 +280,7 @@ export default{
   margin:auto;
   text-align:center;
   font-size: 2em;
-  grid-column: 1/9;
+  grid-column: 4/6;
   grid-row: 1;
 }
 

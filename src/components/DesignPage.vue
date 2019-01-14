@@ -289,10 +289,10 @@ button:hover{
   #ordering h2{
     font-size: 5vw;
   }
-}
-#ordering{
-  margin:10px auto auto auto;
-}
+  }
+  #ordering{
+    margin:10px auto auto auto;
+  }
 
 /* -------------------- CSS för mobiler -----------------*/
 @media screen and (max-width:740px){
