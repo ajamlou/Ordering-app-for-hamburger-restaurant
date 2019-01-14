@@ -54,25 +54,18 @@ Data.prototype.getFavBurgers = function () {
     for(let i = 0;i<chosenIngredients.length;i++){
       price = price + chosenIngredients[i].selling_price;
     }
-    let allergy = [];
+    let gluten_free = true;
+    let lactose_free = true;
+    let vegan = true;
     for(let i = 0;i<chosenIngredients.length;i++){
-      if(chosenIngredients[i].milk_free === 1 && chosenIngredients[i].gluten_free === 1 && chosenIngredients[i].vegan === 1){
-        allergy.push(true);
+      if(chosenIngredients[i].milk_free === 0){
+        lactose_free = false;
       }
-      else{
-        allergy.push(false);
-      }
-      if(chosenIngredients[i].gluten_free === 1){
-        allergy.push(true);
-      }
-      else{
-        allergy.push(false);
+      if(chosenIngredients[i].gluten_free === 0){
+        gluten_free = false;
       }
       if(chosenIngredients[i].vegan === 1){
-        allergy.push(true);
-      }
-      else{
-        allergy.push(false);
+        vegan = false;
       }
     }
     console.log(allergy);
@@ -84,7 +77,7 @@ Data.prototype.getFavBurgers = function () {
       price: price,
       selected: false,
       description: favorites[j].description,
-      allergy: allergy
+      allergy:
     }
     chosenBurgers.push(burger);
   }

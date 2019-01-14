@@ -125,8 +125,8 @@ v-show = "ModalVisibility === true">
 //import methods and data that are shared between the component and kitchen views
 import KitchenModal from '@/components/KitchenModal.vue'
 import ChangeFavorites from '@/components/ChangeFavorites.vue'
-import StaffViewStorage from '@/components/StaffViewStorage.vue'
-import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
+// import StaffViewStorage from '@/components/StaffViewStorage.vue'
+// import StaffViewStatistics from'@/components/StaffViewStatistics.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsCooking from '@/components/OrderItemIsCooking.vue'
@@ -145,8 +145,8 @@ export default {
     OrderItemToPrepare,
     OrderItemIsCooking,
     OrderItemFinished,
-    StaffViewStorage,
-    StaffViewStatistics,
+    // StaffViewStorage,
+    // StaffViewStatistics,
     KitchenModal,
     KitchenViewFrontPage,
     PreppView,
