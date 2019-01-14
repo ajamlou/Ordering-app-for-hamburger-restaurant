@@ -11,7 +11,7 @@
               <input v-model = 'rows.description'>
               <p>Rabatt på hamburgaren(ange i %): <p>
                 <input v-model = 'rows.discount'>
-            <div v-for="(row, index) in rows" :key = "index">
+            <div v-for="(row, index) in rows" :key = "`row-${index}`">
               <p>{{row.title}} {{index+1}}</p>
               <input v-model="row.value"><button id="cancelBtn" @click = "remove(index)">Ta bort</button>
             </div>
@@ -19,9 +19,9 @@
             <br>
             <br>
             <p>VILKEN BURGARE VILL DU ERSÄTTA?</p>
-            <div v-for = "(item, i) in favBurgers" :key = "i">
+            <div v-for = "(item, index) in favBurgers" :key = "`item-${index}`">
               <p>{{item.name}}:</p>
-              <input type="radio" class = "radio" v-model = 'rows.checked' :value = "i">
+              <input type="radio" class = "radio" v-model = 'rows.checked' :value = "index">
             </div>
             <p>Lägg till som en ny hamburgare:</p>
             <input type="radio" class = "radio" v-model='rows.checked' value = 'add' >
@@ -82,6 +82,12 @@
           this.favError(); //Kallar på funktionen som hanterar felet
         }
         if(this.checkIfChecked() && !this.showSlotModal){
+          /*Nedanstående if-sats kollar om längden på urlen är 0
+          eller om urlen är 0 efter att vi trimmat den (dvs kollar om urlen
+        bara är massa mellanslag)*/
+          if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
+            this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
+          }
           let burger = {
             "name": this.rows.name,
             "url": this.rows.url,
