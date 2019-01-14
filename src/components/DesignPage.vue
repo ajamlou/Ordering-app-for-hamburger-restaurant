@@ -215,10 +215,10 @@ export default {
   grid-row:4;
   background-color: #c5e5be;
 }
-/* #next-btn:hover{
+#next-btn:hover{
 background-color: #89a085;
 border-color: #000000;
-} */
+}
 
 button{
   display: inline-block;

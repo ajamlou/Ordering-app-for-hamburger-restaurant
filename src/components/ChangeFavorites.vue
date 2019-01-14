@@ -3,15 +3,31 @@
     <div id = "favMaster" >
       <h1 id = "header">ÄNDRA PÅ FAVORITERNA</h1>
       <div id = "burger" >
-        <p>Namn på ny burgare: <p>
-          <input v-model = 'rows.name'>
-          <p>URL till den nya bilden: <p>
-            <input v-model = 'rows.url'>
-            <p>Beskrivning av den nya burgaren: <p>
-              <input v-model = 'rows.description'>
-              <p>Rabatt på hamburgaren(ange i %): <p>
-                <input v-model = 'rows.discount'>
-                <div v-for="(row, index) in rows" :key = "`row-${index}`">
+
+        <label>Namn på ny burgare: </label>
+          <input
+          type="text"
+           v-model = 'rows.name'>
+
+          <label>URL till den nya bilden: </label>
+            <input
+            type="text"
+            v-model = 'rows.url'>
+
+            <label>Rabatt på hamburgaren(ange i %): </label>
+              <input
+              type="text"
+              v-model = 'rows.discount'>
+
+            <label>Beskrivning av den nya burgaren: </label>
+              <textarea
+              rows="4"
+              v-model = 'rows.description'></textarea>
+
+                <div v-for="(row, index) in rows"
+                class="new-ing"
+                :key = "`row-${index}`">
+
                   <p>{{row.title}} {{index+1}}</p>
                   <input v-model="row.value"><button id="cancelBtn" @click = "remove(index)">Ta bort</button>
                 </div>
@@ -210,10 +226,13 @@ export default {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding-top:15px;
+  grid-column-gap: 3em;
 }
 #burger{
+  display:grid;
   grid-column: 1/4;
   grid-row:2/3;
+  margin-left:10px;
 }
 
 #fullaccordion{
@@ -223,7 +242,7 @@ export default {
 }
 
 #header{
-  grid-column: 1/4;
+  grid-column: 1/8;
   grid-row:1/2;
 }
 
@@ -258,6 +277,12 @@ export default {
   height: 10vh;
   width: 10vw;
   font-size: 18px;
+}
+input[type="text"],label,textarea{
+  display:block;
+}
+input[type="text"],textarea{
+  margin-bottom:10px;
 }
 
 .confirm:hover{background-color: #367c39}
