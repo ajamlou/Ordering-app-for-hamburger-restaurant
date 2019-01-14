@@ -212,6 +212,7 @@ export default {
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .header{
   grid-column: 2;
   grid-row: 1;
