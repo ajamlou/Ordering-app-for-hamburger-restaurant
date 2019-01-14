@@ -5,7 +5,8 @@
         {{uiLabels.chooseAFavorite}}
       </div>
       <div id = "burger-wrapper">
-        <div class ="burgers" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class ="burgers">
           <h1 class = "header">{{item.name}}</h1>
           <img :src= "item.url" class = "image">
           <div class = "description">
@@ -19,6 +20,7 @@
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
       </div>
+    </div>
       <div id="extras-title">
         {{uiLabels.extras}}
       </div>
@@ -57,8 +59,8 @@
     @click="emptyOrder()">
     {{uiLabels.abort}}
   </button>
-</div>
-</SlotModal> -->
+</div> -->
+<!-- </SlotModal> -->
 
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
@@ -147,7 +149,17 @@ export default {
     //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
     //ska vara där inne.
     cancelBtnModal: function(){
-      this.$emit('cancel_btn_modal')
+      this.toggleSlotModal();
+      this.pressedAbortModal=true;
+    },
+    //Togglar en modal
+    toggleSlotModal:function(){
+      if(!this.showSlotModal){
+        this.showSlotModal=true;
+      }
+      else{
+        this.showSlotModal=false;
+      }
     },
   }
 }
@@ -189,10 +201,14 @@ export default {
   /* border-bottom: dotted;
   border-color: #ed6381; /*rosa */
 }
-.burgers{
+
+.background{
   width: 320px;
   height: 320px;
   border-radius: 160px;
+}
+
+.burgers{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
 }
