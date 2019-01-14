@@ -98,16 +98,12 @@ export default {
     // skickar favoritburgaren som väljs till ordering och lägger in den där
     favToCheckout: function(index, item){
       this.$emit("clearburger");
-      this.unselect();
+      this.$emit('unselect', index);
       item.selected = !item.selected;
-      for (var i = 0; i< item.ingredients.length; i++){
-        this.$emit("fav-ingredient", item.ingredients[i]);
-      }
-    },
-    //sätter alla favoritburgarnas select till false
-    unselect: function(){
-      for(var i=0; i<this.favBurgers.length; i++){
-        this.favBurgers[i].selected = false;
+      if(item.selected === true){
+        for (var i = 0; i< item.ingredients.length; i++){
+          this.$emit("fav-ingredient", item.ingredients[i]);
+        }
       }
     },
     //tar bort ingredienser från extras

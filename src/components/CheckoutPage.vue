@@ -88,6 +88,7 @@ export default{
         this.$emit('change_view','frontPage');
         this.$emit('clear_all');
         this.$emit('remove_backButton');
+        this.$emit('unselect','no');
       }
       else this.showSlotModal=false;
     },
@@ -123,6 +124,7 @@ export default{
     newBurger:function(){
       this.$emit('change_view','frontPage');
       this.$emit('new_burger');
+      this.$emit('unselect','no');
     },
     // Bestämmer vad som ska visas i modalen. Om en order finns kommer ordernr och
     // bekräftelse upp, annars ett felmeddelande
