@@ -9,46 +9,39 @@
         @click="$emit('switchVisibility')">
         X
       </button>
-        <div class="storage-body" id="ing-mod">
+      <div>
+        Vara
+      </div>
+      <div>
+        Antal i lager
+      </div>
+      <div>
+        Säljpris
+      </div>
+      <div class="storage-body" id="ing-mod">
         <StaffViewStorage
         v-show = "decideContent === 'storage'"
         :ingredients="ingredients">
-        </StaffViewStorage>
-
-        <StaffViewStatistics
-        v-show = "decideContent === 'statistics'"
-        :ingredients="ingredients"
-        :orders="orders">
-        </StaffViewStatistics>
-
-      </div>
+      </StaffViewStorage>
     </div>
   </div>
+</div>
 </transition>
 </template>
 
 <script>
 import StaffViewStorage from '@/components/StaffViewStorage.vue'
-import StaffViewStatistics from '@/components/StaffViewStatistics.vue'
 export default {
   name: 'KitchenModal',
-
   props: {
     decideContent:String,
     ingredients: Array,
     orders: Object
-
   },
   components:{
     StaffViewStorage,
-    StaffViewStatistics
   },
-  methods: {
-
-  }
 }
-
-
 </script>
 
 <style scoped>
@@ -66,41 +59,35 @@ export default {
 
 .storage-wrapper {
   position: fixed;
-  text-align:center;
+  text-align: center;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #FFFFFF;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: hidden;
-  overflow: visible;
+  overflow: auto;
   border-radius: 15px;
   padding-bottom: 15px;
-  width:75%;
+  width: 75%;
+  text-underline-position: auto;
 }
 
 .storage-body {
   grid-column: 1/4;
-  display: table-cell;
-  vertical-align: middle;
   width: 100%;
   height: 50vh;
-  padding: 20px 30px;
   background-color: #fff;
-  border-radius: 1px;
   font-family: 'Montserrat', sans-serif;
   overflow-y: scroll;
 }
 
 .close-button {
-  grid-column:3/4;
-  justify-self:end;
+  grid-column: 3/4;
+  justify-self: end;
   border-radius: 15px;
   font-size: 23px;
-  height:2em;
-  width:2em;
+  height: 2em;
+  width: 2em;
   cursor: pointer;
   font-weight: bold;
   color: white;
@@ -109,14 +96,14 @@ export default {
 
 .close-button:hover {background-color: #660000}
 
-/* .storage-modal-fade-enter,
-  .storage-modal-fade-leave-active {
-    opacity: 0;
-  }
+.storage-modal-fade-enter,
+.storage-modal-fade-leave-active {
+opacity: 0;
+}
 
-  .storage-modal-fade-enter-active,
-  .storage-modal-fade-leave-active {
-    transition: opacity .1s ease;
-  } */
+.storage-modal-fade-enter-active,
+.storage-modal-fade-leave-active {
+transition: opacity .1s ease;
+}
 
 </style>
