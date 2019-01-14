@@ -190,8 +190,8 @@ export default {
   min-height:100vh;
   margin-top:0 !important;
   padding-top:0 !important;
-  background-color: #7a7a7a;
-  background:url('../assets/seamless-chalk.jpg');
+  /* background-color: #262626; */
+  background: url('../assets/CLP_blackboardSmooth.jpg');
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
