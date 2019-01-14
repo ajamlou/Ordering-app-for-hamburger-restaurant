@@ -37,7 +37,11 @@ Data.prototype.getFavBurgers = function () {
       var filter = {
         ingredient1: favorites[j].ingredient1,
         ingredient2: favorites[j].ingredient2,
-        ingredient3: favorites[j].ingredient3
+        ingredient3: favorites[j].ingredient3,
+        ingredient4: favorites[j].ingredient4,
+        ingredient5: favorites[j].ingredient5,
+        ingredient6: favorites[j].ingredient6,
+        ingredient7: favorites[j].ingredient7
       };
       var chosenIngredients = ingredients.filter(function(ingredient){
         for (var key in filter) {
