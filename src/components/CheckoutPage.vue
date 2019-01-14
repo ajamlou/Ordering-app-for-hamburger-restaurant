@@ -10,7 +10,7 @@
 <SlotModal
 id="orderFinishedModal"
 v-if="this.showSlotModal">
-<div slot="body" class="slotBody">{{slotContent}}</div>
+<div id="slotTextFinished" slot="body" class="slotBody">{{slotContent}}</div>
 <!-- När man trycker på "Beställ" kommer en modal upp och innehållet baseras på om beställningen
 är tom eller ej, orderFinished bestämmer vad som sker när man trycker på "OK" -->
 <div slot="footer">
@@ -336,6 +336,16 @@ button{
   }
   #sumOfOrder{
     font-size: 2em;
+  }
+  #slotTextFinished{
+    font-size: 24px;
+  }
+  .btn-close{
+    background-color: #c5e5be;
+    border-radius: 5px;
+    width: 2em;
+    height: 2em;
+    font-size: 1.5em;
   }
 }
 
