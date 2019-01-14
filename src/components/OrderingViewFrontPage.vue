@@ -3,10 +3,10 @@
   id="frontPage">
   <div
   id="orderingFrontPage-backdrop">
-  <div class="welcome">
+  <div class="frontpage-title">
     <div
     v-if = "this.breadcrumbs.length === 0">
-      {{uiLabels.welcomeText}}
+      {{uiLabels.frontpage-titleText}}
     </div>
     <div
     v-if = "this.breadcrumbs.length != 0">
@@ -40,7 +40,6 @@ export default {
   height:100%;
   justify-items: center;
 }
-
 #orderingFrontPage-backdrop{
   display:grid;
   grid-template-rows: minmax(min-content,max-content) 30% 30%;
@@ -52,8 +51,18 @@ export default {
   margin-bottom: 3em;
   padding-bottom: 1em;
 }
-
+.frontpage-title{
+  font-family: 'Lobster', sans-serif;
+  text-align: center;
+  font-size: 8vw;
+  color: #ed6381; /*mörkrosa*/
+  text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
+  grid-row: 1;
+  border-bottom: dotted;
+  border-color: #ed6381;
+}
 #favoritesButton, #createBurgerButton {
+  background-color: #b9d7cb; /*ljusturkos*/
   text-transform: uppercase;
   color: #444444;
   display: grid;
@@ -68,52 +77,28 @@ export default {
   min-width:200px;
   height:inherit;
 }
-
 #createBurgerButton {
   grid-row:2/3;
 }
 #favoritesButton{
   grid-row:3/4;
 }
-#createBurgerButton,#favoritesButton{
-  background-color: #b9d7cb; /*ljusturkos*/
-}
 #createBurgerButton:hover,#favoritesButton:hover {
   background-color: #6f8179;
 }
 
-.welcome{
-  font-family: 'Lobster', sans-serif;
-  text-align: center;
-  font-size: 8vw;
-  color: #ed6381; /*mörkrosa*/
-  text-shadow: 2px 2px #444444; /*samma grå som bakgrundsrutorna */
-  grid-row: 1;
-  border-bottom: dotted;
-  border-color: #ed6381;
-}
-
 /*------------------ CSS för ipad/mobiler-isch ------------*/
-@media screen and (max-width:1024px){
-  .welcome{ /* = Frontpagens titel*/
-  }
-
-  #favoritesButton, #createBurgerButton{
-  }
-}
-
 @media screen and (max-width:650px){
-   .welcome{
+   .frontpage-title{
     font-size:3em;
   }
-
   #favoritesButton, #createBurgerButton{
     width:4em;
     font-size: 1.5em;
   }
 }
 @media screen and (max-width:405px){
-  .welcome{
+  .frontpage-title{
     font-size: 3em;
   }
 }
