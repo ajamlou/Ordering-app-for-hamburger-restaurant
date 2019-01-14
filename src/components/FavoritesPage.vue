@@ -197,7 +197,7 @@ export default {
   flex-wrap: wrap;
   justify-content:center;
   /* border-bottom: dotted;
-  border-color: #ed6381; /*rosa */ */
+  border-color: #ed6381; /*rosa */
 }
 .burgers{
   width: 320px;
