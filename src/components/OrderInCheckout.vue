@@ -105,7 +105,7 @@ h5, h6{
 .ord-check-div{
   display:grid;
   background-color:rgba(255,255,255,0.9);
-  border: 1px solid rgb(100,100,100);
+  /* border: 1px solid rgb(100,100,100); */
   flex:none;
 }
 
@@ -185,7 +185,8 @@ h5, h6{
 
 .btns button{
   background-color: #ddd;
-  border: none;
+  border-color: black;
+  border-width: thin;
   color: black;
   padding: 10px 20px;
   text-align: center;
@@ -196,7 +197,6 @@ h5, h6{
   border-radius: 16px;
 }
 .btns button:hover{
-  background-color: #000;
-  color: white;
+  background-color: #676767;
 }
 </style>

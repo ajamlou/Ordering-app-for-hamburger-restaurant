@@ -43,12 +43,12 @@ id="yesBtn"
 </SlotModal>
 
 <div id="btn-order-wrap">
-  <div id="add-btn-div" @click="newBurger">
+  <button id="add-btn-div" @click="newBurger">
     <div id="addButtonText">
       <h5>{{uiLabels.addBurger}}</h5>
     </div>
     <!-- <p>+</p> -->
-  </div>
+  </button>
   <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
     <OrderInCheckout
     class="flex-item"
@@ -240,19 +240,19 @@ export default{
   overflow-x: auto;
   background-color: #006622;
   border-radius: 10px;
-  border: 1px solid #7a7a7a;
+  /* border: 1px solid #7a7a7a; */
   margin-top: 3vh;
 }
 
 #add-btn-div{
   display: flex;
-  text-align: center;
-  max-width: 20vh;
+  max-width: 184px;
   background-color: #b9d7cb;;
   cursor: pointer;
   border-radius: 10px;
-  color: white;
+  color: black;
   margin: 3vh 1vh 0 0;
+  /* border: 1px solid rgb(100,100,100); */
 }
 
 #add-btn-div:hover{
@@ -260,13 +260,11 @@ export default{
   border-color: #000000;
 }
 
-/* #add-btn-div>p{
-margin: auto;
-font-size: 2em;
-} */
-
 #addButtonText{
+  text-align: center;
   padding: 1em 2em;
+  vertical-align: middle;
+  line-height: 90px;
 }
 
 #bottom-div{
@@ -367,9 +365,12 @@ button{
   text-decoration: none;
   /* display: inline-block; */
   /* margin: 4px 2px; */
+  border-width: thin;
+  border-color: black;
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
+
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/
@@ -410,6 +411,17 @@ button{
 
   #add-btn-div{
     /* Här vill jag få in att de vara samma size som burgarrutorna.*/
+  }
+}
+
+@media screen and (max-width:500px){
+  #order-btn2,#cancelOrder-btn{
+    font-size: 18px;
+    width: 80px;
+    height: 60px;
+  }
+  #sumOfOrder{
+    font-size: 25px;
   }
 }
 
