@@ -379,28 +379,6 @@ export default {
               background-size: 100px 100px;
               background-position: 0 0, 50px 50px;
             }
-            /* #favorites{
-            grid-column: 1/7;
-            grid-row:0/1;
-          }
-          #extras-favorites{
-          grid-column: 1/7;
-          grid-row:3;
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          grid-template-rows: 50px 250px 50px;
-        }
-        #fav-category{
-        grid-column-start: 1;
-        grid-column-end: 7;
-        grid-row: 2;
-      }
-      #fav-next-btn{
-      grid-column-start: 6;
-      grid-column-end: 7;
-      grid-row-start: 3;
-      grid-row-end: 4;
-      }*/
 
       #bck-btn:hover{
         background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
