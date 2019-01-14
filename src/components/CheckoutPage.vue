@@ -280,8 +280,7 @@ export default{
   height: 2.5em;
   font-size: 2em;
   color: black;
-  /* margin-bottom: 1em;
-  margin-top: 1em; */
+
 }
 button{
   color: black;
@@ -305,7 +304,7 @@ button{
   }
 }
 
-/* -------------------- CSS för mobiler -----------------*/
+/* -------------------- CSS för mindre skärmar -----------------*/
 
 @media screen and (max-width:740px){
   #checkoutPage-title{

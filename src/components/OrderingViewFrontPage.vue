@@ -87,7 +87,7 @@ export default {
   background-color: #6f8179;
 }
 
-/*------------------ CSS för ipad/mobiler-isch ------------*/
+/*------------------ CSS för mindre skärmar ------------*/
 @media screen and (max-width:650px){
   .welcome{
     font-size:3em;

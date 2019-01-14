@@ -532,7 +532,7 @@ export default {
         font-size: 20px;
       }
 
-      /*------------------ CSS för ipad/mobiler-isch ------------*/
+      /*------------------ CSS för mindre skärmar ------------*/
       @media screen and (max-width:1206px){ /*När category-row bryts, skifta plats på alla element*/
         #designPage-title{
           grid-row: 1;
@@ -565,7 +565,6 @@ export default {
         }
       }
 
-      /* -------------------- CSS för mobiler -----------------*/
       @media screen and (max-width:740px){
         #bck-btn,#lang-btn{
           width:90px;
