@@ -55,7 +55,8 @@ v-if = "currentView === 'favoritesPage'"
 @addToCheckout = "addToCheckout"
 @change_view = "changeView"
 @clear_all="clearAll"
-@remove_backButton="removeBackButton">
+@remove_backButton="removeBackButton"
+@clearburger = "resetFavBurger">
 </FavoritesPage>
 
 
