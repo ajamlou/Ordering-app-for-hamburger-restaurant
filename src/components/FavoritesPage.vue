@@ -175,11 +175,12 @@ export default {
 }
 #allergen-div{
   grid-column: 4/7;
-  grid-row:2;
+  grid-row:1;
   display:grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: auto;
   font-size:1em;
+  margin-bottom:-10px;
 }
 #burger-wrapper{
   grid-column: 1/7;
