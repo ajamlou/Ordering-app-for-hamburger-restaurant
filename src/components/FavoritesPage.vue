@@ -34,7 +34,7 @@
               <img src="../assets/vegan.png">
             </div>
           </div>
-          <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
+          <p class = "price">{{uiLabels.price}}: {{item.price}} :-</p>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@
   "newOrder" : "New Order",
   "pay" : "Pay",
   "sum": "Sum",
+  "price":"Price",
   "ordersInQueue" : "RECEIVED",
   "ordersPreparing" : "PREPARING",
   "ordersFinished" : "FINISHED",
