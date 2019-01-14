@@ -67,7 +67,7 @@ id="yesBtn"
 <div id="bottom-div">
 <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
 <div id="sumOfOrder">
-  <p>{{uiLabels.sum}}: {{totalPrice}}:-</p>
+  {{uiLabels.sum}}: {{totalPrice}}:-
 </div>
 <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
@@ -197,8 +197,10 @@ export default{
   border-radius: 5vh;
   width: 95%;
   justify-self: center;
-  margin-bottom: 1em;
-  padding-bottom: 3em;
+  margin-bottom:2em;
+  padding-bottom:1em;
+  /* margin-bottom: 2em; */
+  /* padding-bottom: 3em; */
 }
 
 #checkoutPage-title{
@@ -261,27 +263,25 @@ font-size: 2em;
 }
 
 #bottom-div{
-  grid-column: 1/7;
+  grid-row: 3/4;
+  grid-column: 1/9;
   display:grid;
+  grid-template-columns: repeat(8,1fr);
   justify-content: space-between;
 }
 
 #sumOfOrder{
   justify-self: center;
-  margin: auto;
-  text-align: center;
+  margin:auto;
+  text-align:center;
   font-size: 2em;
-  grid-column: 4/6;
-  grid-row: 4;
-}
-
-#order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
-  border: 1px solid #7a7a7a;
+  grid-column: 1/9;
+  grid-row: 1;
 }
 
 #order-btn2{
   grid-column: 8/9;
-  grid-row: 4/5;
+  grid-row: 1;
   background-color: #c5e5be;
 }
 
@@ -291,13 +291,20 @@ font-size: 2em;
 
 #cancelOrder-btn{
   grid-column: 1/2;
-  grid-row: 4/5;
+  grid-row: 1;
   background-color: #e51e4a;
 }
 
 #cancelOrder-btn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
   border-color: #000000;
+}
+
+#order-btn2, #cancelOrder-btn{
+  width:120px;
+  height:80px;
+  border:1px solid #7a7a7a;
+  font-size: 25px;
 }
 
 #yesBtn{
@@ -322,6 +329,10 @@ font-size: 2em;
   border-color: #000000;
 }
 
+#order-btn2, #cancelOrder-btn, #yesBtn, #noBtn{
+  border: 1px solid #7a7a7a;
+}
+
 .slotBody{
   padding: 3em;
 }
@@ -343,11 +354,11 @@ font-size: 2em;
 button{
   color: black;
   font-size: 16px;
-  padding: 10% 15%;
+  /* padding: 10% 15%; */
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
+  /* display: inline-block; */
+  /* margin: 4px 2px; */
   cursor: pointer;
   border-radius: 16px;
   text-transform: uppercase;
@@ -364,11 +375,10 @@ button{
   }
 
   #sumOfOrder{
-    grid-column: 6/8;
   }
   #order-btn2{
-    grid-column: 8;
-    grid-row: 4/5;
+    /* grid-column: 8;
+    grid-row: 4/5; */
   }
 }
 
@@ -383,11 +393,7 @@ button{
     align-items: center;
   }
   #sumOfOrder{
-    margin: auto;
-    text-align: center;
     font-size: 2em;
-    grid-column: 2/8;
-    grid-row: 4;
   }
   #checkout-wrapper{
     /* Här vill jag få in att de ska vara mindre  */
