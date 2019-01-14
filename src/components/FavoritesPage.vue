@@ -164,7 +164,7 @@ export default {
 }
 
 .description{
-  grid-column: 1/3;
+  grid-column: 1/4;
   grid-row:3;
   text-align: center;
 }
@@ -172,6 +172,7 @@ export default {
 .ingredient-tooltip{
   grid-column: 3;
   grid-row: 3;
+  text-align: right;
 }
 
 
