@@ -188,14 +188,13 @@ h5, h6{
   border-color: black;
   border-width: thin;
   color: black;
-  padding: 8px 15px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 16px;
-  text-transform: uppercase;
 }
 .btns button:hover{
   background-color: #676767;
