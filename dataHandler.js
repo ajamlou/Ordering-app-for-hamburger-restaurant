@@ -75,7 +75,8 @@ Data.prototype.getFavBurgers = function () {
       ingredients: chosenIngredients,
       price: price,
       selected: false,
-      description: favorites[j].description,
+      description_sv: favorites[j].description_sv,
+      description_en: favorites[j].description_en,
       gluten_free: gluten_free,
       lactose_free: lactose_free,
       vegan: vegan

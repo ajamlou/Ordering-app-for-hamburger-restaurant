@@ -21,7 +21,7 @@
           <h1 class = "header">{{item.name}}</h1>
           <img :src= "item.url" class = "image">
           <div class = "description">
-            {{item.description}}
+            {{item["description_"+ lang]}}
           </div>
           <div class = "allergens">
             <div id="gluten-exp" v-if = "!item.gluten_free">
@@ -30,12 +30,9 @@
             <div id="dairy-exp" v-if = "!item.lactose_free">
               <img src="../assets/dairy.png">
             </div>
-            <div id="vegan-exp" v-if = "!item.vegan">
+            <div id="vegan-exp" v-if = "item.vegan">
               <img src="../assets/vegan.png">
             </div>
-          </div>
-          <div v-b-tooltip.hover.right = "tooltip" class ="ingredient-tooltip">
-            [ i ]
           </div>
           <p class = "price">{{uiLabels.sum}}: {{item.price}} :-</p>
         </div>
@@ -200,7 +197,7 @@ export default {
   grid-row:3;
   display:flex;
   flex-wrap: wrap;
-  justify-content:center;
+  justify-content:space-around;
   /* border-bottom: dotted;
   border-color: #ed6381; /*rosa */
 }
@@ -250,13 +247,7 @@ export default {
   height: 25px;
 }
 
-.ingredient-tooltip{
-  grid-column: 3;
-  grid-row: 3;
-  text-align: right;
-  color: blue;
-  font-weight:bold;
-}
+
 /* .ingredients{
 grid-column: 1/3;
 grid-row: 3;
@@ -360,6 +351,8 @@ h1{
     grid-column:1/7;
     grid-row:2;
     font-size: 1em;
+    border-bottom: dotted;
+    border-color: #ed6381; /*rosa*/
   }
   #allergen-div img{
     width: 30px;
