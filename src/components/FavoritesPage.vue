@@ -90,7 +90,11 @@ export default {
     SlotModal
   },
   beforeMount: function(){
-
+    // for(let i =0;i<this.favBurgers.length;i++){
+    //   for(let obj in this.favBurgers[i])
+    //   obj.ingredients[]
+    //
+    // }
 
   },
   methods:{
@@ -109,7 +113,7 @@ export default {
       }
     },
     removeFromMenu: function(item,index){
-      this.$emit('removeIngredient',item,index);
+      this.$emit('remove_ingredient',item,index);
     },
     //visar ingrediensmodalen för tillbehör
     toggleShowIngredientsModal:function(data){
