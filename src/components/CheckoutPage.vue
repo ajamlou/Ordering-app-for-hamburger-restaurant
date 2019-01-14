@@ -117,8 +117,7 @@ export default{
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
-      this.toggleSlotModal();
-      this.pressedAbortModal=true;
+      this.$emit('cancel_btn_modal')
     },
     //Om en trycker på "Fortsätt beställa" i Avbryt-modalen
     //försvinner modalen

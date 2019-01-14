@@ -147,17 +147,7 @@ export default {
     //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
     //ska vara där inne.
     cancelBtnModal: function(){
-      this.toggleSlotModal();
-      this.pressedAbortModal=true;
-    },
-    //Togglar en modal
-    toggleSlotModal:function(){
-      if(!this.showSlotModal){
-        this.showSlotModal=true;
-      }
-      else{
-        this.showSlotModal=false;
-      }
+      this.$emit('cancel_btn_modal')
     },
   }
 }
