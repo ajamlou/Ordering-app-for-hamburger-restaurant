@@ -37,6 +37,8 @@
       </CategoryRow>
     </div>
 
+<!-- Modal för avbryt-knappen. Tar in en boolean för att urskilja att det är
+avbrytknappen som tryckts på. -->
   <SlotModal
     v-if="this.showSlotModal && this.pressedAbortModal">
     <div slot="header"></div>
@@ -115,21 +117,28 @@ export default {
     toggleShowIngredientsModal:function(data){
       this.$emit('info_to_modal', data);
     },
+    //Skickar information om ordern till i varukorgen
     addToCheckout: function(){
       this.$emit('addToCheckout');
     },
+    //Byter vy
     changeView: function(data){
       this.$emit('change_view',data);
     },
+    //När en trycker på "Avbryt beställning" clearas allt och en tas tillbaka
+    //till framsidan.
     emptyOrder:function(){
       this.$emit('change_view','frontPage');
       this.$emit('clear_all');
       this.$emit('remove_backButton');
     },
+    //Funktion för avbrytknappen, den öppnar en modal och bestämmer vad som
+    //ska vara där inne.
     cancelBtnModal: function(){
       this.toggleSlotModal();
       this.pressedAbortModal=true;
     },
+    //Togglar en modal
     toggleSlotModal:function(){
       if(!this.showSlotModal){
         this.showSlotModal=true;
