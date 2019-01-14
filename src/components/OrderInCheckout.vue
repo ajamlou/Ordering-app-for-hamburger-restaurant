@@ -92,6 +92,9 @@ export default{
 }
 </script>
 <style scoped>
+h5, h6{
+  text-decoration: underline;
+}
 .ord-check-bod{
   grid-row:2;
   height:10em;

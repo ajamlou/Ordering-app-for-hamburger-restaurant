@@ -70,11 +70,11 @@
         let favoritePrice = 0;
         try{
           for (var i = 0; i< this.rows.length; i++){
-            favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_sv === this.rows[i].value)); /*lägger favoritingredienser i en array*/
-            favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_sv === this.rows[i].value)).selling_price; /*räknar ut priset för de ingredienserna*/
+            favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_sv.toUpperCase() === this.rows[i].value.toUpperCase())); /*lägger favoritingredienser i en array*/
+            favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_sv.toUpperCase() === this.rows[i].value.toUpperCase())).selling_price; /*räknar ut priset för de ingredienserna*/
             if(favoriteIngredients.length === 0 && favoritePrice === 0){
-              favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_en === this.rows[i].value)); /*Kollar om de skrivit in på engelska*/
-              favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_en === this.rows[i].value)).selling_price;
+              favoriteIngredients.push(this.ingredients.find(ingredient=>ingredient.ingredient_en.toUpperCase() === this.rows[i].value.toUpperCase())); /*Kollar om de skrivit in på engelska*/
+              favoritePrice += (this.ingredients.find(ingredient=>ingredient.ingredient_en.toUpperCase() === this.rows[i].value.toUpperCase())).selling_price;
             }
           }
         }
