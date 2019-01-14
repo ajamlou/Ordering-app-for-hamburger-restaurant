@@ -277,10 +277,10 @@ flex-wrap: wrap;
   border-color: #000000;
 }
 
-#yesBtn{
-  background-color: #e51e4a;
+#yesBtn,#noBtn{
   grid-column: auto;
   grid-row: auto;
+  height: 10vh;
 }
 
 #yesBtn:hover{
@@ -290,8 +290,9 @@ flex-wrap: wrap;
 
 #noBtn{
   background-color: #c5e5be;
-  grid-column: auto;
-  grid-row: auto;
+}
+#yesBtn{
+    background-color: #e51e4a;
 }
 
 #noBtn:hover{

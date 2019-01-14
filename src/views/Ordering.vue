@@ -411,6 +411,7 @@ export default {
               grid-column: 2/3;
               background-color: #e51e4a;
               border: 1px solid #7a7a7a;
+              height: 10vh;
             }
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
@@ -420,6 +421,7 @@ export default {
               grid-column: 4/5;
               background-color: #c5e5be;
               border:1px solid #7a7a7a;
+              height: 10vh;
             }
             #noBtn:hover{
               background-color: #89a085;
