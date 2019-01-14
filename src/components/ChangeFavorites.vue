@@ -179,6 +179,20 @@ export default {
         if (this.rows.url === undefined||this.rows.url.length === 0 || this.rows.url.trim().length === 0){
           this.rows.url='https://toppng.com/public/uploads/preview/fast-food-burger-11528345395r3cdlrs6sr.png';
         }
+        let gluten_free = true;
+        let lactose_free = true;
+        let vegan = true;
+        for(let i = 0;i<favoriteIngredients.length;i++){
+          if(favoriteIngredients[i].milk_free === 0){
+            lactose_free = false;
+          }
+          if(favoriteIngredients[i].gluten_free === 0){
+            gluten_free = false;
+          }
+          if(favoriteIngredients[i].vegan === 0){
+            vegan = false;
+          }
+        }
         let burger = {
           "name": this.capitalize(this.rows.name),
           "url": this.rows.url,
@@ -187,7 +201,10 @@ export default {
           "index": this.rows.checked,
           "selected": false,
           "description_sv": this.rows.description_sv,
-          "description_en": this.rows.description_en
+          "description_en": this.rows.description_en,
+          "gluten_free": gluten_free,
+          "lactose_free":lactose_free,
+          "vegan":vegan
         }
         this.$store.state.socket.emit('updateinfo', burger);
         this.rows = [];
