@@ -402,7 +402,6 @@ export default {
 
             #bck-btn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-              border-color: #000000;
             }
 
             .slotButtons{
@@ -412,22 +411,18 @@ export default {
             #yesBtn{
               grid-column: 2/3;
               background-color: #e51e4a;
-              border: 1px solid #7a7a7a;
               height: 10vh;
             }
             #yesBtn:hover{
               background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-              border-color: #000000;
             }
             #noBtn{
               grid-column: 4/5;
               background-color: #c5e5be;
-              border:1px solid #7a7a7a;
               height: 10vh;
             }
             #noBtn:hover{
               background-color: #89a085;
-              border-color: #000000;
             }
 
             #lang-btn{
@@ -435,13 +430,11 @@ export default {
               grid-row:1;
               width:100px;
               height:50px;
-              /* border:1px solid #7a7a7a; */
               background-color: #b9d7cb; /*ljusturkos*/
               padding: 0;
             }
             #lang-btn:hover{
               background-color: #6f8179;
-              border-color: #000000;
             }
             #bck-btn,#lang-btn{
               align-self: center;
@@ -505,7 +498,6 @@ export default {
               grid-column: 1;
               grid-row: 1;
               background-color: #e51e4a;
-              /* border: 1px solid #7a7a7a; */
               width:100px;
               height:50px;
               margin:auto;
@@ -519,27 +511,17 @@ export default {
               width:120px;
               height:80px;
               justify-self:end;
-              /* border:1px solid #7a7a7a; */
               grid-column: 6/7;
               grid-row:4;
               background-color: #c5e5be;}
-              /* #next-btn:active{border: 2px solid #595959;} */
+
               #next-btn:hover{
                 background-color: #89a085;
-                border-color: #000000;
-                /* background: -moz-linear-gradient(to bottom, #33cc33 51%, #248f24  51%); */
-                /*background: -webkit-gradient(linear,left top, left bottom, color-stop(51%,#ff4d4d), color-stop(51%,#ff0000));*/
-                /* background: -webkit-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-                background: -o-linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-                background: -ms-linear-gradient(top, #33cc33 51%,#248f24 51%);
-                background: linear-gradient(to bottom, #33cc33 51%,#248f24 51%);
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33cc33', endColorstr='#248f24',GradientType=0 ); */
               }
 
               .btn-close{
                 background-color: #33cc33;
                 border-radius: 10px;
-                /* position: relative; */
                 width: 2em;
                 height: 2em;
                 font-size: 2em;
@@ -589,9 +571,9 @@ export default {
                 /*#price-div{
                 grid-row:5;
               } */
-              #ordering h2{
-                font-size: 5vw;
-              }
+                #ordering h2{
+                  font-size: 5vw;
+                }
             }
             #ordering{
               margin:10px auto auto auto;
