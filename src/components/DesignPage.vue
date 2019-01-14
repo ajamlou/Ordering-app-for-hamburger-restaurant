@@ -1,11 +1,11 @@
 <template>
 
   <div id="designPage-backdrop">
-  <div
-  id="ordering">
-  <div
-  id="designPage-title">
-  {{uiLabels.yourOrder}}
+    <div
+    id="ordering">
+    <div
+    id="designPage-title">
+    {{uiLabels.yourOrder}}
   </div>
   <!--<img class="example-panel" src="@/assets/exampleImage.jpg"> -->
   <div id= "bestallning"><h2>{{ uiLabels.myBurger }}</h2></div>
@@ -51,17 +51,17 @@
     @remove_ingredient="removeFromMenu"
     @info_to_modal="toggleShowIngredientsModal">
   </CategoryRow>
-  </div>
-  </div>
-  <div id="bottom-div">
+</div>
+</div>
+<div id="bottom-div">
   <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
   <div id="price-div">
     {{uiLabels.sum}}: {{price}}:-
   </div>
   <button id="next-btn" @click="addToCheckout();changeView();">{{uiLabels.next}}</button>
-  </div>
-  </div>
-  </div>
+</div>
+</div>
+</div>
 </template>
 
 <script>
@@ -215,10 +215,10 @@ export default {
   grid-row:4;
   background-color: #c5e5be;
 }
-#next-btn:hover{
-  background-color: #89a085;
-  border-color: #000000;
-}
+/* #next-btn:hover{
+background-color: #89a085;
+border-color: #000000;
+} */
 
 button{
   display: inline-block;

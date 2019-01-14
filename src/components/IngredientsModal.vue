@@ -131,8 +131,11 @@ export default {
     width:2em;
     cursor: pointer;
     font-weight: bold;
-    color: white;
-    background: red;
+    color: #444444;
+    background: #e51e4a;;
+  }
+  .btn-close:hover{
+    background-color: #a01533;
   }
   @media screen and (max-width:500px){
     .modal{

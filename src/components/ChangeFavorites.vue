@@ -57,7 +57,6 @@
 
             <b-collapse
             :id="'accordion'+index"
-            visible
             accordion="my-accordion"
             role="tabpanel">
 

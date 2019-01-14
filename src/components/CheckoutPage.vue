@@ -19,7 +19,7 @@ v-if="this.showSlotModal">
   class="btn-close"
   @click="orderFinished()">
   {{uiLabels.OKlabel}}
-  </button>
+</button>
 </div>
 </Slotmodal>
 <!-- Är onödig, men vänta lite med att ta bort -->
@@ -28,11 +28,11 @@ v-if="this.showSlotModal">
 v-if="this.showSlotModal && this.pressedAbortModal">
 <div slot="body">{{uiLabels.areYouSure}}</div>
 <div slot="footer">
-  <button
-  type="button"
-  id="noBtn"
-  @click="continueOrder();toggleSlotModal()">
-  {{uiLabels.dontAbort}}
+<button
+type="button"
+id="noBtn"
+@click="continueOrder();toggleSlotModal()">
+{{uiLabels.dontAbort}}
 </button>
 <button
 type="button"
@@ -45,7 +45,7 @@ id="yesBtn"
 
 <div id="btn-order-wrap">
   <button id="add-btn-div" @click="newBurger">
-      {{uiLabels.addBurger}}
+    {{uiLabels.addBurger}}
   </button>
 
   <div id="checkout-wrapper" :class="{'noBorder' : !menusInOrder}">
@@ -64,11 +64,11 @@ id="yesBtn"
 </div>
 
 <div id="bottom-div">
-<button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
-<div id="sumOfOrder">
-  {{uiLabels.sum}}: {{totalPrice}}:-
-</div>
-<button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
+  <button id="cancelOrder-btn" @click="cancelBtnModal()">{{uiLabels.cancelOrder}}</button>
+  <div id="sumOfOrder">
+    {{uiLabels.sum}}: {{totalPrice}}:-
+  </div>
+  <button id="order-btn2" @click="decideSlotContent();placeOrder()">{{ uiLabels.placeOrder }}</button>
 </div>
 </div>
 </div>
@@ -112,9 +112,9 @@ export default{
     //Oavsett om beställningen är tom eller avbryts den när man trycker på
     //"Avbryt beställning" i modalen.
     emptyOrder:function(){
-        this.$emit('change_view','frontPage');
-        this.$emit('clear_all');
-        this.$emit('remove_backButton');
+      this.$emit('change_view','frontPage');
+      this.$emit('clear_all');
+      this.$emit('remove_backButton');
     },
     //Modal som kommer upp när en trycker på "Avbryt"
     cancelBtnModal: function(){
@@ -248,7 +248,6 @@ export default{
 }
 #add-btn-div:hover{
   background-color: #6f8179;
-  border-color: #000000;
 }
 #bottom-div{
   grid-row: 3/4;
@@ -264,7 +263,6 @@ export default{
 }
 #cancelOrder-btn:hover{
   background-color: #a01533; /*matchar #e51e4a; - mörkrosa*/
-  border-color: #000000;
 }
 #sumOfOrder{
   justify-self: center;
@@ -285,7 +283,6 @@ export default{
 #order-btn2, #cancelOrder-btn{
   width:120px;
   height:80px;
-  border:1px solid #7a7a7a;
   font-size: 25px;
 }
 
@@ -310,12 +307,12 @@ button{
   font-size: 16px;
   text-align: center;
   text-decoration: none;
-  border-width: thin;
   border-color: black;
-  cursor: pointer;
+  border-width: thin;
   border-radius: 16px;
   text-transform: uppercase;
   margin: 4px 2px;
+  cursor: pointer;
 }
 
 /*------------------ CSS för ipad/mobiler-isch ------------*/

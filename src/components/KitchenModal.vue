@@ -80,15 +80,16 @@ export default {
   transform: translate(-50%, -50%);
   background: #FFFFFF;
   border-radius: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 2vh;
   width: 75%;
+  height: 75%;
   text-underline-position: auto;
 }
 
 .storage-body {
   grid-column: 1/4;
-  width: 100%;
-  height: 50vh;
+  width: auto;
+  height: auto;
   background-color: #fff;
   font-family: 'Montserrat', sans-serif;
   overflow-y: auto;
@@ -100,7 +101,6 @@ export default {
   display: grid;
   border-bottom: 1px solid rgba(0,0,0,0.1);
   grid-template-columns: 33% 33% 33%;
-
 }
 
 .close-button {
