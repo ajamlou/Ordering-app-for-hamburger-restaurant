@@ -64,11 +64,10 @@ Data.prototype.getFavBurgers = function () {
       if(chosenIngredients[i].gluten_free === 0){
         gluten_free = false;
       }
-      if(chosenIngredients[i].vegan === 1){
+      if(chosenIngredients[i].vegan === 0){
         vegan = false;
       }
     }
-    console.log(lactose_free);
 
     let burger = {
       name: favorites[j].burger_name,
