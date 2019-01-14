@@ -112,7 +112,7 @@ v-if="this.showSlotModal && this.pressedAbortModal">
 <button
 type="button"
 id="yesBtn"
-@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();submit();">
+@click="toggleSlotModal();changeView('frontPage');clearAll();removeBackButton();">
 {{uiLabels.abort}}
 </button>
 </div>
@@ -325,13 +325,6 @@ export default {
                     this.nextBtnModal();
                   }
                 },
-                submit:function() {
-                  this.bus.$emit('submit')
-                },
-                // newMenu:function(){
-                //   this.resetBurger();
-                //   this.changeView('designPage');
-                // },
 
                 /*Denna ropas på från checkout för att nollställa alla burgar-relaterade
                 arrayer och byter vy till frontpage*/
@@ -348,7 +341,6 @@ export default {
                 resetFavBurger:function(){
                   this.categoryItemCounter=this.categoryItemCounter.map(()=>0);/*Nollställer arrayen*/
                   this.chosenIngredients = this.chosenIngredients.filter(ingredient => ingredient.category > 4);
-                  console.log(this.chosenIngredients)
                   this.price = this.chosenIngredients.reduce((sum,ingredient)=>{
                     sum+=ingredient.selling_price;
                     return sum
