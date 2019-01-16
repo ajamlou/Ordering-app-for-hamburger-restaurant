@@ -299,10 +299,11 @@ export default {
                 },
                 /*När en meny ändras från checkout ser denna funktion till
                 att ingredienserna från menyn laddas tillbaka korrekt in i designpage*/
-                modifyMenu:function(ingredients,units,index,itemCounter){
+                modifyMenu:function(ingredients,units,index,itemCounter,price){
                   this.chosenIngredients=ingredients;
                   this.categoryItemCounter=itemCounter;
                   this.units=units;
+                  this.price = price;
                   this.modifyMenuIndex=index;
                   this.isModifying = true;
                   this.changeView('designPage');

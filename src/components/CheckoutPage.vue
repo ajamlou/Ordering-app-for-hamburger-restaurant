@@ -116,8 +116,8 @@ export default{
     removeMenu:function(index){
       this.menus.splice(index,1);
     },
-    modifyMenu:function(ingredients,units,index,itemCounter){
-      this.$emit('modify_menu',ingredients,units,index,itemCounter);
+    modifyMenu:function(ingredients,units,index,itemCounter,price){
+      this.$emit('modify_menu',ingredients,units,index,itemCounter,price);
       this.menus.splice(index,1);
     },
     //Byter vy när en trycker på "Lägg till burgare"

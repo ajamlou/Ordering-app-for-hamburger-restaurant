@@ -73,7 +73,7 @@ export default{
       },
       /*Skickar info om ordern som ska ändras (ingredienser, antal osv)*/
       modifyMenu:function(){
-        this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id,this.menu.itemCount);
+        this.$emit('modify_menu', this.menu.ingredients, this.menu.units,this.id,this.menu.itemCount,this.menu.price);
         this.$emit('change_view','designPage');
       },
     },
