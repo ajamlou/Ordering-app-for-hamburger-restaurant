@@ -16,7 +16,7 @@
         </div>
       </div>
       <div id = "burger-wrapper">
-        <div class = "background":class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
+        <div class = "background" :class="{'selected': item.selected}" v-for = "(item, index) in favBurgers" :key = 'index' @click = "favToCheckout(index, item)">
           <div class ="burgers">
             <h1 class = "header">{{item.name}}</h1>
             <img :src= "item.url" class = "image">
